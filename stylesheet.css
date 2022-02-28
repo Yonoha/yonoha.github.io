@@ -11,3 +11,7 @@ h1 {
 h2 {
     font-family: "Times New Roman", "sans-serif"; 
 }
+
+p {
+    margin-left: 20px;
+}
