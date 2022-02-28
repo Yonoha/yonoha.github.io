@@ -1,1 +1,13 @@
+@charset "UTF-8";
+body {
+    margin: 25px; /* 上下左右の一括指定 */	
+    BACKGROUND-COLOR : rgb(255, 255, 255);
+}
 
+h1 {
+   font-family: "Times New Roman", "sans-serif"; 
+}
+
+h2 {
+    font-family: "Times New Roman", "sans-serif"; 
+}
