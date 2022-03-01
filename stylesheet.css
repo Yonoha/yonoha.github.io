@@ -1,11 +1,13 @@
 @charset "UTF-8";
+
 body {
-    margin: 25px; /* 上下左右の一括指定 */	
-    BACKGROUND-COLOR : rgb(255, 255, 255);
+    margin: 25px; /*上下左右の一括指定*/
+    background-image: url(back_lightblue.gif); /*背景*/
 }
 
 h1 {
-   font-family: "Times New Roman", "sans-serif"; 
+    color: #364e96; /*文字色*/
+    font-family: "Times New Roman", "sans-serif"; /*フォント*/
 }
 
 h2 {
@@ -15,3 +17,4 @@ h2 {
 p {
     margin-left: 20px;
 }
+
