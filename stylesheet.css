@@ -3,11 +3,12 @@
 body {
     margin: 25px; /*上下左右の一括指定*/
     background-image: url(back_lightblue.gif); /*背景*/
+    font-family: "Yu Gothic"; /*フォント*/
 }
 
 h1 {
     color: #364e96; /*文字色*/
-    font-family: "Times New Roman", "sans-serif"; /*フォント*/
+    font-family: "Times New Roman", "sans-serif"; 
 }
 
 h2 {
@@ -15,6 +16,6 @@ h2 {
 }
 
 p {
-    margin-left: 20px;
+    margin-left: 20px;  
 }
 
