@@ -1,0 +1,259 @@
+\RequirePackage{plautopatch}
+\documentclass[uplatex, a4paper, 14Q, dvipdfmx]{jsarticle}
+\usepackage{docmute}
+\usepackage{../mypackage}
+
+\title{\texorpdfstring{$\Ainf$}{Ainf}増強の一意性}
+\author{よの}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  $\Ainf$増強の一意性について議論する.  
+  特に断らない限りこの章では, $\Ainf$圏はc-unitalであり, $\Ainf$関手と$\Ainf$加群はc-unitを保つとする. 
+\end{abstract}
+
+\tableofcontents
+
+\section{三角圏の\texorpdfstring{$\Ainf$}{Ainf}増強}
+
+\begin{definition}[$\Ainf$増強]
+  三角圏$\T$に対して, ある$\Ainf$圏$\A$が存在して三角圏同値
+  \begin{align*}
+    \T \simeq \Tr(\A)
+  \end{align*}
+  が成立するとき, $\Ainf$圏$\Tw(\C)$を$\T$の$\Ainf$増強($\Ainf$-enhancement for $\T$)という.
+  このとき, $\T$は$\Ainf$増強を持つという. 
+\end{definition}
+
+\begin{lemma}
+  次の2つは同値である.
+  \begin{enumerate}
+    \item 三角圏は代数的である.
+    \item 三角圏は$\Ainf$増強を持つ.
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  $\Ainf$-Yonedaの補題より, 任意の$\Ainf$圏はdg圏と$\Ainf$擬同型である.
+  三角圏が代数的であることとdg増強をもつことは同値である.
+  dg圏が$\Ainf$圏とみなせることより同値性は従う.
+\end{proof}
+
+$\Tw\A$と$\Tr\A$の構成法より以下の命題が従う. 
+
+例えば, $\Tr\A = H^0(\Tw\A)$は$H(\Tw\A)$と同じだけの情報を持っている. 
+
+\begin{lemma}
+  次の2つは同値である.
+  \begin{enumerate}
+    \item $\Tr\A = H^0(\Tw\A)$において, 2つの対象は同型である.
+    \item $H(\Tw\A)$において, 2つの対象は同型である. 
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  シフト関手$S^\sigma : \Tw\A \to \Tw\A$が$\Ainf$擬同型であることより従う. 
+\end{proof}
+
+\begin{lemma}
+  $\A$を$\Ainf$圏とする. 
+  このとき, 三角圏同値 
+  \begin{align*}
+    H^0(\Tw\Tw\A) \simeq \H^0(\Tw\A)
+  \end{align*}
+  が存在する.
+\end{lemma}
+
+\begin{proof}
+  $\Tw\A$の構成法より従う.
+\end{proof}
+
+\section{\texorpdfstring{$\Ainf$}{Ainf}増強の一意性}
+
+三角圏$\T$が$\Ainf$増強$\Tw\A$をもつとき, $\Ainf$増強は$\Ainf$擬同値を除いて一意であるかについて考える. 
+
+\begin{question}
+  $\A, \B$を$\Ainf$圏, $\phi : \Tr\A \to \Tr\B$は三角圏同値であるとする. 
+  このとき, ある$\Ainf$擬同値$\varphi : \Tw\A \to \Tw\B$が存在して, 次の図式は可換となるか. 
+  \[\begin{tikzcd}
+    \Tw\A & \Tw\B \\
+    \Tr\A & \Tr\B
+    \arrow["\tilphi", dashed, from=1-1, to=1-2]
+    \arrow["{H^0}", from=1-2, to=2-2]
+    \arrow["{H^0}"', from=1-1, to=2-1]
+    \arrow["\phi"', from=2-1, to=2-2]
+  \end{tikzcd}\]
+\end{question}
+
+そのためにまず, $\Ainf$関手と三角関手に関する自然同型の概念を定義する.
+
+\begin{definition}[リフト] \label{def_lift}
+  $\varphi : \Tw\A \to \Tw\B$を$\Ainf$関手, $H^0 : \Tw\A \to \Tw\A, \Tw\B \to \Tw\B$をコホモロジーをとる関手, $\phi : \Tr\A \to \Tr\B$を三角関手とする. 
+  \[\begin{tikzcd}
+    \Tw\A & \Tw\B \\
+    \Tr\A & \Tr\B
+    \arrow["\tilphi", from=1-1, to=1-2]
+    \arrow["{H^0}", from=1-2, to=2-2]
+    \arrow["{H^0}"', from=1-1, to=2-1]
+    \arrow["\phi"', from=2-1, to=2-2]
+  \end{tikzcd}\]
+  合成$\phi \circ H^0$と$H^0 \circ \tilphi$が次の2つを満たすとき, $\phi \circ H^0$と$H^0 \circ \tilphi$は自然同型であるという. 
+  \begin{itemize}
+    \item 任意の$Y \in \Ob\Tw\A$に対して, $\phi \circ H^0(Y)$と$H^0 \circ \tilphi(Y)$は$\Tr\B$において同型である. 
+    $\Tr\B$におけるこの同型射を$\theta_Y : \phi \circ H^0(Y) \to H^0 \circ \tilphi(Y)$と表す.
+    \item 任意の$\mu^1_{\Tw\A}$で閉じている射$a_1 \in \hom_{\Tw\A}^0 (Y_0,Y_1)$に対して, 次の図式は可換である. 
+    \[\begin{tikzcd}
+      \phi \circ H^0(Y_0) & \phi \circ H^0(Y_1) \\
+      H^0 \circ \tilphi(Y_0) & H^0 \circ \tilphi(Y_1)
+      \arrow["{\phi \circ H^0(a_1)}", from=1-1, to=1-2]
+      \arrow["{\theta_{Y_0}}"', from=1-1, to=2-1]
+      \arrow["{\theta_{Y_1}}", from=1-2, to=2-2]
+      \arrow["{H^0 \circ \tilphi(a_1)}"', from=2-1, to=2-2]
+    \end{tikzcd}\]
+  \end{itemize}
+  このような$\tilphi : \Tw\A \to \Tw\B$が存在するとき, $\tilphi$を$\phi$のリフト(lift)という.
+\end{definition}
+
+% \begin{definition}[$\Ainf$増強の一意性]
+  
+% \end{definition}
+
+一般にはリフトが存在するとは限らない.
+
+% Kaj3 theorem 5.5.
+\begin{remark}
+  $\A, \B$を次のような極小$\Ainf$圏とする.
+  \begin{itemize}
+    \item $H(\A)$の$H(\B)$のいずれにおいても, 相異なる対象は同型でない. 
+    \item 三角圏同値$\phi : \Tr\A \to \Tr\B$は存在する.
+    \item 三角圏同値$\phi$の充満部分圏への制限$H(\A) \to H(\B)$は圏同型である.
+  \end{itemize}
+  このとき, $\A$と$\B$が$\Ainf$同型でない限り, $\phi$のリフト$\tilphi : \Tw\A \to \Tw\B$は存在しない.
+\end{remark}
+
+\begin{proof}
+  対偶を示す. 
+  $\phi$のリフト$\tilphi : \Tw\A \to \Tw\B$が存在するとする.
+  このとき, それぞれを制限することで$\Ainf$擬同値$\A \to \B$が存在する. 
+  条件より, この$\Ainf$擬同値は$\Ainf$擬同型である.
+  つまり, $\A$と$\B$は$\Ainf$同型である. 
+\end{proof}
+
+$\Ainf$増強が存在するとき, いつ($\Ainf$擬同値をのぞいて)一意であるかを考える. 
+
+\begin{definition}[形式的な$\Ainf$圏]
+  $\Ainf$圏$\A$がコホモロジー圏$H(\A)$と$\Ainf$擬同型であるとき, $\A$は形式的な$\Ainf$圏(formal $\Ainf$-category)であるという. 
+\end{definition}
+
+\begin{remark}
+  $\A$を形式的な$\Ainf$圏とする.
+  \cref{prop_minimal_model_theorem}より, $\A$に$\Ainf$擬同型な極小$\Ainf$圏$(\tilA)$が存在する.
+  このとき, $\mu_{\tilA}$の高次の$\Ainf$構造$\mu^3_{\tilA}, \mu^4_{\tilA}, \cdots$は全て自明である.
+  \cref{prop_Tw_is_Ainf_qeq}より, 三角圏同値
+  \begin{align*}
+    \Tr\A \simeq \Tr(H(\A))
+  \end{align*}
+  が存在する.
+  $\A$が形式的な$\Ainf$圏であるとき, $\Tr\A$は$H(\A)$のみから決定されることを示している. 
+\end{remark}
+
+コホモロジー圏における合成を$2$次の$\Ainf$構造とすると, 極小$\Ainf$圏を得ることができる. 
+
+\begin{definition}[$\Ainf$拡張]
+  次数付き線形圏$\B$に対して, 極小$\Ainf$圏$\A$を次のように定義する.
+  \begin{description}
+    \item[($d=0$)] 対象の集まり$\Ob\A := \Ob\B$
+    \item[($d=1$)] 極小$\Ainf$圏なので$\mu^1_\A := 0$
+    \item[($d=2$)] $\mu^2_\A$は次数付き線形圏の合成
+  \end{description}
+  $\A$は$\B$の$\Ainf$拡張($\Ainf$-decoration of $\B$)であるという. 
+\end{definition}
+
+\begin{definition}[自明な$\Ainf$拡張]
+  次数付き線形圏$\B$の$\Ainf$拡張$\A$がdg圏となるとき, $\A$は$\B$の自明な$\Ainf$拡張(trivial $\Ainf$-decoration of $\B$)であるという. 
+\end{definition}
+
+\begin{example}
+  極小$\Ainf$圏$\A$のコホモロジー圏$H(\A)$をdg圏とみなす.  
+  $H(\A)$は$H(\A)$の自明な$\Ainf$拡張である. 
+\end{example}
+
+\begin{definition}[自明な$\Ainf$拡張をもつ]
+  極小$\Ainf$圏$\A$のコホモロジー圏を$H(\A)$とする. 
+  次数付き線形圏$\B$の任意の$\Ainf$拡張が$H(\A)$と$\Ainf$擬同型であるとき, $\B$は自明な$\Ainf$拡張をもつ(have trivial $\Ainf$-decoration)という. 
+\end{definition}
+
+\begin{lemma} \label{prop_trivial_Ainf_decoration_induces_formal}
+  極小$\Ainf$圏$\A$のコホモロジー圏を$H(\A)$とする. 
+  $H(\A)$が自明な$\Ainf$拡張をもつとき, $\A$は形式的である. 
+\end{lemma}
+
+\begin{proof}
+  自明な$\Ainf$拡張をもつとき, $\A$は$H(\A)$と$\Ainf$擬同型である.
+  よって, $\A$は形式的な$\Ainf$圏である.
+\end{proof}
+
+\begin{theorem} \label{prop_trivial_Ainf_decoration_induces_unique_Ainf_enhancement}
+  $\Ainf$圏$\A$の次数付き線形圏$H(\A)$は自明な$\Ainf$拡張をもつとする. 
+  このとき, 三角圏$\T$の$\Ainf$増強は存在すれば$\Ainf$擬同値を除いて一意である. 
+\end{theorem}
+
+\begin{proof}
+  存在性より$\Tw\A$は三角圏$\T$の$\Ainf$増強である.
+  ある$\Ainf$圏$\B$が存在して$\Tr\B \simeq \T$であるとする. 
+  つまり, 三角圏同値
+  \begin{align*}
+    \phi : \Tr\A \to H^0(\B)
+  \end{align*}
+  が存在するとする. 
+  このとき, 次数付き圏として圏同値$H(\Tw\A) \simeq H(\B)$が存在する. 
+  $H(\Tw\A)$の充満部分圏$H(\A)$と圏同値となるような$\B$の充満部分$\Ainf$圏$\B'$をとる.
+  \begin{align*}
+    H(\A) \simeq H(\B')
+  \end{align*}
+  \cref{prop_trivial_Ainf_decoration_induces_formal}より, $\Ainf$圏として
+  \begin{align*}
+    \A \simeq H(\A) \simeq H(\B') \cong \B'
+  \end{align*}
+  である. 
+  $\A$と$\B$は$\Ainf$擬同値なので, $\Ainf$擬同値 
+  \begin{align*}
+    \tilphi : \Tw\A \to \Tw\B'
+  \end{align*}
+  が存在する. 
+  $\Tw\B'$は$\B'$の充満部分$\Ainf$圏なので, この埋め込みを$i : \Tw\B' \to \B$と表す.
+  このとき, 次の図式は\cref{def_lift}の意味で可換である.
+  \[\begin{tikzcd}
+    \Tw\A & {\Tw\B'} & \B \\
+    \Tr\A & {\Tr\B'} & {H^0(\B)}
+    \arrow["i", hook, from=1-2, to=1-3]
+    \arrow["\tilphi", from=1-1, to=1-2]
+    \arrow["{H^0}", from=1-1, to=2-1]
+    \arrow["{H^0}", from=1-2, to=2-2]
+    \arrow["{H^0}"', from=1-3, to=2-3]
+    \arrow["{H^0(\tilphi)}"', from=2-1, to=2-2]
+    \arrow["{H^0(i)}"', hook, from=2-2, to=2-3]
+  \end{tikzcd}\]
+  $H^0(i)$は忠実充満な三角関手なので, $H^0(i) \circ H^0(\tilphi)$はリフト$i \circ \tilphi$をもつ. 
+\end{proof}
+
+% \cref{prop_trivial_Ainf_decoration_induces_unique_Ainf_enhancement}より以下の命題が従う.
+
+% \begin{corollary}
+  
+% \end{corollary}
+
+% \section{\texorpdfstring{$\Ainf$}{Ainf}圏のねじれ積}
+
+% $\Tr\A$の積構造を調べるために$\Ainf$圏のねじれ積を定義する.
+
+% \begin{definition}[ねじれ積]
+%   $X,Y,Z$を$0$対象ではない片側ねじれ複体とする. 
+%   このとき, 
+% \end{definition}
+
+\end{document}

@@ -1,0 +1,711 @@
+\RequirePackage{plautopatch}
+\documentclass[uplatex, a4paper, 14Q, dvipdfmx]{jsarticle}
+\usepackage{docmute}
+\usepackage{../mypackage}
+
+\title{許容的部分圏とSerre関手}
+\author{よの}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+\tableofcontents
+
+\section{許容的部分圏と半直交分解}
+
+$\bbK$を体, $(\A,T)$を$\bbK$線形な三角圏, $\B$を$\A$の狭義充満三角部分圏とする. 
+
+\begin{definition}[直交部分圏]
+  $\A$の狭義充満三角部分圏
+  \begin{align*}
+    (\Bperp)_\A := \{C \in \A ~|~ \text{任意の} B \in \B \text{に対して} \Hom_\A(B,C) = 0\}
+  \end{align*}
+  を$\B$の$\A$における右直交部分圏(right orthogonal subcategory to $\B$)という. 
+  双対的に, $\A$の狭義充満三角部分圏
+  \begin{align*}
+    (\perpB)_\A := \{D \in \A ~|~ \text{任意の} B \in \B \text{に対して} \Hom_\A(D,B) = 0\}
+  \end{align*}
+  を$\B$の$\A$における左直交部分圏(left orthogonal subcategory to $\B$)という.
+  $\A$が明らかな場合は$\A$を省略する.  
+\end{definition}
+
+\begin{lemma} \label{prop:in_Bperp_equal_hom_equal_hom}
+  $\B$における完全三角$X \to Y \to Z$に対して, 次の2つは同値である. 
+  \begin{enumerate}
+    \item $Z \in \Bperp$である.
+    \item 任意の$B \in \B$に対して, $\Hom(B,X) \cong \Hom(B,Y)$である. 
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  (1)から(2)を示す. 
+  完全三角に任意の$B \in \B$におけるホモロジカル的関手$\Hom(B,-)$を作用させると, 次の長完全列を得る.
+  \begin{align*}
+    \to \Hom(B,X) \to \Hom(B,Y) \to \Hom(B,Z) \to \Hom(B,Z[1]) \to 
+  \end{align*}
+  $\Bperp$はシフトで閉じているので, $\Hom(B[1],Z) = \Hom(B,Z) = 0$である.  
+  よって, $\Hom(B,X) \cong \Hom(B,Y)$である. \\
+  (2)から(1)を示す.
+  同様に, 次の長完全列を得る. 
+  \begin{align*}
+    \to \Hom(B,X) \to \Hom(B,Y) \to \Hom(B,Z) \to \Hom(B,X[1]) \to \Hom(B,Y[1]) \to
+  \end{align*}
+  $\Hom(B,X) \cong \Hom(B,Y)$なので, $\Hom(B,Z) = 0$である. 
+  よって, $Z \in \Bperp$である.
+\end{proof}
+
+
+双対的に次の命題が成立する.
+
+\begin{corollary} \label{prop:in_perpB_equal_hom_equal_hom}
+  $\B$における完全三角$X \to Y \to Z$に対して, 次の2つは同値である. 
+  \begin{enumerate}
+    \item $X \in \perpB$である.
+    \item 任意の$B \in \B$に対して, $\Hom(Y,B) \cong \Hom(Z,B)$である. 
+  \end{enumerate}
+\end{corollary}
+
+\begin{definition}[許容的]
+  任意の$X \in \A$に対して, ある$B \in \B$と$C \in \Bperp$が存在して, $B \to X \to C$が完全三角となるとき, $\B$は右許容的(right-admissible)であるという. 
+  双対的に, 任意の$X \in \A$に対して, ある$D \in \perpB$と$B \in \B$が存在して, $D \to X \to B$が完全三角となるとき, $\B$は左許容的(left-admissible)であるという. 
+  $\B$が右許容的かつ左許容的であるとき, $\B$は両側許容的(two-sided admissible)であるという. 
+\end{definition}
+
+\begin{theorem} \label{prop:generate_equal_right_adm}
+  次の4つは同値である. 
+  \begin{enumerate}
+    \item $\A = \myangle{\B,\Bperp}$である. つまり, $\B$と$\Bperp$は$\A$を生成する. 
+    \item $\B$は右許容的である.
+    \item 包含関手$i : \B \hookrightarrow \A$は右随伴$i^R : \A \to \B$をもつ. 
+    \item 包含関手$j_\ast : \Bperp \hookrightarrow \A$は左随伴$j^\ast : \A \to \Bperp$をもつ. 
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  (3)から(2)を示す. 
+  任意の$X \in \A$に対して, $i^RX \to X$を補完する完全三角$i^RX \to X \to C$をとる. 
+  任意の$B' \in \B$におけるホモロジカル的関手$\Hom(B',-)$を作用させると次の長完全列を得る.
+  \begin{align*}
+    \to \Hom(B',i^RX) \to \Hom(B',X) \to \Hom(B',C) \to 
+  \end{align*}
+  仮定の随伴性より
+  \begin{align*}
+    \Hom_\B(B', i^RX) 
+    \cong \Hom_\A(i B', X) 
+    \cong \Hom_\A(B',X)
+  \end{align*}
+  である. 
+  \cref{prop:in_Bperp_equal_hom_equal_hom}より, $C \in \Bperp$である. \\
+  (2)から(3)を示す. 
+  仮定より, 任意の$X \in A$に対して, ある$B \in \B, C \in \Bperp$が存在して, $B \to X \to C$は完全三角となる.  
+  $B' \to X' \to C'$を同じ条件の完全三角として, $f : X' \to X$をとる. 
+  このとき, 次の図式を可換にする射$\psi : B' \to B$が一意に存在することを示す. 
+  \[\begin{tikzcd}
+    B & X & C \\
+    {B'} & {X'} & C
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow[from=2-1, to=2-2]
+    \arrow[from=2-2, to=2-3]
+    \arrow["\psi"', dotted, from=2-1, to=1-1]
+    \arrow["\varphi"', dotted, from=2-3, to=1-3]
+    \arrow["f"', from=2-2, to=1-2]
+  \end{tikzcd}\]
+  \cref{prop:in_Bperp_equal_hom_equal_hom}より
+  \begin{align*}
+    \Hom(B',B) \cong \Hom(B',X)
+  \end{align*}
+  である. 
+  よって, 任意の$X,X' \in \A$と$f: X' \to X$に対して
+  \begin{align*}
+    i^R(X) := B , ~~ i^R(f) := \psi
+  \end{align*}
+  と定義すると, これはwell-definedである. 
+  このとき
+  \begin{align*}
+    \Hom_\A(i B', X) 
+    \cong \Hom_\A(B',X) 
+    \cong \Hom_\B(B',B)
+    \cong \Hom_\B(B',i^RX)
+  \end{align*}
+  となるので, $i^R$は$i$の右随伴である. \\
+  (1)から(2)は明らかなので, (2)から(1)を示す. 
+  これは完全三角$B \to X \to C$に含まれる$X \in \A$によって生成される$\A$の充満部分圏がシフトと錐をとる操作で閉じていることを示せばよい. 
+  まず, シフトで閉じていることを示す.
+  $\B$と$\Bperp$は$\A$の三角部分圏なので, 任意の$i \in \bbZ$に対して$B[i] \in \B, C[i] \in \C$である. 
+  よって, $B[i] \to X[i] \to C[i]$は完全三角であり, $X[i] \in \A$である.
+  次に, 錐をとる操作で閉じていることを示す.
+  つまり, 次の図式の一番下の行が完全三角であることを示せばよいが, これは一般化八面体公理より従う.
+  \[\begin{tikzcd}
+    B & X & C \\
+    {B'} & {X'} & C \\
+    {\Cone \psi} & {\Cone f} & {\Cone \varphi}
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow[from=2-1, to=2-2]
+    \arrow[from=2-2, to=2-3]
+    \arrow["\psi", from=1-1, to=2-1]
+    \arrow["f", from=1-2, to=2-2]
+    \arrow["\varphi", from=1-3, to=2-3]
+    \arrow[from=2-1, to=3-1]
+    \arrow[from=2-2, to=3-2]
+    \arrow[from=2-3, to=3-3]
+    \arrow[dashed, from=3-1, to=3-2]
+    \arrow[dashed, from=3-2, to=3-3]
+  \end{tikzcd}\]
+\end{proof}
+
+\begin{lemma} \label{prop:B_equal_perp_Bperp}
+  $\B$が右許容的であるとき, $\B = {}^\perp(\Bperp)$である. 
+\end{lemma}
+
+\begin{proof}
+  $\B \subset {}^\perp(\Bperp)$は明らかなので, ${}^\perp(\Bperp) \subset \B$を示す. 
+  $\B$は右許容的なので, 任意の$X \in {}^\perp(\Bperp) \subset B$に対して, ある$B \in \B$と$C \in \Bperp$が存在して, $B \to X \to C$は完全三角である. 
+  $C \in \Bperp$より$\Hom(X,C) = 0$なので
+  \begin{align*}
+    B \cong X \oplus C[-1]
+  \end{align*}
+  である. 
+  同様に, $\Hom(B,C[-1]) = 0$なので, $C[-1] \cong 0$である. 
+  よって, $B \cong X$である. 
+\end{proof}
+
+\begin{lemma} \label{prop:B_is_right_adm_imply_Bperp_is_left_adm}
+  $\B$が右許容的であるとき, $\Bperp$は左許容的である. 
+\end{lemma}
+
+\begin{proof}
+  $\B$は右許容的なので, 任意の$X \in \A$に対して, ある$B \in \B$と$C \in \Bperp$が存在して, $B \to X \to C$は完全三角である.
+  \cref{prop:B_equal_perp_Bperp}より$\B = {}^\perp(\Bperp)$なので, 任意の$X \in \A$に対して, ある$C \in \Bperp$と$D \in {}^\perp(\Bperp) (=\B)$が存在して, $D \to X \to C$は完全三角である.
+  よって, $\Bperp$は左許容的である. 
+\end{proof}
+
+双対的に次の命題が成立する.
+
+\begin{corollary} \label{prop:generate_equal_left_adm}
+  次の4つは同値である. 
+  \begin{enumerate}
+    \item $\A = \myangle{B,\perpB}$である. つまり, $\B$と$\perpB$は$\A$を生成する. 
+    \item $\B$は左許容的である.
+    \item 包含関手$i : \B \hookrightarrow \A$は左随伴$i^L : \A \to \B$をもつ. 
+    \item 包含関手$j_! : \perpB \hookrightarrow \A$は右随伴$j^! : \A \to \perpB$をもつ. 
+  \end{enumerate}
+\end{corollary}
+
+\begin{corollary}
+  $\B$が左許容的であるとき, $\B = (\perpB)^\perp$である. 
+\end{corollary}
+
+\begin{corollary}
+  $\B$が左許容的であるとき, $\perpB$は右許容的である. 
+\end{corollary}
+
+$\B$が両側許容的であるときの随伴をまとめる. 
+
+\begin{corollary}
+  $\B$が両側許容的であるとき, 次の随伴が存在する. 
+  \[\begin{tikzcd}
+    \Bperp &&&& \perpB \\
+    && \A \\
+    \\
+    && \B
+    \arrow["{j_\ast}"', shift right, curve={height=6pt}, from=1-1, to=2-3]
+    \arrow["{j_!}"', shift right, curve={height=6pt}, from=1-5, to=2-3]
+    \arrow[from=4-3, to=2-3]
+    \arrow["{j^\ast}"', curve={height=6pt}, from=2-3, to=1-1]
+    \arrow["\dashv"{anchor=center, rotate=-25}, draw=none, from=1-1, to=2-3]
+    \arrow["{j^!}"', shift right, curve={height=6pt}, from=2-3, to=1-5]
+    \arrow["\dashv"{anchor=center, rotate=25}, draw=none, from=2-3, to=1-5]
+    \arrow["{i^!}", shift left=2, curve={height=-6pt}, from=2-3, to=4-3]
+    \arrow["\dashv"{anchor=center, rotate=-90}, shift left=2, draw=none, from=2-3, to=4-3]
+    \arrow["{i_!}"', shift right=2, curve={height=6pt}, from=2-3, to=4-3]
+    \arrow["\dashv"{anchor=center, rotate=90}, shift left=2, draw=none, from=4-3, to=2-3]
+  \end{tikzcd}\]
+\end{corollary}
+
+\begin{definition}[変異関手] \label{def:mutation_functor}
+  $\B$は両側許容的であるとする. 
+  $j^\ast : \A \to \Bperp$のdomainを$\perpB$に制限した
+  \begin{align*}
+    L_\B := j^\ast|_{\perpB} : \perpB \to \Bperp
+  \end{align*}
+  を$\perpB$の右変異関手(right mutation functor of $\perpB$)という. 
+  双対的に, $j^! : \A \to \perpB$のdomainを$\Bperp$に制限した
+  \begin{align*}
+    R_\B := j^!|_{\Bperp} : \Bperp \to \perpB
+  \end{align*}
+  を$\Bperp$の左変異関手(left mutation functor of $\Bperp$)という. 
+\end{definition}
+
+\begin{lemma}
+  右変異関手と左変異関手は互いに圏同値を定める. 
+\end{lemma}
+
+\begin{proof}
+  右変異関手の準逆が左変異関手であることから従う. 
+\end{proof}
+
+\begin{definition}[$\infty$許容的]
+  $\B$の繰り返し右直交をとった部分圏が全て右許容的であるとき, $\B$は右$\infty$許容的($+\infty$-admissible)であるという. 
+  双対的に, $\B$の繰り返し左直交をとった部分圏が全て左許容的であるとき, $\B$は左$\infty$許容的($-\infty$-admissible)であるという. 
+  $\B$が右$\infty$許容的かつ左$\infty$許容的であるとき, $\B$は両側$\infty$許容的(two-sided-$\infty$-admissible)であるという.
+\end{definition}
+
+\section{飽和的三角圏}
+
+$\bbK$を体, $(\A,T)$を$\bbK$線形な三角圏とする.
+
+\begin{definition}[有限型]
+  任意の$X,Y \in \A$に対する$\Ext_\A(X,Y)$が有限次元であり, ほとんど全ての$\Ext^i$が$0$であるとき, $\A$は有限型(of finite type)であるという.
+\end{definition}
+
+この節の以降では三角圏は全て有限型であるとする. 
+
+\begin{definition}[有限型の関手]
+  (コ)ホモロジカル関手$h : \A^{(\myop)} \to \Vectfd$が任意の$X \in \A$に対して$h^i(X) (= h(X[-1]))$がほとんど全ての$i$で$0$であるとき, $h$は有限型の関手(functor of finite type)であるという. 
+\end{definition}
+
+\begin{example}
+  完全関手$\Phi : \A^\myop \to D^b(\Vectfd)$に対して
+  \begin{align*}
+    h := H^0 \circ \Phi : \A^\myop \to \Vectfd
+  \end{align*}
+  は有限型の関手である.
+\end{example}
+
+\begin{lemma}
+  完全関手$\A^\myop \to D^b(\Vectfd)$のなす圏を$\Ex(\A)$, 完全関手$\A^\myop \to \Vectfd$のなす圏を$\Coh(\A)$とする. 
+  対応$\Phi \mapsto H^0 \circ \Phi$は次の圏同値を定める. 
+  \begin{align*}
+    H^0 \circ - : \Ex(\A) \to \Coh(\A)
+  \end{align*}
+\end{lemma}
+
+\begin{proof}
+  任意の$E \in \A$に対して$h^\bullet(E)$を自明な微分をもつ複体とみなすと, 関手
+  \begin{align*}
+    t : \Coh(\A) \to \Ex(\A) : h \mapsto \Phi : E \mapsto h^\bullet(E)
+  \end{align*}
+  定める. 
+  まず, $t(h) : \A \to D^b(\Vectfd)$が完全関手であることをみる. 
+  つまり, $\A$における完全三角$B \to A \to C$に対して, $h^\bullet(C) \to h^\bullet(A) \to h^\bullet(B)$が$D^b(\Vectfd)$における完全三角であることをみる. (途中)
+  次に, $H^0 \circ -$と$t$が準逆であることをみる. 
+  任意の$h \in \Coh(\A)$に対して, 定義より$(H^0 \circ -) \circ t(h) = h$である. 
+  $D^b(\Vectfd)$から$\GrVect$への関手$H^\bullet$は圏同値を定めるので, 任意の$\Phi \in \Ex(\A)$に対して, $t \circ (H^0 \circ -)(\Phi) = \Phi$である. 
+\end{proof}
+
+\begin{definition}[飽和的]
+  任意の有限型のコホモロジカル関手$\A^\myop \to \Vectfd$が表現可能であるとき, $\A$は右飽和的(right-saturated)であるという. 
+  双対的に, 任意の有限型のホモロジカル関手$\A \to \Vectfd$が表現可能であるとき, $\A$は左飽和的であるという.
+  $\A$が右飽和的かつ左飽和的であるとき, $\A$は両側飽和的(two-sided-saturated)であるという.
+\end{definition}
+
+\begin{example}
+  $D^b(\Vectfd)$は両側飽和的である. 
+\end{example}
+
+\begin{theorem} \label{prop:saturated_imply_admissible}
+  $\B$を$\A$の充満三角部分圏とする. 
+  $\B$が右(左)飽和的であるとき, $\B$は右(左)許容的である. 
+\end{theorem}
+
+\begin{proof}
+  $\B$が右飽和的であるとする.
+  任意の$X \in \A$における$\Hom_\A(-,X) : \B^\myop \to \Vectfd$をとって, $B \in \B$をその表現対象とする. 
+  $\B$は右飽和的なので, 任意の$B_1 \in \B$に対して
+  \begin{align*}
+    \Hom_\B(B_1,B) \cong \Hom_\A(B_1,X)
+  \end{align*} 
+  である. 
+  任意の$C \in \A$に対して, $B \to X \to C$が完全三角であるとする.
+  \cref{prop:in_Bperp_equal_hom_equal_hom}より, $C \in \Bperp$である. 
+  よって, $\B$は右許容的である. 
+\end{proof}
+
+一般に, 逆は成立しないが, $\A$が飽和的であれば成立する. 
+
+\begin{theorem} \label{prop:admissible_in_saturated_imply_saturated}
+  $\A$は左(右)飽和的であり, $\B$は$\A$の右(左)許容的な三角部分圏とする. 
+  このとき, $\B$は左(右)飽和的である.
+\end{theorem}
+
+\begin{proof}
+  $\A$は左飽和的であり, $\B$は$\A$の右許容的な三角部分圏とする. 
+  $\B$上の任意のホモロジカル関手$h : \B \to \Vectfd$をとる. 
+  $\B$は右許容的なので, \cref{prop:generate_equal_right_adm}より, 包含関手$i : \B \hookrightarrow \A$は右随伴$i^R : \A \to \B$をもつ.
+  このとき
+  \begin{align*}
+    h' = h \circ i^R : \A \to \Vectfd
+  \end{align*}
+  はホモロジカル関手である. 
+  $\A$は左飽和的なので, $X \in \A$を表現可能関手の表現対象とする. 
+  $\B$は右許容的なので, 任意の$A \in \A$に対して, ある$B \in \B$と$C \in \Bperp$が存在して, $B \to A \to C$は完全三角である.
+  $C \in \Bperp$なので, $\Hom(X,C) = 0$である. 
+  つまり, $X \in (\perpB)^\perp$である. 
+  \cref{prop:B_equal_perp_Bperp}より, $B = (\perpB)^\perp$なので, $X \in \B$である. 
+  また, \cref{prop:in_Bperp_equal_hom_equal_hom}より, $\Hom(X,B) \cong \Hom(X, A)$である. 
+  つまり
+  \begin{align*}
+    h(B) 
+    \cong \Hom(X,B)
+    \cong \Hom(X,A)
+  \end{align*}
+  となるので, $\B$は左飽和的である.
+\end{proof}
+
+$\infty$許容的とは次のように結びつけることができる. 
+
+\begin{corollary} \label{prop:same_direction_admissible_in_saturated_imply_saturated}
+  $\A$は右(左)飽和的であり, $\B$は$\A$の右(左)許容的な三角部分圏とする. 
+  \footnote{
+    \cref{prop:admissible_in_saturated_imply_saturated}は左-右であるが, 今は右-右であることに注意. 
+  }
+  このとき, $\B$は右(左)$\infty$飽和的である.
+\end{corollary}
+
+\begin{proof}
+  $\A$は右飽和的であり, $\B$は$\A$の右許容的な三角部分圏とする. 
+  \cref{prop:B_is_right_adm_imply_Bperp_is_left_adm}より, $\Bperp$は左許容的である. 
+  \cref{prop:admissible_in_saturated_imply_saturated}より, $\Bperp$は右飽和的である. 
+  $\Bperp$は$\B$の狭義充満三角部分圏なので, \cref{prop:admissible_in_saturated_imply_saturated}より$\Bperp$は右許容的である. 
+  同様に, $\B^{\perp\perp}, \B^{\perp\perp\perp}, \cdots$も右許容的なので, $\B$は右$\infty$飽和的である.
+\end{proof}
+
+\cref{prop:admissible_in_saturated_imply_saturated}と\cref{prop:same_direction_admissible_in_saturated_imply_saturated}より, 次の命題が従う.
+
+\begin{corollary}
+  $\A$は両側飽和的であり, $\B$は$\A$の両側許容的な三角部分圏とする. 
+  このとき, $\B$は両側飽和的かつ両側$\infty$許容的である. 
+\end{corollary}
+
+\cref{prop:saturated_imply_admissible}より, 次の命題が従う.
+
+\begin{corollary}
+  $\A$は両側飽和的であり, $\B$は$\A$の両側飽和的な三角部分圏とする. 
+  このとき, $\B$は両側$\infty$許容的である. 
+\end{corollary}
+
+また, 許容的と飽和的には次のような関係がある. 
+
+\begin{theorem}
+  $\B$を$\A$の右(左)許容的な三角部分圏とする. 
+  $\B$と$\Bperp$が右(左)飽和的であるとき, $\A$も右(左)飽和的である. 
+\end{theorem}
+
+\section{Serre関手}
+
+$\A$を$\bbC$線形な三角圏とする. 
+
+\begin{definition}[Serre関手]
+  任意の$A,B \in \A$に対して, $\sum_{i} \dim \Hom^i(A,B) < \infty$であるとする. 
+  自己圏同値
+  \begin{align*}
+    \S_\A : \A \to \A
+  \end{align*}
+  が任意の$A,B \in \A$に対して, bi-functionalな同型射
+  \begin{align*}
+    \varphi_{A,B} : \Hom_\A(A,B) \xrightarrow{\cong} \Hom_\A(B,\S_\A A)^\ast
+  \end{align*}
+  が存在するとき, $\S_\A$を$\A$上のSerre関手(Serre functor)という. 
+  このとき, 同型射$\{\varphi_{A,B}\}$をSerre構造(Serre structure)という. 
+  $\A$が明らかな場合は$\A$を省略する. 
+\end{definition}
+
+\begin{lemma}
+  任意の自己圏同値$\Phi : \A \to \A$は$\A$上のSerre関手$\S$と可換である. 
+  つまり, 関手の同型$\Phi \circ \S \cong \S \circ \Phi$が存在する. 
+\end{lemma}
+
+\begin{proof}
+  任意の$A, B \in \A$に対して, 次の自然同型を得る.
+  \begin{align*}
+    &\Hom_\A(\Phi A,\Phi \S A)
+    \cong \Hom_\A(A,\S B) 
+    \cong \Hom_\A(\S B, \S A)^\ast
+    \cong \Hom_\A(B,A)^\ast \\
+    &\cong \Hom_\A(\Phi B, \Phi A)
+    \cong \Hom_\A(\S^{-1} \Phi A, \Phi B)
+    \cong \Hom_\A(\Phi A, \S \Phi B)
+  \end{align*}
+  Yonedaの補題より, 自然同型$\Phi \circ \S B \cong \S \circ \Phi B$を得る. 
+  これは$B$に対して自然なので, 関手の同型$\Phi \circ \S \cong \S \circ \Phi$を得る. 
+\end{proof}
+
+\begin{theorem}
+  Serre関手は完全関手である.
+\end{theorem}
+
+\begin{proof}
+  マットレスを定義したら書きます.
+\end{proof}
+
+次の命題はSerre関手の存在性の同値条件を与える. 
+
+\begin{theorem} \label{prop:serre_equal_representable}
+  次の2つは同値である. 
+  \begin{enumerate}
+    \item $\A$はSerre関手をもつ. 
+    \item 任意の$A \in \A$に対して, $\Hom_\A(A,-)^\ast$と$\Hom_\A(-,A)^\ast$で表される任意の関手は表現可能である. 
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  (1)から(2)を示す.
+  $\S$がSerre関手であるとき
+  \begin{align*}
+    & \Hom_\A(-,\S A) \cong \Hom_\A(\S A,\S -)^\ast \cong \Hom_\A(A,-)^\ast \\
+    & \Hom_\A(\S^{-1}A,-) \cong \Hom_\A(-,A)^\ast
+  \end{align*}
+  であるので, $\S A$は$\Hom_\A(A,-)^\ast$の表現対象であり, $\S^{-1} A$は$\Hom_\A(-,A)^\ast$の表現対象である. 
+  (2)から(1)を示す. (途中)
+
+\end{proof}
+
+\begin{theorem}
+  Serre関手は存在するならば, 自然同型を除いて一意である. 
+\end{theorem}
+
+\cref{prop:serre_equal_representable}より, 飽和的三角圏とSerre関手の存在が結びつく. 
+
+\begin{corollary}
+  $\A$を有限型の三角圏とする. 
+  $\A$が両側飽和的であるとき, $\A$はSerre関手をもつ. 
+\end{corollary}
+
+Serre関手が存在するとき, $\infty$許容的であることを有限回の操作で確かめることができる.
+
+\begin{theorem}
+  $\A$はSerre関手$\S$をもち, $\B$を$\A$の両側許容的な三角部分圏とする.
+  このとき, $\Bpp = \S(\B)$かつ$\ppB = \S^{-1}(\B)$であり, $\B$は両側$\infty$許容的である. 
+\end{theorem}
+
+\begin{proof}
+  まず, $\S(\B) \subset \Bpp$を示す.
+  $\B$は右許容的なので, 任意の$X \in \A$に対して, ある$B \in \B, C \in \Bperp$が存在して, $B \to X \to C$は完全三角である.
+  このような$C \in \Bperp$は任意の$B \in \Bperp$に対して, $\Hom_\A(B,C) = 0$である. 
+  このとき, Serre関手の同型を用いると
+  \begin{align*}
+    \Hom_\A(C,\S B) 
+    \cong \Hom_\A(\S B, \S C)^\ast
+    \cong \Hom_\A(B,C)^\ast
+    = 0
+  \end{align*}
+  である. 
+  任意の$C \in \Bpp$に対して$\Hom(C,\S B)  = 0$なので, $\S B \in \Bpp$である.
+  よって, $\S(\B) \subset \Bpp$である. \\
+  次に, $\Bpp \subset \S(\B)$を示す. 
+  任意の$L \in \Bpp$をとる. 
+  つまり, 任意の$C \in \Bperp$に対して, $\Hom_\A(C,L) = 0$である. 
+  このとき, Serre関手の同型を用いると
+  \begin{align*}
+    \Hom_\A(C,L)
+    \cong \Hom_\A(L,\S C)
+    \cong \Hom_\A(\S^{-1}L, C)
+  \end{align*}
+  である. 
+  任意の$C \in \Bperp$に対して$\Hom_\A(\S^{-1}L, C) = 0$なので, $\S^{-1}L \in {}^\perp(\Bperp)$である. 
+  \cref{prop:B_equal_perp_Bperp}より, $\S^{-1}L \in \B$である. 
+  つまり, $L \in \S(\B)$であるので, $\Bpp \subset \S(\B)$である. 
+  以上より, $\Bpp = \S(\B)$である. 
+  $\ppB = \S^{-1}(\B)$も同様に示せる.
+  (途中)
+\end{proof}
+
+\begin{theorem}
+  $\A$はSerre関手$\S$をもち, $\B$を$\A$の両側許容的な三角部分圏とする.
+  ここで, $\S$をcodomainを$\Bperp$に制限した$\S' : \perpB \to \Bperp$と, \cref{def:mutation_functor}で定義された$\Bperp$の右変異関手$R_\B : \Bperp \to \perpB$の合成
+  \begin{align*}
+    \S_{\perpB} := R_\B \circ \S' : \perpB \to \perpB
+  \end{align*}
+  は$\perpB$上のSerre関手である.
+\end{theorem}
+
+\begin{theorem}
+  $\B$を$\A$の両側許容的な三角部分圏とする.
+  $\Bperp$が両側許容的であり, $\B$と$\Bperp$がSerre関手$\S_\B$と$\S_{\Bperp}$をそれぞれもつとき, $\A$はSerre関手をもつ. 
+\end{theorem}
+
+\begin{theorem}
+  $\A$はSerre関手$\S$をもち, $\B$は$\A$の右(左)許容的な三角部分圏で, Serre関手$\S_\B$を持つとする.
+  このとき, $\B$は両側$\infty$許容的である. 
+\end{theorem}
+
+\section{例外生成列} 
+
+自明な微分を持つ$\bbK$ベクトル空間の次数付き複体$\Hom^\bullet(A,B)$を次のように定義する. 
+\begin{align*}
+  \Hom^\bullet(A,B) &:= \bigoplus_{k \in \bbZ} \Hom_\A(A,T^kB)
+\end{align*}
+
+\begin{example}
+  $\A$がAbel圏の導来圏のとき, $\Hom^\bullet(A,B)$は$\RHom(A,B)$と擬同型である. 
+\end{example}
+
+\begin{definition}[例外対象]
+  $E \in \A$が$\Hom^\bullet(E,E) = \bbK$を満たす, つまり
+  \begin{align*}
+    \Hom^i(E,E) = 
+    \begin{cases}
+      \bbK & (i = 0) \\
+      0    & (i \neq 0) 
+    \end{cases}
+  \end{align*}
+  を満たすとき, $E$を例外対象(exceptional object)という. 
+\end{definition}
+
+\begin{definition}[例外列]
+  $E_0,\cdots,E_n$を$\A$の例外対象とする. 
+  例外対象の列$(E_0,\cdots,E_n)$が任意の$i>j$に対して
+  \begin{align*}
+    \Hom^\bullet(E_i,E_j) = 0
+  \end{align*}
+  を満たすとき, $(E_0,\cdots,E_n)$を例外列(exceptional collection)という.
+  2つの例外対象$E,F \in \A$からなる例外列$(E,F)$を例外対(exceptional pair)という.  
+\end{definition}
+
+% \begin{definition}[例外対]
+%   2つの例外対象$E,F$からなる例外列$(E,F)$を例外対(exceptional pair)という.
+%   つまり, 次の式が成立する.
+%   \begin{align*}
+%     \Hom^\bullet(F,E) = 0
+%   \end{align*}
+% \end{definition}
+
+次の命題は定義より従う. 
+
+\begin{lemma}
+  $\A$における例外対象$E$に対して, $\Hom^\bullet(E,E)$は恒等射$\id_E$によって張られる$1$次元$\bbK$上ベクトル空間である. 
+\end{lemma}
+
+\begin{lemma}
+  $\A$における例外列$(E_0,\cdots,E_n)$に対して, $i \neq j$のとき, $E_i$と$E_j$は同型でない. 
+\end{lemma}
+
+\begin{definition}[例外生成系]
+  $\A$における例外列$(E_0,\cdots,E_n)$に対して
+  \begin{align*}
+    \A \cong \myangle{E_0,\cdots,E_n}
+  \end{align*}
+  となるとき, $(E_0,\cdots,E_n)$を$\A$の例外生成系(full exceptional collection)という.  
+\end{definition}
+
+\begin{remark}
+  三角圏が常に例外的対象をもつとは限らない. 
+  例えば, Calabi-Yau圏は例外的対象をもたない. 
+\end{remark}
+
+\begin{definition}[例外対の変異]
+  例外対$\tau = (E,F)$に対して, $R_FE, L_EF$を$\A$における次の完全三角を用いて定義する.
+  \begin{align}
+    & E \xrightarrow{coev} \Hom^\bullet(E,F)^\ast \otimes F \to R_FE \tag{1} \label{dist:R_FE} \\
+    & L_EF \to \Hom^\bullet(E,F) \otimes E \xrightarrow{ev} F \tag{2} \label{dist:L_EF}
+  \end{align}
+  $R_FE$を$E$の$F$による右変異(right mutation), $L_EF$を$F$の$E$による左変異(left mutation)という. 
+  \footnote{
+    $R_E\tau = (F,R_FE)$を例外対$\tau$の右変異, $L_E\tau = (L_EF,E)$を例外対$\tau$の左変異ということもある. 
+  }
+  \footnote{
+    添え字が明らかな場合は$(F,R_FE)$を$(F,RE)$のように省略することが多い. 
+    本稿では, この省略は基本的に用いない. 
+  }
+\end{definition}
+
+変異は一般の例外列に対しても定義することができる. 
+
+\begin{definition}[例外列の変異]
+  例外列$\sigma = (E_0,\cdots,E_n)$と$0 \leq i \leq n-1$に対して
+  \begin{align*}
+    & R_i\sigma = (E_0,\cdots,E_{i-1}, E_{i+1}, R_{E_{i+1}}E_i, E_{i+2},\cdots,E_n) \\
+    & L_i\sigma = (E_0,\cdots,E_{i-1}, L_{E_i}E_{i+1}, E_i, E_{i+2},\cdots,E_n ) 
+  \end{align*}
+  をそれぞれ例外列の左変異(left mutated collection), 例外列の右変異(right mutated collection)という. 
+\end{definition}
+
+\cref{prop:mutation_is_also_exceptional}を証明するために, いくつか準備をする. 
+$E^\bullet_{i+1} := \Hom^\bullet(E_i,E_{i+1})^\ast \otimes E_{i+1}$とする. 
+
+\begin{lemma}
+  $\A$における例外列$(E_0,\cdots,E_n)$に対して, 次の式が成立する.
+  \begin{align*}
+    \Hom_\A(R_{E_{i+1}}E_i, T^k(E_{i+1})) = 0
+  \end{align*}
+\end{lemma}
+
+\begin{proof}
+  \cref{dist:R_FE}にコホモロジカル的関手$\Hom(-,T^k(E_{i+1}))$を作用させると, 次の長完全列を得る. 
+  \begin{align*}
+    \Hom(E_i,T^k(E_{i+1})) \to \Hom(E^\bullet_{i+1},T^k(E_{i+1})) \to \Hom(R_{E_{i+1}}E_i,T^k(E_{i+1}))
+  \end{align*}
+  例外列の定義より$\Hom(E_i,T^k(E_{i+1})) = 0$なので, $\Hom(\Hom^\bullet(E_i,E_{i+1})^\ast \otimes E_{i+1},T^k(E_{i+1})) \cong \Hom(R_{E_{i+1}}E_i,T^k(E_{i+1}))$であることから従う. 
+\end{proof}
+
+\begin{lemma}
+  $\A$における例外列$(E_0,\cdots,E_n)$に対して, 次の式が成立する.
+  \begin{align*}
+    \Hom_\A(E_j, T^k(R_{E_{i+1}}E_i)) = 0 & (j > i) \\
+    \Hom_\A(R_{E_{i+1}}E_i, T^k(E_j)) = 0 & (j < i)
+  \end{align*}
+\end{lemma}
+
+\begin{proof}
+  \cref{dist:R_FE}にコホモロジカル関手$\Hom(E_j,-)$を作用させると, 次の長完全列を得る.
+
+\end{proof}
+
+\begin{lemma}
+  $\A$における例外列$(E_0,\cdots,E_n)$に対して, $R_{E_{i+1}}E_i$は例外対象である. 
+\end{lemma}
+
+\begin{proof}
+  \cref{dist:R_FE}にコホモロジカル的関手$\Hom(-,E_i)$を作用させると, 次の長完全列を得る. 
+  \begin{align*}
+    \Hom(E_i,E_i) \to \Hom(E^\bullet_{i+1},E_i) \to \Hom(R_{E_{i+1}}E_i,E_i)
+  \end{align*}
+\end{proof}
+
+\begin{theorem} \label{prop:mutation_is_also_exceptional}
+  例外列の左(右)変異は例外列である. 
+\end{theorem}
+
+\begin{lemma}
+  例外列$(E_0,\cdots,E_n)$が$\A$を生成するとき, 例外列の左(右)変異も$\A$を生成する. 
+\end{lemma}
+
+\begin{proof}
+  $\A = \langle E_0,\cdots,E_n \rangle, \B = \langle E_0,\cdots,E_{i-1}, E_{i+1}R_{E_{i+1}}E_i, E_{i+2},\cdots,E_n \rangle$とする.
+  まず, $\B \subset \A$を示す. 
+  $\A$は$\otimes$とシフトで閉じているので, $\Hom^\bullet(E_i,E_{i+1})^\ast \otimes E_{i+1} \in \A$である. 
+  \cref{dist:R_FE}より, $R_{E_{i+1}}E_i \in \A$である. 
+  よって, $\B \subset \A$である. \\
+  次に$\A \subset \B$を示す.
+  $(E_{i+1},R_{E_{i+1}}E_i)$の左変異をとると, $(E_0,\cdots,E_{i-1}, E_{i+1}R_{E_{i+1}}E_i, E_{i+2},\cdots,E_n)$から$(E_0,\cdots,E_n)$を得る. 
+  よって, $\A \subset \B$である.
+\end{proof}
+
+% $R_i$と$L_i$は例外列の集まり上の対応とみなすことができる. 
+
+% \begin{lemma}
+%   $\A$の例外列$\sigma$に対して, 次の式を満たす. 
+%   \begin{align*}
+%     R_iL_i\sigma = L_iR_i\sigma = \sigma
+%   \end{align*}
+% \end{lemma}
+
+% 変異は例外列の集まりに組み紐群の作用を誘導する. 
+
+% \begin{lemma}
+%   $\A$の例外列$\sigma$に対して, 次の式を満たす. 
+%   \begin{align*}
+%     & R_iR_{i+1}R_i = R_{i+1}R_iR_{i+1} \\
+%     & L_iL_{i+1}L_i = L_{i+1}L_iL_{i+1}
+%   \end{align*}
+% \end{lemma}
+
+\end{document}

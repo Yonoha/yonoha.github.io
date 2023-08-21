@@ -1,0 +1,1060 @@
+\RequirePackage{plautopatch}
+\documentclass[uplatex, a4paper, 14Q, dvipdfmx]{jsarticle}
+\usepackage{docmute}
+\usepackage{../mypackage}
+
+\title{三角圏と三角関手}
+\author{よの}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  三角圏と三角関手を定義して, 公理から導かれる性質をいろいろと述べる. 
+\end{abstract}
+
+\tableofcontents
+
+\section{三角圏} \label{section4_1}
+
+前三角圏で成立する命題もあるが, 基本的には三角圏において議論する. 
+
+\begin{definition}[三角系列]
+  $\T$を加法圏, $T: \T \to \T$を加法的自己圏同値とする. 
+  このとき, $\T$における三角系列(triangle)とは, $\T$の対象$X, Y, Z$と射$u: X \to Y, v: Y \to Z, w: Z \to TX$
+  \footnote{
+    対象$X$と射$f$に対して, $T(X)$を$TX$, $T(f)$を$Tf$, $T^{-1}(X)$を$-TX$, $T^{-1}(f)$を$-Tf$とあらわす. 
+  }
+  の組$(X,Y,Z,u,v,w)$からなる図式
+  \[\begin{tikzcd}
+    X & Y & Z & TX
+    \arrow["u", from=1-1, to=1-2]
+    \arrow["v", from=1-2, to=1-3]
+    \arrow["w", from=1-3, to=1-4]
+  \end{tikzcd}\]
+  である. 
+\end{definition}
+
+\begin{notation} \label{notation_triangle}
+  三角系列の名前の由来は次のように三角系列を表記することがあるからである. 
+  \[\begin{tikzcd}
+    X && Y \\
+    & Z
+    \arrow["u", from=1-1, to=1-3]
+    \arrow["v", from=1-3, to=2-2]
+    \arrow["w", squiggly, from=2-2, to=1-1]
+  \end{tikzcd}\]
+  ここで, 波線は$w : Z \to TX$をあらわしている. 
+\end{notation}
+
+\begin{definition}[三角系列の射]
+  $\T$を加法圏, $T: \T \to \T$を加法的自己圏同値とする. 
+  $\T$の三角系列
+  \[\begin{tikzcd}
+    X & Y & Z & TX \\
+    {X'} & {Y'} & {Z'} & {TX'}
+    \arrow["u", from=1-1, to=1-2]
+    \arrow["v", from=1-2, to=1-3]
+    \arrow["w", from=1-3, to=1-4]
+    \arrow["{u'}", from=2-1, to=2-2]
+    \arrow["{v'}", from=2-2, to=2-3]
+    \arrow["{w'}", from=2-3, to=2-4]
+  \end{tikzcd}\]
+  に対して, 三角系列の射(morphism of triangles)とは, $\T$における射$f: X \to X', g: Y \to Y', h: Z \to Z'$の組$(f,g,h)$であって, 次の図式を可換にするものである. 
+  \[\begin{tikzcd}
+    X & Y & Z & TX \\
+    {X'} & {Y'} & {Z'} & {TX'}
+    \arrow["u", from=1-1, to=1-2]
+    \arrow["v", from=1-2, to=1-3]
+    \arrow["w", from=1-3, to=1-4]
+    \arrow["f", from=1-1, to=2-1]
+    \arrow["g", from=1-2, to=2-2]
+    \arrow["h", from=1-3, to=2-3]
+    \arrow["Tf", from=1-4, to=2-4]
+    \arrow["{u'}"', from=2-1, to=2-2]
+    \arrow["{v'}"', from=2-2, to=2-3]
+    \arrow["{w'}"', from=2-3, to=2-4]
+  \end{tikzcd}\]
+  三角系列の図式は圏をなす. 
+  $f,g,h$がすべて同型射であるとき, 三角系列の射$(f,g,h)$は同型射であるといい, 三角系列$(X,Y,Z,u,v,w), (X,',Y',Z',u',v',w')$は同型であるという. 
+\end{definition}
+
+\begin{definition}[三角圏]
+  $\T$を加法圏, $T: \T \to \T$を加法的自己圏同値とする. 
+  三角系列のなす圏の充満部分圏を$\Delta$と表し, $\Delta$に属する三角系列を完全三角(exact triangle)
+  \footnote{
+    特三角(distinguished triangle)ともいう. 
+  }
+  という. 
+  組$(T,\Delta)$が次の条件を満たすとき, $(\T, T, \Delta)$を三角圏(triangulated category), $T$をシフト関手(shift functor)という. 
+  \begin{description}
+    \item[(TR1)] $\Delta$は同型で閉じている. すなわち, 完全三角に同型な三角系列は完全三角である. 
+    \item[(TR2)] 任意の$X \in \T$に対して, 三角系列
+    \[\begin{tikzcd}
+      X & X & 0 & TX
+      \arrow["\id_X", from=1-1, to=1-2]
+      \arrow[from=1-2, to=1-3]
+      \arrow[from=1-3, to=1-4]
+    \end{tikzcd}\]
+    は完全三角である. 
+    \item[(TR3)] 任意の射$f: X \to Y$を補完する完全三角 
+    \[\begin{tikzcd}
+      X & Y & Z & TX
+      \arrow["f", from=1-1, to=1-2]
+      \arrow["v", from=1-2, to=1-3]
+      \arrow["w", from=1-3, to=1-4]
+    \end{tikzcd}\]
+    が存在する. 
+    \item[(TR4)] 2つの三角系列
+    \[\begin{tikzcd}
+      X & Y & Z & TX \\
+      {Y} & {Z} & {TX} & {TY}
+      \arrow["u", from=1-1, to=1-2]
+      \arrow["v", from=1-2, to=1-3]
+      \arrow["w", from=1-3, to=1-4]
+      \arrow["{v}", from=2-1, to=2-2]
+      \arrow["{w}", from=2-2, to=2-3]
+      \arrow["{-Tu}", from=2-3, to=2-4]
+    \end{tikzcd}\]
+    について, 一方が完全三角であることと他方が完全三角であることは同値である. 
+    \item[(TR5)] 2つの完全三角
+    \[\begin{tikzcd}
+      X & Y & Z & TX \\
+      {X'} & {Y'} & {Z'} & {TX'}
+      \arrow["u", from=1-1, to=1-2]
+      \arrow["v", from=1-2, to=1-3]
+      \arrow["w", from=1-3, to=1-4]
+      \arrow["{u'}", from=2-1, to=2-2]
+      \arrow["{v'}", from=2-2, to=2-3]
+      \arrow["{w'}", from=2-3, to=2-4]
+    \end{tikzcd}\]
+    と, ある射$f: X \to X', g: Y \to Y'$が次の図式を可換にするとする. 
+    \[\begin{tikzcd}
+      X & Y \\
+      {X'} & {Y'}
+      \arrow["u", from=1-1, to=1-2]
+      \arrow["g", from=1-2, to=2-2]
+      \arrow["f"', from=1-1, to=2-1]
+      \arrow["{u'}"', from=2-1, to=2-2]
+    \end{tikzcd}\]
+    このとき, ある射$h: Z \to Z'$が存在して, 次の図式を可換にする. 
+    \footnote{
+      $h$が一意であることは課していないことに注意. 
+    }
+    \[\begin{tikzcd}
+      X & Y & Z & TX \\
+      {X'} & {Y'} & {Z'} & {TX'}
+      \arrow["u", from=1-1, to=1-2]
+      \arrow["v", from=1-2, to=1-3]
+      \arrow["w", from=1-3, to=1-4]
+      \arrow["f", from=1-1, to=2-1]
+      \arrow["g", from=1-2, to=2-2]
+      \arrow["h", dashed, from=1-3, to=2-3]
+      \arrow["Tf", from=1-4, to=2-4]
+      \arrow["{u'}"', from=2-1, to=2-2]
+      \arrow["{v'}"', from=2-2, to=2-3]
+      \arrow["{w'}"', from=2-3, to=2-4]
+    \end{tikzcd}\] 
+    \item[(TR6)] 3つの完全三角
+    \[\begin{tikzcd}
+      X & Y & {Z'} & TX \\
+      X & Z & {Y'} & TX \\
+      Y & Z & {X'} & TY 
+      \arrow["u", from=1-1, to=1-2]
+      \arrow[from=1-2, to=1-3]
+      \arrow[from=1-3, to=1-4]
+      \arrow[from=2-2, to=2-3]
+      \arrow[from=2-3, to=2-4]
+      \arrow["{v \circ u}", from=2-1, to=2-2]
+      \arrow["v", from=3-1, to=3-2]
+      \arrow[from=3-2, to=3-3]
+      \arrow[from=3-3, to=3-4]
+    \end{tikzcd}\]
+    に対して, ある射$Z' \to Y', Y' \to X', X' \to TZ'$が存在して, 
+    \[\begin{tikzcd}
+      {Z'} & {Y'} & {X'} & {TZ'}
+      \arrow[from=1-2, to=1-3]
+      \arrow[from=1-1, to=1-2]
+      \arrow[from=1-3, to=1-4]
+    \end{tikzcd}\]
+    は完全三角であって, 次の図式を可換にする. 
+    \[\begin{tikzcd}
+      X & Y & {Z'} & TX \\
+      X & Z & {Y'} & TX \\
+      Y & Z & {X'} & TY \\
+      {Z'} & {Y'} & {X'} & {TZ'}
+      \arrow["u", from=1-1, to=1-2]
+      \arrow[from=1-2, to=1-3]
+      \arrow[from=1-3, to=1-4]
+      \arrow["{v \circ u}", from=2-1, to=2-2]
+      \arrow[from=2-2, to=2-3]
+      \arrow[from=2-3, to=2-4]
+      \arrow["v", from=3-1, to=3-2]
+      \arrow[from=3-2, to=3-3]
+      \arrow[from=3-3, to=3-4]
+      \arrow[dashed, from=4-1, to=4-2]
+      \arrow[dashed, from=4-2, to=4-3]
+      \arrow[dashed, from=4-3, to=4-4]
+      \arrow["{\id_X}", from=1-1, to=2-1]
+      \arrow["u", from=2-1, to=3-1]
+      \arrow[from=3-1, to=4-1]
+      \arrow["v", from=1-2, to=2-2]
+      \arrow["{\id_Z}", from=2-2, to=3-2]
+      \arrow[from=3-2, to=4-2]
+      \arrow[dashed, from=1-3, to=2-3]
+      \arrow[dashed, from=2-3, to=3-3]
+      \arrow["{\id_{X'}}", from=3-3, to=4-3]
+      \arrow["Tu", from=2-4, to=3-4]
+      \arrow[from=3-4, to=4-4]
+      \arrow["{\id_{TX}}", from=1-4, to=2-4]
+    \end{tikzcd}\]
+    (TR6)を八面体公理(octahedron axiom)という. 
+    三角圏の公理から(TR6)を抜いたものを前三角圏(pretriangulated category)という. 
+  \end{description}
+\end{definition}
+
+\begin{remark}
+  三角圏の定義は完全圏と違って統一されている. 
+  \cite{Nee}の定義と本稿の定義の対応を述べておく. 
+  \begin{itemize}
+    \item \cite{Nee}のDefinition 1.1.1.で定義されるcandidate triangleは, 本稿における三角系列であって射の合成が$0$となるものである.
+     
+    \item Definition 1.1.2.にあるように, 三角圏におけるcandidate triangleの集まりの元をdistinguished triangleと呼んでいる.
+    Remark 1.1.3.や本稿の\cref{comp_zero}にあるように, distinguishedであればcandidateである. 
+    Notation 1.1.4.で, 三角圏においてdistinguishedは省略すると注記されている. 
+
+    \item Definition 1.1.2.ではpre-triangulated category (本稿の前三角圏)しか定義されておらず, triangulated category (本稿の三角圏)はのちに定義されている.
+    本稿でもそうだが, 八面体公理を使用する命題が少ないからである. (t-構造などでは重要となる.)
+
+    \item Definition 1.1.12.でhomological functorにdecentであるという条件を定義している. 
+    Example 1.1.13にあるように, hom関手はdecent homological functorである. 
+    \cite{Nee}ではdecent homological functorであることをいくつかの命題で仮定している.
+    本稿では, hom関手を使って議論しているので, decent homological functorをhom関手として読み替えてもらえばよい. 
+
+    \item Definition 1.1.14でpre-triangleが定義されている. 
+    Example 1.1.15.にあるように, 任意のdistinguishedはpre-triangleである. 
+    本稿では\cref{homological_log_exact}に対応する. 
+
+    \item Caution 1.1.16.にあるように, pre-triangleであってもdistinguishedであるとは限らない. 
+    例えば, $\CA$において写像錐はpre-triangleの条件を満たすが, distinguishedではない. 
+    つまり, $\CA$は三角圏ではない. 
+  \end{itemize}
+\end{remark}
+
+以降では, $\A$はAbel圏, $\T$は三角圏, $T: \T \to \T$はシフト関手であるとする. 
+
+\begin{lemma} \label{comp_zero}
+  $\T$における完全三角
+  \[\begin{tikzcd}
+    X & Y & Z & TX
+    \arrow["u", from=1-1, to=1-2]
+    \arrow["v", from=1-2, to=1-3]
+    \arrow["w", from=1-3, to=1-4]
+  \end{tikzcd}\]
+  に対して, 合成$v \circ u, w \circ v, Tu \circ w$は$0$である. 
+\end{lemma}
+
+\begin{proof}
+  (TR2)と(TR5)より, ある射$0 \to Z$が存在して, 次の図式を可換にする. 
+  \[\begin{tikzcd}
+    X & X & 0 & TX \\
+    X & Y & Z & TX
+    \arrow["{\id_X}", from=1-1, to=1-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow[from=1-3, to=1-4]
+    \arrow["u"', from=2-1, to=2-2]
+    \arrow["v"', from=2-2, to=2-3]
+    \arrow["w", from=2-3, to=2-4]
+    \arrow["{\id_X}", from=1-1, to=2-1]
+    \arrow["u", from=1-2, to=2-2]
+    \arrow[dashed, from=1-3, to=2-3]
+    \arrow["{\id_{TX}}", from=1-4, to=2-4]
+  \end{tikzcd}\]
+  よって, 
+  \begin{align*}
+    v \circ u 
+    = 0
+  \end{align*}
+  (TR4)を用いると, $w \circ v = 0$と$Tu \circ w = 0$も従う. 
+\end{proof}
+
+\begin{lemma}
+  $\T$が三角圏であるとき, $\T^\myop$も三角圏である. 
+\end{lemma}
+
+\begin{theorem} \label{preserve_limit}
+  シフト関手$T$は積と余積を保存する. 
+\end{theorem}
+
+\begin{proof}
+  $T$は自己圏同値であるので, 左随伴と右随伴をもつ. 
+  左随伴は余積を保ち, 右随伴は積を保つことから従う. 
+\end{proof}
+
+\begin{remark}
+  $\T$が三角圏のとき, $\T^\myop$も$T^{-1}$
+  \footnote{
+    $T^{-1}$は$T$の準逆である. 
+    任意の$i$に対して, $T^n$はwell-definedであり, 一意な同型を除いて一意である. (unique up to unique somorphism)
+  }
+  により三角圏となるので, $T^{-1}$も積と余積を保つ. 
+\end{remark}
+
+三角圏の構造を調べる際に, コホモロジカル関手という概念が重要となる. 
+
+\begin{definition}[ホモロジカル関手とコホモロジカル関手]
+  加法関手$H: \T \to \A$が次の条件を満たすとき, ホモロジカル関手(homological functor)であるという. 
+  \begin{itemize}
+    \item 任意の完全三角
+    \[\begin{tikzcd}
+      X & Y & Z & TX
+      \arrow["u", from=1-1, to=1-2]
+      \arrow["v", from=1-2, to=1-3]
+      \arrow["w", from=1-3, to=1-4]
+    \end{tikzcd}\]
+    に対して, 
+    \[\begin{tikzcd}
+      {H(X)} & {H(Y)} & {H(Z)}
+      \arrow["Hu", from=1-1, to=1-2]
+      \arrow["Hv", from=1-2, to=1-3]
+    \end{tikzcd}\]
+    が$\A$において完全である.  
+  \end{itemize}
+  双対的に, 関手$\T^\myop \to \A$がホモロジカル関手であるとき, $H: \T \to \A$はコホモロジカル関手(cohomological functor)であるという. 
+\end{definition}
+
+\begin{remark} \label{homological_log_exact}
+  ホモロジカル関手$H: \T \to \A$と任意の$i$に対して, 関手$H^i$を
+  \begin{align*}
+    H^i := H \circ T^i: \T \to \A
+  \end{align*}
+  と定義する. 
+  (TR4)より, 長完全列
+  \[\begin{tikzcd}
+    \cdots & {H^{i-1}(Z)} & {H^i(X)} & {H^i(Y)} & {H^i(Z)} & {H^{i+1}(X)} & \cdots
+    \arrow[from=1-1, to=1-2]
+    \arrow["{H^{i-1}w}", from=1-2, to=1-3]
+    \arrow["H^iu", from=1-3, to=1-4]
+    \arrow["H^iv", from=1-4, to=1-5]
+    \arrow["H^iw", from=1-5, to=1-6]
+    \arrow[from=1-6, to=1-7]
+  \end{tikzcd}\]
+  が存在する. 
+\end{remark}
+
+\begin{theorem} \label{hom_homological}
+  $A \in \T$に対して, 次の2つが成立する. 
+  \begin{enumerate}
+    \item hom関手
+    \begin{align*}
+      \hom(A, -): \T \to \Ab
+    \end{align*}
+    はホモロジカル関手である. 
+    \item hom関手
+    \begin{align*}
+      \hom(-, A): \T \to \Ab
+    \end{align*}
+    はコホモロジカル関手である. 
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  (1) : 任意の完全三角
+  \[\begin{tikzcd}
+    X & Y & Z & TX
+    \arrow["u", from=1-1, to=1-2]
+    \arrow["v", from=1-2, to=1-3]
+    \arrow["w", from=1-3, to=1-4]
+  \end{tikzcd}\]
+  に対して, 
+  \[\begin{tikzcd}
+    {\hom(A,X)} & {\hom(A,Y)} & {\hom(A,Z)}
+    \arrow["{u \circ -}", from=1-1, to=1-2]
+    \arrow["{v \circ -}", from=1-2, to=1-3]
+  \end{tikzcd}\]
+  が完全であることを示す. 
+  \cref{comp_zero}より, 任意の$e \in \Hom_\A(A,X)$に対して
+  \begin{align*}
+    v \circ u \circ e
+    = 0
+  \end{align*}
+  である. 
+  $v \circ f = 0$を満たす射$f \in \Hom_\A(A,Y)$に対して, ある射$h: A \to X$が存在して, $f = u \circ h$を満たすことを示す. 
+  (TR2)と(TR4)より, 完全三角
+  \[\begin{tikzcd}
+    A & 0 & TA & TA
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow["{-\id_{TA}}", from=1-3, to=1-4]
+  \end{tikzcd}\]
+  が存在する.
+  (TR4)より, 完全三角
+  \[\begin{tikzcd}
+    Y & Z & TX & TY
+    \arrow["v", from=1-1, to=1-2]
+    \arrow["w", from=1-2, to=1-3]
+    \arrow["{-Tu}", from=1-3, to=1-4]
+  \end{tikzcd}\]
+  が存在する. 
+  (TR5)より, ある射$Th: TA \to TX$が存在して, 次の図式を可換にする. 
+  \[\begin{tikzcd}
+    A & 0 & TA & TA \\
+    {Y} & {Z} & {TX} & {TY}
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow["{-\id_{TA}}", from=1-3, to=1-4]
+    \arrow["f", from=1-1, to=2-1]
+    \arrow[from=1-2, to=2-2]
+    \arrow["{Th}", dashed, from=1-3, to=2-3]
+    \arrow["{Tf}", from=1-4, to=2-4]
+    \arrow["{v}"', from=2-1, to=2-2]
+    \arrow["{w}"', from=2-2, to=2-3]
+    \arrow["{-Tu}"', from=2-3, to=2-4]
+  \end{tikzcd}\]
+  右の四角の可換性より, 
+  \begin{align*}
+    Tf 
+    = Tu \circ Th
+  \end{align*}
+  である. 
+  $T$は忠実充満なので, ある射$h: A \to X$が存在して, 
+  \begin{align*}
+    f 
+    = u \circ h
+  \end{align*}
+  (2) : (1)の双対である. 
+\end{proof}
+
+\begin{theorem}[two-out-of-three] \label{two_out_of_three}
+  $\T$において, 次の完全三角の可換図式が与えられているとする. 
+  \[\begin{tikzcd}
+    X & Y & Z & TX \\
+    {X'} & {Y'} & {Z'} & {TX'}
+    \arrow["u", from=1-1, to=1-2]
+    \arrow["v", from=1-2, to=1-3]
+    \arrow["w", from=1-3, to=1-4]
+    \arrow["f", from=1-1, to=2-1]
+    \arrow["g", from=1-2, to=2-2]
+    \arrow["h", from=1-3, to=2-3]
+    \arrow["Tf", from=1-4, to=2-4]
+    \arrow["{u'}"', from=2-1, to=2-2]
+    \arrow["{v'}"', from=2-2, to=2-3]
+    \arrow["{w'}"', from=2-3, to=2-4]
+  \end{tikzcd}\] 
+  このとき, $f,g,h$のうち2つが同型射であるとき, 残り1つも同型射となる. 
+\end{theorem}
+
+\begin{proof}
+  (TR4)より, $f$と$g$が同型射であると仮定しても, 一般性は失われない. 
+  (TR4)と\cref{hom_homological}より, 任意の$A \in \T$に対して, 次の完全列の可換図式が存在する. 
+  \[\begin{tikzcd}
+    {\hom(A,X)} & {\hom(A,Y)} & {\hom(A,Z)} & {\hom(A,TX)} & {\hom(A,TY)} \\
+    {\hom(A,X')} & {\hom(A,Y')} & {\hom(A,Z')} & {\hom(A,TX')} & {\hom(A,TY')}
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow[from=1-3, to=1-4]
+    \arrow[from=1-4, to=1-5]
+    \arrow[from=2-1, to=2-2]
+    \arrow[from=2-2, to=2-3]
+    \arrow[from=2-3, to=2-4]
+    \arrow[from=2-4, to=2-5]
+    \arrow["{f \circ -}", from=1-1, to=2-1]
+    \arrow["{g \circ -}", from=1-2, to=2-2]
+    \arrow["{h \circ -}", from=1-3, to=2-3]
+    \arrow["{Tf \circ -}", from=1-4, to=2-4]
+    \arrow["{Tg \circ -}", from=1-5, to=2-5]
+  \end{tikzcd}\]
+  $f,g$は同型射なので, 五項補題より$h \circ -$も同型射である. 
+  米田の補題より, $Z$と$Z'$は同型である. 
+\end{proof}
+
+\begin{corollary} \label{iso_z}
+  $\T$において, 次の完全三角の可換図式が与えられているとする. 
+  \[\begin{tikzcd}
+    X & Y & Z & TX \\
+    {X} & {Y} & {Z'} & {TX}
+    \arrow["u", from=1-1, to=1-2]
+    \arrow["v", from=1-2, to=1-3]
+    \arrow["w", from=1-3, to=1-4]
+    \arrow["{\id_X}", from=1-1, to=2-1]
+    \arrow["{\id_Y}", from=1-2, to=2-2]
+    \arrow["{\id_{TX}}", from=1-4, to=2-4]
+    \arrow["{u}"', from=2-1, to=2-2]
+    \arrow["{v'}"', from=2-2, to=2-3]
+    \arrow["{w'}"', from=2-3, to=2-4]
+  \end{tikzcd}\] 
+  このとき, $Z$と$Z'$は同型である. 
+\end{corollary}
+
+\begin{proof}
+  (TR5)より, ある射$Z \to Z'$が存在して, 次の完全三角の図式を可換にする. 
+  \[\begin{tikzcd}
+    X & Y & Z & TX \\
+    {X} & {Y} & {Z'} & {TX}
+    \arrow["u", from=1-1, to=1-2]
+    \arrow["v", from=1-2, to=1-3]
+    \arrow["w", from=1-3, to=1-4]
+    \arrow["{\id_X}", from=1-1, to=2-1]
+    \arrow["{\id_Y}", from=1-2, to=2-2]
+    \arrow[dashed, from=1-3, to=2-3]
+    \arrow["{\id_{Tf}}", from=1-4, to=2-4]
+    \arrow["{u}"', from=2-1, to=2-2]
+    \arrow["{v'}"', from=2-2, to=2-3]
+    \arrow["{w'}"', from=2-3, to=2-4]
+  \end{tikzcd}\] 
+  \cref{two_out_of_three}より, この射$Z \to Z'$は同型射である. 
+\end{proof}
+
+\begin{definition}[錐] \label{cone}
+  \cref{iso_z}より, 三角圏$\T$における射$f: X \to Y$に対して, 
+  \[\begin{tikzcd}
+    X & Y & Z & TX
+    \arrow["u", from=1-1, to=1-2]
+    \arrow["v", from=1-2, to=1-3]
+    \arrow["w", from=1-3, to=1-4]
+  \end{tikzcd}\]
+  が完全三角となるような$Z \in \T$は同型を除いて一意に定まる. 
+  $Z$を$f$の錐(cone)といい, $\Cone f$とあらわす. 
+\end{definition}
+
+以下では, \cref{two_out_of_three}から示される命題をいくつか証明する. 
+以降ではあまり使わないので, 飛ばして読みすすめても問題ないと思われる. 
+
+\begin{corollary}
+  $\T$において, 次の完全三角の可換図式が与えられているとする. 
+  \[\begin{tikzcd}
+    X & Y & Z & TX
+    \arrow["u", from=1-1, to=1-2]
+    \arrow["v", from=1-2, to=1-3]
+    \arrow["w", from=1-3, to=1-4]
+  \end{tikzcd}\]
+  このとき, 次の2つが成立することは同値である. 
+  \begin{itemize}
+    \item $u: X \to Y$は同型射である. 
+    \item $Z$は$0$と同型である
+  \end{itemize}
+\end{corollary}
+
+\begin{proof}
+  仮定と(TR1)で与えられる完全三角に対して, (TR5)を用いると, 次の可換図式が得られる. 
+  \[\begin{tikzcd}
+    X & Y & Z & TX \\
+    {Y} & {Y} & {0} & {TY}
+    \arrow["u", from=1-1, to=1-2]
+    \arrow["v", from=1-2, to=1-3]
+    \arrow["w", from=1-3, to=1-4]
+    \arrow["u", from=1-1, to=2-1]
+    \arrow["{\id_Y}", from=1-2, to=2-2]
+    \arrow[from=1-3, to=2-3]
+    \arrow["{Tu}", from=1-4, to=2-4]
+    \arrow["{\id_Y}"', from=2-1, to=2-2]
+    \arrow[from=2-2, to=2-3]
+    \arrow[from=2-3, to=2-4]
+  \end{tikzcd}\] 
+  \cref{two_out_of_three}より, $u$が同型射であることとと, $Z \to 0$が同型射であることは同値である. 
+\end{proof}
+
+\begin{corollary} \label{auto_split}
+  $\T$において, 次の完全三角の可換図式が与えられているとする. 
+  \[\begin{tikzcd}
+    X & Y & Z & TX
+    \arrow["u", from=1-1, to=1-2]
+    \arrow["v", from=1-2, to=1-3]
+    \arrow["w", from=1-3, to=1-4]
+  \end{tikzcd}\] 
+  このとき, 次の4つが成立する. 
+  \begin{enumerate}
+    \item $v$がエピ射であることと, $w=0$は同値である. 
+    \item $v$がモノ射であることと, $u=0$は同値である. 
+    \item $v$がエピ射であることと, $u$がモノ射であることは同値である. 
+    \item $w=0$のとき, $Y \simeq X \oplus Z$である. 
+    \[\begin{tikzcd}
+      X & {X \oplus Z} & Z & TX
+      \arrow["u", from=1-1, to=1-2]
+      \arrow["v", from=1-2, to=1-3]
+      \arrow["0", from=1-3, to=1-4]
+    \end{tikzcd}\] 
+  \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+  (1) : まず$\Rightarrow$を示す. 
+  \cref{comp_zero}より, $w \circ v = 0$である. 
+  $v$がエピ射であるとき, $w = 0$である. \\
+  $\Leftarrow$を示す. 
+  \cref{hom_homological}より, 任意の$A \in \T$に対して, 
+  \[\begin{tikzcd}
+    {\hom(TX,A)} & {\hom(Z,A)} & {\hom(Y,A)} 
+    \arrow["{- \circ w}", from=1-1, to=1-2]
+    \arrow["{- \circ v}", from=1-2, to=1-3]
+  \end{tikzcd}\]
+  は完全列なので, $w=0$のとき, 
+  \begin{align*}
+    - \circ v: \hom(Z,A) \to \hom(Y,A)
+  \end{align*}
+  はモノ射である. 
+  よって, $v$はエピ射である. \\
+  (2) : (1)の双対である. \\
+  (3) : $h=0$と$-h=0$が同値であることから従う. \\
+  (4) : $w=0$であるとき, 1と2より,
+  \[\begin{tikzcd}
+    0 & {\hom(Z,A)} & {\hom(Y,A)} & {\hom(X,A)} & 0 \\
+    0 & {\hom(A,X)} & {\hom(A,Y)} & {\hom(A,Z)} & 0
+    \arrow[from=1-1, to=1-2]
+    \arrow["{- \circ v}", from=1-2, to=1-3]
+    \arrow["{- \circ u}", from=1-3, to=1-4]
+    \arrow[from=1-4, to=1-5]
+    \arrow[from=2-1, to=2-2]
+    \arrow["{v \circ -}", from=2-3, to=2-4]
+    \arrow[from=2-4, to=2-5]
+    \arrow["{u \circ -}", from=2-2, to=2-3]
+  \end{tikzcd}\]
+  は短完全列である. 
+  このとき,
+  \[\begin{tikzcd}
+    0 & X & Y & Z & 0
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow[from=1-3, to=1-4]
+    \arrow[from=1-4, to=1-5]
+  \end{tikzcd}\]
+  は分裂短完全列であるので, 
+  \begin{align*}
+    Y \simeq X \oplus Z
+  \end{align*}
+\end{proof}
+
+\begin{remark}
+  \cref{auto_split}より, 三角圏において任意のモノ射は分裂モノ射であり, 任意のエピ射は分裂エピ射である. 
+  もちろん, 一般のAbel圏においては成立しない. 
+\end{remark}
+
+\begin{remark}
+  \cref{auto_split}の(4)を直接示すこともできる. 
+\end{remark}
+
+\begin{proof}
+  $u$が分裂モノ射であることを示す.
+  $v$が分裂エピ射であることも同様に示される. 
+  仮定の完全三角と(TR2)に(TR3)を用いる. 
+  (TR5)より, ある射$Tu': TY \to TX$が存在して, 次の図式を可換にする. 
+  \[\begin{tikzcd}
+    Z & TX & TY & TZ \\
+    0 & TX & TX & 0
+    \arrow["{w=0}", from=1-1, to=1-2]
+    \arrow["{-Tu}", from=1-2, to=1-3]
+    \arrow["{-Tv}", from=1-3, to=1-4]
+    \arrow[from=1-4, to=2-4]
+    \arrow["{Tu'}", dashed, from=1-3, to=2-3]
+    \arrow["{\id_{TX}}", from=1-2, to=2-2]
+    \arrow[from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+    \arrow["{-\id_{TX}}"', from=2-2, to=2-3]
+    \arrow[from=2-3, to=2-4]
+  \end{tikzcd}\]
+  よって, 
+  \begin{align*}
+    Tu' \circ Tu = \id_{TX}
+  \end{align*}
+  が成立する. 
+  $T$は忠実充満なので, $u' \circ u = \id_X$を満たす$u': Y \to X$が存在する. 
+\end{proof}
+
+(TR5)で定義される射$h : Z \to Z'$は一意ではない.
+一意であるための条件としては次のようなものが存在する. 
+
+\begin{lemma}
+  (TR5)と同様の用語を用いる. 
+  2つの完全三角
+  \[\begin{tikzcd}
+    X & Y & Z & TX \\
+    {X'} & {Y'} & {Z'} & {TX'}
+    \arrow["u", from=1-1, to=1-2]
+    \arrow["v", from=1-2, to=1-3]
+    \arrow["w", from=1-3, to=1-4]
+    \arrow["{u'}", from=2-1, to=2-2]
+    \arrow["{v'}", from=2-2, to=2-3]
+    \arrow["{w'}", from=2-3, to=2-4]
+  \end{tikzcd}\]
+  において, 
+  \begin{align*}
+    \Hom_\T(Y,X') &= 0 \\
+    \Hom_\T(TX,Y') &= 0
+  \end{align*}
+  のとき, 射$h : Z \to Z'$は一意に存在する. 
+\end{lemma}
+
+完全三角の(余)直積は完全三角となる. 
+
+\begin{theorem} \label{preserve_prod}
+  $\Lambda$を添え字集合とする. 
+  任意の$\lambda \in \Lambda$に対して, 次の完全三角が与えられているとする. 
+  \[\begin{tikzcd}
+    {X_\lambda} & {Y_\lambda} & {Z_\lambda} & {TX_\lambda}
+    \arrow["{u_\lambda}", from=1-1, to=1-2]
+    \arrow["{v_\lambda}", from=1-2, to=1-3]
+    \arrow["{w_\lambda}", from=1-3, to=1-4]
+  \end{tikzcd}\]
+  $\T$において直積
+  \begin{align*}
+    \prod_{\lambda \in \Lambda} X_\lambda, \quad
+    \prod_{\lambda \in \Lambda} Y_\lambda, \quad
+    \prod_{\lambda \in \Lambda} Z_\lambda
+  \end{align*}
+  が存在するとする. 
+  このとき, 次の図式は完全三角である. 
+  \[\begin{tikzcd}
+    {\prod_{\lambda \in \Lambda} X_\lambda} & {\prod_{\lambda \in \Lambda} Y_\lambda} & {\prod_{\lambda \in \Lambda} Z_\lambda} & {T(\prod_{\lambda \in \Lambda} X_\lambda)}
+    \arrow["{u}", from=1-1, to=1-2]
+    \arrow["{v}", from=1-2, to=1-3]
+    \arrow["{w}", from=1-3, to=1-4]
+  \end{tikzcd}\]
+  ここで, 
+  \begin{align*}
+    u:= \prod_{\lambda \in \Lambda} u_\lambda, \quad
+    v:= \prod_{\lambda \in \Lambda} v_\lambda, \quad
+    w:= \prod_{\lambda \in \Lambda} w_\lambda
+  \end{align*}
+\end{theorem}
+
+\begin{proof}
+  
+\end{proof}
+
+双対的に次の命題が成立する. 
+
+\begin{corollary} \label{preserve_coprod}
+  $\Lambda$を添え字集合とする. 
+  任意の$\lambda \in \Lambda$に対して, 次の完全三角が与えられているとする. 
+  \[\begin{tikzcd}
+    {X_\lambda} & {Y_\lambda} & {Z_\lambda} & {TX_\lambda}
+    \arrow["{u_\lambda}", from=1-1, to=1-2]
+    \arrow["{v_\lambda}", from=1-2, to=1-3]
+    \arrow["{w_\lambda}", from=1-3, to=1-4]
+  \end{tikzcd}\]
+  $\T$において余直積
+  \begin{align*}
+    \coprod_{\lambda \in \Lambda} X_\lambda, \quad
+    \coprod_{\lambda \in \Lambda} Y_\lambda, \quad
+    \coprod_{\lambda \in \Lambda} Z_\lambda
+  \end{align*}
+  が存在するとする. 
+  このとき, 次の図式は完全三角である. 
+  \[\begin{tikzcd}
+    {\coprod_{\lambda \in \Lambda} X_\lambda} & {\coprod_{\lambda \in \Lambda} Y_\lambda} & {\coprod_{\lambda \in \Lambda} Z_\lambda} & {T(\prod_{\lambda \in \Lambda} X_\lambda)}
+    \arrow["{u}", from=1-1, to=1-2]
+    \arrow["{v}", from=1-2, to=1-3]
+    \arrow["{q}", from=1-3, to=1-4]
+  \end{tikzcd}\]
+  ここで, 
+  \begin{align*}
+    u:= \coprod_{\lambda \in \Lambda} u_\lambda, \quad
+    v:= \coprod_{\lambda \in \Lambda} v_\lambda, \quad
+    w:= \coprod_{\lambda \in \Lambda} w_\lambda
+  \end{align*}
+\end{corollary}
+
+% \begin{theorem}
+%   $\T$において, 次の3つの図式のうち2つが完全三角であるとする. 
+%   \[\begin{tikzcd}
+%     {(1)} & X & Y & Z & TX \\
+%     {(2)} & {X'} & {Y'} & {Z'} & {TX'} \\
+%     {(3)} & {X \oplus X'} & {Y \oplus Y'} & {Z \oplus Z'} & {TX \oplus TX'}
+%     \arrow["{u \oplus u'}", from=3-2, to=3-3]
+%     \arrow["{v \oplus v'}", from=3-3, to=3-4]
+%     \arrow["{w \oplus w'}", from=3-4, to=3-5]
+%     \arrow["u", from=1-2, to=1-3]
+%     \arrow["v", from=1-3, to=1-4]
+%     \arrow["w", from=1-4, to=1-5]
+%     \arrow["{u'}", from=2-2, to=2-3]
+%     \arrow["{v'}", from=2-3, to=2-4]
+%     \arrow["{w'}", from=2-4, to=2-5]
+%   \end{tikzcd}\]
+%   このとき, 残りの1つも完全三角である. 
+% \end{theorem}
+
+% \begin{proof}
+%   1と2が完全三角であるとき, 3が完全三角であることは\cref{preserve_coprod}より従う. 
+%   2と3が完全三角であるとき, 1が完全三角であることを示す. 
+%   1と3が完全三角であるとき, 2が完全三角であることも同様に示される.
+% \end{proof}
+
+八面体公理を用いる命題は次のようなものがある. 
+
+\begin{lemma}[一般化八面体公理]
+  $\T$において次の可換図式が与えられているとする. 
+  \[\begin{tikzcd}
+    {X_1} & {Y_1} \\
+    {X_2} & {Y_2}
+    \arrow["{u_1}", from=1-1, to=1-2]
+    \arrow["{f_2}", from=1-2, to=2-2]
+    \arrow["{f_1}"', from=1-1, to=2-1]
+    \arrow["{u_2}"', from=2-1, to=2-2]
+  \end{tikzcd}\]
+  このとき, すべての行と列が完全三角であり, すべての四角形が可換であるような次の図式が存在する. 
+  \[\begin{tikzcd}
+    {X_1} & {Y_1} & {Z_1} & {TX_1} \\
+    {X_2} & {Y_2} & {Z_2} & {TX_2} \\
+    {X_3} & {Y_3} & {Z_3} & {TX_3} \\
+    {TX_1} & {TY_1} & {TZ_1}
+    \arrow["{u_1}", from=1-1, to=1-2]
+    \arrow["{f_2}", from=1-2, to=2-2]
+    \arrow["{f_1}", from=1-1, to=2-1]
+    \arrow["{u_2}", from=2-1, to=2-2]
+    \arrow[from=2-1, to=3-1]
+    \arrow[from=3-1, to=4-1]
+    \arrow[from=3-1, to=3-2]
+    \arrow[from=4-1, to=4-2]
+    \arrow[from=2-2, to=3-2]
+    \arrow[from=3-2, to=4-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow[from=2-2, to=2-3]
+    \arrow[from=3-2, to=3-3]
+    \arrow[from=4-2, to=4-3]
+    \arrow[from=1-3, to=1-4]
+    \arrow[from=1-4, to=2-4]
+    \arrow[from=2-4, to=3-4]
+    \arrow[from=3-3, to=3-4]
+    \arrow[from=2-3, to=2-4]
+    \arrow[from=1-3, to=2-3]
+    \arrow[from=2-3, to=3-3]
+    \arrow[from=3-3, to=4-3]
+  \end{tikzcd}\]
+\end{lemma}
+
+\begin{proof}
+  \cref{cone}より, 
+  \begin{align*}
+    Z_1 := \Cone u_1 \\
+    Z_2 := \Cone u_2 \\
+    X_3 := \Cone f_1 \\
+    Y_3 := \Cone f_2 
+  \end{align*}
+  としてよい. 
+  $f_2 \circ u_1$に(TR3)を用いると, 次の完全三角を得る.  
+  \[\begin{tikzcd}
+    {X_1} & {Y_2} & {\Cone (f_2 \circ u_1)} & {TX_1}
+    \arrow["{f_2 \circ u_1}", from=1-1, to=1-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow[from=1-3, to=1-4]
+  \end{tikzcd}\]
+  3つの完全三角
+  \[\begin{tikzcd}
+    {X_1} & {Y_1} & {\Cone u_1} & {TX_1} \\
+    {X_1} & {Y_2} & {\Cone (f_2 \circ u_1)} & {TX_1} \\
+    {Y_1} & {Y_2} & {\Cone f_2} & {TY_1}
+    \arrow["{u_1}", from=1-1, to=1-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow[from=1-3, to=1-4]
+    \arrow[from=2-2, to=2-3]
+    \arrow[from=2-3, to=2-4]
+    \arrow["{f_2 \circ u_1}", from=2-1, to=2-2]
+    \arrow["{f_2}", from=3-1, to=3-2]
+    \arrow[from=3-2, to=3-3]
+    \arrow[from=3-3, to=3-4]
+  \end{tikzcd}\]
+  に(TR6)を用いると, 次の完全三角を得る. 
+  \[\begin{tikzcd}
+    {\Cone u_1} & {\Cone (f_2 \circ u_1)} & {\Cone f_2} & {T(\Cone u_1)}
+    \arrow["\varphi", from=1-1, to=1-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow[from=1-3, to=1-4]
+  \end{tikzcd}\]
+  同様に, 次の完全三角を得る.  
+  \[\begin{tikzcd}
+    {\Cone f_1} & {\Cone (u_2 \circ f_1)} & {\Cone u_2} & {T(\Cone f_1)}
+    \arrow[from=1-1, to=1-2]
+    \arrow["\psi", from=1-2, to=1-3]
+    \arrow[from=1-3, to=1-4]
+  \end{tikzcd}\]
+  (TR4)より, 次の完全三角を得る. 
+  \[\begin{tikzcd}
+    {\Cone (f_2 \circ u_1)} & {\Cone u_2} & {T(\Cone f_1)} & {T(\Cone (f_2 \circ u_1))}
+    \arrow["\psi", from=1-1, to=1-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow[from=1-3, to=1-4]
+  \end{tikzcd}\]
+  3つの完全三角
+  \[\begin{tikzcd}
+    {\Cone u_1} & {\Cone (f_2 \circ u_1)} & {\Cone f_2} & {T(\Cone u_1)} \\
+    {\Cone u_1} & {\Cone u_2} & {\Cone (\psi \circ \varphi)} & {T(\Cone u_1)} \\
+    {\Cone (f_2 \circ u_1)} & {\Cone u_2} & {T(\Cone f_1)} & {T(\Cone (f_2 \circ u_1))}
+    \arrow["{\varphi}", from=1-1, to=1-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow[from=1-3, to=1-4]
+    \arrow[from=2-2, to=2-3]
+    \arrow[from=2-3, to=2-4]
+    \arrow["{\psi \circ \varphi}", from=2-1, to=2-2]
+    \arrow["{\psi}", from=3-1, to=3-2]
+    \arrow[from=3-2, to=3-3]
+    \arrow[from=3-3, to=3-4]
+  \end{tikzcd}\]
+  に(TR6)を用いると, 次の完全三角を得る. 
+  \[\begin{tikzcd}
+    {\Cone f_2} & {\Cone (\psi \circ \varphi)} & {T(\Cone f_1)} & {T(\Cone f_2)}
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow[from=1-3, to=1-4]
+  \end{tikzcd}\]
+  (TR4)より, 次の完全三角を得る. 
+  \[\begin{tikzcd}
+    {\Cone f_1} & {\Cone f_2} & {\Cone (\psi \circ \varphi)} & {T(\Cone f_1)}
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow[from=1-3, to=1-4]
+  \end{tikzcd}\]
+  よって, $Z_3 := \Cone (\psi \circ \varphi)$とすればよい. 
+  各四角形の可換性は(TR5)より従う. 
+\end{proof}
+
+\section{三角関手} \label{section4_2}
+
+\begin{definition}[三角部分圏]
+  $\T' \subset \T$を充満加法部分圏とする. 
+  $\T'$が次の条件を満たすとき, $\T$の三角部分圏(triangulated subcategory)であるという. 
+  \begin{enumerate}
+    \item $\T'$は三角圏であり, $\T'$のシフト関手は$\T$のシフト関手の$\T'$への制限である. 
+    \item $\T'$における完全三角
+    \[\begin{tikzcd}
+      {X'} & {Y'} & {Z'} & {TX'}
+      \arrow["{u'}", from=1-1, to=1-2]
+      \arrow["{v'}", from=1-2, to=1-3]
+      \arrow["{w'}", from=1-3, to=1-4]
+    \end{tikzcd}\]
+    は$\T$においても完全三角である. 
+  \end{enumerate}
+\end{definition}
+
+\begin{theorem} \label{sub_triangle}
+  $\T' \subset \T$を同型で閉じている充満加法部分圏とする. 
+  このとき, 次の2つは同値である. 
+  \begin{enumerate}
+    \item $\T'$は三角部分圏である.
+    \item 次の2つが成立する. 
+    \begin{enumerate}
+      \item $\T'$はシフトで閉じている. 
+      つまり, $\T' = T\T'$が成立する. 
+      \item $\T$における完全三角
+      \[\begin{tikzcd}
+        X & Y & Z & TX
+        \arrow["u", from=1-1, to=1-2]
+        \arrow["v", from=1-2, to=1-3]
+        \arrow["w", from=1-3, to=1-4]
+      \end{tikzcd}\]
+      において$X, Y \in \T'$のとき, $Z \in \T'$である. 
+    \end{enumerate}
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  1 $\Rightarrow$ 2 : (a)は定義から明らかであり, (b)は\cref{cone}より従う. \\
+  2 $\Rightarrow$ 1 : (a)と(b)から$\T'$に三角構造が定まることをみる. 
+  (a)より$\T'$上にシフト関手$T: \T' \to \T'$が定まる. 
+  $\T'$の完全三角を$\T$における完全三角であって, 各対象が$\T'$に属するときと定義する. 
+  このとき, (TR3)以外は$\T$が三角圏であることから従う. 
+  $u: X \to Y$に対して, (TR3)が成立することを示す. 
+  $\T$における(TR3)より, ある対象$Z \in \T$が存在して, 次の図式は完全三角である. 
+  \[\begin{tikzcd}
+    X & Y & Z & TX
+    \arrow["u", from=1-1, to=1-2]
+    \arrow["v", from=1-2, to=1-3]
+    \arrow["w", from=1-3, to=1-4]
+  \end{tikzcd}\]
+  このとき, (b)より$Z \in \T'$となる. 
+  よって, $u$を補完する完全三角が$\T'$において存在する. 
+\end{proof}
+
+\begin{definition}[thick部分圏]
+  $\T' \subset \T$を同型で閉じている充満加法部分圏とする. 
+  $\T'$が直和因子で閉じているとき, thick部分圏(thick subcategory)であるという. 
+\end{definition}
+
+\begin{theorem}
+  ホモロジカル関手$H: \T \to \A$が任意の$i$に対して, 
+  \begin{align*}
+    H^i(X) = 0
+  \end{align*}
+  を満たす$X \in \T$のなす充満部分圏は$\T$のthick部分圏となる. 
+\end{theorem}
+
+\begin{definition}[生成]
+  $\S \subset \T$を充満部分圏とする. 
+  $\T' \subset \T$が同型で閉じている充満加法部分圏であって, $\S$を含む最小のものであるとき, $\S$は$\T'$を三角圏として生成する(generate)という. 
+\end{definition}
+
+\begin{definition}[三角関手]
+  $\T, \T'$を三角圏とする. 
+  加法関手$F: \T \to \T'$が次の条件を満たすとき, 三角関手(triangulated functor)
+  \footnote{
+    完全関手(exact functor)ともいう. 
+  }
+  であるという.
+  \begin{enumerate}
+    \item 自然同型
+    \begin{align*}
+      \varphi: F \circ T \simeq T \circ F
+    \end{align*}
+    が存在する. 
+    \item $\T$の任意の完全三角
+    \[\begin{tikzcd}
+      X & Y & Z & TX
+      \arrow["u", from=1-1, to=1-2]
+      \arrow["v", from=1-2, to=1-3]
+      \arrow["w", from=1-3, to=1-4]
+    \end{tikzcd}\]
+    に対して, 
+    \[\begin{tikzcd}
+      FX & FY & FZ & FTX
+      \arrow["Fu", from=1-1, to=1-2]
+      \arrow["Fv", from=1-2, to=1-3]
+      \arrow["Fw", from=1-3, to=1-4]
+    \end{tikzcd}\]
+    は$\T'$における完全三角である. 
+  \end{enumerate}
+\end{definition}
+
+三角関手の合成はまた三角関手となる. 
+
+\begin{lemma}
+  三角圏$\T, \T', \T''$と三角関手$F: \T \to \T', F': \T' \to \T''$に対して, 合成
+  \begin{align*}
+    F' \circ F: \T \to \T''
+  \end{align*}
+  は三角関手となる. 
+\end{lemma}
+
+三角関手とホモロジカル関手の合成はホモロジカル関手となる. 
+
+\begin{lemma}
+  三角関手$F: \T \to \T'$とホモロジカル関手$H: \T' \to \A$に対して, 合成
+  \begin{align*}
+    H \circ F: \T \to \A
+  \end{align*}
+  はホモロジカル関手となる. 
+\end{lemma}
+
+以降では, $\T, \T'$を三角圏, $F: \T \to \T'$を三角関手とする.
+
+\begin{definition}[三角同値] 
+  三角関手$F$が圏同値であるとき, 三角同値(triangle equivalence)であるという. 
+\end{definition}
+
+\begin{theorem} \label{adjoint_triangulated}
+  関手$F: \T \to \T', G: \T' \to \T$が随伴$F \dashv G$であるとき, 次の2つは同値である.  
+  \begin{enumerate}
+    \item $F$は三角関手である. 
+    \item $G$は三角関手である. 
+  \end{enumerate}
+\end{theorem}
+
+\begin{corollary}
+  $F$が三角同値であるとき, $F^{-1}$も三角同値である. 
+  特に, $T^n: \T \to \T$は三角同値である. 
+\end{corollary}
+
+\bibliographystyle{jalpha}
+\bibliography{../triangulated_cf}
+
+\end{document}

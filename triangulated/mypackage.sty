@@ -1,0 +1,183 @@
+\usepackage[uplatex]{otf} 
+\usepackage{xparse}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\usepackage{comment}
+\usepackage{enumitem}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{intersections, calc, arrows.meta, shadows}
+\usepackage{../quiver}
+\usepackage{mathrsfs, mathtools}
+\usepackage{nameref}
+\usepackage{physics}
+\usepackage{hyperref}
+\usepackage{pxjahyper}
+\usepackage{cleveref}
+\usepackage{here}
+\usepackage{anyfontsize}
+\usepackage{nameref}
+\usepackage{ulem}
+\usepackage{url}
+\usepackage{subfiles}
+\usepackage{relsize}
+\usepackage[bbgreekl]{mathbbol}
+\usepackage{amsfonts}
+% \usepackage{mycommand}
+% change colors
+\hypersetup{
+	colorlinks=true,
+	citecolor=blue,
+	linkcolor=teal,
+	urlcolor=orange,
+}
+
+% new thorem style
+\newtheoremstyle{jplain} % name
+{} % space above
+{} % space below
+{\normalfont} % body font
+{} % indent amount
+{\bfseries} % theorem head font
+{.} % punctuation after theorem head
+{4pt} % space after theorem head (default: 5pt)
+{\thmname{#1}\thmnumber{#2}\thmnote{\hspace{2pt}(#3)}} % theorem head spec
+
+\theoremstyle{jplain}
+\newtheorem{theorem}{定理}
+\newtheorem{lemma}     [theorem]{補題}
+\newtheorem{corollary} [theorem]{系}
+\newtheorem{example}   [theorem]{例}
+\newtheorem{definition}[theorem]{定義}
+\newtheorem{remark}    [theorem]{注意}
+\newtheorem{notation}  [theorem]{記法}
+\newtheorem{question}  [theorem]{問題}
+\newtheorem{answer}    [theorem]{答え}
+
+\newtheorem*{theorem*}{定理}
+\newtheorem*{lemma*}  {補題}
+
+% cref
+\crefname{chapter}{第}{第}
+\creflabelformat{chapter}{#2#1章#3}
+\crefname{section}{第}{第}
+\creflabelformat{section}{#2#1章#3}
+\crefname{subsection}{第}{第}
+\creflabelformat{subsection}{#2#1節#3}
+\crefname{appendix}{}{}
+\creflabelformat{appendix}{#2#1#3}
+
+\crefname{theorem}   {定理}{定理}
+\crefname{lemma}     {補題}{補題}
+\crefname{corollary} {系}  {系}
+\crefname{definition}{定義}{定義}
+\crefname{remark}    {注意}{注意}
+\crefname{notation}  {記法}{記法}
+\crefname{example}   {例}  {例}
+\crefname{equation}  {式}  {式}
+
+\newcommand{\crefpairconjunction}{と}
+\newcommand{\crefrangeconjunction}{から}
+\newcommand{\crefmiddleconjunction}{, }
+\newcommand{\creflastconjunction}{, および}
+
+% show theorem depth
+\numberwithin{theorem} {section}
+\numberwithin{equation}{section}
+
+% proof environment
+\makeatletter
+\newenvironment{Proof}[1][\Proofname]{\par
+  \normalfont
+  \topsep6\p@\@plus6\p@ \trivlist
+  \item[\hskip\labelsep{\bfseries #1}\@addpunct{\bfseries.}]\ignorespaces
+}
+{
+  \endtrivlist
+}
+\newcommand{\Proofname}{証明}
+\makeatother
+
+% Delta \to Prism
+\DeclareSymbolFontAlphabet{\mathbb}{AMSb} %to ensure that the meaning of \mathbb does not change
+\DeclareSymbolFontAlphabet{\mathbbl}{bbold}
+\newcommand{\Prism}{{\mathlarger{\mathbbl{\Delta}}}}
+
+% newcommands
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbZ}{\mathbb{Z}}
+\newcommand{\bbR}{\mathbb{R}}
+
+\newcommand{\GrVect}{\mathbf{GrVect}}
+\newcommand{\Vectfd}{\mathbf{Vect}_{\mathrm{fd}}}
+\newcommand{\Coh} {\mathbf{Coh}}
+\newcommand{\Ex} {\mathbf{Ex}}
+\newcommand{\Ab} {\mathbf{Ab}}
+
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\C}{\mathcal{C}}
+\renewcommand{\S}{\mathcal{S}} % \S = \section 
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calK}{\mathcal{K}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\T}{\mathcal{T}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\Q}{\mathcal{Q}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+
+\newcommand{\Bperp}{\B^\perp}
+\newcommand{\Bpp}{\B^{\perp\perp}}
+\newcommand{\perpB}{{}^\perp \B}
+\newcommand{\ppB}{{}^{\perp\perp} \B}
+
+% \newcommand{\arg} {\mathrm{arg}}
+\newcommand{\Cone} {\mathrm{Cone}}
+\newcommand{\Coim}[1] {\mathrm{Coim}(#1)}
+\newcommand{\coim}[1] {\mathrm{coim}(#1)}
+\newcommand{\im}[1] {\mathrm{im}(#1)}
+\newcommand{\coker}[1] {\mathrm{coker}(#1)}
+\renewcommand{\ker}[1] {\mathrm{ker}(#1)}
+\renewcommand{\Im}[1] {\mathrm{Im}(#1)}
+\newcommand{\domain} {\mathrm{domain}}
+\newcommand{\exact}{\mathrm{exact}}
+\newcommand{\Hom}  {\mathrm{Hom}}
+\newcommand{\id}   {\mathrm{id}}
+\newcommand{\Id}   {\mathrm{Id}}
+\newcommand{\Ob}   {\mathrm{Ob}}
+\newcommand{\myop} {\mathrm{op}}
+\newcommand{\Ext} {\mathrm{Ext}}
+\newcommand{\Stab} {\mathrm{Stab}}
+\newcommand{\Slice} {\mathrm{Slice}}
+
+\newcommand{\RHom}{\mathbb{R}\mathrm{Hom}}
+
+\newcommand{\myangle}[1]{\langle #1 \rangle}
+\newcommand{\myabs}[1]{| #1 |}
+
+\newcommand{\CAd}{\mathbf{C}(\mathcal{A}')}
+\newcommand{\CA}{\mathbf{C}(\mathcal{A})}
+\newcommand{\CAm}{\mathbf{C}^-(\mathcal{A})}
+\newcommand{\CAp}{\mathbf{C}^+(\mathcal{A})}
+\newcommand{\CAb}{\mathbf{C}^b(\mathcal{A})}
+\newcommand{\CAast}{\mathbf{C}^{\ast}(\mathcal{A})}
+
+\newcommand{\DAd}{\mathbf{D}(\mathcal{A}')}
+\newcommand{\DA}{\mathbf{D}(\mathcal{A})}
+\newcommand{\DAm}{\mathbf{D}^-(\mathcal{A})}
+\newcommand{\DAp}{\mathbf{D}^+(\mathcal{A})}
+\newcommand{\DAb}{\mathbf{D}^b(\mathcal{A})}
+\newcommand{\DAast}{\mathbf{D}^{\ast}(\mathcal{A})}
+
+\newcommand{\KA}{\mathbf{K}(\mathcal{A})}
+\newcommand{\KAd}{\mathbf{K}(\mathcal{A}')}
+\newcommand{\KAm}{\mathbf{K}^-(\mathcal{A})}
+\newcommand{\KAp}{\mathbf{K}^+(\mathcal{A})}
+\newcommand{\KAb}{\mathbf{K}^b(\mathcal{A})}
+\newcommand{\KAast}{\mathbf{K}^{\ast}(\mathcal{A})}

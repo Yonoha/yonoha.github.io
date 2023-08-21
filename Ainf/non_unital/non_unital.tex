@@ -1,0 +1,1796 @@
+\RequirePackage{plautopatch}
+\documentclass[uplatex, a4paper, 14Q, dvipdfmx]{jsarticle}
+\usepackage{docmute}
+\usepackage{../mypackage}
+
+\title{恒等射を持たない\texorpdfstring{$\Ainf$}{Ainf}圏}
+\author{よの}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  恒等射を持たない$\Ainf$圏の定義から$\Ainf$-Yoneda埋め込みまでの$\Ainf$圏論の基礎を説明する. 
+\end{abstract}
+
+\tableofcontents
+
+\section{恒等射を持たない\texorpdfstring{$\Ainf$}{Ainf}圏} \label{section_non_unital_Ainf_cat}
+
+\begin{definition}[恒等射を持たない$\Ainf$圏] \label{def_non_unital_Ainf_cat}
+  恒等射を持たない$\Ainf$圏(non-unital $\Ainf$-category) $(\A,\mu_\A)$は次のデータから構成される. 
+  \begin{itemize}
+    \item 対象の集まり$\Ob\A$ 
+    \item 任意の$X_0, X_1 \in \Ob\A$に対して, 次数付きベクトル空間$\hom_\A(X_0,X_1)$
+    \item 任意の$d \geq 1$と$a_1 \in \hom_\A(X_0,X_1), \cdots, a_d \in \hom_\A(X_{d-1},X_d)$に対して
+    \begin{align*}
+      \mu^d_\A : \hom_\A(X_{d-1},X_d) \otimes \cdots \otimes \hom_\A(X_0,X_1) \to \hom_\A(X_0,X_d)[2-d]
+    \end{align*}
+    が与えられていて, $\Ainf$結合式($\Ainf$-associativity equation) 
+    \begin{align*}
+      \sum_{m,n} (-1)^{\maltese n} \mu^{d-m+1}_\A(a_d,\cdots,a_{n+m+1}, \mu^m_\A(a_{n+m},\cdots,a_{n+1}), a_n,\cdots,a_1)
+      = 0
+    \end{align*}
+    を満たす.
+    \footnote{
+      任意の$i \in \mathbb{Z}$に対して, $[i]$はベクトル空間の通常のシフトを表している.
+    }
+    ここで
+    \begin{align*}
+      \sum_{m,n} &:= \sum_{0 \leq n \leq d-m} \sum_{1 \leq m \leq d} = \sum_{m+n \leq d} \\
+      \maltese n &:= |a_1| + \cdots |a_n| - n
+    \end{align*}
+    である. 
+    $\mu_\A$を恒等射を持たない$\Ainf$圏の$\Ainf$構造($\Ainf$-structure of non-unital $\Ainf$-category)という. 
+  \end{itemize}
+\end{definition}
+
+\begin{remark} \label{rem_low_Ainf_associativity}
+  $\Ainf$結合式の低次の場合をみる. 
+  \begin{description}
+    \item[($d=1$)] $\mu^1_\A : \hom_\A(X_0,X_1) \to \hom_\A(X_0,X_1)[1]$ \\
+    $(m,n) = (1,0)$を考えると, $\mu^1_\A$は
+    \begin{align*}
+      \mu^1_\A (\mu^1_\A (a_1))
+      = 0
+    \end{align*}
+    を満たす. 
+    $(\hom_\A(X_0,X_1), \mu^1_\A)$は複体で, $\mu^1_\A$は微分とみなせる. 
+    \[\begin{tikzcd}
+      {\hom_\A(X,Y) = ~~ \cdots} & {\hom^i_\A(X,Y)} & {\hom^{i+1}_\A(X,Y)} & \cdots
+      \arrow[from=1-1, to=1-2]
+      \arrow["{\mu^1_\A}", from=1-2, to=1-3]
+      \arrow[from=1-3, to=1-4]
+    \end{tikzcd}\]
+    \item[($d=2$)] $\mu^2_\A : \hom_\A(X_1,X_2) \otimes \hom_\A(X_0,X_1) \to \hom_\A(X_0,X_2)$ \\
+    $(m,n) = (1,0), (1,1), (2,0)$を考えると, $\mu^2_\A$は 
+    \begin{align*}
+      \mu^2_\A(a_2, \mu^1_\A(a_1)) + (-1)^{|a_1|-1} \mu^2_\A(\mu^1_\A(a_2), a_1) + \mu^1_\A(\mu^2_\A(a_2, a_1))
+      = 0
+    \end{align*}
+    を満たす. 
+    $\mu^2_\A$は射の合成とみなせて, 微分$\mu^1_\A$は射の合成$\mu^2_\A$と整合的である. 
+    \[\begin{tikzcd}
+      {\hom_\A(X_1,X_2) \otimes \hom_\A(X_0,X_1)} && {\hom_\A(X_1,X_2) \otimes \hom_\A(X_0,X_1)[1]} \\
+      {\hom_\A(X_1,X_2)[1] \otimes \hom_\A(X_0,X_2)} && {\hom_\A(X_0,X_2)[1]}
+      \arrow["{\id \otimes \mu^1_\A}", from=1-1, to=1-3]
+      \arrow["{\mu^2_\A}", from=1-3, to=2-3]
+      \arrow["{\mu^1_\A \otimes \id}"', from=1-1, to=2-1]
+      \arrow["{\mu^2_\A}"', from=2-1, to=2-3]
+      \arrow["{\mu^1_\A \circ \mu^2_\A}"{description}, from=1-1, to=2-3]
+    \end{tikzcd}\]
+    \item[($d=3$)] $\mu^3_\A : \hom_\A(X_2,X_3) \otimes \hom_\A(X_1,X_2) \otimes \hom_\A(X_0,X_1) \to \hom_\A(X_0,X_3)[-1]$ \\
+    $(m,n) = (1,0), (1,1), (1,2), (2,0), (2,1), (3,0)$を考えると, $\mu^3_\A$は
+    \begin{align*}
+      &\mu^3_\A(a_3, a_2, \mu^1_\A(a_1)) + (-1)^{|a_1|-1} \mu^3_\A(a_3, \mu^1_\A(a_2), a_1) + (-1)^{|a_1|+|a_2|-2} \mu^3_\A(\mu^1_\A(a_3), a_2, a_1) \\
+      &+ \mu^2_\A(a_3, \mu^2_\A(a_2,a_1)) + (-1)^{|a_1|-1} \mu^2_\A(\mu^2_\A(a_3,a_2), a_1) + \mu^1_\A(\mu^3_\A(a_3,a_2,a_1)) \\
+      &= 0
+    \end{align*}
+    を満たす. 
+    $\mu^2_\A(a_3, \mu^2_\A(a_2,a_1)) + (-1)^{|a_1|-1} \mu^2_\A(\mu^2_\A(a_3,a_2), a_1)$は射の合成$\mu^2_\A$の結合性の差である. 
+    $\mu^3_\A$は射の結合性のホモトピーとみなせて, 射の合成$\mu^2_\A$はホモトピー$\mu^3_\A$を除いて結合的である.
+    \[\begin{tikzcd}
+      {\hom_\A(X_2,X_3) \otimes \hom_\A(X_1,X_2) \otimes \hom_\A(X_0,X_1)} & {\hom_\A(X_1,X_3) \otimes \hom_\A(X_0,X_1)} \\
+      {\hom_\A(X_2,X_3) \otimes \hom_\A(X_0,X_2)} & {\hom_\A(X_0,X_3)}
+      \arrow["{\mu^2_\A \otimes \id}", from=1-1, to=1-2]
+      \arrow["{\mu^2_\A}", from=1-2, to=2-2]
+      \arrow["{\id \otimes \mu^2_\A}"', from=1-1, to=2-1]
+      \arrow["{\mu^2_\A}"', from=2-1, to=2-2]
+      \arrow["{\mu^1_\A \circ \mu^3_\A}"{description}, from=1-1, to=2-2]
+    \end{tikzcd}\]
+    \footnote{
+      この図式は$\mu^3_\A$が射の結合性のホモトピーとみなせるという「イメージ」であることに注意. 
+      $\mu^3_\A(a_3, a_2, \mu^1_\A(a_1)) + (-1)^{|a_1|-1} \mu^3_\A(a_3, \mu^1_\A(a_2), a_1) + (-1)^{|a_1|+|a_2|-2} \mu^3_\A(\mu^1_\A(a_3), a_2, a_1)$に関する部分は描いていないので, 図式は不完全である. 
+    }
+    \item[($d \geq 4$)] $d=3$の時と同様に, 合成$\mu^d_\A$はより高次のホモトピー$\mu^{d+1}_\A,\mu^{d+2}_\A,\cdots$を除いて結合的である. 
+  \end{description}
+\end{remark}
+
+\begin{remark}
+  恒等射を持たない$\Ainf$圏$\A$は任意の$X \in \Ob\A$に対して, 恒等射$\id_X \in \hom_\A(X,X)$にあたる射が存在するとは限らない. 
+  \cref{rem_low_Ainf_associativity}にあるように, 射の合成はホモトピーを除いて結合的であるので, 射の結合律は成立しない. 
+  よって, 恒等射を持たない$\Ainf$圏は通常の圏の公理を満たさない. 
+\end{remark}
+
+\begin{remark}
+  恒等射を持たない$\Ainf$圏には恒等射にあたる射が存在しないので, 対象の同型と圏同値
+  \footnote{
+    対象の同型を定義できないので, 本質的全射を定義することができない. 
+  }
+  は定義することができない. 
+  一方, 充満性や忠実性, 圏同型は定義することができる. 
+\end{remark}
+
+恒等射を持たない$\Ainf$圏の定義は双対的である. 
+
+\begin{definition}[恒等射を持たない双対$\Ainf$圏]
+  恒等射を持たない$\Ainf$圏$(\A,\mu_\A)$に対して, 恒等射を持たない$\Ainf$圏$(\Aop,\mu_{\Aop})$を次のように定義する. 
+  \begin{itemize}
+    \item 対象の集まり$\Ob\Aop := \Ob\A$
+    \item 任意の$X_0, X_1 \in \Ob\Aop$に対して
+    \begin{align*}
+      \hom_{\Aop}(X_0,X_1) := \hom_\A(X_1,X_0)
+    \end{align*}
+    \item 任意の$d \geq 1$と$a_1 \in \hom_{\Aop}(X_0,X_1), \cdots, a_d \in \hom_{\Aop}(X_{d-1},X_d)$に対して
+    \begin{align*}
+      \mu^d_{\Aop}(a_d,\cdots,a_1) := (-1)^{\maltese d} \mu^d_\A(a_1,\cdots,a_d)
+    \end{align*}
+  \end{itemize}
+  $(\Aop,\mu_{\Aop})$を恒等射を持たない双対$\Ainf$圏(opposite non-unital $\Ainf$-category)という. 
+\end{definition}
+
+\begin{proof}
+  $(\Aop,\mu_{\Aop})$が恒等射を持たない$\Ainf$圏であることをみる. 
+  つまり, $\mu_{\Aop}$が$\Ainf$結合式
+  \begin{align*}
+    \sum_{m,n} (-1)^{\maltese n} \mu^{d-m+1}_{\Aop} (a_d,\cdots,a_{n+m+1}, \mu^m_{\Aop}(a_{n+m},\cdots,a_{n+1}), a_n,\cdots,a_1)
+    = 0
+  \end{align*}
+  を満たすことをみる.
+  \begin{align*}
+    &(L.H.S) \\
+    &= \sum_{m,n} (-1)^{\maltese n} (-1)^{\maltese d-m+1} (-1)^{\maltese m} 
+    \mu^{d-m+1}_\A (a_1,\cdots,a_n, \mu^m_\A(a_{n+1},\cdots,a_{n+m}), a_{n+m+1},\cdots,a_d) \\
+    &=0
+  \end{align*}
+\end{proof}
+
+\begin{example}
+  $(\A,\mu_\A)$を恒等射を持たない$\Ainf$圏とする. 
+  $d \geq 3$において$\mu^d_\A=0$のとき, $(\A,\mu^1_\A,\mu^2_\A)$は恒等射を持たないdg圏とみなせる. 
+  逆に, 恒等射を持たないdg圏は$d \geq 3$で$\mu^d_\A=0$である恒等射を持たない$\Ainf$圏とみなせる. 
+\end{example}
+
+\begin{proof}
+  任意の$a_1 \in \hom_\A(X_0,X_1), a_2 \in \hom_\A(X_1,X_2)$に対して
+  \begin{itemize}
+    \item 微分$d$は$d(a_1) := (-1)^{|a_1|} \mu^1_\A(a_1)$
+    \item 合成$\circ$は$a_2 \circ a_1 := (-1)^{|a_1|} \mu^2_\A(a_2,a_1)$
+  \end{itemize}
+  とすればよい. 
+  これらが
+  \begin{align*}
+    &d^2(a_1)=0 \\
+    &d(a_2 \circ a_1)=d(a_2) \circ a_1 + (-1)^{|a_2|} a_2 \circ d(a_1)
+  \end{align*}
+  を満たすことは計算すれば分かる. 
+  逆も同様に示せる. 
+\end{proof}
+
+\begin{example}
+  単位元のない$\Ainf$代数は恒等射を持たない1点$\Ainf$圏とみなせる. 
+\end{example}
+
+微分が消えるような恒等射を持たない$\Ainf$圏は極小と呼ばれる.
+
+\begin{definition}[恒等射を持たない極小$\Ainf$圏]
+  恒等射を持たない$\Ainf$圏$(\A,\mu_\A)$が
+  \begin{align*}
+    \mu^1_\A = 0
+  \end{align*}
+  を満たすとき, $\A$は極小(minimal)であるという. 
+\end{definition}
+
+複数の対象をもつ恒等射を持たない極小$\Ainf$圏も簡単に構成できる.
+
+\begin{example}
+  次の恒等射を持たない$\Ainf$圏$\A$を考える. 
+  \[\begin{tikzcd}
+    {X_0} & {X_1} & {X_2} & {X_3}
+    \arrow["{\alpha_{0,1}}", from=1-1, to=1-2]
+    \arrow["{\alpha_{1,2}}", from=1-2, to=1-3]
+    \arrow["{\alpha_{2,3}}", from=1-3, to=1-4]
+  \end{tikzcd}\]
+  \begin{align*}
+    &\hom_\A(X_i,X_i) = \bbK \cdot \id_{X_i} ~ (k=0,1,2,3) \\
+    &\hom_\A(X_i,X_{i+1}) = \bbK \cdot \alpha_{i,i+1} ~ (k=0,1,2) \\
+    &\hom_\A(X_i,X_{i+2}) = 0 ~ (i=0,1) \\
+    &\hom_\A(X_0,X_3) = \bbK \cdot \beta_{0,3} \\
+    &\mu_\A^3(\alpha_{0,1},\alpha_{1,2},\alpha_{2,3}) = \beta_{0,3}
+  \end{align*}
+  恒等射を含まない$\mu^2_\A$や上の$\mu_\A^3$以外, それ以上の$\Ainf$構造は消えているとする. 
+  ここで$\alpha_{i,i+1}$は次数$1$の基底, $\beta_{0,3}$は次数$2$の基底である. 
+  このとき, $\A$は極小である. 
+\end{example}
+
+恒等射を持たない$\Ainf$圏の部分圏を考えることができる. 
+
+\begin{definition}[$\Ainf$部分圏]
+  恒等射を持たない$\Ainf$圏$\A$に対して, 恒等射を持たない$\Ainf$圏$(\tilA,\mu_{\tilA})$を次のように定義する. 
+  \begin{itemize}
+    \item 対象の集まり$\Ob\tilA$は$\Ob\A$の部分集合
+    \item 任意の$X_0,X_1 \in \Ob\tilA$に対して, $\hom_{\tilA}(X_0,X_1)$は$\hom_\A(X_0,X_1)$の次数付き部分ベクトル空間
+    \item 任意の$d \geq 1$と$a_1 \in \hom_{\tilA}(X_0,X_1), \cdots, a_d \in \hom_{\tilA}(X_{d-1},X_d)$に対して
+    \begin{align*}
+      \mu^d_{\tilA} : \hom_{\tilA}(X_{d-1},X_d) \otimes \cdots \otimes \hom_{\tilA}(X_0,X_1) \to \hom_{\tilA}(X_0,X_d)[2-d]
+    \end{align*}
+    が与えられていて, $\Ainf$結合式を満たす. 
+  \end{itemize}
+  $\tilA$を$\A$の$\Ainf$部分圏($\Ainf$-subcategory)という. 
+\end{definition}
+
+
+恒等射を持たない$\Ainf$圏からコホモロジー圏を考えることができる. 
+
+\begin{definition}[コホモロジー圏]
+  恒等射を持たない$\Ainf$圏$(\A,\mu_\A)$に対して, 恒等射を持たない次数つき線形圏$H(\A)$を次のように定義する. 
+  \begin{itemize}
+    \item 対象の集まり$ \Ob H(\A) := \Ob\A$
+    \item 任意の$X_0, X_1 \in \Ob H(\A)$に対して, $\hom_{H(\A)}(X_0,X_1)$はコホモロジー群
+    \begin{align*}
+      \hom_{H(\A)}(X_0,X_1) := H^\bullet(\hom_\A(X_0,X_1), \mu^1_\A)
+    \end{align*}
+    \item 任意の$[a_1] \in \hom_{H(\A)}(X_0,X_1), [a_2] \in \hom_{H(\A)}(X_1,X_2)$に対して, 合成$\cdot$は
+    \begin{align*}
+      [a_2] \cdot [a_1] := (-1)^{|a_1|} [\mu^2_\A(a_2,a_1)]
+    \end{align*}
+  \end{itemize}
+  $H(\A)$を$\A$のコホモロジー圏(cohomological category of $\A$)という. 
+\end{definition}
+
+恒等射を持たない$\Ainf$圏から$0$次コホモロジーをとる圏も定義される. 
+
+\begin{definition}[$0$次コホモロジー圏]
+  恒等射を持たない$\Ainf$圏$(\A,\mu_\A)$に対して, 恒等射を持たない次数つき線形圏$H^0(\A)$を次のように定義する. 
+  \begin{itemize}
+    \item 対象の集まり$\Ob H^0(\A) := \Ob\A$
+    \item 任意の$X_0, X_1 \in \Ob H^0(\A)$に対して, $\hom_{H^0(\A)}(X_0,X_1)$は$0$次コホモロジー群
+    \begin{align*}
+      \hom_{H^0(\A)}(X_0,X_1) := H^0(\hom_\A(X_0,X_1), \mu^1_\A)
+    \end{align*}
+    \item 任意の$[a_1] \in \hom_{H(\A)}(X_0,X_1), [a_2] \in \hom_{H(\A)}(X_1,X_2)$に対して, 合成$\cdot$は
+    \begin{align*}
+      [a_2] \cdot [a_1] := (-1)^{|a_1|} [\mu^2_\A(a_2,a_1)]
+    \end{align*}
+  \end{itemize}
+  $H^0(\A)$を$\A$の$0$次コホモロジー圏($0$-th cohomological category of $\A$)という. 
+\end{definition}
+
+コホモロジー圏と$0$次コホモロジー圏には次のような関係がある. 
+
+\begin{lemma}
+  恒等射を持たない$\Ainf$圏$\A$に対して, $H^0(\A)$は$H(\A)$の部分圏である.
+\end{lemma}
+
+\begin{proof}
+  それぞれのhom空間の定義より従う. 
+\end{proof}
+
+\begin{lemma}
+  恒等射を持たない$\Ainf$圏$\A$に対して, Koszul符号を除いて
+  \begin{align*}
+    H(\A)^{\mathrm{op}} = H(\Aop)
+  \end{align*}
+  が成立する. 
+\end{lemma}
+
+$d \geq 2$に対して$\mu^d_\A$は鎖写像ではないが, コホモロジー圏上ではMassey積の形で現れる. 
+
+\begin{remark}[\cite{Sei} remark 1.2]
+  次の恒等射を持たない$\Ainf$圏$\A$を考える. 
+  \[\begin{tikzcd}
+    & {X_0} \\
+    {X_1} && {X_2} \\
+    & {X_3}
+    \arrow["{a_1}"', from=1-2, to=2-1]
+    \arrow["{a_2}"', from=2-1, to=2-3]
+    \arrow["{a_3}", from=2-3, to=3-2]
+    \arrow["{h_1}", from=1-2, to=2-3]
+    \arrow["{h_2}"', from=2-1, to=3-2]
+  \end{tikzcd}\]
+  \begin{align*}
+    \mu^1_\A(h_i) = \mu^2_\A(a_{i+1},a_i) ~ (i=1,2)
+  \end{align*}
+  であって, コホモロジー圏において 
+  \begin{align*}
+    [a_3] \cdot [a_2] = [a_2] \cdot [a_1] = 0 
+  \end{align*}
+  である. 
+  ここで, $c \in \hom_\A(X_0,X_3)$を
+  \begin{align*}
+    c := \mu^3_\A(a_3,a_2,a_1) - \mu^2_\A(h_2,a_1) - \mu^2_\A(a_3,h_1)
+  \end{align*}
+  と定義する.
+  このとき, 次数$|a_1|+|a_2|+|a_3|-1$において
+  \begin{align*}
+    \mu^1_\A(c)=0
+  \end{align*}
+  である.
+  また
+  \begin{align*}
+    [c] \in \frac{\hom_{H(\A)}(X_0,X_3)}{[a_3] \cdot \hom_{H(\A)}(X_0,X_2) + \hom_{H(\A)}(X_1,X_3) \cdot [a_1]}
+  \end{align*}
+  は$[a_i]$のみによる.
+  このとき
+  \begin{align*}
+    \langle [a_3],[a_2],[a_1] \rangle := (-1)^{|a_2|} [c]
+  \end{align*}
+  と表す. 
+\end{remark}
+
+\section{恒等射を考えない\texorpdfstring{$\Ainf$}{Ainf}関手} \label{section_non_unital_Ainf_functor}
+
+恒等射を持たない$\Ainf$圏の間の関手を定義する. 
+
+\begin{definition}[恒等射を考えない$\Ainf$関手]
+  恒等射を持たない$\Ainf$圏$\A, \B$に対して, 恒等射を考えない$\Ainf$関手(non-unital $\Ainf$-functor) 
+  \begin{align*}
+    \F : \A \to \B
+  \end{align*}
+  は次のデータから構成される. 
+  \begin{itemize}
+    \item 対象の対応$\F^0 : \Ob\A \to \Ob\B$
+    \footnote{
+      $\F=(\F^0,\F^1,\cdots)$であるが, \cite{Sei}の記法に従い以降では$\F^0$も$\F$と表す. 
+    }
+    \item 任意の$d \geq 1$と$a_1 \in \hom_\A(X_0,X_1), \cdots, a_d \in \hom_\A(X_{d-1},X_d)$に対して
+    \begin{align*}
+      \F^d : \hom_\A(X_{d-1},X_d) \otimes \cdots \otimes \hom_\A(X_0,X_1) \to \hom_\B(\F X_0,\F X_d)[1-d]
+    \end{align*}
+    が与えられていて, 多項等式(polynomial equation)
+    \begin{align*}
+      &\sum_r \sum_{s_1,\cdots,s_r} \mu^d_\B (\F^{s_r} (a_d,\cdots,a_{d-s_r+1}), \cdots, \F^{s_1}(a_{s_1},\cdots,a_1)) \\ 
+      &= \sum_{m,n} (-1)^{\maltese n} \F^{d-m+1} (a_d,\cdots,a_{m+n+1}, \mu^m_\A(a_{n+m},\cdots,a_{n+1}), a_n,\cdots,a_1)
+    \end{align*}
+    を満たす. 
+    ここで
+    \begin{align*}
+      \sum_r \sum_{s_1,\cdots,s_r} 
+      := \sum_{r \geq 1} \sum_{d = s_1 + \cdots + s_r}
+    \end{align*}
+    である. 
+  \end{itemize}
+\end{definition}
+
+\begin{remark}
+  多項等式の低次の場合を見る. 
+  \begin{description}
+    \item[($d=1$)] $\F^1 : \hom_\A(X_0,X_1) \to \hom_\B(\F X_0,\F X_1)$ \\
+    $r=1 ~ (s_1=1) ~/~ (m,n)=(0,1)$を考えると, $\F^1$は
+    \begin{align*}
+      \mu^1_\B(\F^1(a_1)) = \F^1(\mu^1_\A(a_1))
+    \end{align*}
+    を満たす. 
+    よって, $\F^1$は複体の写像である.
+    \[\begin{tikzcd}
+      {\hom_\A(X_0,X_1)} & {\hom_\A(X_0,X_1)[1]} \\
+      {\hom_\B(\F X_0,\F X_1)} & {\hom_\B(\F X_0,\F X_1)[1]}
+      \arrow["{\mu^1_\A}", from=1-1, to=1-2]
+      \arrow["{\F^1}", from=1-2, to=2-2]
+      \arrow["{\F^1}"', from=1-1, to=2-1]
+      \arrow["{\mu^1_\B}"', from=2-1, to=2-2]
+    \end{tikzcd}\] 
+    \item[($d=2$)] $\F^2 : \hom_\A(X_1,X_2) \otimes \hom_\A(X_0,X_1) \to \hom_\B(\F X_0,\F X_2)[-1]$ \\
+    $r=1 ~ (s_1=2), r=2 ~ (s_1=1, s_2=1) ~/~ (m,n)=(1,0), (1,1), (2,0)$を考えると, $\F^2$は
+    \begin{align*}
+      &\mu^1_\B(\F^2(a_2,a_1)) + \mu^2_\B(\F^1(a_2), \F^1(a_1)) \\
+      &= \F^2(a_2,\mu^1_\A(a_1)) + (-1)^{|a_1|-1} \F^2(\mu^1_\A(a_2),a_1) + \F^1(\mu^2_\A(a_2,a_1))
+    \end{align*}
+    を満たす. 
+    $\mu^2_\B(\F^1(a_2), \F^1(a_1)) $と$\F^1(\mu^2_\A(a_2,a_1))$があることより, $\F^2$はこの間のホモトピーとみなせて, 複体の写像$\F^1$と射の合成$\mu^2$はホモトピー$\F^2$を除いて可換である.
+    \footnote{
+      射の合成$\mu^2$を分かりやすく$\circ$と表すと, $\F^1(a_2 \circ_\A a_1)=\F^1(a_2) \circ_\B \F^1(a_1)$がホモトピー$\F^2$を除いて成立するということである. 
+    }
+    \[\begin{tikzcd}
+      {\hom_\A(X_1,X_2) \otimes \hom_\A(X_0,X_1)} & {\hom_\A(X_0,X_2)} \\
+      {\hom_\B(\F X_1,\F X_2) \otimes \hom_\B(\F X_0,\F X_1)} & {\hom_\B(\F X_0,\F X_2)}
+      \arrow["{\mu^2_\A}", from=1-1, to=1-2]
+      \arrow["{\F^1}", from=1-2, to=2-2]
+      \arrow["{\F^1 \otimes \F^1}"', from=1-1, to=2-1]
+      \arrow["{\mu^2_\B}"', from=2-1, to=2-2]
+      \arrow["{\mu^1_\B \circ \F^2}"{description}, from=1-1, to=2-2]
+    \end{tikzcd}\] 
+    % \item[($d=3$)] $\F^3 : \hom_\A(X_2,X_3) \otimes \hom_\A(X_1,X_2) \otimes \hom_\A(X_0,X_1) \to \hom_\B(\F X_0,\F X_3)[-2]$ 
+  \end{description}
+\end{remark}
+
+恒等射を持たない$\Ainf$圏上の恒等関手を定義する. 
+
+\begin{definition}[恒等射を考えない$\Ainf$恒等関手] \label{def_identity__Ainf_func}
+  恒等射を持たない$\Ainf$圏$\A$に対して, 恒等射を考えない$\Ainf$関手
+  \begin{align*}
+    \Id_\A : \A \to \A
+  \end{align*}
+  を次のように定義する. 
+  \begin{description}
+    \item[($d=0$)] 任意の$X \in \Ob\A$に対して$\Id_\A X := X$
+    \item[($d=1$)] 任意の$X_0,X_1 \in \Ob\A$に対して, $\Id_\A^1$は複体の恒等写像$\id_{\hom_\A(X_0,X_1)}$
+    \item[($d \geq 2$)] $\Id_\A^d := 0$
+  \end{description}
+  $\Id_\A$を$\A$上の恒等射を考えない$\Ainf$恒等関手(non-unital $\Ainf$-identity functor on $\A$)という.
+\end{definition}
+
+\begin{proof}
+  $\Id_\A$が恒等射を考えない$\Ainf$関手であることをみる. 
+  つまり, $\Id_\A$が多項等式
+  \begin{align*}
+    &\sum_r \sum_{s_1,\cdots,s_r} \mu^d_\A (\Id_\A^{s_r} (a_d,\cdots,a_{d-s_r+1}), \cdots, \Id_\A^{s_1}(a_{s_1},\cdots,a_1)) \\ 
+    &= \sum_{m,n} (-1)^{\maltese n} \Id_\A^{d-m+1} (a_d,\cdots,a_{m+n+1}, \mu^m_\A(a_{n+m},\cdots,a_{n+1}), a_n,\cdots,a_1)
+  \end{align*}
+  を満たすことをみる.
+  左辺は$d = s_1+\cdots+s_d = 1+\cdots+1$, 右辺は$(m,n)=(d,0)$のみを考えればよい. 
+  よって, 左辺と右辺はそれぞれ次のようになる. 
+  \begin{align*}
+    (L.H.S) 
+    &= \mu^d_\A(\Id_\A^1(a_d), \cdots, \Id_\A^1(a_1)) \\
+    &= \mu^d_\A(a_d, \cdots, a_1) \\
+    (R.H.S)
+    &= \Id_\A^1(\mu^d_\A(a_d, \cdots, a_1)) \\
+    &= \mu^d_\A(a_d, \cdots, a_1)
+  \end{align*}
+  以上より, $\Id_\A$は恒等射を考えない$\Ainf$関手である.
+\end{proof}
+
+恒等射を考えない$\Ainf$関手の合成は恒等射を考えない$\Ainf$関手である. 
+
+\begin{definition}[恒等射を考えない$\Ainf$関手の合成] \label{def_comp_of_Ainf_func}
+  恒等射を考えない$\Ainf$関手$\F : \A \to \B, \G : \B \to \C$に対して, 恒等射を考えない$\Ainf$関手
+  \begin{align*}
+    \G \circ \F : \A \to \C
+  \end{align*}
+  を次のように定義する. 
+  \begin{description}
+    \item[($d=0$)] 任意の$X \in \Ob\A$に対して$(\G \circ \F)(X) : = \G(\F(X))$
+    \item[($d \geq 1$)] 任意の$a_1 \in \hom_\A(X_0,X_1), \cdots, a_d \in \hom_\A(X_{d-1},X_d)$に対して
+    \begin{align*}
+      (\G \circ \F)^d (a_d,\cdots,a_1)
+      := \sum_r \sum_{s_1,\cdots,s_r} \G^r(\F^{s_r} (a_d,\cdots,a_{d-s_r+1}), \cdots, \F^{s_1}(a_{s_1},\cdots,a_1))
+    \end{align*}
+  \end{description}
+\end{definition}
+
+\begin{remark}
+  恒等射を考えない$\Ainf$関手の合成の低次の場合を見る. 
+  \begin{description}
+    \item[($d=1$)] $r=1 ~ (s_1=1)$を考えると
+    \begin{align*}
+      (\G \circ \F)^1(a_1) 
+      := \G^1(\F^1(a_1))
+    \end{align*}
+    つまり, 通常の関手おける射の送り方と同じである. 
+    \item[($d=2$)] $r=1 ~ (s_1=1), r=2 ~ (s_1=1,s_2=1)$を考えると
+    \begin{align*}
+      (\G \circ \F)^2(a_2,a_1) 
+      := \G^1(\F^2(a_2,a_1)) + \G^2(\F^1(a_2),\F^1(a_1))
+    \end{align*}
+    つまり, $\C$におけるホモトピー$(\G \circ \F)^2(a_2,a_1)$は$\B$におけるホモトピー$\F^2(a_2,a_1)$を$\G^1$で送ったものと, ホモトピー$\G^2(\F^1(a_2),\F^1(a_1))$の和である. 
+    % \item[($d=3$)]
+  \end{description}
+\end{remark}
+
+恒等射を考えない$\Ainf$関手の合成は強結合的である. 
+
+\begin{lemma} \label{prop_Ainf_functor_is_strictly_associative}
+  恒等射を考えない$\Ainf$関手$\F : \A \to \B, \G : \B \to \C, \H : \C \to \D$に対して
+  \begin{align*}
+    (\H \circ \G) \circ \F = \H \circ (\G \circ \F)
+  \end{align*}
+  が成立する. 
+\end{lemma}
+
+恒等射を考えない$\Ainf$関手はコホモロジー圏上の関手を定める. 
+
+\begin{definition}[恒等射を考えないコホモロジー圏上の関手] \label{prop_F_induces_HF}
+  恒等射を考えない$\Ainf$関手$\F : \A \to \B$に対して, 恒等射を考えない次数付き線形関手
+  \begin{align*}
+    H(\F) : H(\A) \to H(\B)
+  \end{align*}
+  を次のように定義する.
+  \begin{itemize}
+    \item 任意の$X \in \Ob H(\A) = \Ob\A$に対して$H(\F)(X) := \F X$
+    \item 任意の$[a] \in \hom_{H(\A)}(X_0,X_1)$に対して$H(\F)(a) := [\F^1(a)]$
+  \end{itemize}
+  $H(\F)$を恒等射を考えないコホモロジー圏上の関手(non-unital functor on cohomological category)という.
+\end{definition}
+
+恒等射を持たない$\Ainf$圏上の同型関手を定義する. 
+
+\begin{definition}[$\Ainf$同型]
+  恒等射を考えない$\Ainf$関手$\F : \A \to \B$において, 複体の写像$\F^1$が同型写像であるとき, $\F$は$\Ainf$同型($\Ainf$-isomorphism)であるという.
+\end{definition}
+
+コホモロジー圏上の関手が通常の関手として圏同型である場合は$\Ainf$擬同型と呼ばれる. 
+
+\begin{definition}[$\Ainf$擬同型]
+  恒等射を考えない$\Ainf$関手$\F : \A \to \B$に対して, $H(\F)$がコホモロジー圏の圏同型
+  \begin{align*}
+    H(\A) \cong H(\B)
+  \end{align*}
+  を定めるとき, $\F$は$\Ainf$擬同型($\Ainf$-quasi-isomorphism)であるという. 
+\end{definition}
+
+\begin{example}
+  $\Ainf$同型は$\Ainf$擬同型である. 
+\end{example}
+
+$\Ainf$擬同型は複体の写像を用いて表すことができる. 
+
+\begin{lemma}
+  次の2つは同値である. 
+  \begin{enumerate}
+    \item 恒等射を考えない$\Ainf$関手$\F : \A \to \B$は$\Ainf$擬同型である. 
+    \item 任意の$X \in \Ob\A$に対して$\F X := X$であって, 複体の写像$\F^1$が通常の意味で擬同型である. 
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  \cref{prop_F_induces_HF}より従う. 
+\end{proof}
+
+\begin{definition}[コホモロジー圏上で忠実充満な恒等射を考えない$\Ainf$関手]
+  恒等射を考えない$\Ainf$関手$\F : \A \to \B$に対して, $H(\F)$が忠実充満であるとき, $\F$はコホモロジー圏上で忠実充満な恒等射を考えない$\Ainf$関手(cohomologically fully faithful non-unital $\Ainf$-functor)であるという. 
+\end{definition}
+
+\begin{example}
+  $\Ainf$擬同型はコホモロジー圏上で忠実充満である. 
+\end{example}
+
+\section{形式的微分同相} \label{section_formal_diffeomorphism}
+
+恒等射を持たない$\Ainf$圏から新しい恒等射を持たない$\Ainf$圏を構成することができる.
+
+\begin{definition} \label{def_tildeA}
+  恒等射を持たない$\Ainf$圏$\A$に対して, dg-quiver $\tilA = (\Ob\tilA, \hom_{\tilA}(X_0,X_1))$を次のように定義する. 
+  \begin{itemize}
+    \item 対象の集まり$\Ob\tilA := \Ob\A$
+    \item 任意の$X_0,X_1 \in \Ob\tilA$に対して$\hom_{\tilA}(X_0,X_1) := \hom_\A(X_0,X_1)$
+  \end{itemize} 
+\end{definition}
+
+\begin{definition}[形式的微分同相] \label{def_formal_diffeomorphism}
+  恒等射を持たない$\Ainf$圏$\A$とdg-quiver $\tilA$に対して, 形式的微分同相(formal diffeomorphism) 
+  \begin{align*}
+    \Phi : \A \to \tilA
+  \end{align*}
+  は次のデータから構成される. 
+  \begin{description}
+    \item[($d=0$)] 対象の対応$\Phi : \Ob\A \to \Ob\tilA$は恒等写像
+    \item[($d \geq 1$)] 任意の$a_1 \in \hom_\A(X_0,X_1), \cdots, a_d \in \hom_\A(X_{d-1},X_d)$に対して
+    \begin{align*}
+      \Phi^d : \hom_\A(X_{d-1},X_d) \otimes \cdots \otimes \hom_\A(X_0,X_1) \to \hom_{\tilA}(X_0,X_d)[1-d]
+    \end{align*}
+    が与えられていて, $\Phi^1 : \hom_\A(X_0,X_1) \to \hom_{\tilA}(X_0,X_1)$は線形自己同型である.
+  \end{description}
+\end{definition}
+
+恒等射を持たない$\Ainf$圏と形式的微分同相からdg-quiverに$\Ainf$構造が定まる. 
+
+\begin{theorem} \label{prop_modified_Ainf_structure}
+  形式的微分同相$\Phi : \A \to \tilA$に対して, 多項等式を満たすように$\mu_{\tilA}$が一意に帰納的に定まる.
+  つまり, $(\tilA, \mu_{\tilA})$は恒等射を持たない$\Ainf$圏である. 
+\end{theorem}
+
+\begin{proof}
+  $\mu_{\tilA}$が帰納的に定まることを示す. 
+  \begin{description}
+    \item[($d=1$)] $\mu^1_{\tilA} : \hom_{\tilA}(X_0,X_1) \to \hom_{\tilA}(X_0,X_1)[1]$を
+    \begin{align*}
+      \mu^1_{\tilA} (\Phi^1(a_1))
+      := \Phi^1(\mu^1_\A(a_1))
+    \end{align*}
+    で定義すると, $d=1$の多項等式を満たす.
+    \footnote{
+      多項等式を満たすように定義しているので, これは明らかである. 
+    }
+    このとき, $\mu^1_{\tilA}$が$\Ainf$結合式を満たすことをみる. 
+    \begin{align*}
+      \mu^1_{\tilA} (\mu^1_{\tilA} (a_1))
+      = \mu^1_{\tilA} (\Phi^1(\mu^1_\A(a_1))) 
+      = \Phi^1(\mu^1_\A (\mu^1_\A (a_1))) 
+      = 0
+    \end{align*}
+    \item[($d=2$)] $\mu^2_{\tilA} : \hom_{\tilA}(X_1,X_2) \otimes \hom_{\tilA}(X_0,X_1) \to \hom_{\tilA}(X_0,X_2)$を
+    \begin{align*}
+      \mu^2_{\tilA} (\Phi^1(a_2),\Phi^1(a_1)) 
+      := \Phi^2(a_2,\mu^1_\A(a_1)) + (-1)^{|a_1|-1} \Phi^2(\mu^1_\A(a_2),a_1) + \Phi^1(\mu^2_\A(a_2,a_1))
+    \end{align*}
+    で定義すると, $d=2$の多項等式を満たす.
+    このとき, $\mu^2_{\tilA}$が$\Ainf$結合式を満たすことをみる. 
+    \item[($d \geq 3$)] $\mu^d_{\tilA} (\Phi^1(a_d), \cdots, \Phi^1(a_1))$は同様に定義できて, $\Ainf$結合式を満たすことが分かる.
+  \end{description}
+\end{proof}
+
+\begin{corollary} \label{prop_Phi_is_Ainf_functor}
+  次の2つが成立する. 
+  \begin{enumerate}
+    \item 形式的微分同相$\Phi$は恒等射を考えない$\Ainf$関手である. 
+    \item $\Phi$は$\Ainf$同型である. 
+  \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+  それぞれ次のように示すことができる. 
+  \begin{enumerate}
+    \item 形式的微分同相の定義と\cref{prop_modified_Ainf_structure}より従う. 
+    \item 形式的微分同相の定義において, $\Phi^1$が線形自己同型であることより従う.
+  \end{enumerate}
+\end{proof}
+
+\begin{definition}[修正$\Ainf$構造]
+  恒等射を持たない$\Ainf$圏$\tilA$の$\Ainf$構造$\mu_{\tilA}$を修正$\Ainf$構造(modified $\Ainf$-structure)という.
+\end{definition}
+
+\begin{notation}
+  恒等射を持たない$\Ainf$圏$\tilA$を$\Phi_\ast \A$と表す.
+\end{notation}
+
+% \begin{remark}
+%   形式的微分同相は非可換幾何学の言葉である. (\cite{Sei}のremark 1.3を参照)
+% \end{remark}
+
+恒等射を考えない$\Ainf$関手の合成を帰納的に解くことで, 形式的微分同相の逆関手を構成できる. 
+
+\begin{lemma} \label{prop_diffeomorphism_has_inverse}
+  形式的微分同相$\Phi: \A \to \Phi_\ast \A$に対して, 恒等射を考えない$\Ainf$関手
+  \begin{align*}
+    \Phi^{-1} : \Phi_\ast \A \to \A
+  \end{align*}
+  を次のように定義する.
+  \begin{description}
+    \item[($d=0$)] 対象の対応$\Phi^{-1} : \Ob\Phi_\ast \A \to \Ob\A$は恒等写像
+    \item[($d \geq 1$)] 任意の$a_1 \in \hom_{\Phi_\ast \A}(X_0,X_1), \cdots, a_d \in \hom_{\Phi_\ast \A}(X_{d-1},X_d)$に対して
+    \begin{align*}
+      (\Id_\A)^d (a_d,\cdots,a_1)
+      = \sum_r \sum_{s_1,\cdots,s_r} (\Phi^{-1})^r(\Phi^{s_r} (a_d,\cdots,a_{d-s_r+1}), \cdots, \Phi^{s_1}(a_{s_1},\cdots,a_1))
+    \end{align*}
+    により帰納的に$(\Phi^{-1})^d$を定める.
+  \end{description}
+  このとき, $\Phi^{-1}$は$\Phi$の逆関手である. 
+  つまり
+  \begin{align*}
+    \Phi^{-1} \circ \Phi &= \Id_\A \\
+    \Phi \circ \Phi^{-1} &= \Id_{\Phi_\ast \A}
+  \end{align*}
+  が成立する. 
+\end{lemma}
+
+\begin{example} \label{eg_Ainf_qis_with_zero_differential_is_formal_diffeo}
+  恒等射を持たない$\Ainf$圏$(\A,\mu_\A), (\B,\mu_\B)$が$\mu^1_\A=\mu^1_\B=0$であるとする.
+  恒等射を考えない$\Ainf$関手$\Phi : \A \to \B$が$\Ainf$擬同型であるとき, $\Phi$は形式的微分同相である. 
+\end{example}
+
+$\A$と$\Phi_\ast \A$はdg-quiverとして同型である. 
+形式的微分同相$\Phi : \A \to \Phi_\ast \A$を(それぞれの$\Ainf$構造を忘れて) dg-quiverの写像$\Phi: \A \to \A$とみなす.
+
+\begin{lemma}
+  dg-quiverの写像$\Phi : \A \to \A$の集まりは恒等射を考えない$\Ainf$関手の合成により群をなす.
+\end{lemma}
+
+\begin{proof}
+  単位元は恒等射を考えない$\Ainf$恒等関手(をdg-quiverの写像とみなしたもの)により与えられる.
+  逆元は\cref{prop_diffeomorphism_has_inverse}より与えられる. 
+  結合性は\cref{prop_Ainf_functor_is_strictly_associative}より従う. 
+\end{proof}
+
+\section{前自然変換と恒等射を考えない\texorpdfstring{$\Ainf$}{Ainf}関手圏} \label{section_non_unital_Ainf_functor_cat}
+
+恒等射を考えない$\Ainf$関手の間の前自然変換と恒等射を考えない$\Ainf$関手のなす圏を定義する. 
+
+\begin{definition}[前自然変換]
+  $\F_0,\F_1 : \A \to \B$を恒等射を考えない$\Ainf$関手とする. 
+  $\F_0$から$\F_1$への次数$g$の前自然変換$T$ (pre-natural transformation of degree $g$ from $\F_0$ to $\F_1$)を次のように定義する. 
+  \begin{itemize}
+    \item $T = (T^0, T^1, \cdots)$で, 任意の$d \geq 0$に対して
+    \begin{align*}
+      T^d : \hom_\A(X_{d-1},X_d) \otimes \cdots \otimes \hom_\A(X_0,X_1) \to \hom_\B(\F_0 X_0,\F_1 X_d)[g-d]
+    \end{align*}
+  \end{itemize}
+  $\F_0$から$\F_1$への次数$g$の前自然変換の集まりを$\hom^g(\F_0,\F_1)$と表す. 
+\end{definition}
+
+\begin{remark}
+  前自然変換の$d$が低次の場合をみる. 
+  \begin{description}
+    \item[($d=0$)] $T^0 : \bbK \to \hom_\B(\F_0 X \to \F_1 X)[k]$は$\hom^k_\B(\F_0 X \to \F_1 X)$の元とみなせる. 
+    \[\begin{tikzcd}
+      && {\F_0 X} \\
+      X \\
+      && {\F_1 X}
+      \arrow["{\F_0}", curve={height=-12pt}, maps to, from=2-1, to=1-3]
+      \arrow["{\F_1}"', curve={height=12pt}, maps to, from=2-1, to=3-3]
+      \arrow["{T^0}", from=1-3, to=3-3]
+    \end{tikzcd}\]
+    \item[($d=1$)] $T^1 : \hom_\A(X_0,X_1) \to \hom_\B(\F_0 X_0,\F_1 X_1)[g-1]$ 
+    \[\begin{tikzcd}
+      {X_0} && {\F_0 X_0} \\
+      {X_1} && {\F_1 X_1}
+      \arrow["{a_1}"', from=1-1, to=2-1]
+      \arrow["{T^1(a_1)}", from=1-3, to=2-3]
+      \arrow["{\F_0}", curve={height=-12pt}, maps to, from=1-1, to=1-3]
+      \arrow["{\F_1}"', curve={height=12pt}, maps to, from=2-1, to=2-3]
+    \end{tikzcd}\]
+    \item[($d=2$)] $T^2 : \hom_A(X_1,X_2) \otimes \hom_\A(X_0,X_1) \to \hom_\B(\F_0 X_0,\F_1 X_2)[g-2]$
+    \[\begin{tikzcd}
+      {X_0} && {\F_0 X_0} \\
+      {X_1} \\
+      {X_2} && {\F_1 X_2}
+      \arrow["{a_1}"', from=1-1, to=2-1]
+      \arrow["{a_2}"', from=2-1, to=3-1]
+      \arrow["{\F_0}", curve={height=-12pt}, maps to, from=1-1, to=1-3]
+      \arrow["{\F_1}"', curve={height=12pt}, maps to, from=3-1, to=3-3]
+      \arrow["{T^2(a_2,a_1)}", from=1-3, to=3-3]
+    \end{tikzcd}\]
+  \end{description}
+\end{remark}
+
+恒等射を考えない$\Ainf$関手と前自然変換は恒等射を持たない$\Ainf$圏をなす. 
+
+\begin{definition}[恒等射を考えない$\Ainf$関手圏]
+  恒等射を持たない$\Ainf$圏$\A,\B$に対して, 恒等射を持たない$\Ainf$圏$\Q := \nufun{\A}{\B}$を次のように定義する. 
+  \begin{itemize}
+    \item 対象は$\A$から$\B$への恒等射を考えない$\Ainf$関手$\F : \A \to \B$
+    \item 任意の$\F_0,\F_1 \in \Ob\Q$に対して$\hom^g_\Q(\F_0,\F_1) := \hom^g(\F_0,\F_1)$
+    \item 任意の$e \geq 1$と$a_1 \in \hom_\A(X_0,X_1), \cdots, a_d \in \hom_\A(X_{d-1},X_d)$と$T_1 \in \hom_\Q(\F_0,\F_1), \cdots, T_e \in \hom_\Q(\F_{e-1},\F_e)$に対して, 合成
+    \begin{align*}
+      \mu^e_\Q : \hom_\Q(\F_{e-1},\F_e) \otimes \cdots \otimes \hom_\Q(\F_0,\F_1) \to \hom_\Q(\F_0,\F_e)[2-e]
+    \end{align*}
+    \begin{description}
+      \item[($e=1$)] $\mu^1_\Q : \hom_\Q(\F_0,\F_1) \to \hom_\Q(\F_0,\F_1)[1]$は 
+      \begin{align*}
+        (\mu^1_\Q(T_1))^d (a_d,\cdots,a_1) \\
+        := \sum_{1 \leq i \leq r} \sum_{s_1,\cdots,s_r} (-1)^\dagger \mu^r_\B(\F^{s_r}_1(a_d,\cdots,a_{d-s_r+1}), \cdots, \F^{s_i+1}_1(a_{s_1+\cdots+2s_i+1}, \cdots, a_{s_1+\cdots+s_i+1}), \\
+        T^{s_i}_1(a_{s_1+\cdots+s_i}, \cdots, a_{s_1+\cdots+s_{i-1}+1}), \\
+        \F^{s_i-1}_0(a_{s_1+\cdots+s_{i-1}}, \cdots, a_{s_1+\cdots+s_{i-2}+2}), \cdots, \F^{s_1}_0(a_{s_1},\cdots,a_1)
+        ) \\
+        - \sum_{m,n} (-1)^{\maltese n+|T_1|-1} T^{d-m+1}_1 (a_d,\cdots,a_{n+m+1}, \mu^m_\A(a_{n+m} \cdots, a_{n+1}), a_n,\cdots,a_1)
+      \end{align*}
+      ここで, $s_1,\cdots,s_r$は$0$でもよく
+      \begin{align*}
+        \dagger
+        := (|T_1|-1)(|a_1|+\cdots|a_{s_1+\cdots+s_{i-1}}|-s_1-\cdots-s_{i-1})
+      \end{align*}
+      である. 
+      \item[($e=2$)] $\mu^2_\Q : \hom_Q(\F_1,\F_2) \otimes \hom_\Q(\F_0,\F_1) \to \hom_\Q(\F_0,\F_2)$は
+      \begin{align*}
+        (\mu^2_\Q(T_2,T_1))^d(a_d,\cdots,a_1) \\
+        := \sum_{1 \leq i \leq j \leq r} \sum_{s_1,\cdots,s_r} (-1)^\circ \mu^r_\B(\F^{s_r}_2(a_d,\cdots,a_{d-s_r+1}), \cdots, \F^{s_j+1}_1(a_{s_1+\cdots+2s_j+1}, \cdots, a_{s_1+\cdots+s_j+1}), \\
+        T^{s_j}_2(a_{s_1+\cdots+s_j}, \cdots, a_{s_1+\cdots+s_{j-1}+1}), \\
+        \F^{s_j-1}_0(a_{s_1+\cdots+s_{j-1}}, \cdots, a_{s_1+\cdots+s_{j-2}+2}), \cdots, \F^{s_i+1}_1(a_{s_1+\cdots+2s_i+1}, \cdots, a_{s_1+\cdots+s_i+1}), \\
+        T^{s_i}_1(a_{s_1+\cdots+s_i}, \cdots, a_{s_1+\cdots+s_{i-1}+1}), \\
+        \F^{s_i-1}_0(a_{s_1+\cdots+s_{i-1}}, \cdots, a_{s_1+\cdots+s_{i-2}+2}), \cdots, \F^{s_1}_0(a_{s_1},\cdots,a_1)
+        )
+      \end{align*}
+      ここで, $s_1,\cdots,s_r$は$0$でもよく 
+      \begin{align*}
+        \circ 
+        :=\sum_{1 \leq k \leq s_1+\cdots+s_{j-1}} (|T_2|-1)(|a_k|-1) + \sum_{1 \leq k \leq s_1+\cdots+s_{i-1}} (|T_1|-1)(|a_k|-1)
+      \end{align*}
+      である. 
+      \item[($e \geq 3$)] $\mu^e_\Q$は$\mu^2_\Q$と同じパターン (任意の$e \geq 2$において, $\mu^e_\Q$に$\mu_\A$は登場しない.)
+    \end{description}
+  \end{itemize}
+  $\nufun{\A}{\B}$を恒等射を考えない$\Ainf$関手圏(non-unital $\Ainf$-functor category)という.
+\end{definition}
+
+\begin{remark}
+  $\mu^1_\Q$において, $d$が低次の場合をみる. 
+  \begin{description}
+    \item[($d=1$)] $\mu^1_\Q : \hom_\Q(\F_0,\F_1) \to \hom_\Q(\F_0,\F_1)[1]$は
+    \begin{align*}
+      (\mu^1_\Q(T_1))^1(a_1) 
+      := (-1)^{(|T_1|-1)|a_1|} \mu^1_\B(T^1_1(a_1)) - (-1)^{|T_1|-1} T^1_1(\mu^1_\A(a_1))
+    \end{align*}
+    を満たす. 
+
+  \end{description}
+\end{remark}
+
+\begin{definition}[自然変換]
+  恒等射を考えない$\Ainf$関手圏$\Q$において, 次数$g$の前自然変換$T$が
+  \begin{align*}
+    \mu^1_\Q(T) = 0  
+  \end{align*}
+  を満たすとき, $T$は次数$g$の自然変換(natural transformation)であるという. 
+\end{definition}
+
+\begin{remark}
+  $\mu^2_\Q$において, $d$が低次の場合をみる. 
+  \begin{description}
+    \item[($d=1$)] $\mu^2_\Q : \hom_Q(\F_1,\F_2) \otimes \hom_\Q(\F_0,\F_1) \to \hom_\Q(\F_0,\F_2)$は
+    \begin{align*}
+      (\mu^2_\Q(T_2,T_1))^1(a_1) 
+      := 
+    \end{align*}
+  \end{description}
+\end{remark}
+
+前自然変換はコホモロジー圏上の関手の間の射を定める. 
+
+\begin{lemma}
+  $\F_0,\F_1 : \A \to \B$を恒等射を考えない$\Ainf$関手とする. 
+  前自然変換$T : \F_0 \to \F_1$は任意の$X \in \Ob\A$に対して, $H(\B)$における射
+  \begin{align*}
+    [T^0_X] \in \hom_{H(\B)}(\F_0X,\F_1X)
+  \end{align*}
+  を定める. 
+\end{lemma}
+
+自然変換はコホモロジー圏上で通常の自然変換のようにふるまう. 
+
+\begin{lemma} \label{prop_pre_natural_transformation_induces_natural_transformation}
+  $\F_0,\F_1 : \A \to \B$を恒等射を考えない$\Ainf$関手. $T$を次数$g$の自然変換とする. 
+  任意の$a_1 \in \hom_\A(X_0,X_1)$に対して, $H(\B)$において
+  \begin{align*}
+    [T^0_{X_1}] \cdot [\F_0^1(a_1)]
+    = (-1)^{|a_1|g} [\F_1^1(a_1)] \cdot [T^0_{X_0}]
+  \end{align*}
+  が成立する. 
+  つまり, $H(\B)$において次の図式は符号を除いて可換である. 
+  \[\begin{tikzcd}
+    {\F_0 X_0} & {\F_0 X_1} \\
+    {\F_1 X_0} & {\F_1 X_1}
+    \arrow["{[F^1_0(a_1)]}", from=1-1, to=1-2]
+    \arrow["{[T^0_{X_1}]}", from=1-2, to=2-2]
+    \arrow["{[T^0_{X_0}]}"', from=1-1, to=2-1]
+    \arrow["{[F^1_1(a_1)]}"', from=2-1, to=2-2]
+  \end{tikzcd}\]
+  特に, $g=0$のとき
+  \begin{align*}
+    H(T) := \{[T^0_X] \in \hom_{H(\B)}(\F_0 X,\F_1 X) \}_{X \in \Ob\A}
+  \end{align*}
+  は$H(\F_0)$から$H(\F_1)$への通常の自然変換である. 
+\end{lemma}
+
+\begin{definition}[恒等射を考えない次数付き線形関手圏]
+  恒等射を持たない次数つき線形圏$Nu\text{-}fun(A,B)$を次のように定義する. 
+  \begin{itemize}
+    \item 対象は恒等射を考えない次数付き線形関手$F : A \to B$
+    \item 任意の$F_0, F_1 \in \Ob Nu\text{-}fun(A,B)$に対して, 射は恒等射を考えない次数付き線形関手の自然変換
+  \end{itemize}
+  $Nu\text{-}fun(A,B)$を恒等射を考えない次数付き線形関手圏(non-unital graded linear functor category)という. 
+\end{definition}
+
+\begin{corollary}
+  $\F_0,\F_1 : \A \to \B$を恒等射を考えない$\Ainf$関手, $T : \F_0 \to \F_1$を次数$g$の前自然変換とする. 
+  対応$\F_0 \mapsto H(\F_0), [T] \mapsto H(T)$は恒等射を考えない関手
+  \begin{align*}
+    H(\nufun{\A}{\B}) \to Nu\text{-}fun(A,B)
+  \end{align*}
+  を定める. 
+\end{corollary}
+
+\section{恒等射を考えない\texorpdfstring{$\Ainf$}{Ainf}合成関手} \label{section_Ainf_composition_functor}
+
+恒等射を考えない$\Ainf$関手を合成する操作は, 恒等射を考えない$\Ainf$関手を定める. 
+
+\begin{definition}[恒等射を考えない$\Ainf$右合成関手]
+  任意の恒等射を持たない$\Ainf$圏$\C$と恒等射を考えない$\Ainf$関手$\G : \A \to \B$に対して, 恒等射を考えない$\Ainf$関手
+  \begin{align*}
+    \RG : \nufun{\B}{\C} \to \nufun{\A}{\C} 
+  \end{align*}
+  を次のように定義する. 
+  $\Q := \nufun{\B}{\C}$と表す. 
+  \begin{description}
+    \item[($e=0$)] 任意の$\F \in \Ob\Q$に対して$\RG(\F) := \F \circ \G $.
+    \item[($e \geq 1$)] 任意の$a_1 \in \hom_\A(X_0,X_1), \cdots, a_d \in \hom_\A(X_{d-1},X_d)$と$T_1 \in \hom_\Q(\F_0,\F_1), \cdots, T_e \in \hom_\Q(\F_{e-1},\F_e)$に対して
+    \begin{align*}
+      \RG^e : \hom_{\nufun{\B}{\C}}(\F_{e-1},\F_e) \otimes \cdots \otimes \hom_{\nufun{\B}{\C}}(\F_0,\F_1) \\
+      \to \hom_{\nufun{\A}{\C}}(\RG \F_0,\RG \F_e)[1-e]
+    \end{align*}
+    \begin{description}
+      \item[($e=1$)] $\RG^1: \hom_{\nufun{\B}{\C}} (\F_0,\F_1) \to \hom_{\nufun{\A}{\C}} (\RG \F_0,\RG \F_1)$は
+      \begin{align*}
+        (\RG^1(T_1))^d(a_d,\cdots,a_1)
+        := \sum_r \sum_{s_1,\cdots,s_r} T_1^r(\G^{s_r}(a_d,\cdots,a_{d-s_r+1}), \cdots, \G^{s_1}(a_{s_1},\cdots,a_1))
+      \end{align*}
+      \item[($e \geq 2$)] $(\RG^e(T_e,\cdots,T_1))^d(a_d,\cdots,a_1) := 0$
+    \end{description}
+  \end{description}
+  $\RG$を恒等射を考えない$\Ainf$右合成関手(non-unital $\Ainf$-right composition functor)という. 
+\end{definition}
+
+\begin{proof}
+  $\RG$が恒等射を考えない$\Ainf$関手であることをみる. 
+  つまり, $\RG$が多項等式
+  \begin{align*}
+    &\sum_r \sum_{e=s_1+\cdots+s_r} \mu^e_{\nufun{\A}{\C}} (\RG^{s_r} (T_e,\cdots,T_{e-s_r+1}), \cdots, \RG^{s_1}(T_{s_1},\cdots,T_1)) \\ 
+    &= \sum_{m,n} (-1)^{\maltese n} \RG^{e-m+1} (T_e,\cdots,T_{m+n+1}, \mu^m_{\nufun{\B}{\C}}(T_{n+m},\cdots,T_{n+1}), T_n,\cdots,T_1)
+  \end{align*}
+  を満たすことをみる. 
+  左辺は$e = s_1+\cdots+s_e = 1+\cdots+1$, 右辺は$(m,n)=(e,0)$のみを考えればよい. 
+  よって, 左辺と右辺はそれぞれ次のようになる. 
+  \begin{align*}
+    (L.H.S)
+    &= \mu^e_{\nufun{\A}{\C}}(\RG^1(T_e),\cdots,\RG^1(T_1)) \\
+    (R.H.S)
+    &= \RG^1(\mu^e_{\nufun{\B}{\C}}(T_e,\cdots,T_1))
+  \end{align*}
+  あとはそれぞれ計算すればよい. 
+\end{proof}
+
+同様に, 左合成も恒等射を考えない$\Ainf$関手を定める. 
+
+\begin{definition}[恒等射を考えない$\Ainf$左合成関手]
+  任意の恒等射を持たない$\Ainf$圏$\C$と恒等射を考えない$\Ainf$関手$\G : \A \to \B$に対して, 恒等射を考えない$\Ainf$関手
+  \begin{align*}
+    \LG : \nufun{\C}{\A} \to \nufun{\C}{\B} 
+  \end{align*}
+  を次のように定義する. 
+  $\Q := \nufun{\C}{\A}$と表す. 
+  \begin{description}
+    \item[($e=0$)] 任意の$\F \in \Ob\Q$に対して$\LG(\F) := \G \circ \F $.
+    \item[($e \geq 1$)] 任意の$a_1 \in \hom_\A(X_0,X_1), \cdots, a_d \in \hom_\A(X_{d-1},X_d)$と$T_1 \in \hom_\Q(\F_0,\F_1), \cdots, T_e \in \hom_\Q(\F_{e-1},\F_e)$に対して
+    \begin{align*}
+      \LG^e : \hom_{\nufun{\C}{\A}}(\F_{e-1},\F_e) \otimes \cdots \otimes \hom_{\nufun{\C}{\A}}(\F_0,\F_1) \\
+      \to \hom_{\nufun{\C}{\B}}(\LG \F_0,\LG \F_e)[1-e]
+    \end{align*}
+    \begin{description}
+      \item[($e=1$)] $\LG^1: \hom_{\nufun{\C}{\A}} (\F_0,\F_1) \to \hom_{\nufun{\C}{\B}} (\LG \F_0,\LG \F_1)$は
+      \begin{align*}
+        (\LG^1(T_1))^d(a_d,\cdots,a_1) \\
+        := \sum_{1 \leq i \leq r} \sum_{s_1,\cdots,s_r} (-1)^\dagger \G^r (\F^{s_r}_1(a_d,\cdots,a_{d-s_r+1}), \cdots, \F^{s_i+1}_1(a_{s_1+\cdots+2s_i+1}, \cdots, a_{s_1+\cdots+s_i+1}), \\
+        T^{s_i}(a_{s_1+\cdots+s_i}, \cdots, a_{s_1+\cdots+s_{i-1}+1}), \\
+        \F^{s_i-1}_0(a_{s_1+\cdots+s_{i-1}}, \cdots, a_{s_1+\cdots+s_{i-2}+2}), \cdots, \F^{s_1}_0(a_{s_1},\cdots,a_1))
+      \end{align*}
+      \item[($e \geq 2$)] \cite{Fuk02}を参照
+      % \begin{align*}
+      %   (\LG^e(T_e,\cdots,t_1))^d(a_d,\cdots,a_1) := 
+      % \end{align*}
+    \end{description}
+  \end{description}
+  $\LG$を恒等射を考えない$\Ainf$左合成関手(non-unital $\Ainf$-left composition functor)という. 
+\end{definition}
+
+\begin{remark}
+  任意の$e \geq 1$に対して, $\RG^e$と$\LG^e$に$\mu_\A, \mu_\B, \mu_\C$のいずれも登場していない. 
+\end{remark}
+
+恒等射を考えない$\Ainf$合成関手は合成可能である. 
+
+\begin{lemma}
+  適当な恒等射を考えない$\Ainf$関手$\G_1,\G_2$に対して
+  \begin{align*}
+    \R_{\G_1} \circ \R_{\G_2} &= \R_{\G_2 \circ \G_1} \\
+    \L_{\G_1} \circ \L_{\G_2} &= \L_{\G_1 \circ \G_2} \\
+    \L_{\G_1} \circ \R_{\G_2} &= \R_{\G_2} \circ \L_{\G_1}
+  \end{align*}
+  が成立する. 
+\end{lemma}
+
+\begin{lemma}
+  恒等射を持たない$\Ainf$圏$\A$に対して$\Q := \nufun{\A}{\A}$と表す. 
+  $\G_1, \G_2 : \A \to \A$を恒等射を考えない$\Ainf$関手, $T_1 \in \hom_\Q(\G_1,\Id_\A), T_2 \in \hom_\Q(\G_2,\Id_\A)$を前自然変換とする. 
+  このとき, $H(\hom_\Q(\G_1 \circ \G_2, \Id_\A))$において
+  \begin{align*}
+    [\mu^2_\Q(T_1,\L^1_{\G_1}(T_2))]
+    = (-1)^\$ [\mu^2_\Q(T_2,\R^1_{\G_2}(T_1))]
+  \end{align*}
+  が成立する.
+  ここで
+  \begin{align*}
+    \$ := (|T_1|-1)(|T_2|-1) + 1
+  \end{align*}
+  である. 
+\end{lemma}
+
+\begin{proof}
+  $U \in \hom^{|T_1|+|T_2|-1}_\Q (\G_1 \circ \G_2, \Id_\A)$を次のように定義する.
+  \begin{align*}
+    U^d(a_d,\cdots,a_1)
+    := \sum_{m,n,r} \sum_{s_1,\cdots,s_r} (-1)^{(|T_2|-1) \maltese n} 
+    T_1^{r+d-n-m+1} (a_d,\cdots,a_{n+m+1}, \\
+    T_2^m(a_{n+m},\cdots,a_{n+1}), \\
+    \G_2^{s_r}(a_n,\cdots,a_{n-s_r+1}) \cdots, \G_2^{s_1}(a_{s_1},\cdots,a_1))
+  \end{align*}
+\end{proof}
+
+\section{フィルトレーション}
+
+恒等射を持たない$\Ainf$圏$\A, \B$に対して$\Q := \nufun{\A}{\B}$と表す.
+
+\begin{definition}[フィルトレーション]
+  $\hom_\Q(\G_0,\G_1)$の部分複体$F^\bullet$が次の条件を満たすとき, $F^\bullet$はフィルトレーション(length filtration)であるという.
+  \begin{itemize}
+    \item $F^\bullet = (T^1,\cdots,T^r,\cdots)$であり, それぞれの前自然変換$T^r$は
+    \begin{align*}
+      (T^r)^0 = \cdots = (T^r)^{r-1} = 0
+    \end{align*}
+    を満たす. 
+  \end{itemize}
+\end{definition}
+
+\begin{lemma} \label{prop_circ_T_is_isom}
+  $\G_0,\G_1,\G_2 : \A \to \B$を恒等射を考えない$\Ainf$関手, $T \in \hom_\Q(\G_0,\G_1)$を前自然変換とする. 
+  任意の$X \in \Ob\A$に対して, $[T^0_X] \in \hom_{H(\B)}(\G_0X,\G_1X)$の右合成が同型
+  \begin{align*}
+    - \circ [T^0_X] : \hom_{H(\B)}(\G_1X,\G_2X) \to \hom_{H(\B)}(\G_0X,\G_2X)
+  \end{align*}
+  を定めるとする. 
+  このとき, $H(\Q)$において$[T] : \G_1 \to \G_2$の右合成は同型
+  \begin{align*}
+    - \circ [T] : \hom_{H(\Q)}(\G_1,\G_2) \to \hom_{H(\Q)}(\G_0,\G_2)
+  \end{align*}
+  を定める.
+  左合成に対しても同様に成立する. 
+\end{lemma}
+
+恒等射を考えない$\Ainf$左合成関手はコホモロジー圏上の忠実充満性を保つ. 
+
+\begin{lemma} \label{prop_LG_is_also_cohomologically_fully_faithful}
+  $\G :\A \to \B$をコホモロジー圏上で忠実充満な恒等射を考えない$\Ainf$関手とする. 
+  このとき, 任意の恒等射を持たない$\Ainf$圏$\C$に対して, $\LG : \nufun{\C}{\A} \to \nufun{\C}{\B}$はコホモロジー圏上で忠実充満である. 
+\end{lemma}
+
+\begin{remark} 
+  $\G :\A \to \B$をコホモロジー圏上で忠実充満な恒等射を考えない$\Ainf$関手とする. 
+  このとき, 任意の恒等射を持たない$\Ainf$圏$\C$に対して, $\RG : \nufun{\B}{\C} \to \nufun{\A}{\C}$は一般にはコホモロジー圏上で忠実充満でない.
+\end{remark}
+
+恒等射を考えない$\Ainf$右合成関手に関しては, 強く$\Ainf$擬同型を課す必要がある. 
+
+\begin{lemma} \label{prop_RG_is_also_cohomologically_fully_faithful}
+  $\G :\A \to \B$を$\Ainf$擬同型とする. 
+  このとき, 任意の恒等射を持たない$\Ainf$圏$\C$に対して, $\RG : \nufun{\B}{\C} \to \nufun{\A}{\C}$はコホモロジー圏上で忠実充満である. 
+\end{lemma}
+
+\section{恒等射を考えない\texorpdfstring{$\Ainf$}{Ainf}関手の拡張}
+
+恒等射を持たない$\Ainf$圏$\A, \B$に対して$\Q := \nufun{\A}{\B}, A := H(\A), B := H(\B)$と表す. 
+$\tilA$を$\A$の充満部分圏として, $\tilde{A} := H(\tilA)$と表す. 
+$G : A \to B$を恒等射を考えない関手, 組$(G,G)$のHochschildコホモロジーを$HH(A,B)$とする.  
+
+\begin{lemma}
+  任意の$r \geq 3$に対して$HH^2(A,B)^{2-r} = 0$であるとする.
+  このとき, ある恒等射を考えない$\Ainf$関手$\G : \A \to \B$が存在して, $H(\G) = G$を満たす. 
+\end{lemma}
+
+\begin{lemma}
+  $\tilde{G} : \tilde{A} \to B$を$G : A \to B$の$\tilde{A}$への制限とする.
+  Hochschildコホモロジー上に誘導される射
+  \begin{align*}
+    HH^{r+s}(A,B)^s \to HH^{r+s}(\tilde{A},B)^s
+  \end{align*}
+  が次の条件を満たすとする.
+  \begin{itemize}
+    \item 任意の$r + s = 2$かつ$r \geq 3$を満たす$(r,s)$に対して, この射は単射である.
+    \item 任意の$r + s = 1$かつ$r \geq 2$を満たす$(r,s)$に対して, この射は全射である.
+  \end{itemize}
+  $H(\tilG) = \tilde{G}$である恒等射を考えない$\Ainf$関手$\tilG : \tilA \to \B$が存在するとき, $\tilG$を$H(\G) = G$である恒等射を考えない$\Ainf$関手$\G : \A \to \B$が存在する.
+\end{lemma}
+
+\section{恒等射を考えない\texorpdfstring{$\Ainf$}{Ainf}関手圏におけるホモトピー}
+
+恒等射を持たない$\Ainf$圏$\A, \B$に対して$\Q := \nufun{\A}{\B}$と表す. 
+
+\begin{definition}[ホモトピー]
+  任意の$\F_0,\F_1 \in \Ob\Q$に対して, 前自然変換
+  \begin{align*}
+    D := \F_0 \to \F_1 \in \hom^1_\Q(\F_0,\F_1)
+  \end{align*}
+  を次のように定義する. 
+  \begin{description}
+    \item[($d=0$)] $D^0 := 0$.
+    \item[($d \geq 1$)] $D^d := \F_0^d - \F_1^d$.  
+  \end{description}
+  $T^0 = 0$である$T \in \hom^0_\Q(\F_0,\F_1)$が存在して
+  \begin{align*}
+    D = \mu^1_\Q(T)
+  \end{align*}
+  を満たすとき, $T$を$\F_0$から$\F_1$へのホモトピー(homotopy)という. 
+  このとき, $\F_0$と$\F_1$はホモトピック(homotopic)であるといい, $\F_0 \sim \F_1$と表す.  
+\end{definition}
+
+ホモトピックな恒等射を考えない$\Ainf$関手はコホモロジーをとると等しい. 
+
+\begin{lemma} \label{prop_cohomology_preserves_homotopic}
+  $\F_0,\F_1$を恒等射を考えない$\Ainf$関手とする.
+  $\F_0 \sim \F_1$のとき, $H(\F_0) = H(\F_1)$である.  
+\end{lemma}
+
+恒等射を考えない$\Ainf$合成関手はホモトピーを保つ. 
+
+\begin{lemma} \label{prop_composition_functor_preserves_homotopic}
+  $\F_0,\F_1 : \B \to \C, \G : \A \to \B$を恒等射を考えない$\Ainf$関手とする. 
+  $T$が$\F_0$から$\F_1$へのホモトピーであるとき, $\RG^1(T)$は$\F_0 \circ \G$から$\F_1 \circ \G$へのホモトピーである. 
+  左合成についても同様に成立する. 
+\end{lemma}
+
+\begin{proof}
+  右合成についてのみ考える. 
+  \begin{align*}
+    (\RG \F_0)^d - (\RG \F_1)^d
+    = \RG^1 (\F_0^d - \F_1^d) 
+    = \RG^1(\mu^1_{\nufun{\B}{\C}} (T)) 
+    = \mu^1_{\nufun{\A}{\C}} (\RG^1(T))
+  \end{align*}
+  最後で$\RG$が単位元のない$\Ainf$関手である(特に, $\RG^1$が複体の写像である)ことを用いた. 
+\end{proof}
+
+次の命題は\cref{prop_homotopy_is_equivalence_relation_in_Q}において有用である. 
+
+\begin{lemma} \label{lem_func_cat_formula}
+  $\hom_\Q(\F_j,\F_k)$の元である前自然変換を$T_{[jk]}$と表す.
+  恒等射を考えない$\Ainf$関手$\F_j,\F_k,\F_l : \A \to \B$に対して, 次の等式が成立する. 
+  \begin{align*}
+    \mu^1_\Q(T_{[jl]}) 
+    &= \mu^1_\Q(T_{[jk]}) - \mu^2_\Q(\F_k-\F_l,T_{[jk]}) \\
+    &= \mu^1_\Q(T_{[kl]}) + \mu^2_\Q(T_{[kl]},\F_j-\F_k)
+  \end{align*}
+\end{lemma}
+
+\begin{theorem} \label{prop_homotopy_is_equivalence_relation_in_Q}
+  ホモトピーは$\Q$における同値関係である. 
+\end{theorem}
+
+\begin{proof}
+  ホモトピーが反射律, 推移律, 対称律をそれぞれ満たすことをみる.
+  $\hom_\Q(\F_j,\F_k)$の元である前自然変換を$T_{[jk]}$と表す.
+  任意の$j,k$に対して, 次数付きベクトル空間$\hom_\Q(\F_j,\F_k)$は等しいことに注意. 
+  \begin{description}
+    \item[(反射律)] $T \in \hom^0_\Q(\F_0,\F_1)$を任意の$d$において$T^d:=0$とすればよい. 
+    \item[(推移律)] $\F_0$から$\F_1$へのホモトピーを$T_1$, $\F_1$から$\F_2$へのホモトピーを$T_2$とする. 
+    \begin{align*}
+      \mu^1_\Q((T_1)_{[01]}) = \F_0 -\F_1 \\
+      \mu^1_\Q((T_2)_{[12]}) = \F_1 -\F_2 
+    \end{align*}
+    このとき, $\F_0$から$\F_2$への射$T$を次のように定義する. 
+    \begin{align*}
+      T := (T_1)_{[02]} + (T_2)_{[02]} + \mu^2_\Q(T_2,T_1)
+    \end{align*}
+    \cref{lem_func_cat_formula}より
+    \begin{align*}
+      \mu^1_\Q((T_1)_{[02]})
+      &= \mu^1_Q((T_1)_{[01]}) - \mu^2_\Q(\F_1-\F_2,(T_1)_{[01]}) \\
+      &= \F_0 - \F_1 - \mu^2_\Q(\F_1-\F_2,(T_1)_{[01]}) \\
+      \mu^1_\Q((T_2)_{[02]})
+      &= \mu^1_Q((T_1)_{[12]}) + \mu^2_\Q((T_1)_{[12]},\F_0-\F_1) \\
+      &= \F_1 - \F_2 + \mu^2_\Q((T_1)_{[12]},\F_0-\F_1)
+    \end{align*}
+    よって
+    \begin{align*}
+      &\mu^1_\Q(T) \\
+      &= \mu^1_\Q((T_1)_{[02]} + (T_2)_{[02]} + \mu^2_\Q(T_2,T_1)) \\
+      &= (\F_0 - \F_1) - \mu^2_\Q(\F_1-\F_2,(T_1)_{[01]}) + (\F_1 - \F_2) + \mu^2_\Q((T_1)_{[12]},\F_0-\F_1) + \mu^1_\Q (\mu^2_\Q(T_2,T_1)) \\
+      &= \F_0 -\F_2 + \mu^2_\Q((T_1)_{[12]},\mu^1_\Q((T_1)_{[01]})) - \mu^2_\Q(\mu^1_\Q((T_2)_{[12]}),(T_1)_{[01]}) + \mu^1_\Q (\mu^2_\Q(T_2,T_1))
+    \end{align*}
+    \cref{rem_low_Ainf_associativity}より
+    \footnote{
+      $\Q$における$d=2$の$\Ainf$結合式である. 
+    }
+    \begin{align*}
+      \mu^2_\Q((T_1)_{[12]},\mu^1_\Q((T_1)_{[01]})) - \mu^2_\Q(\mu^1_\Q((T_2)_{[12]}),(T_1)_{[01]}) + \mu^1_\Q (\mu^2_\Q(T_2,T_1))
+      = 0
+    \end{align*}
+    なので
+    \begin{align*}
+      \mu^1_\Q(T)
+      = \F_0 -\F_2
+    \end{align*}
+    つまり, $T$は$\F_0$から$\F_2$へのホモトピーである. 
+    \item[(対称律)] $\F_0$から$\F_1$へのホモトピーを$T_1$とする. 
+    次の2つの写像を考える. 
+    \begin{align*}
+      &\phi : \hom_\Q(\F_1,\F_0) \to \hom_\Q(\F_1,\F_1) : T \mapsto (-1)^{|T|} \mu^2_\Q(T_1,T) + T_{[11]} \\
+      &\psi : \hom_\Q(\F_1,\F_1) \to \hom_\Q(\F_0,\F_1) : T \mapsto \mu^2_\Q(T,T_1) + T_{[01]}
+    \end{align*}
+    $\phi$と$\psi$が同型射であることを示す. (途中)
+  \end{description}
+\end{proof}
+
+\begin{definition}[$\Ainf$ホモトピー同値関手]
+  
+\end{definition}
+
+ホモトピーは有理ホモトピー論の視点から次のように考えることができる(らしい).
+
+\begin{remark}[\cite{Sei} remark 1.11]
+  次のdg代数$I$を考える.
+  \begin{align*}
+    &I := \bbK u_0 \oplus \bbK u_1 \oplus \bbK h \\
+    &|u_0|=|u_1| = 0,~ |h| = 1 \\
+    &d u_0 = -d u_1 = h \\
+    &u_0u_0=u_0,~ u_1u_1=u_1,~ u_0u_1=u_1u_0=0 \\
+    &u_1h=h,~ hu_1=u_0h=0,~ hu_0=h  
+  \end{align*}
+  である.
+  このとき, $H(I) \cong \bbK$である. 
+  % つまり, $u_k$によって生成される部分空間への射影$f_k : I \to \bbK$は擬同型である.
+  単位元のない$\Ainf$代数$\B$に対して, テンソル積$I \otimes \B$を次のように定義する. (省略)
+  このとき, 次の2つは同値である.
+  \begin{enumerate}
+    \item $T$は$\Ainf$準同型$\F_0,\F_1 : \A \to \B$のホモトピーである. 
+    \item 写像
+    \begin{align*}
+      \G : \A &\to I \otimes \B \\
+      (a_d,\cdots,a_1) &\mapsto u_0 \otimes \F_0(a_d,\cdots,a_1) + u_1 \otimes \F_1(a_d,\cdots,a_1) + (-1)^{\maltese d} h \otimes T(a_d,\cdots,a_1)
+    \end{align*}  
+    は準同型を定める.
+    つまり, 次の図式は可換である.
+    \[\begin{tikzcd}
+      && \B \\
+      \A & {I \otimes \B} \\
+      && \B
+      \arrow["\G", from=2-1, to=2-2]
+      \arrow["{f_0 \otimes \id_\B}"', from=2-2, to=1-3]
+      \arrow["{f_1 \otimes \id_\B}", from=2-2, to=3-3]
+      \arrow["{\F_0}", curve={height=-12pt}, from=2-1, to=1-3]
+      \arrow["{\F_1}"', curve={height=12pt}, from=2-1, to=3-3]
+    \end{tikzcd}\]
+  \end{enumerate}
+\end{remark}
+
+\section{ホモロジー的摂動論と極小模型}
+
+恒等射を持たない$\Ainf$圏と複体などから新しい恒等射を持たない$\Ainf$圏を構成することができる. 
+
+\begin{theorem}[ホモロジー的摂動論] \label{prop_homological_perturbation}
+  次の4つが与えられているとする. 
+  \begin{itemize}
+    \item 恒等射を持たない$\Ainf$圏$(\B,\mu_\B)$
+    \item ベクトル空間の複体$(\hom_\A(X_0,X_1),d_A)$ 
+    \item 複体の写像$\F^1 : \hom_\A(X_0,X_1) \to \hom_\B(X_0,X_1)$と$\G^1 : \hom_\B(X_0,X_1) \to \hom_\A(X_0,X_1)$
+    \item $\mu^1_B T^1+ T^1 \mu^1_\B = \F^1 \circ \G^1 - \id_{\hom_\B(X_0,X_1)}$を満たす次数$-1$の複体の写像$T^1 : \hom_\B(X_0,X_1) \to \hom_\B(X_0,X_1)$
+  \end{itemize}
+  このとき, 任意の$a_1 \in \hom_\A(X_0,X_1), \cdots, a_d \in \hom_\A(X_{d-1},X_d)$に対して
+  \begin{enumerate}
+    \item 恒等射を持たない$\Ainf$圏$(\A,\mu_\A)$は
+    \begin{itemize}
+      \item 対象の集まり$\Ob\A := \Ob\B$
+      \item 任意の$a_1 \in \hom_\A(X_0,X_1), \cdots, a_d \in \hom_\A(X_{d-1},X_d)$に対して
+      \begin{align*}
+        \mu^1_\A 
+        &:= d_\A \\
+        \mu^d_\A(a_d,\cdots,a_1)
+        &:= \sum_{r \geq 2} \sum_{s_1,\cdots,s_r} \G^1(\mu^r_\B(\F^{s_r}(a_d,\cdots,a_{d-s_r+1}), \cdots, \F^{s_1}(a_s,\cdots,a_1)))
+      \end{align*}
+    \end{itemize}
+    \item 恒等射を考えない$\Ainf$関手$\F : \A \to \B$は
+    \begin{description}
+      \item[($d=0$)] 対象の対応は恒等写像$\F := \id : \Ob\A \to \Ob\B$
+      \item[($d=1$)] $\F^1$は複体の写像$\F^1 : \hom_\A(X_0,X_1) \to \hom_\B(X_0,X_1)$
+      \item[($d \geq 2$)] 任意の$a_1 \in \hom_\A(X_0,X_1), \cdots, a_d \in \hom_\A(X_{d-1},X_d)$に対して
+      \begin{align*}
+        \F^d(a_d,\cdots,a_1)
+        := \sum_{r \geq 2} \sum_{s_1,\cdots,s_r} T^1(\mu^r_\B(\F^{s_r}(a_d,\cdots,a_{d-s_r+1}), \cdots, \F^{s_1}(a_s,\cdots,a_1)))
+      \end{align*}
+    \end{description}
+    \item 恒等射を考えない$\Ainf$関手$\G : \B \to \A$は(おそらく)
+    \begin{description}
+      \item[($d=0$)] 対象の対応は恒等写像$\G := \id : \Ob\B \to \Ob\A$
+      \item[($d=1$)] $\G^1$は複体の写像$\G^1 : \hom_\B(X_0,X_1) \to \hom_\A(X_0,X_1)$
+      \item[($d \geq 2$)] 任意の$b_1 \in \hom_\B(X_0,X_1), \cdots, b_d \in \hom_\B(X_{d-1},X_d)$に対して
+      \begin{align*}
+        \G^d(b_d,\cdots,b_1)
+        := \sum_{r \geq 2} \sum_{s_1,\cdots,s_r} \mu^r_\A(\G^{s_r}(T^1 b_d,\cdots,T^1 b_{d-s_r+1}), \cdots, \G^{s_1}(T^1 b_s,\cdots,T^1 b_1))
+      \end{align*}
+    \end{description}
+    \item $\F \circ \G$と$\Id_\B$のホモトピー$T$は
+  \end{enumerate}
+  によって帰納的にそれぞれ定まる. 
+\end{theorem}
+
+\begin{proof}
+  $d=2$のときをみる.
+  \begin{enumerate}
+    \item $\mu^2_\A(a_2,a_1) := \G^1 (\mu^2_\B(\F^1a_2, \F^1a_1)) : \hom_\A(X_1,X_2) \otimes \hom_\A(X_0,X_1) \to \hom_\A(X_0,X_2)$が
+    \begin{align*}
+      \mu^2_\A(a_2, \mu^1_\A(a_1)) + (-1)^{|a_1|-1} \mu^2_\A(\mu^1_\A(a_2), a_1) + \mu^1_\A(\mu^2_\A(a_2, a_1))
+      = 0
+    \end{align*}
+    を満たすことをみる. 
+  \begin{align*}
+    &(L.H.S) \\
+    &= \G^1 (\mu^2_\B(\F^1a_2, \F^1(\mu^1_\A(a_1)))) + (-1)^{|a_1|-1} \G^1 (\mu^2_\B(\F^1(\mu^1_\A(a_2)), \F^1a_1)) + \mu^1_\A(\G^1 (\mu^2_\B(\F^1a_2, \F^1a_1))) \\
+    &= \G^1 (\mu^2_\B(\F^1a_2, \mu^1_\B(\F^1a_1))) + (-1)^{|a_1|-1} \G^1 (\mu^2_\B(\mu^1_\B(\F^1a_2), \F^1a_1)) + \G^1(\mu^1_\B (\mu^2_\B(\F^1a_2, \F^1a_1))) \\
+    &= \G^1 (\mu^2_\B(\F^1a_2, \mu^1_\B(\F^1a_1)) + (-1)^{|a_1|-1} \mu^2_\B(\mu^1_\B(\F^1a_2), \F^1a_1) + \mu^1_\B (\mu^2_\B(\F^1a_2, \F^1a_1))) \\
+    &= 0
+  \end{align*}
+  ここで, $\B$における$d=2$の$\Ainf$結合式を用いた.
+  \item $\F^2 : T^1(\mu^2_\B(\F^1a_2, \F^1a_1)) : \hom_\A(X_1,X_2) \otimes \hom_\A(X_0,X_1) \to \hom_\A(\F X_0,\F X_2)[1]$が
+  \begin{align*}
+    &\mu^1_\B(\F^2(a_2,a_1)) + \mu^2_\B(\F^1a_2, \F^1a_1) \\
+    &= \F^2(a_2,\mu^1_\A(a_1)) + (-1)^{|a_1|-1} \F^2(\mu^1_\A(a_2),a_1) + \F^1(\mu^2_\A(a_2,a_1))
+  \end{align*}
+  を満たすことをみる.
+  これは$\B$における$d=2$の$\Ainf$結合式を用いればよい. 
+  \item 2と同様. 
+  \item 
+  \end{enumerate}
+\end{proof}
+
+ホモロジー的摂動論から$\Ainf$圏における極小模型定理を示すことができる. 
+% 次の補題は極小模型定理において非常に重要である. 
+
+% % Kaj2 theorem 7.21前後
+% \begin{definition}[線形化縮な恒等射を持たない$\Ainf$圏]
+  
+% \end{definition}
+
+% % Kaj3 theorem 2.29
+% \begin{lemma}[分解定理] \label{prop_Ainf_category_is_Ainf_isomorphic_to_directsum}
+%   任意の恒等射を持たない$\Ainf$圏は恒等射を持たない極小$\Ainf$圏と単位元のない線形可縮な$\Ainf$圏に直和分解できる.
+% \end{lemma}
+
+\begin{theorem}[極小模型定理] \label{prop_minimal_model_theorem}
+  任意の恒等射を持たない$\Ainf$圏は恒等射を持たない極小$\Ainf$圏と$\Ainf$擬同値である. 
+\end{theorem}
+
+\begin{proof}
+  $X_0,X_1$を恒等射を持たない$\Ainf$圏$\B$の任意の対象とする. 
+  複体$(\hom_\B(X_0,X_1), \mu^1_\B)$を$\mu^1_\A= 0$である複体とacyclic complementに直和分解する. 
+  $\mu^1_\A=0$である複体を$\hom_\A(X_0,X_1)$として, $\F^1 : \hom_\A(X_0,X_1) \to \hom_\B(X_0,X_1)$を入射, $\G^1 : \hom_\B(X_0,X_1) \to \hom_\A(X_0,X_1)$を射影とする. 
+  acyclic complementのcontracting homotopyは$T^1$を定める. 
+  \cref{prop_homological_perturbation}より, $\mu^1_\A=0$である恒等射を持たない$\Ainf$圏$\A$を構成できる. 
+  このとき, $\A$と$\B$は$\Ainf$擬同型である.
+\end{proof}
+
+\begin{remark}
+  極小模型定理において, $\F \circ \G \sim \Id_B$と$\G \circ \F \sim \Id_\A$が成立する. 
+  前者は\cref{prop_homological_perturbation}より従う. 
+  $\G$は$\Ainf$擬同型なので\cref{prop_composition_functor_preserves_homotopic}より, $\G \circ \F \circ \G \sim \G$である.
+  \cref{prop_RG_is_also_cohomologically_fully_faithful}より, $\RG$がコホモロジー圏上で忠実充満なので
+  \begin{align*}
+    \RG^1 : \hom_{\nufun{\A}{\A}}(\Id_\A, \G \circ\F) \to \hom_{\nufun{\B}{\A}}(\G, \G \circ \F \circ \G)
+  \end{align*}
+  は複体の擬同型を定める. 
+  $0$次で消えているような前自然変換のなす部分複体を考えると, $\RG^1$は$\Id_\A - \G \circ\F$を$\G - \G \circ \F \circ \G$に写す. 
+  よって, $\G \circ \F$と$\Id_\A$のホモトピーが得られる. 
+\end{remark}
+
+\begin{corollary} \label{prop_Ainf_qis_has_homotopy_inverse}
+  $\Ainf$擬同型はホモトピー逆関手をもつ. 
+\end{corollary}
+
+\begin{proof} 
+  $\K : \B \to \tilB$を$\Ainf$擬同型とする. 
+  恒等射を持たない$\Ainf$圏$\B,\tilB$にそれぞれ\cref{prop_minimal_model_theorem}を用いると, 恒等射を持たない$\Ainf$圏と$\Ainf$擬同型の図式
+  \[\begin{tikzcd}
+    \A && \B \\
+    \\
+    {\tilA} && {\tilB}
+    \arrow["\F", shift left=1, from=1-1, to=1-3]
+    \arrow["\K", from=1-3, to=3-3]
+    \arrow["\H"', dashed, from=1-1, to=3-1]
+    \arrow["{\tilde{\F}}", from=3-1, to=3-3]
+    \arrow["\G", from=1-3, to=1-1]
+    \arrow["{\tilde{\G}}", shift left=1, from=3-3, to=3-1]
+  \end{tikzcd}\]
+  が得られる. 
+  ここで, $\mu^1_\A = \mu^1_{\tilA} = 0$である. 
+  このとき, ある$\K^{-1} : \tilB \to \B$が存在して$\K$のホモトピー逆関手であることを示す. 
+  \begin{align*}
+    \H := \tilG \circ \K \circ \F : \A \to \tilA
+  \end{align*}
+  とする. 
+  $\F, \tilG, \K$は$\Ainf$擬同型なので, \cref{prop_homotopy_is_equivalence_relation_in_Q}より$\H$も$\Ainf$擬同型である. 
+  \cref{eg_Ainf_qis_with_zero_differential_is_formal_diffeo}より$\H$は形式的微分同相なので, 逆関手$\H^{-1} : \tilA \to \A$をもつ. 
+  また
+  \begin{align*}
+    \tilF \circ \H \circ \G 
+    = \tilF \circ \tilG \circ \K \circ \F \circ \G 
+    \simeq \Id_{\tilB} \circ \K \circ \Id_B 
+    = \K
+  \end{align*}
+  より, $\K$と$\tilF \circ \H \circ \G$はホモトピックである. 
+  \begin{align*}
+    \K^{-1} := \F \circ \H^{-1} \circ \tilG : \tilB \to \B
+  \end{align*}
+  とすると 
+  \begin{align*}
+    &\K^{-1} \circ \K 
+    \simeq \F \circ \H^{-1} \circ \tilG \circ \tilF \circ \H \circ \G 
+    =\Id_\B \\
+    &\K \circ \K^{-1}
+    \simeq \tilF \circ \H \circ \G \circ \F \circ \H^{-1} \circ \tilG 
+    = \Id_{\tilB}
+  \end{align*}
+  よって, $\K^{-1}$は$\K$のホモトピー逆関手である. 
+\end{proof}
+
+$\Ainf$ホモトピー同値関手であることと$\Ainf$擬同型であることは同値である. 
+
+\begin{corollary}
+  恒等射を考えない$\Ainf$関手$\F : \A \to \B$に対して, 次の2つは同値である.
+  \begin{enumerate}
+    \item $\F$は$\Ainf$ホモトピー同値関手である. 
+    \item $\F$は$\Ainf$擬同型関手である. 
+  \end{enumerate} 
+\end{corollary}
+
+% \begin{remark}
+%   ホモロジー的摂動論の歴史について (\cite{Sei}のremark 1.15を参照)
+% \end{remark}
+
+% \begin{definition}[極小模型]
+  
+% \end{definition}
+
+\section{恒等射を考えない\texorpdfstring{$\Ainf$}{Ainf}加群}
+
+恒等射を持たない$\Ainf$圏上の恒等射を考えない右$\Ainf$加群を定義する. 
+$\A$を恒等射を持たない$\Ainf$圏とする. 
+
+\begin{definition}[複体の圏$\Ch$]
+  恒等射を持たないdg圏
+  \footnote{
+    $\Ch$は恒等射を持つ(通常のdg圏)が, 今は単位元の存在を課していない. 
+    \cref{section_unital_Ainf_cat}以降の$\Ainf$加群(後述)では, $\Ch$を恒等射を持つdg圏としている. 
+  }
+  $\Ch$を次のように定義する. 
+  \begin{itemize}
+    \item 対象はベクトル空間の複体$(C,d)$
+    \item 任意の$(C_0,d_0), (C_1,d_1) \in \Ob\Ch$に対して
+    \begin{align*}
+      \hom_{\Ch}^i((C_0,d_0), (C_1,d_1)) 
+      := \bigoplus_{k} \hom_{\bbK}(C_0^k,C_1^{k+i})
+    \end{align*}
+    \item 任意の$a_1 \in \hom_{\Ch}(X_0,X_1), a_2 \in \hom_{\Ch}(X_1,X_2)$に対して 
+    \begin{align*}
+      &\mu^1_{\Ch}(a_1) := d \circ a_1 + (-1)^{|a_1|+1} a_1 \circ d \\
+      &\mu^2_{\Ch}(a_2,a_1) := (-1)^{|x|(|y|+1)} a_2 \circ a_1
+    \end{align*}
+  \end{itemize}
+  $\Ch$を恒等射を持たない$\Ainf$圏とみなす. 
+\end{definition}
+
+\begin{definition}[恒等射を考えない右$\Ainf$加群]
+  恒等射を考えない$\Ainf$関手
+  \begin{align*}
+    \Aop \to \Ch
+  \end{align*}
+  を$\A$上の恒等射を考えない右$\Ainf$加群(non-unital (right) $\Ainf$-module over $\A$)という. 
+  以降では, 「$\A$上の」と「右」を省略する. 
+  \footnote{
+    同様に, 恒等射を考えない左$\Ainf$加群も定義することができる. \cite{Fuk02}を参照
+  }
+\end{definition}
+
+恒等射を考えない$\Ainf$加群を具体的に書き下す.
+
+\begin{definition}[$\Ainf$加群の$\Ainf$構造]
+  恒等射を考えない$\Ainf$加群$\M$は恒等射を考えない$\Ainf$関手$\M : \Aop \to \Ch$なので次のようになる. 
+  \begin{description}
+    \item[($d=0$)] 対象の対応$\M : \Ob\Aop \to \Ob\Ch$
+    \item[($d=1$)] 任意の$X \in \Ob\Aop$に対して, $\M(X)$はベクトル空間の複体である.
+    よって, 微分$\M(X) \to \M(X)[1]$が存在する. 
+    この微分を
+    \begin{align*}
+      \mu^1_\A : \M(X) \to \M(X)[1]
+    \end{align*}
+    と表す. 
+    \item[($d \geq 2$)] テンソル-hom随伴より
+    \begin{align*}
+      \M^{d-1} : \hom_\A(X_{d-2},X_{d-1}) \otimes \cdots \otimes \hom_\A(X_0,X_1) \to \hom_{\Ch}(\M(X_{d-1}),\M(X_0))[2-d]
+    \end{align*}
+    \footnote{
+      恒等射を考えない$\Ainf$加群は反変関手なので, $\hom_{\Ch}(\M(X_{d-1}),\M(X_0))$となっていることに注意. 
+    }
+    に対応して
+    \begin{align*}
+      \mu^d_\M : \M(X_{d-1}) \otimes \hom_\A(X_{d-2},X_{d-1}) \otimes \cdots \otimes \hom_\A(X_0,X_1) \to \M(X_0)[2-d]
+    \end{align*}
+    が得られる.
+  \end{description}
+  $\mu_\M =(\mu_\M^1,\mu_\M^2,\cdots)$を恒等射を考えない$\Ainf$加群の$\Ainf$構造($\Ainf$-structure of non-unital $\Ainf$-module)という. 
+\end{definition}
+
+% \begin{remark}
+%   $\Ainf$加群の$\Ainf$構造$\mu_\M$の低次の場合をみる. 
+%   \begin{description}
+%     \item[($d=1$)] $\mu^1_\M : \M(X_0) \to \M(X_0)[1]$なので, $\mu^1_\M$は任意の$\M(X_0) \in \Ob\Ch$における微分とみなせる. 
+%     \item[($d=2$)] $\mu^2_\M : \M(X_1) \otimes \hom_\A(X_0,X_1) \to \M(X_0)$はテンソル-hom随伴を用いると
+%     $\hom_\A(X_0,X_1) \to \hom_{\Ch}(\M(X_1),\M(X_0))$となる. つまり, 通常の反変関手における射の対応とみなせる. 
+%   \end{description}
+% \end{remark}
+
+恒等射を考えない$\Ainf$加群$\M$に対する多項等式は次のようになる.
+
+\begin{lemma} \label{prop_Ainf_module_polynomial_equation}
+  任意の$b \in \M(X_{d-1})$と$a_1 \in \hom_\A(X_0,X_1), \cdots, a_d \in \hom_\A(X_{d-1},X_d)$に対して, $\mu_\M$は次の等式をみたす. 
+  \begin{align*}
+    &\sum_{0 \leq n < d} (-1)^{\maltese n} \mu^{n+1}_\M(\mu^{d-n}_\M(b,a_{d-1},\cdots,a_{n+1}), a_n, \cdots, a_1) \\
+    &+ \sum_{n+m < d} (-1)^{\maltese n} \mu^{d-m+1}_\M(b,a_{d-1},\cdots,a_{n+m+1}, \mu^m_\A(a_{n+m},\cdots,a_{n+1}), a_n, \cdots, a_1)
+    = 0
+  \end{align*}
+\end{lemma}
+
+\begin{proof}
+  任意の$d \geq 3$に対して$\mu^d_{\Ch} = 0$であることに注意.
+\end{proof}
+
+恒等射を考えない$\Ainf$加群の間の前自然変換を定義する. 
+
+\begin{definition}[恒等射を考えない$\Ainf$加群の前準同型]
+  恒等射を考えない$\Ainf$加群$\M_0,\M_1$に対して, 前自然変換$t : \M_0 \to \M_1$を恒等射を考えない$\Ainf$加群の前準同型(pre-module homomorphism of $\Ainf$-modules)という.
+\end{definition}
+
+恒等射を考えない$\Ainf$加群の前準同型を具体的に書き下す.
+
+\begin{remark} 
+  恒等射を考えない$\Ainf$加群の前準同型は前自然変換なので, 各$g$に対して$T = (T^0,T^1,\cdots) \in \hom^{g} (\M_0,\M_1)$は次のようになる. 
+  \begin{description}
+    \item[($d \geq 1$)] テンソル-hom随伴より
+    \begin{align*}
+      T^{d-1} : \hom_\A(X_{d-2},X_{d-1}) \otimes \cdots \otimes \hom_\A(X_0,X_1) \to \hom_{\Ch}(\M_0(X_{d-1}), \M_1(X_0))[g-d+1]
+    \end{align*}
+    に対応して
+    \begin{align*}
+      t^d : \M_0(X_{d-1}) \otimes \hom_\A(X_{d-2},X_{d-1}) \otimes \cdots \otimes \hom_\A(X_0,X_1) \to \M_1(X_0)[|t|-d+1]
+    \end{align*}
+    が得られる.  
+  \end{description}
+\end{remark}
+
+% \begin{remark}
+%   $t^d$の低次の場合をみる. 
+%   \begin{description}
+%     \item[($d=1$)] $t^1 : \M_0(X_0) \to \M_1(X_0)[|t|]$
+%     \item[($d=2$)] $t^2 : \M_0(X_1) \otimes \hom_\A(X_0,X_1) \to \M_1(X_0)$にテンソル-hom随伴を用いると
+%     $\hom_\A(X_0,X_1) \to \hom_{\Ch}(\M_0(X_1),\M_1(X_0))[|t|-1]$となる. 
+%   \end{description}
+% \end{remark}
+
+恒等射を考えない$\Ainf$加群の前準同型と前自然変換には次のような関係がある. 
+
+\begin{lemma}
+  任意の$b \in \M_0(X_{d-1})$と$a_1 \in \hom_\A(X_0,X_1), \cdots, a_d \in \hom_\A(X_{d-1},X_d)$に対して
+  \begin{align*}
+    t^d(b,a_{d-1},\cdots,a_1) 
+    = (-1)^\S T^{d-1}(a_1,\cdots,a_{d-1})(b)
+  \end{align*}
+  が成立する. 
+  ここで
+  \begin{align*}
+    \S 
+    := (|T|-1)|b| + |T|(|T|-1) / 2
+  \end{align*}
+  である. 
+\end{lemma}
+
+恒等射を考えない$\Ainf$加群と恒等射を考えない$\Ainf$加群の前準同型は恒等射を持たない$\Ainf$圏をなす. 
+
+\begin{definition}[恒等射を考えない$\Ainf$加群圏]
+  恒等射を考えない$\Ainf$関手圏$\numod{\A} := \nufun{\Aop}{\Ch}$を次のように定義する. 
+  $\Q := \numod{\A}$と表す. 
+  \begin{itemize}
+    \item 対象は$\A$上の恒等射を考えない$\Ainf$加群$\M : \Aop \to \Ch$
+    \item 任意の$\M_0,\M_1 \in \Ob\Q$に対して, 次数$g$の各hom空間$\hom^g(\M_0,\M_1)$は次数$g$の恒等射を考えない$\Ainf$加群の前準同型$t : \M_0 \to \M_1$の集まり
+    \item 任意の$t_1 \in \hom_\Q(\M_0,\M_1),\cdots,t_e \in \hom_\Q(\M_{e-1},\M_e)$と$a_1 \in \hom_\A(X_0,X_1), \cdots, a_d \in \hom_\A(X_{d-1},X_d)$に対して
+    \begin{description}
+      \item[($e=1$)] $\hom_\Q(\M_0,\M_1) \to \hom_\Q(\M_0,\M_1)[1]$は
+      \begin{align*}
+        &(\mu^1_\Q(t_1))^d(b,a_{d-1},\cdots,a_1) \\
+        &:= \sum_n (-1)^\ddagger \mu^{n+1}_{\M_1}(t_1^{d-n}(b,a_{d-1},\cdots,a_{n+1}), a_n, \cdots, a_1) \\
+        &+ \sum_n (-1)^\ddagger t_1^{n+1}(\mu^{d-n}_{\M_0}(b,a_{d-1},\cdots,a_{n+1}), a_n, \cdots, a_1) \\
+        &+ \sum_{m,n} (-1)^\ddagger t_1^{d-m+1}(b, a_{d-1}, \cdots, a_{n+m+1}, \mu^n_\A(a_{n+m},\cdots,a_{n+1}), a_n, \cdots, a_1)
+      \end{align*}
+      \item[($e=2$)] $\hom_\Q(\M_1,\M_2) \otimes \hom_\Q(\M_0,\M_1) \to \hom_\Q(\M_0,\M_2)$は
+      \begin{align*}
+        &(\mu^2_\Q(t_2,t_1))^d(b,a_{d-1},\cdots,a_1) \\
+        &:= \sum_n (-1)^\ddagger t^{n+1}_2(t^{d-n}_1(b,a_{d-1},\cdots,a_{n+1}), a_n, \cdots, a_1)
+      \end{align*}
+      \item[($e \geq 3$)] $(\mu^e_\Q(t_e,\cdots,t_1))^d (b,a_{d-1},\cdots,a_1):= 0$ \\
+      ここで
+      \begin{align*}
+        \ddagger
+        := |a_{n+1}| + \cdots + |a_{d-1}| + |b| - d + n + 1
+      \end{align*}
+      である. 
+    \end{description}
+  \end{itemize}
+  $\numod{\A}$を$\A$上の恒等射を考えない$\Ainf$加群圏(non-unital $\Ainf$-category of non-unital $\Ainf$-modules over $\A$)という. 
+\end{definition}
+
+恒等射を持たない$\Ainf$圏上の恒等射を考えない$\Ainf$加群はコホモロジー圏上の加群を定める. 
+
+\begin{remark}
+  恒等射を持たない$\Ainf$圏$\A$上の恒等射を考えない$\Ainf$加群$\M : \Aop \to \Ch$は恒等射を考えない関手(単位元を持たない通常の加群) 
+  \begin{align*}
+    H(\M) : H(\A)^{\mathrm{op}} \to \Grmod
+  \end{align*}
+  を定める. 
+  ここで, $\Grmod$は次数付きベクトル空間のなす圏である. 
+\end{remark}
+
+\begin{remark}
+  $H(\M)$は任意の$X \in \Ob\A$における$\M(X)$のコホモロジー群$H(\M(X))$から構成される. 
+  任意の$b \in \M(X_1)$と$a_1 \in \hom_\A(X_0,X_1)$に対して
+  \begin{itemize}
+    \item 微分$d$は$d(b) := (-1)^{|b|} \mu^1_\M(b)$
+    \item 作用$\cdot$は$b \cdot a_1 := (-1)^{|a_1|} \mu^2_\M(b,a_1)$
+  \end{itemize}
+  である. 
+\end{remark}
+
+\begin{remark}
+  恒等射を考えない$\Ainf$加群の前準同型$t : \M_0 \to \M_1$は任意の$X \in \Ob\A$に対して, 単位元のないの加群の準同型
+  \begin{align*}
+    H(t) : H(\M_0(X)) \to H(\M_1(X)) : [b] \mapsto [(-1)^{|b|} t^1(b)]
+  \end{align*}
+  を定める. 
+\end{remark}
+
+次の命題は\cref{prop_circ_T_is_isom}の特別な場合である. 
+
+\begin{corollary} \label{prop_Ainf_homomorphism_induces_Ainf_qis}
+  恒等射を考えない$\Ainf$加群の前準同型$t : \M_0 \to \M_1$が任意の$X \in \Ob\A$に対して, $ H(t) : H(\M_0(X)) \to H(\M_1(X))$が同型を定めるとする.
+  このとき, 任意の恒等射を考えない$\Ainf$加群$\N$に対して, $t$の右合成と左合成
+  \begin{align*}
+    \R_t &: \hom_\Q(\M_1,\N) \to \hom_\Q(\M_0,\N) \\
+    \L_t &: \hom_\Q(\N,\M_0) \to \hom_\Q(\N,\M_1)
+  \end{align*} 
+  は$\Ainf$擬同型を定める. 
+\end{corollary}
+
+\begin{remark}
+  $\A$を恒等射を持たない$\Ainf$圏とする.
+  単位元のない$\Ainf$加群$\M$が任意の$X \in \Ob\A$に対して, $H(\M(X),\mu^1_\M) = 0$を満たすとする. 
+  \cref{prop_Ainf_homomorphism_induces_Ainf_qis}において$\M_0=\M_1=\M$とすると, 恒等射を考えない$\Ainf$加群$\N$に対して
+  \begin{align*}
+    H(\hom_\Q(\M,\N)) = H(\hom_\Q(\N,\M)) = 0
+  \end{align*}
+  となる. 
+  このとき, $\M$はK-projectiveかつK-injectiveであるという. 
+\end{remark}
+
+恒等射を考えない$\Ainf$関手は恒等射を考えない$\Ainf$加群圏の間の恒等射を考えない$\Ainf$関手を定める. 
+
+\begin{definition}[恒等射を考えない$\Ainf$プルバック関手]
+  恒等射を考えない$\Ainf$関手$\G : \A \to \B$に対して, 恒等射を考えない$\Ainf$関手
+  \begin{align*}
+    \G^\ast := \R_{\G^{\mathrm{op}}} : \numod{\B} \to \numod{\A}
+  \end{align*}
+  を次のように定義する.
+  \begin{description}
+    \item[($e=0$)] 任意の$X \in \Ob\B$に対して$\G^\ast(\M)(X) := \M(\G(X))$
+    \item[($\A$上の$\Ainf$加群の$\Ainf$構造)] 任意の$b \in \hom_\A(X_{d-1},Y)$と$a_1 \in \hom_\A(X_0,X_1), \cdots, a_{d-1} \in \hom_\A(X_{d-2},X_{d-1})$に対して
+    \begin{align*}
+      \mu^d_{\G^\ast\M}(b,a_{d-1},\cdots,a_1)
+      := \sum_{r} \sum_{s_1,\cdots,s_r} \mu^r_\M (b,\G^{s_r}(a_{d-1},\cdots,a_{d-s_r}), \cdots, \G^{s_1}(a_{s_1},\cdots,a_1))
+    \end{align*}
+    \item[($e \geq 1$)] 任意の$t_1 \in \hom_\Q(\M_0,\M_1), \cdots, t_e \in \hom_\Q(\M_{e-1},\M_e)$に対して
+    \begin{align*}
+      (\G^\ast)^e : \hom_{\numod{\B}}(\M_{e-1},\M_e) \otimes \cdots \otimes \hom_{\numod{\B}}(\M_0,\M_1) \\
+      \to \hom_{\numod{\A}}(\G^\ast \M_0,\G^\ast \M_e)[1-e]
+    \end{align*}
+    \begin{description}
+      \item[($e=1$)] $(\G^\ast)^1: \hom_{\numod{\B}} (\M_0,\M_1) \to \hom_{\numod{\A}} (\R^\ast \M_0,\R^\ast \M_1)$は
+      \begin{align*}
+        ((\G^\ast)^1(t_1))^d(b,a_{d-1},\cdots,a_1)
+        := \sum_r \sum_{s_1,\cdots,s_r} t_1^r(b, \G^{s_r}(a_d,\cdots,a_{d-s_r}), \cdots, \G^{s_1}(a_{s_1},\cdots,a_1))
+      \end{align*}
+      \item[($e \geq 2$)] $((\G^\ast)^e(t_e,\cdots,t_1))^d(b,a_{d-1},\cdots,a_1) := 0$
+    \end{description}
+  \end{description}
+  $\G^\ast$を恒等射を考えない$\Ainf$プルバック関手(non-unital $\Ainf$-pullback functor)という. 
+\end{definition}
+
+\section{\texorpdfstring{$\Ainf$}{Ainf}-Yoneda埋め込み}
+
+恒等射を考えない$\Ainf$加群として$\Ainf$-Yoneda埋め込みを定義する. 
+$\A$を恒等射を持たない$\Ainf$圏として, $\Q := \mod{\A}$と表す. 
+
+\begin{definition}[$\Ainf$-Yoneda埋め込み]
+  $Y \in \Ob\A$に対する恒等射を考えない$\Ainf$加群$\Y_Y : \Aop \to \Ch$を次のように定義する. 
+  \begin{description}
+    \item[($d=0$)] 任意の$X \in \Ob\A$に対して$\Y_Y(X) := \hom_\A(X,Y)$
+    \footnote{
+      $\A$は恒等射を持たない$\Ainf$圏であるので, $\hom_\A(X,Y)$は次数付きベクトル空間($\mu^1_\A$により複体の構造を持つ), つまり$\hom_\A(X,Y) \in \Ob\Ch$である. 
+    }
+    \item[($d \geq 1$)] $\Ainf$加群の$\Ainf$構造は
+    \begin{align*}
+      &\mu^d_\Y : \hom_\A(X_{d-1},Y) \otimes \hom_\A(X_{d-2},X_{d-1}) \otimes \cdots \otimes \hom_\A(X_0,X_1) \to \hom_\A(X_0,Y)[2-d] \\
+      &\mu^d_\Y(b,a_{d-1},\cdots,a_1) := \mu^d_\A(b,a_{d-1},\cdots,a_1)
+    \end{align*}
+  \end{description}
+  $\Y_Y$を$\Ainf$-Yoneda埋め込み($\Ainf$-Yoneda embedding)
+  \footnote{
+    「恒等射を考えない」$\Ainf$-Yoneda埋め込みとすべきであるが, 省略することが一般的なようである. 
+  }
+  という. 
+\end{definition}
+
+$Y \in \Ob\A$を動かすと, $\Ainf$-Yoneda埋め込みは恒等射を考えない$\Ainf$関手を定める. 
+
+\begin{definition}
+  恒等射を考えない$\Ainf$関手$l_\A : \A \to \Q$を次のように定義する. 
+  \begin{description}
+    \item[($d=0$)] 任意の$Y \in \Ob\A$に対して$l_\A(Y) := \hom_\A(-,Y)$
+    \item[($d=1$)] 任意の$c_1 \in \hom_\A(Y_0,Y_1)$に対して 
+    \begin{align*}
+      l^1_\A(c_1) := c_1 \circ - : \hom_\A(-,Y_0) \to \hom_\A(-,Y_1)
+    \end{align*}
+    \item[($d \geq 2$)] 任意の$c_1 \in \hom_\A(Y_0,Y_1), \cdots, c_{d} \in \hom_\A(Y_{d-1},Y_{d})$に対して
+    \begin{align*}
+      l^d_\A(c_{d-1},\cdots,c_1) := 0
+    \end{align*}
+  \end{description}
+\end{definition}
+
+$\Ainf$-Yoneda埋め込みの前準同型を次のように定義する. 
+$\Y_0(-) := \hom_\A(-,Y_0), \Y_1(-) := \hom_\A(-,Y_1)$と表す. 
+
+\begin{definition}[$\Ainf$-Yoneda埋め込みの前準同型]
+  次数$g$の$\Ainf$-Yoneda埋め込みの前準同型$l =(l^0,l^1,\cdots) \in \hom^{g}_\Q(\Y_0,\Y_1)$を次のように定義する. 
+  \begin{align*}
+    &l^d : \hom_\A(X_{d-1},Y_0) \otimes \hom_\A(X_{d-2},X_{d-1}) \otimes \cdots \otimes \hom_\A(X_0,X_1) \to \hom_\A(X_0,Y_1)[g-d+1] \\
+    &l^d(b,a_{d-1},\cdots,a_1) := \mu^{d+1}_\A(c_1,b,a_{d-1},\cdots,a_1)
+  \end{align*}
+\end{definition}
+
+\begin{definition} \label{def_lambda_M}
+  $\M$を恒等射を考えない$\Ainf$加群, $\Y_Y$を$\Ainf$-Yoneda埋め込みとする. 
+  複体の写像
+  \begin{align*}
+    \lambda_\M : \M(Y) \to \hom_\Q(\Y_Y,\M)
+  \end{align*}
+  を次のように定義する.
+  \begin{itemize}
+    \item 任意の$c \in \M(Y)$と$b \in \hom_\A(X_{d-1},Y)$と$a_1 \in \hom_\A(X_0,X_1), \cdots, a_d \in \hom_\A(X_{d-1},X_d)$に対して
+    \begin{align*}
+      (\lambda_\M(c))^d(b,a_{d-1},\cdots,a_1) := \mu^{d+1}_\M(c,b,a_{d-1},\cdots,a_1)
+    \end{align*}
+  \end{itemize}
+\end{definition}
+
+コホモロジー圏において, $\lambda_\M$と$\mu_\Q$には次のような関係がある. 
+
+\begin{lemma}
+  $\M_0,\M_1$を恒等射を考えない$\Ainf$加群とする. 
+  このとき, 次の2つが成立する. 
+  \begin{enumerate}
+    \item 任意の$c \in \M(Y_1)$と$b \in \hom_\A(Y_0,Y_1)$に対して, $\hom_{H(\Q)}(\Y_0, \M)$において
+    \begin{align*}
+      [\lambda_\M(\mu^2_\M(c,b))]
+      = [\mu^2_\Q(\lambda_\M(c), l^1_\A(b))]
+    \end{align*}
+    \item 任意の$t \in \hom_\Q(\M_0,\M_1)$と$c \in \M_0(Y)$に対して, $\hom_{H(\Q)}(\Y,\M_1)$において 
+    \begin{align*}
+      [\mu^2_\Q(t,\lambda_{\M_0}(c))] 
+      = [\lambda_{\M_1}(t^1(c))]
+    \end{align*}
+  \end{enumerate}
+\end{lemma}
+
+$\Ainf$-Yoneda埋め込みは恒等射を考えない$\Ainf$プルバック関手と可換である. 
+
+\begin{lemma}
+  $\F : \A \to \B$を恒等射を考えない$\Ainf$関手とする. 
+  このとき, 前自然変換
+  \begin{align*}
+    T : l_A \to \F^\ast \circ l_\B \circ \F
+  \end{align*}
+  が存在する.
+  \[\begin{tikzcd}
+    \A & {\numod{\A}} \\
+    \B & {\numod{\B}}
+    \arrow["{l_\A}", from=1-1, to=1-2]
+    \arrow["{\F^\ast}"', from=2-2, to=1-2]
+    \arrow["\F"', from=1-1, to=2-1]
+    \arrow["{l_\B}"', from=2-1, to=2-2]
+  \end{tikzcd}\]
+\end{lemma}
+
+% \begin{definition}[一次化関手]
+%   $\Q$上の恒等射を考えないdg関手$\L : \Q \to \Q$を次のように定義する. 
+%   \begin{align*}
+%     \L := l_\A^\ast \circ l_\Q ; \Q \to \numod{\Q} \to \Q
+%   \end{align*}
+% \end{definition}
+
+\bibliographystyle{jalpha}
+\bibliography{../A_infty_cf}
+
+\end{document}

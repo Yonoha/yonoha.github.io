@@ -1,0 +1,641 @@
+\RequirePackage{plautopatch}
+\documentclass[uplatex, a4paper, 14Q, dvipdfmx]{jsarticle}
+\usepackage{docmute}
+\usepackage{../mypackage}
+
+\title{恒等射を持つ\texorpdfstring{$\Ainf$}{Ainf}圏}
+\author{よの}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  c-unitを持つ$\Ainf$圏から三角圏を構成する. 
+  この三角圏を導来$\Ainf$圏という. 
+
+  特に断らない限りこの章では, $\Ainf$圏はc-unitalであり, $\Ainf$関手と$\Ainf$加群はc-unitを保つとする.
+  \footnote{
+    この省略は文献によって異なるので, 適宜注意書きを読む必要がある. 
+  }
+
+  $\Ainf$圏$\A$を固定して$\Q := \mod{\A}$と表す. 
+  $\M$は$\A$上の右$\Ainf$加群であるとする. 
+\end{abstract}
+
+\tableofcontents
+
+\section{擬表現}
+
+\begin{definition}[擬表現]
+  $H^0(\Q)$において$\M$が$\Y_Y$と同型であるような$Y \in \Ob\A$が存在するとする.  
+  $H^0(\Q)$におけるこの同型射を$[t] : \Y_Y \to \M$と表す. 
+  \begin{align*}
+    [t] : \hom_\A(-,Y) \to \M(-)
+  \end{align*}
+  このとき, 組$(Y,[t])$は$\M$を擬表現する($(Y,[t])$ quasi-represents $\M$)という. 
+  単に, $Y$は$\M$を擬表現するということもある.
+  $Y$を$\M$の擬表現対象(quasi-equivalence object)という. 
+\end{definition}
+
+擬表現は同型を除いて一意である. 
+
+\begin{lemma}
+  $(Y,[t])$と$(\tilde{Y}, [\tilde{t}])$がともに$\Ainf$加群$\M$を擬表現するとする.
+  このとき, ある同型射$a \in \hom_\A(Y,\tilde{Y})$が一意に存在して, 次の図式を可換にする. 
+  \[\begin{tikzcd}
+    {\mathrm{in} ~ H^0(\A)} && {\mathrm{in} ~ H^0(\Q)} \\
+    Y && {\Y_Y} & \M \\
+    {\tilde{Y}} && {\Y_{\tilde{Y}}}
+    \arrow["a"', dashed, from=2-1, to=3-1]
+    \arrow["{[l_\A^1(a)]}"', dashed, from=2-3, to=3-3]
+    \arrow["{[t]}", from=2-3, to=2-4]
+    \arrow["{[\tilde{t}]}", from=3-3, to=2-4]
+  \end{tikzcd}\]
+\end{lemma}
+
+\begin{proof}
+  $l_\A$がコホモロジー圏上で忠実充満であることから従う. 
+\end{proof}
+
+擬表現は$\lambda_\M : \M(Y) \to \hom_\Q(\Y_Y,\M)$を用いて次のように特徴づけることができる. 
+
+\begin{lemma}
+  $H^0(\Q)$における同型射を$[t] : \Y_Y \to \M$とする. 
+  このとき, 次の2つは同値である. 
+  \begin{enumerate}
+    \item 組$(Y,[t])$は$\M$を擬表現する.
+    \item $\mu^1_\M(c)=0$かつ$H^0(\Q)$において$[t]=[\lambda_\M(c)]$となる$c \in \M(Y)$が存在して, 任意の$X \in \Ob\A$に対して
+    \begin{align*}
+      \hom_\A(X,Y) \to \M(X) : b \mapsto (-1)^{|b|} \mu^2_\A(c,b)
+    \end{align*}
+    は擬同型である. 
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  $\Leftarrow$ : $\mu^1_\M(c)=0$
+  \footnote{
+    この条件は擬表現が$H^0(\Q)$で考えていることから必要である.
+  }
+  より, $\lambda_\M(c) : \Y_Y \to \M$は$\Ainf$加群の準同型である.
+  (2)の条件より, $\lambda_\M(c)$は擬同型である. 
+  $H^0(\Q)$において$[t]=[\lambda_\M(c)]$なので, $(Y,[t])$は$\M$を擬表現する. \\
+  $\Rightarrow$ : $\Ainf$-Yonedaの補題より, $\mu^1_\M(c)=0$と$[t]=[\lambda_\M(c)]$である$c \in \M(Y)$が存在する.
+  $[\lambda_\M(c)]$は$H^0(\Q)$における同型射なので, 複体の写像$\hom_\A(X,Y) \to \M(X)$は擬同型である. 
+\end{proof}
+
+\section{直和とテンソル積}
+
+\begin{definition}[直和]
+  $\Ainf$加群$\M_0,\M_1$に対して, $\Ainf$加群$\M_0 \oplus \M_1$を次のように定義する. 
+  \begin{description}
+    \item[($d=0$)] 任意の$X \in \Ob\A$に対して$(\M_0 \oplus \M_1)(X) := \M_0(X) \oplus \M_1(X)$
+    \item[($d \geq 1$)] $\mu^d_{\M_0 \oplus \M_1} := \mu^d_{M_0} \oplus \mu^d_{\M_1}$
+  \end{description} 
+  $\M_0 \oplus \M_1$を$\M_0$と$\M_1$の直和(direct sum)という. 
+\end{definition}
+
+\begin{proof}
+  $\Ainf$加群の直和$(\M_0 \oplus \M_1, \mu_{\M_0 \oplus \M_1})$が$\Ainf$加群の$\Ainf$構造式を満たすことを示せばよい. 
+  これは定義より従う.  
+\end{proof}
+
+\begin{notation}
+  $\Ainf$加群$\M_0,\M_1$の擬表現対象がそれぞれ$Y_0,Y_1$であるとする.
+  このとき, $\Ainf$加群$\M_0 \oplus \M_1$の擬表現対象を$Y_0 \oplus Y_1$と表す. 
+\end{notation}
+
+\begin{lemma}
+  $H(\A)$において, 次の同型が存在する.  
+  \begin{align*}
+    \hom_{H(\A)}(-, Y_0 \oplus Y_1) \simeq \hom_{H(\A)}(-,Y_0) \oplus \hom_{H(\A)}(-,Y_1)
+  \end{align*}
+\end{lemma}
+
+\begin{proof}
+  任意の$X \in \Ob\A$に対して, $l_\A$がコホモロジー圏上で忠実充満であることと$\Ainf$-Yonedaの補題より
+  \begin{align*}
+    \hom_{H(\A)}(X, Y_0 \oplus Y_1)
+    &\simeq \hom_{H(\Q)}(\Y_X, \Y_0 \oplus \Y_1) \\
+    &\simeq H((\Y_0 \oplus \Y_1)(X)) \\
+    &\simeq H(\Y_0(X)) \oplus H(\Y_1(X)) \\
+    &\simeq \hom_{H(\A)}(X,Y_0) \oplus \hom_{H(\A)}(X,Y_1)
+  \end{align*}
+  が成立することより従う. 
+\end{proof}
+
+\begin{definition}[テンソル積]
+  $\Z = (Z,d_Z)$をベクトル空間のなす複体とする. 
+  $\Ainf$加群$\Z \otimes \M$を次のように定義する. 
+  \begin{description}
+    \item[($d=0$)] 任意の$X \in \Ob\A$に対して$(\Z \otimes \M)(X) := \Z \otimes \M(X)$
+    \item[($d = 1$)] 任意の$z \in \Z$と$b \in \M$に対して
+    \begin{align*}
+      \mu^1_{\Z \otimes \M}(z \otimes b) 
+      := (-1)^{|b|-1} d_Z(z) \otimes b + z \otimes \mu^1_\M(b)
+    \end{align*}
+    \item[($d \geq 2$)] 任意の$z \in \Z$と$b \in \M$に対して
+    \begin{align*}
+      \mu^d_{\Z \otimes \M}(z \otimes b,a_{d-1},\cdots,a_1)
+      := z \otimes \mu^d_\M(b,a_{d-1},\cdots,a_1)
+    \end{align*}
+  \end{description}
+  $\Z \otimes \M$を$\Z$と$\M$のテンソル積(tensor product)という. 
+\end{definition}
+
+\begin{proof}
+  $\Ainf$加群のテンソル積$(\Z \otimes \M, \mu_{\Z \otimes \M})$が$\Ainf$加群の$\Ainf$構造式を満たすことを示せばよい. 
+  $d=1$のときを示す.
+  \begin{align*}
+    &\mu^1_{\Z \otimes \M} \mu^1_{\Z \otimes \M}(z \otimes b) \\
+    &= \mu^1_{\Z \otimes \M} ((-1)^{|b|-1} d_Z(z) \otimes b + z \otimes \mu^1_\M(b)) \\
+    &= (-1)^{|b|-1} ((-1)^{|b|-1} d_Z d_Z (z) \otimes b + d_Z(z) \otimes \mu^1_\M(b)) + (-1)^{|b|-1} d_Z(z) \otimes \mu^1_\M(b) + z \otimes \mu^1_\M \mu^1_\M(b) \\
+    &= 0 
+  \end{align*}
+\end{proof}
+
+\begin{notation}
+  $\Ainf$加群$\M$の擬表現対象が$Y$であるとする. 
+  このとき, $\Ainf$加群$\Z \otimes \M$の擬表現対象を$Z \otimes Y$と表す. 
+\end{notation}
+
+\begin{definition}[直和で閉じている]
+  任意の$X_0,X_1 \in \Ob\A$に対して, $X_0 \oplus X_1 \in \Ob\A$であるとき, $\A$は直和で閉じている(closed under direct sum)という. 
+\end{definition}
+
+テンソル積をとる対応は$\Q$上の$\Ainf$関手を定める.
+
+\begin{definition}[$\Q$上のテンソル積関手] \label{def_tensor_functor}
+  $\Ainf$関手$\Z \otimes - : \Q \to \Q$を次のように定義する.
+  \begin{description}
+    \item[($e=0$)] 任意の$\M \in \Q$に対して$(\Z \otimes -)(\M) := \Z \otimes \M$
+    \item[($e=1$)] 任意の$t \in \hom_\Q(\M_0,\M_1)$に対して
+    \begin{align*}
+      (\Z \otimes -)^1(t)(z \otimes b,a_{d-1},\cdots,a_1) 
+      := (-1)^{|z|(|t|-1)} z \otimes t^d(b,a_{d-1},\cdots,a_1)
+    \end{align*}
+    \item[($e \geq 2$)] 任意の$t_1 \in \hom_\Q(\M_0,\M_1),\cdots,t_{e-1} \in \hom_\Q(\M_{e-2},\M_{e-1})$に対して
+    \begin{align*}
+      (\Z \otimes -)^e(t_1,\cdots,t_e) := 0
+    \end{align*}
+  \end{description}
+  $\Z \otimes - : \Q \to \Q$を$\Q$上のテンソル積関手(tensor functor)という.
+\end{definition}
+
+\begin{lemma}
+  $H(\A)$において, 次の同型が存在する. 
+  \begin{align*}
+    \hom_{H(\A)}(-, Z \otimes Y) \simeq H(Z) \otimes \hom_{H(\A)}(-,Y)
+  \end{align*}
+\end{lemma}
+
+\begin{proof}
+  任意の$X \in \Ob\A$に対して, $l_\A$がコホモロジー圏上で忠実充満であることと$\Ainf$-Yonedaの補題より
+  \begin{align*}
+    \hom_{H(\A)}(-, Z \otimes Y)
+    &\simeq \hom_{H(\Q)}(\Y_X, \Z \otimes \Y) \\
+    &\simeq H((\Z \otimes \Y)(X)) \\
+    &\simeq H(\Z \otimes \Y(X)) \\
+    &\simeq H(Z) \otimes H(\Y(X)) \\
+    &\simeq H(Z) \otimes \hom_{H(\A)}(X,Y)
+  \end{align*}
+  が成立することより従う. 
+  途中でKunnethの公式をもちいた. 
+\end{proof}
+
+\begin{remark} \label{rem_tensor_not_depend_on_differential}
+  複体$\Z = (Z,d_Z)$に対して, 通常のコホモロジー$H(\Z)$を複体とみなし, 複体$(H(\Z), d_{H(\Z)}=0)$を考える. 
+  複体の射$\Psi : H(\Z) \to \Z$はコホモロジー圏において同型射である. 
+  \cref{prop_Ainf_homomorphism_induces_Ainf_qis}より, 包含$H(\Z) \otimes \M \to \Z \otimes \M$は$H^0(\Q)$において同型である. 
+  さらに, この同型は$\Psi$によらない. 
+  よって, 複体$\Z$として微分のない次数付きベクトル空間としても一般性は失われない. 
+\end{remark}
+
+\section{シフト}
+
+$\Ainf$加群の擬表現対象を$Y$とする. 
+
+\begin{definition}[シフト]
+  $1$次元ベクトル空間$\K$を$-\sigma$シフトさせた$\K[\sigma] = (\bbK[\sigma],d_{\bbK[\sigma]})$を複体とみなす. 
+  $\K[\sigma]$と$\M$のテンソル積$\K[\sigma] \otimes \M$を$\SSsigmaM$, その擬表現対象$\bbK[\sigma] \otimes Y$を$\SsigmaY$と表す. 
+  \begin{align*}
+    \SSsigmaM &:= \K[\sigma] \otimes \M \\
+    \SsigmaY &:= \bbK[\sigma] \otimes Y
+  \end{align*}
+  $\SSsigmaM, \SsigmaY$をそれぞれ$\M, Y$の$\sigma$重シフト($\sigma$-fold shift)という. 
+  特に, $1$重シフトをそれぞれ$\SSM, SY$と表す.
+  \begin{align*}
+    \SSM &:= \K[1] \otimes \M \\
+    SY &:= \bbK[1] \otimes Y
+  \end{align*} 
+\end{definition}
+
+\begin{definition}[$\Q$上のシフト関手]
+  \cref{def_tensor_functor}において, $\Z=\K[\sigma]$とした$\Q$上のテンソル積関手を$\Q$上のシフト関手(shift functor)といい, $\SSsigma$と表す. 
+  \begin{align*}
+    \SSsigma := \K[\sigma] \otimes - : \Q \to \Q
+  \end{align*}
+\end{definition}
+
+\begin{lemma} \label{prop_shift_functor_is_Ainf_isom}
+  $\Q$上のシフト関手は$\Ainf$同型である. 
+\end{lemma}
+
+\begin{proof}
+  シフト関手$\K[\sigma]$の逆関手が$\K[-\sigma]$で与えられることより従う. 
+\end{proof}
+
+\begin{lemma}
+  $H(\A)$において, 次の同型が存在する. 
+  \begin{align*}
+    &(1) : \hom_{H(\A)} (Y_0,\SsigmaY_1) \simeq \hom_{H(\A)} (Y_0,Y_1)[\sigma] \\
+    &(2) : \hom_{H(\A)} (Y_0,Y_1) \simeq \hom_{H(\A)} (\SsigmaY_0,\SsigmaY_1) \\
+    &(3) : \hom_{H(\A)} (\SsigmaY_0,Y_1)[\sigma] \simeq \hom_{H(\A)} (Y_0,Y_1)
+  \end{align*}
+\end{lemma}
+
+\begin{proof}
+  それぞれ次のように示すことができる. 
+  \begin{enumerate}
+    \item 定義より従う.
+    \item \cref{prop_shift_functor_is_Ainf_isom}より従う.
+    \item (1)で$Y_0 = \SsigmaY_0$として, (2)を用いると
+    \begin{align*}
+      \hom_{H(\A)} (\SsigmaY_0,Y_1)[\sigma]
+      \simeq \hom_{H(\A)} (\SsigmaY_0,\SsigmaY_1) 
+      \simeq \hom_{H(\A)} (Y_0,Y_1)
+    \end{align*}
+  \end{enumerate}
+\end{proof}
+
+\begin{remark}
+  同型の扱い方
+\end{remark}
+
+\begin{definition}[シフトで閉じている]
+  任意の$Y \in \Ob\A$に対して, $SY \in \Ob\A$であるとき, $\A$はシフトで閉じている(closed under shift)という. 
+\end{definition}
+
+$\Ainf$圏がシフトで閉じているとき, $\Q$上のシフト関手から$\A$上のシフト関手を構成することができる. 
+
+\begin{lemma}
+  $\A$はシフトで閉じているとする.
+  このとき, $H^0(\fun{\A}{\A})$において同型を除いて一意である$\Ainf$関手$S : \A \to \A$が存在して, 次の図式を$H^0(\fun{\A}{\Q})$において同型を除いて可換にする.
+  \[\begin{tikzcd}
+    \A & \Q \\
+    \A & \Q
+    \arrow["l", from=1-1, to=1-2]
+    \arrow["\SS", from=1-2, to=2-2]
+    \arrow["S"', dashed, from=1-1, to=2-1]
+    \arrow["l"', from=2-1, to=2-2]
+  \end{tikzcd}\]
+\end{lemma}
+
+\begin{proof}
+  ある$Y \in \Ob\A$に対して$SY$と表せるような対象のなす$\A$の$\Ainf$充満部分圏を$\tilA$とする.
+  ある$Y \in \Ob\A$に対して$H^0(\Q)$において$\SS l(Y)$と同型な$\Ainf$加群のなす$\Q$の$\Ainf$充満部分圏を$\tilQ$とする.
+  $\tilA$と$\tilQ$の定義より, Yoneda埋め込みは$\Ainf$擬同値$\tilA \to \tilQ$を誘導する.
+  \cref{prop_Ainf_qis_has_homotopy_inverse}より, ホモトピー逆関手$\K : \tilQ \to \tilA$が存在する.
+  \[\begin{tikzcd}
+    \A & \Q \\
+    \A & \Q \\
+    \tilA & \tilQ
+    \arrow["l", from=1-1, to=1-2]
+    \arrow["SS", from=1-2, to=2-2]
+    \arrow["l"', from=2-1, to=2-2]
+    \arrow["{p_\Q}", from=2-2, to=3-2]
+    \arrow["\K", from=3-2, to=3-1]
+    \arrow["{i_\A}", from=3-1, to=2-1]
+  \end{tikzcd}\]
+  $S := i_\A \circ \K \circ p_\Q \circ \SS \circ l : \A \to \A$とすると, $S$は$H^0(\fun{\A}{\A})$において同型を除いて一意である.
+  $S$の定義から$H^0(\fun{\A}{\Q})$において求める図式の可換性は同型を除いて従う.
+\end{proof}
+
+\begin{lemma}
+  $\A$が任意の$\sigma \in \mathbb{Z}$に対するシフトと直和で閉じているとする.
+  このとき, $\A$は有限次元のコホモロジーをもつ複体$(Z,d_Z)$に対するテンソル積で閉じている. 
+\end{lemma}
+
+\begin{proof}
+  $I$を有限集合, $Y$を$\A$の対象とする.
+  $H(\Z)$の基底$\{z^i\}_{i \in I}$に対して$\sigma^i = -|z^i|$とおく.
+  $\displaystyle \bigoplus_{i \in I} S^{\sigma^i}Y$のYoneda埋め込み$\displaystyle \bigoplus_{i \in I} \SS^{\sigma^i}Y$は$H^0(\Q)$において$H(\Z) \otimes \Y$と同型である.
+  \cref{rem_tensor_not_depend_on_differential}より, $H(\Z) \otimes \Y$は$\Z \otimes \Y$と$H^0(\Q)$において同型である. 
+\end{proof}
+
+\section{写像錐}
+
+\begin{definition}[抽象写像錐]
+  $\mu^1_\A(c)= 0$である$c \in \hom^0_\A(Y_0,Y_1)$に対して, $\Ainf$加群$\Cone(c)$を次のように定義する. 
+  \begin{description}
+    \item[($d=0$)] 任意の$X \in \Ob\A$に対して
+    \begin{align*}
+      \Cone(c)(X) := \Y_0(X)[1] \oplus \Y_1(X) = \hom_\A(X,Y_0)[1] \oplus \hom_A(X,Y_1)
+    \end{align*}
+    \item[($d \geq 1$)] 任意の$b_0 \in \hom_A(X_{d-1},Y_0), b_1 \in \hom_A(X_{d-1},Y_1)$に対して
+    \begin{align*}
+      &\mu^d_{\Cone(c)}((b_0,b_1),a_{d-1},\cdots,a_1) \\
+      &:= (\mu^d_\A(b_0,a_{d-1},\cdots,a_1), \mu^d_\A(b_1,a_{d-1},\cdots,a_1) + \mu^{d+1}_\A(c,b_0,a_{d-1},\cdots,a_1))
+    \end{align*}
+  \end{description}
+  $\Cone(c)$を$c$の抽象写像錐(abstract mapping cone of $c$)という. 
+\end{definition}
+
+\begin{proof}
+  抽象写像錐$(\Cone(c), \mu_{\Cone(c)})$が$\Ainf$加群の$\Ainf$構造式を満たすことを示せばよい.
+\end{proof}
+
+\begin{notation}[写像錐]
+  $\Ainf$加群$\Cone(c)$の擬表現対象を$c$の写像錐(mapping cone of $c$)といい, $\rmCone(c)$と表す. 
+\end{notation}
+
+\begin{definition}[写像錐で閉じている]
+  $\mu^1_\A(c)= 0$である$c \in \hom^0_\A(Y_0,Y_1)$に対して$\rmCone(c) \in \Ob\A$であるとき, $\A$は写像錐で閉じている(closed under mapping cones)という. 
+\end{definition}
+
+直和とテンソル積とシフトには次のような関係がある.
+
+\begin{example} \label{eg_cone_of_zero}
+  $\A$は写像錐で閉じているとする. 
+  $Y, Y_0 , Y_1, Z\in \Ob\A$に対して, 次の3つが成立する. 
+  \begin{enumerate}
+    \item $0 \in \hom^0_\A(Y_0,Y_1)$の抽象写像錐$\rmCone(0)$は$\SSM_0 \oplus \M_1$を擬表現する.
+    \item 単位元$e_Z : Z \to Z$の抽象写像錐$\rmCone(e_Z)$は$0$加群を擬表現する.
+    \item 射$Y \to \Cone(e_Z)$の写像錐$\Cone(Y \to \Cone(e_Z))$は$SSY$を擬表現する. 
+  \end{enumerate}
+\end{example}
+
+% \begin{proof}
+%   それぞれ次のように示すことができる. 
+%   \begin{enumerate}
+%     \item 
+%   \end{enumerate}
+% \end{proof}
+
+\begin{remark} \label{rem_cone_closedd_induces_shift_sum_closed}
+  $\A$は写像錐で閉じているとする. 
+  \cref{eg_cone_of_zero}の(3)より, $\A$はシフトで閉じている.  
+\end{remark}
+
+\section{完全三角}
+
+$c \in \hom^0_\A(Y_0,Y_1)$は$\mu^1_\A(c)= 0$であるとする. 
+抽象写像錐は2つの$\Ainf$加群の前準同型を定める.
+
+\begin{definition}[入射と射影]
+  $\Ainf$加群の前準同型$\iota \in \hom^0_\Q(\Y_1,\Cone(c))$を次のように定義する.
+  任意の$b_1 \in \Y_1$に対して
+  \begin{description}
+    \item[($e=1$)] $\iota^1(b_1) := (0,(-1)^{|b_1|} b_1)$
+    \item[($e \geq 2$)] $\iota^e(b_1) := (0,0)$
+  \end{description}
+  $\Ainf$加群の前準同型$\pi \in \hom^1_\Q(\C,\Y_0)$を次のように定義する.
+  任意の$b_0 \in \Y_0, b_1 \in \Y_1$に対して
+  \begin{description}
+    \item[($e=1$)] $\pi^1(b_0,b_1) := (-1)^{|b_0|-1} b_0$
+    \item[($e \geq 2$)] $\pi^e(b_0,b_1) := 0$
+  \end{description}
+  $\iota$を$\Cone(c)$への入射(injection), $\pi$を$\Cone(c)$からの射影(projection)という. 
+\end{definition}
+
+入射$\iota$と射影$\pi$は次のように表せる.
+
+\begin{lemma}
+  $e_{Y_0}: Y_0 \to Y_0, e_{Y_1} : Y_1 \to Y_1$を$H(\A)$における単位元とする. 
+  $\tiliota \in \hom^0_\Q(\Y_1,\C), \tilpi \in \hom^0_\Q(\C,\Y_0)$をそれぞれ次のように定義する. 
+  任意の$d \geq 1$と$b_0 \in \hom_A(X_{d-1},Y_0), b_1 \in \hom_A(X_{d-1},Y_1)$に対して
+  \begin{align*}
+    \tiliota^d(b_1,a_{d-1},\cdots,a_1) &:= (0,\mu^{d+1}_\A(e_{Y_1},b_1,a_{d-1},\cdots,a_1)) \\
+    \tilpi^d((b_0,b_1),a_{d-1},\cdots,a_1) &:= -\mu^{d+1}_\A(e_{Y_0},b_0,a_{d-1},\cdots,a_1)
+  \end{align*}
+  このとき, $\tiliota, \tilpi$はそれぞれ$\iota, \pi$とコホモロジー圏において同型である. 
+\end{lemma}
+
+\begin{notation}[三角図式] \label{notation_triangle_diagram}
+  $H(\Q)$において, 次の射の列が存在する. 
+  \[\begin{tikzcd}
+    {\Y_0} & {\Y_1} & {\Cone(c)} & {\Y_0[1]}
+    \arrow["{[l_\A^1(c)]}", from=1-1, to=1-2]
+    \arrow["{[\iota]}", from=1-2, to=1-3]
+    \arrow["{[\pi]}", from=1-3, to=1-4]
+  \end{tikzcd}\]
+  $\Y_0[1]$はベクトル空間のシフトではなく, $\pi$が次数$1$であることを示している. 
+  この図式を次のようにあらわし, 三角図式(triangle diagram)という. 
+  \[\begin{tikzcd}
+    {\Y_0} && {\Y_1} \\
+    & {[1]} \\
+    & {\Cone(c)}
+    \arrow["{[l_\A^1(c)]}", from=1-1, to=1-3]
+    \arrow["{[\iota]}", from=1-3, to=3-2]
+    \arrow["{[\pi] }", from=3-2, to=1-1]
+  \end{tikzcd}\]
+  $[1]$は$\pi$が次数$1$であることを示している. 
+\end{notation}
+
+\begin{definition}[完全三角] \label{def_triangle_diagram}
+  $H(\A)$における図式
+  \[\begin{tikzcd}
+    {Y_0} && {Y_1} \\
+    & {[1]} \\
+    & {Y_2}
+    \arrow["{[c_1]}", from=1-1, to=1-3]
+    \arrow["{[c_2]}", from=1-3, to=3-2]
+    \arrow["{[c_3] }", from=3-2, to=1-1]
+  \end{tikzcd}\]
+  を三角図式(triangle diagram)という. 
+  この三角図式が$\Ainf$-Yondeda埋め込みによって$H(\Q)$において\cref{notation_triangle_diagram}と同型となるとき, 三角図式は完全三角(exact triangle)であるという. 
+\end{definition}
+
+\begin{lemma} \label{prop_exact_is_equivalent_to_acyclic}
+  次の2つは同値である. 
+  \begin{enumerate}
+    \item 三角図式が完全である. 
+    \item ある射$h_1 \in \hom^0_\A(Y_1,Y_0), h_2 \in \hom^0_\A(Y_2,Y_1), k \in \hom^{-1}_\A(Y_1,Y_1)$が存在して
+    \begin{align*}
+      &\mu^1_\A(h_1) = \mu^2(c_3,c_2) \\
+      &\mu^1_\A(h_2) = -\mu^2(c_1,c_3) \\
+      &\mu^1_\A(k) = -\mu^2_\A(c_1,h_1) + \mu^2_\A(h_2,c_2) + \mu^3_\A(c_1,c_3,c_2) -e_{Y_1}
+    \end{align*}
+    であって, 任意の$X \in \Ob\A$に対して, 次の複体は非輪状である.
+    \begin{align*}
+      &\hom_\A(X,Y_2)[1] \otimes \hom_\A(X,Y_0)[1] \otimes \hom_\A(X,Y_1) \\
+      &d 
+      = \begin{pmatrix}
+        \mu^1_\A & 0 & 0 \\
+        \mu^2_\A(c_3,-) & \mu^1_\A & 0 \\
+        \mu^2_\A(h_2,-) + \mu^3_\A(c_1,c_3,-) & \mu^2_\A(c_1,-) & \mu^1_\A
+      \end{pmatrix}
+    \end{align*}
+  \end{enumerate}
+\end{lemma}
+
+\section{完全三角の特徴づけ}
+
+この節における命題は後で証明する.
+この節では, \cref{prop_exact_is_equivalent_to_acyclic}のほかにも完全三角の特徴づけができることを見る. 
+
+\begin{definition}
+  次のような恒等射を持つ$\Ainf$圏$\D$を定義する.
+  \begin{itemize}
+    \item 対象は$3$点$Z_0,Z_1,Z_2$
+    \item hom空間はそれぞれ次を満たす. 
+    \begin{align*}
+      &\hom_\D(Z_k,Z_k) = \bbK \cdot e_{Z_k} \\
+      &\hom_\D(Z_0,Z_1) = \bbK \cdot x_1, ~ |x_1| = 0 \\
+      &\hom_\D(Z_1,Z_2) = \bbK \cdot x_2, ~ |x_2| = 0 \\
+      &\hom_\D(Z_2,Z_0) = \bbK \cdot x_3, ~ |x_3| = 1 \\
+      &\hom_\D(Z_2,Z_1) = \hom_\D(Z_1,Z_0) = \hom_\D(Z_0,Z_2)  = 0 
+    \end{align*}
+    \[\begin{tikzcd}
+      & {Z_0} \\
+      \\
+      {Z_1} && {Z_2}
+      \arrow["{\bbK \cdot x_1}"', shift right=2, from=1-2, to=3-1]
+      \arrow["{\bbK \cdot x_3}"', shift right=1, from=3-3, to=1-2]
+      \arrow["{\bbK \cdot x_2}"', shift right=1, from=3-1, to=3-3]
+      \arrow["0"', from=3-1, to=1-2]
+      \arrow["0"', shift right=1, from=3-3, to=3-1]
+      \arrow["0"', shift right=1, from=1-2, to=3-3]
+    \end{tikzcd}\]
+    \item 合成$\mu_\D$のうち非自明なものは次を満たす.
+    \begin{align*}
+      &\mu^3_\D(x_3,X_2,x_1) = e_{Z_0} \\
+      &\mu^3_\D(x_1,X_3,x_2) = e_{Z_1} \\
+      &\mu^3_\D(x_2,X_1,x_3) = e_{Z_2}
+    \end{align*}
+  \end{itemize} 
+\end{definition}
+
+\begin{theorem} \label{prop_exact_is_equivalent_to_Ainf_functor_D_to_A}
+  次の2つは同値である. 
+  \begin{enumerate}
+    \item $H(\A)$において三角図式
+    \[\begin{tikzcd}
+      {Y_0} && {Y_1} \\
+      & {[1]} \\
+      & {Y_2}
+      \arrow["{[c_1]}", from=1-1, to=1-3]
+      \arrow["{[c_2]}", from=1-3, to=3-2]
+      \arrow["{[c_3] }", from=3-2, to=1-1]
+    \end{tikzcd}\]
+    は完全である.
+    \item 任意の$1 \leq k \leq 3$に対して$\F(Z_k) = Y_k, [\F^1(x_k)] = [c_k]$を満たす$\Ainf$関手$\F : \D \to \A$が存在する.
+  \end{enumerate}
+\end{theorem}
+
+\begin{corollary} \label{prop_exact_maps_to_exact}
+  $\Ainf$関手$\G : \A \to \B$に対して, $H(\G) : \A \to \B$は$H(\A)$における完全三角を$H(\B)$における完全三角にうつす.
+\end{corollary}
+
+\begin{proof}
+  \cref{prop_exact_is_equivalent_to_Ainf_functor_D_to_A}より, 三角図式が$H(\A)$において完全であることと, \cref{prop_exact_is_equivalent_to_Ainf_functor_D_to_A}の(2)の条件を満たす$\Ainf$関手$\F : \D \to \A$が存在することは同値である. 
+  $\G \circ \F$を考えると, \cref{prop_exact_is_equivalent_to_Ainf_functor_D_to_A}の(2)の条件を満たす$\G \circ \F : \D \to \B$が存在する.
+  よって, $H(\A)$における完全三角を$\G$で送ると, $H(\B)$における完全三角である.
+\end{proof}
+
+\begin{corollary}
+  $\F : \A \to \B$をコホモロジー圏上で忠実充満な$\Ainf$関手とする.
+  $\F$の像の元からなる$H(\B)$における完全三角の逆像は$H(\A)$における完全三角である.
+\end{corollary}
+
+\section{三角\texorpdfstring{$\Ainf$}{Ainf}圏}
+
+\begin{definition}[三角$\Ainf$圏] \label{def_triangulated_Ainf_cat}
+  $\Ainf$圏$\A$が次の条件を満たすとき, $\A$は三角$\Ainf$圏(triangulated $\Ainf$-category)であるという. 
+  \begin{enumerate}
+    \item $H^0(\A)$の任意の射$[c_1]$は完全三角に補完できる.
+    \item 任意の$Y \in \Ob\A$に対して, $H^0(\A)$において$S\tilde{Y} \cong Y$である$\tilde{Y} \in \Ob\A$が存在する.  
+  \end{enumerate}
+\end{definition}
+
+\begin{remark}
+  \cref{rem_cone_closedd_induces_shift_sum_closed}より, \cref{def_triangulated_Ainf_cat}の条件(1)は任意の$Y \in \Ob\A$がシフト$SY \in \Ob\A$をもつことを示している.
+  これにより条件(2)は意味を成している. 
+  条件(1)はシフトをとる操作がシフト関手$S : \A \to \A$を定めることも意味している. 
+  条件(2)はこのシフト関手が$\Ainf$擬同値であることを意味している. 
+\end{remark}
+
+今まで見てきたことより, 三角$\Ainf$圏の例が得られる. 
+
+\begin{example} \label{eg_modA_is_triangulated}
+  $\mod{\A}$は三角$\Ainf$圏である.
+\end{example}
+
+\begin{theorem}
+  $\A$が三角$\Ainf$圏であるとき, $H^0(\A)$は三角圏である. 
+\end{theorem}
+
+\begin{proof}
+  三角圏におけるシフトと特三角をそれぞれ次のように定義する.
+  \begin{itemize}
+    \item 三角関手$T$は$T := H^0(S)$
+    \item 特三角は\cref{def_triangle_diagram}において$[c_3]$を射$Y_2 \to SY_0$とした完全三角
+  \end{itemize}
+\end{proof}
+
+\begin{theorem}
+  $\A,\B$を三角$\Ainf$圏とする. 
+  $\F : \A \to \B$が$\Ainf$関手であるとき, $H^0(\F) : H^0(\A) \to H^0(\B)$は三角関手である. 
+\end{theorem}
+
+\section{導来\texorpdfstring{$\Ainf$}{Ainf}圏}
+
+$\A$は空でない$\Ainf$圏であるとする. 
+
+\begin{definition}[生成子]
+  $\B$を三角$\Ainf$圏, $\A$を$\B$の$\Ainf$充満部分圏とする. 
+  $\A$を含む最小の三角$\Ainf$圏である同型で閉じている
+  \footnote{
+    $\Ainf$圏$\A$が同型であるとは, $H^0(\A)$において$X_0$と$X_1$が同型であるとき, $X_0 \in \Ob\A$ならば$X_1 \in \Ob\A$ということである. 
+  }
+  $\B$の充満部分圏を$\tilB$とする. 
+  このとき, $\tilB$を$\A$によって生成される$\B$の三角$\Ainf$部分圏(triangulated $\Ainf$-subcategory of $\B$ generated by $\A$)という. 
+  $\tilB = \B$のとき, $\B$は$\A$によって生成される($\B$ is generated by $\A$)という.
+  このとき, $\A$の対象は$\B$の生成子(objects of $\A$ are generators for $\B$)であるという. 
+\end{definition}
+
+$\A$によって生成される$\B$の三角$\Ainf$部分圏$\tilB$は次のように構成することができる. 
+
+\begin{remark}
+  $\Ob\tilB$は$\Ob\A$に正と負のシフトと写像錐を繰り返し添加させることで得られる. 
+  このように得られた$\B$の充満部分圏$\tilB$は\cref{prop_exact_maps_to_exact}より三角$\Ainf$圏である. % つけたす
+\end{remark}
+
+\begin{definition}[三角閉包]
+  $\A$を$\Ainf$圏, $\B$を三角$\Ainf$圏, $\F : \A \to \B$をコホモロジー圏上で忠実充満な$\Ainf$関手とする. 
+  $\F$の像の任意の元が$\B$の生成子であるとき, 組$(\B,\F)$は$\A$の三角閉包 (triangulated envelope for $\A$)であるという. 
+\end{definition}
+
+三角閉包は常に存在して, $\Ainf$擬同値を除いて一意である. 
+
+\begin{lemma} \label{prop_triangulated_envelope_si_always_exist}
+  $\A$を$\Ainf$圏, $\B$を三角$\Ainf$部分圏, $\F : \A \to \B$をコホモロジー圏上で忠実充満な$\Ainf$関手とする. 
+  \begin{enumerate}
+    \item $\A$の三角閉包 $(\B,\F)$は常に存在する. 
+    \item $(\B,\F), (\tilB,\tilF)$を$\A$の三角閉包とする. 
+    このとき, ある$\Ainf$擬同値$\G : \B \to \tilB$が存在して, $H^0(\fun{\A}{\tilB})$において$\G \circ \F \cong \tilF$である. 
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  それぞれ次のように示すことができる.
+  \begin{enumerate}
+    \item \cref{eg_modA_is_triangulated}より, $\Ainf$-Yoneda埋め込みの像で生成される$\mod{\A}$の充満部分圏をとると三角閉包が得られる. 
+    \item 執筆中
+  \end{enumerate}
+\end{proof}
+
+\begin{definition}[導来$\Ainf$圏]
+  三角$\Ainf$圏$\B$に対して, $0$次コホモロジー圏$H^0(\B)$を$\B$の導来$\Ainf$圏(derived $\Ainf$ category)といい, $D(\B)$とあらわす.
+\end{definition}
+
+% \begin{remark}
+%   twisted complexと三角閉包の歴史について (\cite{Sei}のremark 3.22を参照)
+% \end{remark}
+
+\bibliographystyle{jalpha}
+\bibliography{../A_infty_cf}
+
+\end{document}

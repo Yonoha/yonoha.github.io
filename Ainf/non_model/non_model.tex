@@ -1,0 +1,130 @@
+\RequirePackage{plautopatch}
+\documentclass[uplatex, a4paper, 14Q, dvipdfmx]{jsarticle}
+\usepackage{docmute}
+\usepackage{../mypackage}
+
+\title{\texorpdfstring{$\Ainf$}{Ainf}圏のなす圏はモデル構造を持たない}
+\author{よの}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  $\Ainf$圏のなす$\Ainf$圏がモデル構造をもたないことを示す. 
+\end{abstract}
+
+\tableofcontents
+
+\section{\texorpdfstring{$\Ainf$}{Ainf}圏のなす圏はモデル構造を持たない}
+
+\begin{definition} \label{def_no_equalizer}
+  次数付き代数$\A,\A'$を次のように定義する. 
+  \begin{align*}
+    &\A := \bbK[a_0,a_1], ~ \A' := \bbK[a] \\
+    &a_0^2 = a_1^2 = a_0 a_1 = a_1 a_0 = a^2 = 0 \\
+    &|a_0| = |a_1| = 0, ~ |a| = -1
+  \end{align*}
+  次数付き代数$\A,\A'$を微分が自明なdg代数とみなし, $1$対象の高次のホモトピーが自明な$\Ainf$圏とみなす.\\
+  dg関手$\F_0 : \A \to \A'$を次のように定義する.
+  \begin{align*}
+    \F_0^1(a_0) = \F_0^1(a_1) := 0
+  \end{align*}
+  dg関手$\F_0$を高次のホモトピーが自明な$\Ainf$関手とみなす. \\
+  $\Ainf$関手$\F_1 : \A \to \A'$を$\F_1^1 = \F_0^1$, 
+  \begin{align*}
+    \F_1^2(a_i,a_j) := 
+    \begin{cases}
+      a & (i=0, j=1) \\
+      0 & \otherwise
+    \end{cases}
+  \end{align*}
+  で, 任意の$d \geq 3$に対して$\F_1^d := 0$として定義する.
+\end{definition}
+
+\begin{lemma}
+  \cref{def_no_equalizer}の記号を用いる.  
+  $\Ainf\Cat$において, $\F_0$と$\F_1$のequalizerは存在しない. 
+  $\Ainf\Cat^c$においても同様に成立する.
+\end{lemma}
+
+\begin{proof}
+  $\Ainf\Cat$における場合を考える. 
+  $\F_0$と$\F_1$のequalizerが存在すると仮定する. 
+  $\B$を$\Ainf$圏として, equalizer($\Ainf$関手)を$\G : \B \to \A$と表す. 
+  \[\begin{tikzcd}
+    \B & \A & {\A'}
+    \arrow["\G", from=1-1, to=1-2]
+    \arrow["{\F_1}"', shift right=1, from=1-2, to=1-3]
+    \arrow["{\F_0}", shift left=1, from=1-2, to=1-3]
+  \end{tikzcd}\]
+  任意の$B \in \Ob\B$に対して, $\Ainf$関手 
+  \begin{align*}
+    \H_B : \bbK \to \B : \ast \mapsto B
+  \end{align*}
+  が存在する. 
+  \[\begin{tikzcd}
+    \bbK & \B & \A & {\A'}
+    \arrow["\G", from=1-2, to=1-3]
+    \arrow["{\F_1}"', shift right=1, from=1-3, to=1-4]
+    \arrow["{\F_0}", shift left=1, from=1-3, to=1-4]
+    \arrow["{\H_B}", from=1-1, to=1-2]
+  \end{tikzcd}\]
+  次に, $\B$が$1$対象であることを示す. 
+  任意の$B_0,B_1 \in \Ob\B$に対して, $\H_{B_0},\H_{B_1}$を上で定義した$\Ainf$関手とする.
+  $\bbK$と$\A$は次数$0$に集中しているので, $i=0,1$に対して, $\Ainf$関手
+  \begin{align*}
+    \G \circ \H_{B_i} : \bbK \to \A
+  \end{align*}
+  は恒等射を保ち, $H(\G \circ \H_{B_i})$は$(\G \circ \H_{B_i})^1$と同一視できる.
+  $\bbK$と$\A$は$1$対象なので
+  \begin{align*}
+    \G \circ \H_{B_1} = \G \circ \H_{B_1}
+  \end{align*}
+  である. 
+  $\G$は$\Ainf\Cat$におけるmono射なので
+  \begin{align*}
+    \H_{B_1} = \H_{B_1}
+  \end{align*}
+  である. 
+  つまり$B_1 = B_2$である. 
+  $\B$と$\A$は$\Ainf$代数なので, $\G$は$\Ainf$代数の射である. 
+  よって, $\F_0$と$\F_1$のequalizerは$\Ainf$代数のなす圏におけるequalizerである. 
+  ここで, 代数$\B'$を次のように定義する. 
+  \begin{align*}
+    \B' := \bbK[b], ~ b^2 = 0, ~ |b| = 0 
+  \end{align*}
+  代数$\B'$を次数$0$に集中した微分が自明なdg代数とみなし, 高次のホモトピーが自明な$\Ainf$代数とみなす.
+  $i=0,1$に対して, $\Ainf$代数の射
+  \begin{align*}
+    \I_i : \B' \to \A : b \mapsto a_i
+  \end{align*}
+  が存在して 
+  \begin{align*}
+    \F_0 \circ \I_i = \F_1 \circ \I_i
+  \end{align*}
+  を満たす. 
+  equalizerの普遍性より, 次の図式を可換にする$\Ainf$代数の射$\J : \B' \to \B$が存在する.
+  \[\begin{tikzcd}
+    \bbK & \B & \A & {\A'} \\
+    & {\B'}
+    \arrow["\G", from=1-2, to=1-3]
+    \arrow["{\F_1}"', shift right=1, from=1-3, to=1-4]
+    \arrow["{\F_0}", shift left=1, from=1-3, to=1-4]
+    \arrow["{\H_B}", from=1-1, to=1-2]
+    \arrow["{\I_i}"', from=2-2, to=1-3]
+    \arrow["\J", dashed, from=2-2, to=1-2]
+  \end{tikzcd}\]
+  $\G^1$は全射であるが
+  \begin{align*}
+    (\F_0 \circ \G)^2 \neq (\F_1 \circ \G)^2 
+  \end{align*}
+  なので, $(\F_0 \circ \G) = (\F_1 \circ \G)$となることはない. 
+\end{proof}
+
+\begin{theorem}
+  $\Ainf\Cat$と$\Ainf\Cat^c$はモデル構造を持たない. 
+\end{theorem}
+
+\end{document}

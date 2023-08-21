@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja" class="no-js">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"            content="width=device-width, initial-scale=1">
+    <meta name="Higher Algebra Cafe" content="higher algebraに関する記事の集い場所. ">
+    <title>Higher Algebra Cafe</title> 
+
+    <!-- for javascript module -->
+    <script type="module">
+      document.documentElement.classList.remove('no-js');
+      document.documentElement.classList.add('js');
+    </script>
+
+    <!-- for .css file -->
+    <link rel="stylesheet" href="stylesheet.css">
+
+    <!-- for tex  -->
+    <script type="text/javascript"
+      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" }},
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { matchFontHeight: false },
+        displayAlign: "left",
+        displayIndent: "2em"
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1>Higher Algebra Cafe</h1>
+    <p>Co-mathematicians make co-theorems out of ffee.</p>
+
+    <ul class="tabbed-toc">
+      <li><a href="#sec:Ainf">          $A_\infty$圏論</a></li>
+      <li><a href="#sec:triangulated">  三角圏論</a></li>
+      <li><a href="#sec:quasi-category">quasi-category</a></li>
+      <li><a href="#sec:dgcat">         dg圏論</a></li>
+      <li><a href="#sec:tqft">          位相的場の量子論</a></li>
+    </ul>
+
+    <h2 id="sec:Ainf">$A_\infty$圏論</h2>
+    <ul>
+      <li><a href="Ainf/non_unital/non_unital.pdf">恒等射を持たない$A_\infty$圏</a> <br>
+        恒等射を持たない$A_\infty$圏の定義から$A_\infty$-Yoneda埋め込みまで説明する. 
+      </li>
+      <li><a href="Ainf/unital/unital.pdf">恒等射を持つ$A_\infty$圏</a> <br>
+        恒等射を持つ$A_\infty$圏とc-unitを持つ$A_\infty$圏を定義して, $A_\infty$-Yonedaの補題を示す. 
+      </li>
+      <li><a href="Ainf/triangulated_Ainf/triangulated_Ainf.pdf">三角$A_\infty$圏</a> <br>
+        $A_\infty$圏から三角圏を構成する手法を解説する. 
+      </li>
+      <li><a href="Ainf/twA_trA/twA_trA.pdf">Tr$A$とTw$A$</a> <br>
+        具体的に三角圏の対象を定義することで三角圏を構成する. 
+      </li>
+      <li><a href="Ainf/enhancement/enhancement.pdf">$A_\infty$増強の一意性</a> <br>
+        三角圏を生成する$A_\infty$圏の一意性などについて議論する. 
+      </li>
+      <li><a href="Ainf/non_model/non_model.pdf">$A_\infty$圏のなす圏はモデル構造を持たない</a> <br>
+        $A_\infty$圏のなす圏がequalizerを持たないことを示す. 
+      </li>    
+    </ul>
+
+    <h2 id="sec:triangulated">三角圏論</h2>
+    <ul>
+      <li><a href="triangulated/triangulated_basic/triangulated_basic.pdf">三角圏と三角関手</a> <br>
+        三角圏の定義から基本的な性質を述べる. 
+      </li>
+      <li><a href="triangulated/mutation/mutation.pdf">許容的部分圏とSerre関手</a> <br> 
+        許容的, 飽和的三角圏を定義して, 半直交分解とSerre関手の存在性と深く関わっていることを示す. 
+      </li>
+      <li><a href="triangulated/stability/stability.pdf">Bridgeland安定性条件 (執筆中)</a> <br> 
+        三角圏からAbel圏を自然に構成する$t$構造と, その一般化であるBridgeland安定性条件について書く. 
+      </li>  
+    </ul>
+
+    <h2 id="sec:quasi_category">quasi-category</h2>
+    <ul>
+      <li><a href="quasi_category/kerodon/kerodon.pdf">$\infty$圏の世界</a> <br> 
+        $\infty$圏論を解説している<a href="https://kerodon.net/">kerodon</a>の1章の和訳
+      </li>
+    </ul>
+
+    <h2 id="sec:dgcat">dg圏論</h2>
+    <ul>
+      coming soon...
+    </ul>
+
+    <h2 id="sec:tqft">位相的場の量子論</h2>
+    <ul>
+      coming soon...
+    </ul>
+
+  </body>
+</html>

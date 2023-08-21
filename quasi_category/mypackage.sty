@@ -1,0 +1,178 @@
+\usepackage[uplatex]{otf} 
+\usepackage{xparse}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\usepackage{comment}
+\usepackage{enumitem}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{intersections, calc, arrows.meta, shadows}
+\usepackage{../quiver}
+\usepackage{mathrsfs, mathtools}
+\usepackage{nameref}
+\usepackage{physics}
+\usepackage{hyperref}
+\usepackage{pxjahyper}
+\usepackage{cleveref}
+\usepackage{here}
+\usepackage{anyfontsize}
+\usepackage{nameref}
+\usepackage{ulem}
+\usepackage{url}
+\usepackage{subfiles}
+\usepackage{relsize}
+\usepackage[bbgreekl]{mathbbol}
+\usepackage{amsfonts}
+% \usepackage{mycommand}
+
+% change colors
+\hypersetup{
+	colorlinks=true,
+	citecolor=blue,
+	linkcolor=teal,
+	urlcolor=orange,
+}
+
+% new thorem style
+\newtheoremstyle{jplain} % name
+{} % space above
+{} % space below
+{\normalfont} % body font
+{} % indent amount
+{\bfseries} % theorem head font
+{.} % punctuation after theorem head
+{4pt} % space after theorem head (default: 5pt)
+{\thmname{#1}\thmnumber{#2}\thmnote{\hspace{2pt}(#3)}} % theorem head spec
+
+\theoremstyle{jplain}
+\newtheorem{theorem}{定理}
+\newtheorem{prop}[theorem]{命題}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{cor}[theorem]{系}
+\newtheorem{example}[theorem]{例}
+\newtheorem{definition}[theorem]{定義}
+\newtheorem{remark}[theorem]{注意}
+\newtheorem{cons}[theorem]{構成}
+\newtheorem{que}[theorem]{疑問}
+\newtheorem{nota}[theorem]{記法}
+\newtheorem{exe}[theorem]{練習}
+
+% cref
+\crefname{chapter}{第}{第}
+\creflabelformat{chapter}{#2#1章#3}
+\crefname{section}{第}{第}
+\creflabelformat{section}{#2#1章#3}
+\crefname{subsection}{第}{第}
+\creflabelformat{subsection}{#2#1節#3}
+\crefname{appendix}{}{}
+\creflabelformat{appendix}{#2#1#3}
+
+\crefname{theorem}{定理}{定理}
+\crefname{lemma}{補題}{補題}
+\crefname{corollary}{系}{系}
+\crefname{definition}{定義}{定義}
+\crefname{remark}{注意}{注意}
+\crefname{notation}{記法}{記法}
+\crefname{example}{例}{例}
+\crefname{question}{問題}{問題}
+\crefname{answer}{答え}{答え}
+
+% show theorem depth
+\numberwithin{theorem}{subsection}
+\numberwithin{equation}{subsection}
+
+% proof environment
+\makeatletter
+\newenvironment{Proof}[1][\Proofname]{\par
+  \normalfont
+  \topsep6\p@\@plus6\p@ \trivlist
+  \item[\hskip\labelsep{\bfseries #1}\@addpunct{\bfseries.}]\ignorespaces
+}{
+  \endtrivlist
+}
+\newcommand{\Proofname}{証明}
+\makeatother
+
+% \code for csim
+\DeclareSymbolFontAlphabet{\mathbb}{AMSb} %to ensure that the meaning of \mathbb does not change
+\DeclareSymbolFontAlphabet{\mathbbl}{bbold}
+
+\newcommand{\cset}{\mathbf{Set}}
+\newcommand{\Top}{\mathbf{Top}}
+\newcommand{\fun}{\mathbf{Fun}}
+\newcommand{\gra}{\mathbf{Graph}}
+\newcommand{\cat}{\mathbf{Cat}}
+\newcommand{\cend}{\mathbf{End}}
+
+\newcommand{\csim}{{\mathlarger{\mathbbl{\Delta}}}}
+\newcommand{\insim}{{\mathlarger{\mathbbl{\Delta}}}_\mathrm{inj}}
+\newcommand{\insimop}{{\mathlarger{\mathbbl{\Delta}}}^\OP_\mathrm{inj}}
+\newcommand{\hsim}{\hat{\csim}}
+\newcommand{\simop}{{\csim}^\OP}
+\newcommand{\sset}{\mathbf{Set}_{\csim}}
+
+\newcommand{\Sing}{\mathrm{Sing}}
+\newcommand{\h}{\mathrm{h}}
+\newcommand{\hkan}{\mathrm{Kan}}
+\newcommand{\N}{\mathrm{N}_{\bullet}}
+
+\newcommand{\gr}{\mathrm{Gr}}
+\newcommand{\snd}{S_{k}^{\mathrm{nd}}}
+\newcommand{\sk}{\mathrm{sk}}
+\newcommand{\spine}{\mathrm{Spine}}
+\renewcommand{\Vert}{\mathrm{Vert}}
+\newcommand{\Edge}{\mathrm{Edge}}
+
+\newcommand{\A}{A_\bullet}
+\newcommand{\B}{B_\bullet}
+\renewcommand{\S}{S_\bullet}
+\newcommand{\T}{T_\bullet}
+\newcommand{\U}{U_\bullet}
+\newcommand{\X}{X_\bullet}
+\newcommand{\Y}{Y_\bullet}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calJ}{\mathcal{J}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calU}{\mathcal{U}}
+
+\newcommand{\Ob}{\mathrm{Ob}}
+\newcommand{\Mor}{\mathrm{Mor}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Map}{\mathrm{Map}}
+\newcommand{\OP}{\mathrm{op}}
+\newcommand{\Op}{\mathrm{Op}}
+\newcommand{\Lin}{\mathrm{Lin}}
+\newcommand{\dom}{\mathrm{dom}}
+\newcommand{\cod}{\mathrm{cod}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\Id}{\mathrm{Id}}
+\newcommand{\eva}{\mathrm{ev}}
+\newcommand{\coev}{\mathrm{coev}}
+
+\newcommand{\xr}[1]{\xrightarrow{#1}}
+\newcommand{\xl}[1]{\xleftarrow{#1}}
+\newcommand{\ra}{\Rightarrow}
+\newcommand{\lar}{\Leftarrow}
+\newcommand{\hr}{\hookrightarrow}
+\newcommand{\mt}{\mapsto}
+\newcommand{\ci}{\circ}
+\newcommand{\ti}{\times}
+\newcommand{\del}{\partial}
+\newcommand{\da}{\dagger}
+\newcommand{\dav}{\dashv}
+
+\newcommand{\al}{\alpha}
+\newcommand{\la}{\lambda}
+\newcommand{\si}{\sigma}
+\newcommand{\osi}{\overline{\si}}
+\newcommand{\Si}{\Sigma}
+\newcommand{\vp}{\varphi} 
+\newcommand{\ve}{\varepsilon}

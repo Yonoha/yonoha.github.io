@@ -1,0 +1,620 @@
+\RequirePackage{plautopatch}
+\documentclass[uplatex, a4paper, 14Q, dvipdfmx]{jsarticle}
+\usepackage{docmute}
+\usepackage{../mypackage}
+
+\title{恒等射を持つ\texorpdfstring{$\Ainf$}{Ainf}圏}
+\author{よの}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  恒等射を持つ$\Ainf$圏を定義し, $\Ainf$圏が$\Ainf$加群に埋め込まれることをみる. 
+  このことから, 任意の$\Ainf$圏がdg圏と$\Ainf$擬同値であることが分かる. ($\Ainf$-Yonedaの補題)
+\end{abstract}
+
+\tableofcontents
+
+\section{恒等射を持つ\texorpdfstring{$\Ainf$}{Ainf}圏と恒等射を保つ\texorpdfstring{$\Ainf$}{Ainf}関手}
+
+「恒等射を持つ」$\Ainf$圏には複数の定義がある.
+
+「任意の$a_1 \in \hom_\A(X_0,X_1), \cdots, a_d \in \hom_\A(X_{d-1},X_d)$に対して」を以降では省略する. 
+
+\begin{definition}[恒等射を持つ$\Ainf$圏]
+  $\A$を恒等射を持たない$\Ainf$圏とする. 
+  任意の$X \in \Ob\A$に対してある$e_X \in \hom_\A^0(X,X)$が一意に存在して, 次の条件を満たすとき, $\A$は恒等射を持つ$\Ainf$圏(strictly unital $\Ainf$-category)であるという. 
+  このとき, $e_X$を$X$の恒等射(strict unit)という.
+  \begin{description}
+    \item[($d=1$)] $\mu^1_\A(e_X) = 0$ 
+    \footnote{
+      この定義は課さないことが多い.
+    }
+    \item[($d=2$)] $(-1)^{|a_1|} \mu^2_\A(e_{X_1},a_1) = a_1 = \mu^2_\A(a_1,e_{X_0})$
+    \item[($d \geq 3$)] 任意の$0 \leq n < d$に対して$\mu^d_\A(a_{d-1},\cdots,a_{n+1},e_{X_n},a_n,\cdots,a_1) = 0$
+  \end{description}
+\end{definition}
+
+\begin{definition}[コホモロジー圏上で恒等射を持つ$\Ainf$圏]
+  恒等射を持たない$\Ainf$圏$\A$のコホモロジー圏$H(\A)$が通常の意味で恒等射を持つとき, $\A$はコホモロジー圏上で恒等射を持つ$\Ainf$圏(cohomologically unital $\Ainf$-category)であるという. 
+  以降では, c-unitalな$\Ainf$圏という. 
+  任意の$X \in \Ob\A$に対して$[e_X]$が$H(\A)$における恒等射であるとき, $e_X$を$X$のc-unitという.
+\end{definition}
+
+\begin{definition}[ホモトピー恒等射を持つ$\Ainf$圏]
+  ホモトピー恒等射を持つ$\Ainf$圏(homotopy unital $\Ainf$-category) $(\A,\mu^{-,(i)}_\A)$は次のデータから構成される. 
+  \begin{itemize}
+    \item 対象の集まり$\Ob\A$ 
+    \item 任意の$X_0, X_1 \in \Ob\A$に対して, 次数付きベクトル空間$\hom_\A(X_0,X_1)$
+    \item 任意の$d+i_0\cdots+i_d \geq 0$に対して
+    \begin{align*}
+      \mu^{d,(i_d,\cdots,i_0)}_\A : \hom_\A(X_{d-1},X_d) \otimes \cdots \otimes \hom_\A(X_0,X_1) \to \hom_\A(X_0,X_d)[2-d-2\sum_{k}i_k]
+    \end{align*}
+    が与えられていて, 一般化$\Ainf$結合式(generalized $\Ainf$-associativity equation)を満たす. (\cite{Fuk02} Section 5)
+  \end{itemize}
+\end{definition}
+
+3つの「恒等射を持つ」$\Ainf$圏には次のような関係がある. 
+
+\begin{lemma}
+  次の2つが成立する. 
+  \begin{enumerate}
+    \item 任意の恒等射を持つ$\Ainf$圏はホモトピー恒等射を持つ. 
+    \item 任意のホモトピー恒等射を持つ$\Ainf$圏はc-unitalである.
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  それぞれ次のように示すことができる. 
+  \begin{enumerate}
+    \item $\A$を恒等射を持つ$\Ainf$圏とする. 
+    任意の$X \in \Ob\A$の恒等射を$e_X$とする. 
+    $\mu^{0,(1)}_\A := e_X$として, 任意の$i_0+\cdots+i_d>0$に対して$\mu^{d,(i_,\cdots,i_0)}_\A := 0$とすると, $\A$はホモトピー恒等射を持つ. 
+    \item 一般化$\Ainf$結合式より従う. 
+  \end{enumerate}
+\end{proof}
+
+「恒等射を持つ」$\Ainf$圏の間の「恒等射を保つ」$\Ainf$関手が定義される. 
+
+\begin{definition}[恒等射を保つ$\Ainf$関手]
+  恒等射を持つ$\Ainf$圏$\A,\B$に対して, 恒等射を考えない$\Ainf$関手$\F : \A \to \B$が次の条件を満たすとき, $\F$は恒等射を保つ$\Ainf$関手(strictly unital $\Ainf$-functor)であるという. 
+  \begin{description}
+    \item[($d=1$)] 任意の$X \in \Ob\A$に対して$\F^1(e_X)= e_{\F X}$
+    \item[($d \geq 2$)] 任意の$0 \leq n < d$に対して$\F^d(a_{d-1},\cdots,a_{n+1},e_{X_n},a_n,\cdots,a_1) = 0$
+  \end{description}
+\end{definition}
+
+\begin{definition}[コホモロジー圏上で恒等射を保つ$\Ainf$関手]
+  c-unitalな$\Ainf$圏$\A,\B$に対して, コホモロジー圏上の関手$H(\F): H(\A) \to H(\B)$が通常の関手であるとき, $\F$はコホモロジー圏上で恒等射を保つ$\Ainf$関手(cohomologically unital $\Ainf$-functor)であるという. 
+  以降では, c-unitを保つ$\Ainf$関手という. 
+\end{definition}
+
+\begin{definition}[ホモトピー恒等射を保つ$\Ainf$関手]
+  \cite{Fuk02} Section 5を参照.
+\end{definition}
+
+「恒等射を保つ」$\Ainf$恒等関手や「恒等射を保つ」$\Ainf$関手の合成がそれぞれに対して定義される.
+
+3つの「恒等射を持つ」$\Ainf$圏の間にはさらに次のような関係がある. 
+
+\begin{lemma}
+  任意のホモトピー恒等射を持つ$\Ainf$圏は恒等射を持つ$\Ainf$圏と$\Ainf$擬同型である. 
+\end{lemma}
+
+\begin{proof}
+  \cite{Fuk02}を参照.
+\end{proof}
+
+次の命題は非常に重要である.
+
+\begin{lemma} \label{prop_PhiA_is_strictly_unital}
+  $\A$をc-unitalな$\Ainf$圏とする. 
+  任意の$X \in \Ob\A$に対して, $\hom_\A(X,X)$は$0$か非自明なコホモロジーをもつとする. 
+  このとき, $\Phi^1=\id_{\hom_A(X_0,X_1)}$である形式的微分同相$\Phi$が存在して, $\Phi_\ast \A$は恒等射を持つ. 
+\end{lemma}
+
+\begin{proof}
+  任意の$X \in \Ob\A$に対して, $e_X \in \hom_\A^0(X,X)$は$\mu_\A^1$で閉じている$H(\A)$におけるc-unitとする. (途中)
+\end{proof}
+
+\begin{remark}[\cite{Sei_errata}]
+  \cite{Sei}の命題の主張には誤りがある. 
+  元の主張は
+  \begin{itemize}
+    \item 任意のc-unitalな$\Ainf$圏$\A$に対して, $\Phi^1=\id_{\hom_A(X_0,X_1)}$である形式的微分同相$\Phi$が存在して, $\Phi_\ast \A$は恒等射を持つ. 
+  \end{itemize}
+  であるが, 次のような反例がある. (執筆中)
+\end{remark}
+
+% \begin{remark}
+%   \cref{prop_PhiA_is_strictly_unital}の歴史 (\cite{Sei} remark 2.2を参照)
+% \end{remark}
+
+\section{\texorpdfstring{$\Ainf$}{Ainf}関手圏と\texorpdfstring{$\Ainf$}{Ainf}合成関手に対するc-unital性}
+
+恒等射を持つ$\Ainf$圏に対して成立する命題をc-unitalな$\Ainf$圏に対して拡張することが本節の目標である. 
+
+例えば, 恒等射を持つ$\Ainf$圏への$\Ainf$関手のなす$\Ainf$関手圏は恒等射を持つ. 
+
+\begin{lemma} \label{prop_nufun_is_also_unital}
+  $\A$を恒等射を持つ$\Ainf$圏とする. 
+  任意の$\Ainf$圏$\C$に対して, $\Q := \nufun{\C}{\A}$は恒等射を持つ. 
+\end{lemma}
+
+\begin{proof}
+  任意の$X \in \Ob\C$と$\F \in \Ob\Q$に対して, $E_\F : \F \to \F$を次のように定義する.
+  \begin{description}
+    \item[($e=0$)] $E_\F^0 := e_{\F X} \in \hom_\A^0(\F X,\F X)$
+    \item[($e \geq 1$)] $E_\F^e := 0$
+  \end{description}
+  このとき, 任意の$t_1 \in \hom_\Q(\F_0,\F_1),\cdots,t_{e-1} \in \hom_\Q(\F_{e-2},\F_{e-1})$に対して
+  \begin{description}
+    \item[($e=1$)] $\mu^1_\Q(E_\F) = 0$ 
+    \item[($e=2$)] $(-1)^{|t_1|} \mu^2_\Q(E_{\F_1},t_1) = t_1 = \mu^2_\Q(t_1,E_{\F_0})$
+    \item[($e \geq 3$)] $\mu^e_\Q(t_{e-1},\cdots,t_{n+1},E_{\F_n},t_n,\cdots,t_1) = 0$
+  \end{description}
+  を示せばよいが, これらは計算すればわかる. 
+\end{proof}
+
+この命題をc-unitalな場合に拡張する.
+次の命題はこの拡張において非常に重要である.
+
+\begin{lemma} \label{prop_one_is_c_unital_induces_another}
+  $\F : \A \to \B$を$\Ainf$擬同型とする. 
+  このとき, $\A$がc-unitalであることと$\B$がc-unitalであることは同値である.
+\end{lemma}
+
+\begin{proof}
+  $d=2$における多項等式より
+  \begin{align*}
+    &\mu^1_\B(\F^2(a_2,a_1)) + \mu^2_\B(\F^1(a_2), \F^1(a_1)) \\
+    &= \F^2(a_2,\mu^1_\A(a_1)) + (-1)^{|a_1|-1} \F^2(\mu^1_\A(a_2),a_1) + \F^1(\mu^2_\A(a_2,a_1))
+  \end{align*}
+  である. 
+  $a_1,a_2$が$\mu^1_\A$で閉じている射のとき, $H(\B)$において
+  \begin{align*}
+    [\mu^2_\B(\F^1(a_2), \F^1(a_1))]
+    = [\F^1(\mu^2_\A(a_2,a_1))]
+  \end{align*}
+  となる. 
+  \begin{description}
+    \item[($\A$がc-unital)] 任意の$X \in \Ob\A$に対して, $e_X$が$H(\A)$におけるc-unitであるとする.
+    $\F$は$\Ainf$擬同型なので, 任意の$Y \in \Ob\B$に対して, ある$X \in \Ob\A$が存在して$\F X = Y$となる.
+    この$Y$に対して, $e_Y : Y \to Y$を$e_Y=e_{\F X} := \F^1(e_X)$と定義する. 
+    この$e_Y$が$H(\B)$におけるc-unitであることを示す. 
+    $\F : \A \to \B$は$\Ainf$擬同型なので, $\mu^1_\B$で閉じている任意の射$\tilde{a_1}, \tilde{a_2}$に対して, $\mu^1_\A$で閉じているある射$a_1,a_2$が存在して
+    \begin{align*}
+      [\F^1(a_1)] = [\tilde{a_1}], ~  [\F^1(a_2)] = [\tilde{a_2}]
+    \end{align*}
+    となる. 
+    $H(\B)$における多項等式において$a_1=e_X$または$a_2=e_X$とすると, $\B$がc-unitalであることが分かる. 
+    \item[($\B$がc-unital)] 任意の$Y \in \Ob\B$に対して, $e_Y$が$H(\B)$におけるc-unitであるとする.
+    $\F$は$\Ainf$擬同型なので, $\F X = Y$となる$X \in \Ob\A$と$\mu_\A^1$で閉じている射$e_X : X \to X$が存在して, $[\F^1(e_X)]=[e_Y]$となる.
+    この$e_X$が$H(\A)$におけるc-unitであることを示す. 
+    $H(\B)$における多項等式において$a_1=e_X$または$a_2=e_X$とすると, $\A$がc-unitalであることが分かる. 
+  \end{description}
+\end{proof}
+
+\begin{theorem} \label{prop_nufun_is_also_c-unital}
+  任意のc-unitalな$\Ainf$圏$\A$に対して, 次の2つが成立する. 
+  \begin{enumerate}
+    \item 任意の$\Ainf$圏$\C$に対して, $\Q := \nufun{\C}{\A}$はc-unitalである. 
+    \item $E_\F \in \hom^0_\Q(\F,\F)$が$H(\Q)$におけるc-unitであるとき, 任意の$X \in \Ob\C$に対して, $E^0_\F \in \hom^0_\A(\F X,\F X)$は$H(\A)$におけるc-unitである. 
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  \cref{prop_PhiA_is_strictly_unital}を用いて, $\Phi^1=\id_{\hom_\A(X_0,X_1)}$である形式的微分同相を$\Phi$, $\tilA := \Phi_\ast \A$を恒等射を持つ$\Ainf$圏とする. 
+  それぞれ次のように示すことができる. 
+  \begin{enumerate}
+    \item \cref{prop_nufun_is_also_unital}より$\tilQ := \nufun{\C}{\tilA}$は恒等射を持つ. 
+    $\Phi : \A \to \tilA$は$\Ainf$擬同型なので, $\L_\Phi : \Q \to \tilQ$は$\Ainf$擬同型である. 
+    \cref{prop_one_is_c_unital_induces_another}より, $\Q$はc-unitalである.
+    \item $\F \in \Ob\Q$の$\Phi$による左合成を$\tilF$とあらわす. 
+    自然変換性より, 次の図式は可換である.
+    \[\begin{tikzcd}
+      {\hom_{H(\Q)}(\F,\F)} && {\hom_{H(\tilQ)}(\tilF,\tilF)} \\
+      {\hom_{\Nufun{\C}{\A}}(H(\F),H(\F))} && {\hom_{\Nufun{\C}{\tilA}}(H(\tilF),H(\tilF))}
+      \arrow["{H(\L^1_\Phi) ~ \cong}", from=1-1, to=1-3]
+      \arrow[from=1-1, to=2-1]
+      \arrow[from=1-3, to=2-3]
+      \arrow["="', from=2-1, to=2-3]   
+    \end{tikzcd}\]
+    $\Phi : \A \to \tilA$は$\Ainf$(擬)同型なので, $\L_\Phi : \Q \to \tilQ$は$\Ainf$擬同型である. 
+    よって, $H(\L^1_\Phi)$はコホモロジー圏における複体の同型射である. 
+    また, $\Phi^1=\id_{\hom_\A(X_0,X_1)}$なので$H(\A) = H(\tilA)$である. よって
+    \begin{align*}
+      \Nufun{\C}{\A} = \Nufun{\C}{\tilA}
+    \end{align*}
+    である. 
+    $H(\tilQ)$におけるc-unitである$\Q$における射を$E_\F$とあらわす. 
+    つまり, $E_\F$は
+    \begin{align*}
+      \L^1_\Phi : \hom_\Q(\F,\F) \to \hom_{\tilQ}(\L_\Phi \F,\L_\Phi \F) : E_\F \mapsto  E_{\tilF}
+    \end{align*}
+    によって, $H(\tilQ)$において
+    \begin{align*}
+      [E_{\tilF}] = H(\L^1_\Phi)([E_\F])
+    \end{align*}
+    となる$\Q$における射である. 
+    $H(\L_\Phi)$は関手なので, $[E_\F]$は$H(\Q)$における恒等射である. 
+    上の図式のdiagram chasing
+    \[\begin{tikzcd}
+      {[E_\F]} && {[E_{\tilF}]} \\
+      & {H(E_\F)}
+      \arrow["{H(\L_\Phi)}", maps to, from=1-1, to=1-3]
+      \arrow[maps to, from=1-1, to=2-2]
+      \arrow[maps to, from=1-3, to=2-2]
+    \end{tikzcd}\]
+    より, $H(E_\F)$は$\Nufun{\C}{\A}(= \Nufun{\C}{\tilA})$における恒等射である. 
+    よって, $[E_\F^0] : \F X \to \F X$は$H(\A)$におけるc-unitである. 
+  \end{enumerate}
+\end{proof}
+
+恒等射を保つ$\Ainf$関手の$\Ainf$合成関手は恒等射を保つ. 
+
+\begin{lemma}
+  $\G : \A \to \B$を恒等射を保つ$\Ainf$関手とする. 
+  任意の$\Ainf$圏$\A$に対して, 左合成関手$\LG : \nufun{\C}{\A} \to \nufun{\C}{\B}$は恒等射を保つ. 
+\end{lemma}
+
+\begin{proof}
+  \cref{prop_nufun_is_also_unital}より, $\nufun{\C}{\A}$と$\nufun{\C}{\B}$は恒等射を持つ. 
+  任意の$\F \in \Ob\nufun{\C}{\A}$における恒等射を$E_\F$と表すとき, $\LG^1(E_\F)$が$\nufun{\C}{\B}$における恒等射であることを示せばよい.
+
+\end{proof}
+
+この命題をc-unitalな場合に拡張する.
+$\Ainf$左合成関手と$\Ainf$右合成関手でわずかに主張が異なる. 
+
+\begin{theorem} \label{prop_LG_is_also_c_unital}
+  $\G : \A \to \B$をc-unitを保つ$\Ainf$関手とする. 
+  任意の$\Ainf$圏$\A$に対して, 左合成関手$\LG : \nufun{\C}{\A} \to \nufun{\C}{\B}$はc-unitを保つ. 
+\end{theorem}
+
+\begin{proof}
+  \cref{prop_nufun_is_also_c-unital}より$\nufun{\C}{\A}$と$\nufun{\C}{\B}$はc-unitalである.
+  $\F : \C \to \A$をc-unitを保つ$\Ainf$関手とする. 
+  $E_\F \in \hom^0_{\nufun{\C}{\A}} (\F,\F)$を$H(\nufun{\C}{\A})$におけるc-unitとする. 
+  このとき
+  \begin{align*}
+    [\LG^1(E_\F)] \in \hom^0_{H(\nufun{\C}{\B})} (\G \circ \F,\G \circ \F)
+  \end{align*}
+  である. 
+  \cref{prop_nufun_is_also_c-unital}より, 任意の$X \in \Ob\C$に対して$E^0_\F \in \hom^0_\A(\F X,\F X)$は$H(\A)$におけるc-unitである. 
+  よって 
+  \begin{align*}
+    (\LG^1(E_\F))^0 = \G^1(E^0_\F) \in \hom^0_\B(\G(\F X), \G(\F X))
+  \end{align*}
+  は$H(\B)$におけるc-unitである.
+  フィルトレーションの章の$\Ainf$合成関手の性質と$\nufun{\C}{\B}$がc-unitalであることより, $[\LG^1(E_\F)]$は同型射である. 
+  $E_\F$は冪等で$\LG$は関手なので, $[\LG^1(E_\F)]$は冪等である. 
+  冪等な同型射は恒等射なので, $\LG^1(E_\F)$は$H(\nufun{\C}{\B})$におけるc-unitである. 
+  よって, $\LG$はc-unitを保つ. 
+\end{proof}  
+
+\begin{theorem} \label{prop_RG_is_also_c_unital}
+  $\A, \B$を恒等射を持たない$\Ainf$圏, $\F : \A \to \B$を恒等射を考えない$\Ainf$関手とする.  
+  任意のc-unitalな$\Ainf$圏$\C$に対して, 右合成関手$\RG : \nufun{\B}{\C} \to \nufun{\A}{\C}$はc-unitを保つ.
+\end{theorem}
+
+\begin{proof}
+  \cref{prop_LG_is_also_c_unital}と同様. 
+\end{proof}
+
+\begin{definition}[修正前自然変換] \label{def_modified_pre_natural_transformation}
+  $\C$を恒等射を持たない$\Ainf$圏, $\A$を恒等射を持つ$\Ainf$圏, $\F_0,\F_1 : \C \to \A$を恒等射を考えない$\Ainf$関手とする. 
+  $T^0 = 0$である次数$0$の前自然変換$T : \F_0 \to \F_1$に対して, 前自然変換$S : \F_0 \to \F_1$を次のように定義する. 
+  \begin{description}
+    \item[($e=0$)] $S^0 := e_{\F_0 X}$
+    \item[($e \geq 1$)] $S^e := T^e$
+  \end{description}
+  $S$を修正前自然変換(modified pre-natural transformation)という. 
+\end{definition}
+
+\begin{lemma} \label{prop_homotopy_equivalet_natural_transformation}
+  \cref{def_modified_pre_natural_transformation}の記号を用いる.
+  このとき, 次の2つは同値である.
+  \begin{enumerate}
+    \item $T$は$\F_0$から$\F_1$へのホモトピーである. 
+    \item $S$は$\F_0$から$\F_1$への自然変換である.
+  \end{enumerate}
+\end{lemma}
+
+恒等射を持つ$\Ainf$圏へのホモトピックな$\Ainf$関手は$\Ainf$関手圏の$0$次コホモロジー圏において同型である. 
+
+\begin{lemma} \label{prop_homotopic_is_iso_in_H^0}
+  $\C$を恒等射を持たない$\Ainf$圏, $\A$を恒等射を持つ$\Ainf$圏, $\F_0,\F_1 : \C \to \A$を恒等射を考えない$\Ainf$関手とする. 
+  $\F_0$と$\F_1$がホモトピックであるとき, $H^0(\nufun{\C}{\A})$において$\F_0$と$\F_1$は同型である. 
+\end{lemma}
+
+\begin{proof}
+  \cref{prop_homotopy_equivalet_natural_transformation}より, 修正前自然変換$S$は$\F_0$から$\F_1$への自然変換である. 
+  $S^0 := e_{\F_0 X}$よりフィルトレーションの章の$\Ainf$合成関手の性質を用いると, $H^0(\Q)$において$[S]$の右合成は同型 
+  \begin{align*}
+    \hom_{H^0(\Q)}(\F_0,-) \cong \hom_{H^0(\Q)}(\F_1,-)
+  \end{align*}
+  を定める. 
+  $H^0(\Q)$におけるYonedaの補題より, $H^0(\nufun{\C}{\A})$において$\F_0$と$\F_1$は同型である. 
+\end{proof}
+
+この命題をc-unitalな場合に拡張する.
+
+\begin{theorem}
+  $\C$を恒等射を持たない$\Ainf$圏, $\A$をc-unitalな$\Ainf$圏, $\F_0,\F_1 : \C \to \A$を恒等射を考えない$\Ainf$関手とする. 
+  $\F_0$と$\F_1$がホモトピックであるとき, $\F_0$と$\F_1$は$H^0(\nufun{\C}{\A})$において同型である. 
+\end{theorem}
+
+\begin{proof}
+  \cref{prop_nufun_is_also_c-unital}の記号を用いる. 
+  \cref{prop_composition_functor_preserves_homotopic}より, 左合成関手はホモトピーを保つ. 
+  よって, $\tilF_1 : = \Phi \circ \F_1$と$\tilF_2 := \Phi \circ \F_2$は$\tilQ$においてホモトピックである.
+  \cref{prop_homotopic_is_iso_in_H^0}より, $\tilF_1$と$\tilF_2$は$H^0(\tilQ)$において同型である. 
+  \cref{prop_LG_is_also_cohomologically_fully_faithful}より$\L_\Phi$は$\Ainf$擬同型なので, $\F_1$と$\F_2$は$H^0(\Q)$において同型である. 
+\end{proof}
+
+\section{Morita不変量}
+
+$A,B$を恒等射を持つ次数付き線形圏, $F_0,F_1 : A \to B$を恒等射を保つ次数付き線形関手とする.
+$A$への包含関手が圏同値であるような$A$の部分圏を$\tilde{A} \subset A$と表す. 
+
+\begin{lemma} \label{prop_restriction_induces_iso_of_Hochschild}
+  $F_0,F_1$の$\tilde{A}$への制限はHochschildコホモロジー上の同型
+  \begin{align*}
+    HH(A,B) \cong HH(\tilde{A},B)
+  \end{align*}
+  を定める. 
+\end{lemma}
+
+% % \cref{prop_restriction_induces_iso_of_Hochschild}は次のように一般的に証明することができる. 
+
+% % \begin{remark} \label{rem_another_proof_of_iso_of_Hochschild}
+  
+% % \end{remark}
+
+\section{\texorpdfstring{$\Ainf$}{Ainf}擬同値}
+
+\begin{definition}[c-unitを保つ$\Ainf$関手圏]
+  c-unitを保つ$\Ainf$関手のなす$\Ainf$関手圏をc-unitを保つ$\Ainf$関手圏(c-unital $\Ainf$-functor category)といい, $\fun{\A}{\B}$と表す. 
+\end{definition}
+
+\begin{remark}
+  $\fun{\A}{\B}$は$\nufun{\A}{\B}$の充満部分圏である. 
+\end{remark}
+
+\begin{definition}[$\Ainf$擬同値]
+  c-unitを保つ$\Ainf$関手$\F : \A \to \B$に対して, $H(\F)$がコホモロジー圏の圏同値
+  \begin{align*}
+    H(\A) \simeq H(\B)
+  \end{align*}
+  を定めるとき, $\F$は$\Ainf$擬同値($\Ainf$-quasi-equivalence)であるという. 
+\end{definition}
+
+\begin{example} \label{eg_Ainf_qeq_is_cohomologically_fully_faithful}
+  $\Ainf$擬同型は$\Ainf$擬同値である. 
+  また, $\Ainf$擬同値はコホモロジー圏上で忠実充満である. 
+\end{example}
+
+c-unitを保つ$\Ainf$関手の制限は$\Ainf$関手圏の間の$\Ainf$擬同値を定める. 
+
+\begin{lemma} \label{prop_restriction_induces_Ainf_qeq}
+  c-unitalな$\Ainf$圏$\A$に対して, $\A$への包含関手が$\Ainf$擬同値であるような$\A$の$\Ainf$充満部分圏を$\tilA \subset \A$と表す. 
+  任意のc-unitalな$\Ainf$圏$\B$に対して, c-unitを保つ$\Ainf$関手$\F : \A \to \B$と前自然変換の$\tilA$への制限は$\Ainf$擬同値
+  \begin{align*}
+    H(\fun{\A}{\B}) \simeq H(\fun{\tilA}{\B})
+  \end{align*}
+  を定める. 
+\end{lemma}
+
+\begin{proof}
+  
+\end{proof}
+
+\begin{remark} \label{rem_inclusion_induces_iso_in_H^0}
+  \cref{prop_restriction_induces_Ainf_qeq}の証明より, あるc-unitを保つ$\Ainf$関手$\P : \A \to \tilA$が存在して
+  \begin{align*}
+    \P|_{\tilA} = \Id_{\tilA}
+  \end{align*}
+  を満たす. 
+  包含関手を$\K : \tilA \to \A$と表すと
+  \begin{align*}
+    \P \circ \K = \Id_{\tilA}
+  \end{align*}
+  である. 
+  ここで
+  \begin{align*}
+    &\L_\P(\K \circ \P) = \P \circ \K \circ \P = \Id_{\tilA} \circ \P = \P \\
+    &\L_\P(\Id_\A) = \P \circ \Id_\A = \P
+  \end{align*}
+  なので
+  \begin{align*}
+    \L_\P(\K \circ \P) = \L_\P(\Id_\A)
+  \end{align*}
+  である.
+  定義より, $\K$は$\Ainf$擬同値なので, $\P$も$\Ainf$擬同値である. 
+  特に, $\P$はコホモロジー圏上で忠実充満である. 
+  $\Ainf$左合成関手はコホモロジー圏上で忠実充満なので, $\L_\P$はコホモロジー圏上で忠実充満である.
+  よって, $\K \circ \P$と$\Id_\A$は$H^0(\fun{\A}{\A})$において同型である. 
+\end{remark}
+
+$\Ainf$擬同値は$0$次コホモロジー圏においてホモトピー逆関手をもつ. 
+
+\begin{theorem} \label{prop_Ainf_qeq_has_inverse_in_H^0}
+  $\Ainf$擬同値$\F : \A \to \B$に対して, ある$\Ainf$擬同値$\G : \B \to \A$が存在して次を満たす. 
+  \begin{itemize}
+    \item $H^0(\fun{\A}{\A})$において$\G \circ \F \cong \Id_\A$ 
+    \item $H^0(\fun{\B}{\B})$において$\F \circ \G \cong \Id_\B$ 
+  \end{itemize}
+\end{theorem}
+
+\begin{proof}
+  次の条件を満たす$\Ainf$充満部分圏$\tilA \subset \A, \tilB \subset \B$がそれぞれ存在する. % 圏の骨格
+  \begin{itemize}
+    \item 包含関手$\K_\A : \tilA \to \A$と$\K_\B : \tilB \to \B$は$\Ainf$擬同値である. 
+    \item $\F : \A \to \B$のそれぞれへの制限$\tilF : \tilA \to \tilB$は$\Ainf$擬同型である. 
+  \end{itemize}
+  \[\begin{tikzcd}
+    \A && \B \\
+    \\
+    \tilA && \tilB
+    \arrow["\F", from=1-1, to=1-3]
+    \arrow["{\K_\A}", hook', from=3-1, to=1-1]
+    \arrow["{\K_\B}"', hook', from=3-3, to=1-3]
+    \arrow["{\Ainf \text{-} qis}"', dashed, from=3-1, to=3-3]
+    \arrow["\tilF", no body, from=3-1, to=3-3]
+  \end{tikzcd}\]
+  この図式において, $\tilF$以外は$\Ainf$擬同値である. 
+  \cref{rem_inclusion_induces_iso_in_H^0}より, $\Ainf$擬同値$\P_\A : \A \to \tilA$と$\P_\B : \B \to \tilB$が存在する. 
+  \cref{prop_Ainf_qis_has_homotopy_inverse}より, $\Ainf$擬同型$\tilG : \tilB \to \tilA$が存在する. 
+  ここで
+  \begin{align*}
+    \G := \K_\A \circ \tilG \circ \P_\B : \B \to \A
+  \end{align*}
+  と定義する.
+  \[\begin{tikzcd}
+    \A & \B && \A & \B \\
+    \tilA & \tilB && \tilA & \tilB
+    \arrow["\F", from=1-1, to=1-2]
+    \arrow["{\P_A}"', from=1-1, to=2-1]
+    \arrow["\tilF"', from=2-1, to=2-2]
+    \arrow["{\K_\B}"', from=2-2, to=1-2]
+    \arrow["\G"', from=1-5, to=1-4]
+    \arrow["{\P_B}", from=1-5, to=2-5]
+    \arrow["\tilG", from=2-5, to=2-4]
+    \arrow["{\K_A}", from=2-4, to=1-4]
+  \end{tikzcd}\]
+  \cref{rem_inclusion_induces_iso_in_H^0}より, $H^0(\fun{\A}{\A})$において
+  \begin{align*}
+    \G \circ \F 
+    &\cong (\K_\A \circ \tilG \circ \P_\B) \circ (\K_\B \circ \tilF \circ \P_\A) \\
+    &= \K_\A \circ \tilG \circ \Id_{\tilB} \circ \tilF \circ \P_\A \\
+    &\cong \K_\A \circ \Id_{\tilA} \circ \P_\A \\
+    &= \Id_\A
+  \end{align*}
+  $H^0(\fun{\B}{\B})$において$\F \circ \G \cong \Id_\B$となることも同様に示せる. 
+\end{proof}
+
+% \begin{remark}
+%   \cref{prop_Ainf_qeq_has_inverse_in_H^0}の歴史について (\cite{Sei}のremark 2.11を参照)
+% \end{remark}
+
+$\Ainf$擬同値を合成する$\Ainf$合成関手は$\Ainf$擬同値である. 
+
+\begin{lemma}
+  $\G : \A \to \B$を$\Ainf$擬同値とする. 
+  任意の$\Ainf$圏$\C$に対して, $\RG : \fun{\B}{\C} \to \fun{\A}{\C}$は$\Ainf$擬同値である. 
+  左合成に対しても同様に成立する. 
+\end{lemma}
+
+\begin{proof}
+  \cref{prop_LG_is_also_c_unital}より, $\RG$はコホモロジー圏上で忠実充満である.
+  あとはコホモロジー圏上で本質的全射であることを示せばよい. 
+  \footnote{
+    例えば, $\G$が$\Ainf$擬同型であるときは\cref{prop_LG_is_also_cohomologically_fully_faithful}より従う. 
+    $\G$が充満部分圏からの包含関手であるときは\cref{prop_restriction_induces_Ainf_qeq}より従う. 
+    (これは$\Ainf$擬同値であることまで言えている.)
+  }
+  つまり, 任意の$\H \in \Ob\fun{\A}{\C}$に対して, ある$- \in\fun{\B}{\C}$が存在して$\RG(-) \cong \H$を満たすことを言えばよい. 
+  \cref{prop_Ainf_qeq_has_inverse_in_H^0}より, ある$\F : \B \to \A$が存在して, $\F \circ \G \cong \Id_\A$を満たす. 
+  よって, $H^0(\fun{\A}{\C})$において
+  \begin{align*}
+    \RG(\H \circ \F) 
+    = \L_\H(\F \circ \G) 
+    \cong \L_\H(\Id_\A) 
+    = \H
+  \end{align*}
+\end{proof}
+
+\section{恒等射を保つ\texorpdfstring{$\Ainf$}{Ainf}加群}
+
+\begin{lemma}
+  c-unitalな$\Ainf$圏$\A$に対して, $\numod{\A}$は恒等射を持つ. 
+\end{lemma}
+
+\begin{proof}
+  $\Ch$は恒等射を持つので, \cref{prop_nufun_is_also_c-unital}より$\numod{\A} = \nufun{\Aop}{\Ch}$は恒等射を持つ. 
+\end{proof}
+
+\begin{remark}
+  $\numod{\A}$における恒等射$e_\M$は次のように表される. %定義すればよい?
+  任意の$X \in \Ob\A$と$b \in \M(X)$に対して
+  \begin{description}
+    \item[($e=1$)] $e^1_\M(b) = (-1)^{|b|}b$
+    \item[($e \geq 2$)] $e^e_\M = 0$
+  \end{description}
+\end{remark}
+
+\begin{definition}[コホモロジー圏上で恒等射を保つ$\Ainf$加群]
+  $\Ainf$加群$\M$が$\Ainf$関手としてc-unitを保つとき, $\M$はコホモロジー圏上で恒等射を保つ$\Ainf$加群(cohomologically unital $\Ainf$-module)であるという. 
+  以降では, c-unitを保つ$\Ainf$加群という. 
+\end{definition}
+
+\begin{remark}
+  
+\end{remark}
+
+\begin{definition}[c-unitを保つ$\Ainf$加群のなす圏]
+  c-unitを保つ$\Ainf$加群のなす$\Ainf$関手圏をc-unitを保つ$\Ainf$加群圏(category of c-unital $\Ainf$-modules)といい, $\mod{\A}$と表す. 
+\end{definition}
+
+\section{\texorpdfstring{$\Ainf$}{Ainf}プルバック関手に対するc-unital性}
+
+\section{\texorpdfstring{$\Ainf$}{Ainf}-Yonedaの補題}
+
+\begin{lemma}
+  $\Ainf$-Yoneda埋め込みはc-unitを保つ. 
+\end{lemma}
+
+\begin{proof}
+  $\Ainf$-Yoneda埋め込みの定義より従う. 
+\end{proof}
+
+\begin{lemma}[$\Ainf$-Yonedaの補題] \label{prop_Ainf_Yoneda_lemma}
+  $\A$をc-unitalな$\Ainf$圏とする. 
+  任意の$Y \in \Ob\A$とc-unitを保つ$\Ainf$加群$\M$に対して, 「恒等射を持たない$\Ainf$圏」で定義された
+  \begin{align*}
+    &\lambda_\M : \M(Y) \to \hom_\Q(\Y,\M) \\
+    &(\lambda_\M(c))^d(b,a_{d-1},\cdots,a_1) := \mu^{d+1}_\M(c,b,a_{d-1},\cdots,a_1)
+  \end{align*}
+  は擬同型である. 
+\end{lemma}
+
+\begin{proof}
+  $\lambda_\M$の写像錐を$-1$だけシフトした複体を考える.
+  \begin{align*}
+    \qty(\M(Y) \oplus \hom_\Q(\Y,\M)[-1], 
+    \begin{pmatrix}
+      \mu^1_\M & \lambda_\M \\
+      0 & -\mu^1_\Q
+    \end{pmatrix})
+  \end{align*} 
+\end{proof}
+
+\cref{prop_Ainf_Yoneda_lemma}においてc-unitを保つ$\Ainf$加群としてYoneda埋め込み$\Y$をとると, $\lambda_\M$は$l_\A$に一致して次の系が得られる.
+
+\begin{corollary} \label{prop_l_A_is_cohomologically_fully_faithful}
+  $\A$をc-unitalな$\Ainf$圏とする. 
+  $l_\A : \A \to \mod{\A}$はコホモロジー圏上で忠実充満である. 
+\end{corollary}
+
+$l_\A$の像を考えると次の命題が従う. 
+
+\begin{corollary} \label{prop_Ainf_Yoneda_ver0}
+  任意のc-unitalな$\Ainf$圏は恒等射を持つdg圏と$\Ainf$擬同型である. 
+\end{corollary}
+
+\begin{proof}
+  $\mod{\A}$が恒等射を持つdg圏であることより従う. 
+\end{proof}
+
+% \begin{remark}
+%   \cref{prop_Ainf_Yoneda_lemma}は\cref{rem_another_proof_of_iso_of_Hochschild}と同様に一般的に証明することができる.
+% \end{remark}
+
+\bibliographystyle{jalpha}
+\bibliography{../A_infty_cf}
+
+\end{document}

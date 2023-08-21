@@ -1,0 +1,627 @@
+\RequirePackage{plautopatch}
+\documentclass[uplatex, a4paper, 14Q, dvipdfmx]{jsarticle}
+\usepackage{docmute}
+\usepackage{../mypackage}
+
+\title{\texorpdfstring{$\Tw\A$}{TwA}と\texorpdfstring{$\Tr{\A}$}{TrA}}
+\author{よの}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  ねじれ複体を定義することで, 具体的な三角圏の構成を与えることができる. 
+\end{abstract}
+
+\tableofcontents
+
+\section{加法的拡大}
+
+$I$を有限集合, $\A$を恒等射を持たない$\Ainf$圏とする.
+$\{X^i\}_{i \in I}$を$\A$の対象の族, $\{V^i\}_{i \in I}$を次数付き有限次元ベクトル空間の族とする.
+
+\begin{definition}[$\A$の対象の加法的拡大]
+  $\{X^i\}_{i \in I}$と$\{V^i\}_{i \in I}$に対して, 形式的なテンソル積$\otimes$と直和$\bigoplus$
+  \footnote{
+    この2つは単なる記号であることに注意. 
+    3章で定義されたテンソル積と直和とは「今は」関係がない.
+  }
+  を用いて
+  \begin{align*}
+    X = (I,\{X^i\},\{V^i\}) := \bigoplus_{i \in I} V^i \otimes X^i
+  \end{align*}
+  を$\A$の対象の加法的拡大(additive enlargement of object in $\A$)という. 
+\end{definition}
+
+\begin{definition}[加法的拡大の射]
+  $\A$の対象の加法的拡大$X_0 = \bigoplus_{i \in I_0} V_0^i \otimes X_0^i, X_1 = \bigoplus_{j \in I_1} V_1^j \otimes X_1^j$に対して, $X_0$から$X_1$への射の集まり$\hom(X_0,X_1)$を次のように定義する. 
+  \begin{align*}
+    \hom (X_0,X_1) 
+    &= \hom \qty(\bigoplus_{i \in I_0} V_0^i \otimes X_0^i, \bigoplus_{j \in I_1} V_1^j \otimes X_1^j) \\
+    &:= \qty(\bigoplus_{i,j} \hom_{\bbK}(V_0^i,V_1^j) \otimes \hom_\A(X_0^i,X_1^j))
+  \end{align*}
+  \footnote{
+    最後の$\hom_{\bbK}$は集合で$\hom_\A$はベクトル空間なので, 最後のテンソル積と直和は通常のものである. 
+  }
+  $\hom (X_0,X_1)$の元を加法的拡大の射(morphism of additive enlargements)という. 
+\end{definition}
+
+加法的拡大の射は行列表示することができる.
+
+\begin{notation}[加法的拡大の射の行列表示]
+  加法的拡大の射に対して
+  \begin{align*}
+    a^{ji} &\in \hom_{\bbK}(V_0^i,V_1^j) \otimes \hom_\A(X_0^i,X_1^j) \\
+    \sum_{k} \phi^{j,i,k} &\in \hom_{\bbK}(V_0^i,V_1^j) \\
+    \sum_{k} x^{j,i,k} &\in \hom_\A(X_0^i,X_1^j)
+  \end{align*}
+  とすると, 任意の$a \in \hom (X_0,X_1)$は
+  \begin{align*}
+    a = (a^{j,i}) 
+    = \begin{pmatrix}
+      a^{1,1} & \cdots & a^{1,I_1} \\
+      \vdots & \ddots & \vdots \\
+      a^{I_0,1} & \cdots & a^{I_0,I_1}
+    \end{pmatrix}
+    = \begin{pmatrix}
+      \sum_{k} \phi^{1,1,k} \otimes x^{1,1,k} & \cdots & \sum_{k} \phi^{1,I_1,k} \otimes x^{1,I_1,k} \\
+      \vdots & \ddots & \vdots \\
+      \sum_{k} \phi^{I_0,1,k} \otimes x^{I_0,1,k} & \cdots & \sum_{k} \phi^{I_0,I_1,k} \otimes x^{I_0,I_1,k}
+    \end{pmatrix}
+  \end{align*}
+  と表される. 
+  \footnote{
+    $(a^{j,i})$において$\sum$の添え字は$k$で固定して書いているが, 実際は異なることに注意.
+    簡単のため, $k=1$で$\sum$を省略する場合を考えることがある. 
+  }
+\end{notation}
+
+加法的拡大の集まりは恒等射を持たない$\Ainf$圏を定める.
+
+\begin{definition}[恒等射を持たない$\Ainf$圏$\Sigma\A$]
+  恒等射を持たない$\Ainf$圏$\Sigma\A$を次のように定義する. 
+  \begin{itemize}
+    \item $\Sigma\A$の対象$X$は$\A$の対象の加法的拡大
+    \begin{align*}
+      X := \bigoplus_{i \in I} V^i \otimes X^i
+    \end{align*}
+    \item 任意の$X_0,X_1 \in \Ob\Sigma\A$に対して, $\hom_{\Sigma\A}(X_0,X_1)$は加法的拡大の射の集まり
+    \begin{align*}
+      \hom_{\Sigma\A}(X_0,X_1)
+      := \hom \qty(\bigoplus_{i,j} \hom_{\bbK}(V_0^i,V_1^j) \otimes \hom_\A(X_0^i,X_1^j))
+    \end{align*}
+    \item 任意の$d \geq 1$と$a_1 = (a_1^{j,i}) = (\phi_1^{j,i} \otimes x_1^{j,i}), \cdots, a_d = (a_d^{j,i}) = (\phi_d^{j,i} \otimes x_d^{j,i})$に対して, 合成
+    \begin{align*}
+      \mu^d_{\Sigma\A} : \hom_{\Sigma\A}(X_{d-1},X_d) \otimes \cdots \otimes \hom_{\Sigma\A}(X_0,X_1) \to \hom_{\Sigma\A}(X_0,X_d)[2-d]
+    \end{align*}
+    は次のように定義される. 
+    \begin{align*}
+      \mu^d_{\Sigma\A}(a_d,\cdots,a_1)^{i_d,i_0} 
+      &:= \sum_{i_1,\cdots,i_{d-1} \geq 0} (-1)^\triangleleft 
+      \phi_d^{i_d,i_{d-1}} \circ  \cdots \circ \phi_1^{i_1,i_0} \otimes \mu^d_\A(x_d^{i_d,i_{d-1}}, \cdots, x_1^{i_1,i_0}) \\
+      \mu^d_{\Sigma\A}(a_d,\cdots,a_1) 
+      &:= (\mu^d_{\Sigma\A}(a_d,\cdots,a_1)^{i_d,i_0})
+    \end{align*}
+    ここで
+    \begin{align*}
+      \triangleleft 
+      := \sum_{p < q} |\phi_p^{i_p,i_{p-1}}| \cdot (|x_q^{i_q,i_{q-1}}|-1)
+    \end{align*}
+    である. 
+  \end{itemize}
+  $\Sigma\A$を$\A$の加法的拡大(additive enlargement of $\A$)という. 
+\end{definition}
+
+\begin{proof}
+  加法的拡大$\Sigma\A$が恒等射を持たない$\Ainf$圏であることをみる.
+  つまり, $\mu_{\Sigma\A}$が$\Ainf$結合式 
+  \begin{align*}
+    \sum_{m,n} (-1)^{\maltese n} \mu^{d-m+1}_{\Sigma\A}(a_d,\cdots,a_{n+m+1}, \mu^m_{\Sigma\A}(a_{n+m},\cdots,a_{n+1}), a_n,\cdots,a_1)
+    = 0
+  \end{align*}
+  を満たすことをみる.
+  これは$\mu_{\Sigma\A}$の定義と$\mu_\A$が$\Ainf$結合式を満たすことより従う.
+\end{proof}
+
+恒等射を持たない$\Ainf$圏は加法的拡大に埋め込むことができる. 
+
+\begin{lemma} \label{prop_A_embedding_to_TwA}
+  恒等射を持たない$\Ainf$圏$\A$は加法的拡大$\Sigma\A$に充満部分圏として埋め込むことができる. 
+\end{lemma}
+
+\begin{proof}
+  $I$は$1$点集合$\{\ast\}$, $X^\ast$は任意の$X \in \Ob\A$, $V^\ast$は標数$0$の体$\bbK$とすればよい. 
+  \begin{align*}
+    X := (\{\ast\}, X, \bbK) = \bbK \otimes X = X
+  \end{align*}
+\end{proof}
+
+\section{ねじれ複体}
+
+$\A$を恒等射を持たない$\Ainf$圏, $\Sigma\A$を加法的拡大とする. 
+
+\begin{definition}[前ねじれ複体]
+  $X \in \Ob\Sigma\A$と$\delta_X \in \hom^1_{\Sigma\A}(X,X)$の組$(X,\delta_X)$を前ねじれ複体(pre-twisted complex)という. 
+  $\delta_X$を微分(differntial)や連結(connection)という. 
+\end{definition}
+
+\begin{remark}
+  $X = \bigoplus_{i \in I} V^i \otimes X^i \in \Ob\Sigma\A$に対して, $\phi^{j,i,k} \in \hom_\bbK(V^i,V^j), x^{j,i,k} \in \hom_\A(X^i,X^j)$とする.
+  このとき$\delta_X^{j,i} = \sum_{k} \phi^{j,i,k} \otimes x^{j,i,k}$は$|\phi^{j,i,k}| + |x^{j,i,k}| = 1$を満たす. 
+\end{remark}
+
+前ねじれ複体に対する部分複体と商複体を形式的に定義する. 
+
+\begin{definition}[部分複体]
+  
+\end{definition}
+
+\begin{definition}[商複体]
+  
+\end{definition}
+
+\begin{definition}[ねじれ複体] \label{def_twisted_complex}
+  前ねじれ複体$(X,\delta_X)$が次の条件を満たすとき, 組$(X,\delta_X)$はねじれ複体(twisted complex)
+  \footnote{
+    \cref{def_twisted_complex}の条件(1)と(2)の両方を満たすとき, 片側ねじれ複体(one-sided twisted complex)といい, 条件(2)のみを満たすとき, ねじれ複体(twisted complex)という定義が主である. 
+    ねじれ複体は十分大きい$d$において$\mu^d_{\Sigma\A} = 0$でないとき, $\Ainf$-Maurer-Cartan等式は無限和を含むので定義することができない. 
+    本稿では, この意味でのねじれ複体は出てこないので, 片側ねじれ複体を単にねじれ複体という.
+    この記法は\cite{Sei}に従った. 
+  }
+  であるという. 
+  \begin{itemize}
+    \item $\delta_X = (\delta_X^{j,i})$はストリクト下三角行列
+    \footnote{
+      $\delta_X = (\delta_X^{ji})$において, $j \geq i$のとき$\delta_X^{ji} = 0$ということである.
+    }
+    である. 
+    \item $\Sigma\A$の$\Ainf$構造$\mu_{\Sigma\A}$は$\Ainf$-Maurer-Cartan等式($\Ainf$-Maurer-Cartan equation)
+    \begin{align*}
+      \sum_{d \geq 1} \mu^d_{\Sigma\A} (\underbrace{\delta_X,\cdots,\delta_X}_{d})
+      = \mu^1_{\Sigma\A}(\delta_X) + \mu^2_{\Sigma\A}(\delta_X,\delta_X) + \mu^3_{\Sigma\A}(\delta_X,\delta_X,\delta_X) + \cdots = 0
+    \end{align*}
+    を満たす. 
+  \end{itemize}
+\end{definition}
+
+\begin{remark}
+  $\mu_{\Sigma\A}$の定義と$\delta_X$がストリクト下三角行列であることより, $\Ainf$-Maurer-Cartan等式の左辺は有限個を除いて$0$である.
+\end{remark}
+
+\begin{definition}[恒等射を持たない$\Ainf$圏$\Tw\A$]
+  恒等射を持たない$\Ainf$圏$\Tw\A$を次のように定義する.
+  \begin{itemize}
+    \item 対象の集まり$\Ob\Tw\A := \Ob\Sigma\A$
+    \item 任意の$X_0,X_1 \in \Ob\Tw\A$に対して$\hom_{\Tw\A}(X_0,X_1) : = \hom_{\Sigma\A}(X_0,X_1)$
+    \item 任意の$d \geq 1$と$a_1 = (a_1^{j,i}) = (\phi_1^{j,i} \otimes x_1^{j,i}), \cdots, a_d = (a_d^{j,i}) = (\phi_d^{j,i} \otimes x_d^{j,i})$に対して, 合成
+    \begin{align*}
+      \mu^d_{\Tw\A} : \hom_{\Tw\A}(X_{d-1},X_d) \otimes \cdots \otimes \hom_{\Tw\A}(X_0,X_1) \to \hom_{\Tw\A}(X_0,X_d)[2-d]
+    \end{align*}
+    は次のように定義される. 
+    \begin{align*}
+      &\mu^d_{\Tw\A}(a_d,\cdots,a_1) \\
+      &:= \sum_{i_0,\cdots,i_d \geq 0} \mu^{d+i_0+\cdots+i_d}_{\Sigma\A} (
+      \underbrace{\delta_{X_d},\cdots,\delta_{X_d}}_{i_d}, a_d, 
+      \underbrace{\delta_{X_{d-1}},\cdots,\delta_{X_{d-1}}}_{i_{d-1}}, a_{d-1}, 
+      \cdots, a_1, 
+      \underbrace{\delta_{X_0},\cdots,\delta_{X_0}}_{i_0})
+    \end{align*}
+  \end{itemize}
+\end{definition}
+
+\begin{remark}
+  $\delta_X$がストリクト下三角行列であることより, $\Tw\A$の$\Ainf$構造$\mu_{\Tw\A}$の左辺は有限個を除いて$0$である.
+\end{remark}
+
+\begin{remark}
+  $\Tw\A$における$\Ainf$結合式は$\Ainf$-Maurer-Cartan方程式に一致する. 
+\end{remark}
+
+加法的拡大はねじれ複体のなす圏に埋め込むことができる.
+
+\begin{lemma}
+  $\A$を恒等射を持たない$\Ainf$圏とする. 
+  加法的拡大$\Sigma\A$はねじれ複体のなす圏$\Tw\A$に充満部分圏として埋め込むことができる. 
+\end{lemma}
+
+\begin{proof}
+  $\Sigma\A$は$\delta_X := 0$であると考えればよい.
+\end{proof}
+
+\section{加法的拡大とTwの関手性}
+
+加法的拡大を与える対応は恒等射を考えない$\Ainf$関手を定める.
+
+\begin{definition}[恒等射を考えない$\Ainf$関手$\Sigma\G$]
+  恒等射を考えない$\Ainf$関手$\G : \A \to \B$に対して, 恒等射を考えない$\Ainf$関手$\Sigma\G : \Sigma\A \to \Sigma\B$を次のように定義する. 
+  \begin{description}
+    \item[($e=0$)] 任意の$X = \bigoplus_{i \in I} V^i \otimes X^i \in \Ob\Sigma\A$に対して
+    \begin{align*}
+      \Sigma\G (\bigoplus_{i \in I} V^i \otimes X^i) 
+      := \bigoplus_{i \in I} V^i \otimes \G(X^i)
+    \end{align*}
+    \item[($d \geq 1$)] 任意の$a_1 = (a_1^{j,i}) = (\phi_1^{j,i} \otimes x_1^{j,i}), \cdots, a_d = (a_d^{j,i}) = (\phi_d^{j,i} \otimes x_d^{j,i})$に対して
+    \begin{align*}
+      \Sigma\G^d (a_d,\cdots,a_0)^{i_,i_0}
+      := \sum_{i_1,\cdots,i_{d-1}} (-1)^\triangleleft \phi_d^{i_d,i_{d-1}} \circ  \cdots \circ \phi_1^{i_1,i_0} \otimes \G^d(x_d^{i_d,i_{d-1}}, \cdots, x_1^{i_1,i_0})
+    \end{align*}
+  \end{description}
+\end{definition}
+
+\begin{definition}[前自然変換$\Sigma^1T$]
+  前自然変換$T : \G_0 \to \G_1$に対して, 前自然変換$\Sigma^1T : \Sigma\G_0 \to \Sigma\G_1$を次のように定義する.
+  \begin{description}
+    \item[($d \geq 1$)] 任意の$a_1 = (a_1^{j,i}) = (\phi_1^{j,i} \otimes x_1^{j,i}), \cdots, a_d = (a_d^{j,i}) = (\phi_d^{j,i} \otimes x_d^{j,i})$に対して
+    \begin{align*}
+      \Sigma^1T^d (a_d,\cdots,a_0)^{i_d,i_0} 
+      := \sum_{i_1,\cdots,i_{d-1}} (-1)^\triangleleft \phi_d^{i_d,i_{d-1}} \circ  \cdots \circ \phi_1^{i_1,i_0} \otimes T^d(x_d^{i_d,i_{d-1}}, \cdots, x_1^{i_1,i_0})
+    \end{align*}
+  \end{description}
+\end{definition}
+
+\begin{lemma}
+  対応$G \mapsto \Sigma\G$と$T \mapsto \Sigma^1T$は恒等射を考えない$\Ainf$関手 
+  \begin{align*}
+    \Sigma : \nufun{\A}{\B} \to \nufun{\Sigma\A}{\Sigma\B}
+  \end{align*}
+  を定める. 
+\end{lemma}
+
+同様の議論で, ねじれ複体を与える対応も恒等射を考えない$\Ainf$関手を定める.
+
+\begin{definition}[恒等射を考えない$\Ainf$関手$\Tw\G$]
+  恒等射を考えない$\Ainf$関手$\G : \A \to \B$に対して, 恒等射を考えない$\Ainf$関手$\Tw\G : \Tw\A \to \Tw\B$を次のように定義する. 
+  \begin{description}
+    \item[($d=0$)] 任意の$(X,\delta_X) \in \Ob\Tw\A$に対して
+    \begin{align*}
+      \Tw\G (X,\delta_X) 
+      := (\Sigma\G X, \sum_{e} \Sigma\G^e(\delta_X,\cdots,\delta_X))
+    \end{align*}
+    \item[($d \geq 1$)] 任意の$a_1 = (a_1^{j,i}) = (\phi_1^{j,i} \otimes x_1^{j,i}), \cdots, a_d = (a_d^{j,i}) = (\phi_d^{j,i} \otimes x_d^{j,i})$に対して
+    \begin{align*}
+      &\Tw\G^d (a_d,\cdots,a_0) \\
+      &:= \sum_{i_1,\cdots,i_d \geq 0} \Sigma\G^{d+i_0+\cdots+i_d} (
+        \underbrace{\delta_{X_d},\cdots,\delta_{X_d}}_{i_d}, a_d, 
+        \underbrace{\delta_{X_{d-1}},\cdots,\delta_{X_{d-1}}}_{i_{d-1}}, a_{d-1}, 
+        \cdots, a_1, 
+        \underbrace{\delta_{X_0},\cdots,\delta_{X_0}}_{i_0})
+    \end{align*}
+  \end{description}
+\end{definition}
+
+\begin{definition}[前自然変換$\Tw^1T$]
+  前自然変換$T : \G_0 \to \G_1$に対して, 前自然変換$\Tw^1T : \Tw\G_0 \to \Tw\G_1$を次のように定義する.
+  \begin{description}
+    \item[($d \geq 1$)] 任意の$a_1 = (a_1^{j,i}) = (\phi_1^{j,i} \otimes x_1^{j,i}), \cdots, a_d = (a_d^{j,i}) = (\phi_d^{j,i} \otimes x_d^{j,i})$に対して
+    \begin{align*}
+      &\Tw^1T^d (a_d,\cdots,a_0) \\
+      &:= \sum_{i_1,\cdots,i_d \geq 0} \Sigma^1T^{d+i_0+\cdots+i_d} (
+        \underbrace{\delta_{X_d},\cdots,\delta_{X_d}}_{i_d}, a_d, 
+        \underbrace{\delta_{X_{d-1}},\cdots,\delta_{X_{d-1}}}_{i_{d-1}}, a_{d-1}, 
+        \cdots, a_1, 
+        \underbrace{\delta_{X_0},\cdots,\delta_{X_0}}_{i_0})
+    \end{align*}
+  \end{description}
+\end{definition}
+
+\begin{lemma}
+  対応$G \mapsto \Tw\G$と$T \mapsto \Tw^1T$は恒等射を考えない$\Ainf$関手 
+  \begin{align*}
+    \Tw : \nufun{\A}{\B} \to \nufun{\Tw\A}{\Tw\B}
+  \end{align*}
+  を定める. 
+\end{lemma}
+
+$\Tw$は$\Ainf$合成関手と可換である.
+
+\begin{lemma} \label{prop_Tw_is_commutative_with_comp_func}
+  恒等射を考えない$\Ainf$関手$\G : \A \to \B$に対して
+  \begin{align*}
+    \L_{\Tw\G} \circ \Tw = \Tw \circ \LG : \nufun{\C}{\A} \to \nufun{\Tw\C}{\Tw\B} \\
+    \R_{\Tw\G} \circ \Tw = \Tw \circ \RG : \nufun{\B}{\C} \to \nufun{\Tw\A}{\Tw\C}
+  \end{align*}
+\end{lemma}
+
+$\Tw$はコホモロジー圏上の忠実充満性を保つ.
+
+\begin{lemma} \label{prop_TwG_is_also_cohomologically_fully_faithful}
+  恒等射を考えない$\Ainf$関手$\G : \A \to \B$がコホモロジー圏上で忠実充満であるとする. 
+  このとき, 恒等射を考えない$\Ainf$関手$\Tw\G : \Tw\A \to \Tw\B$はコホモロジー圏上で忠実充満である.
+\end{lemma}
+
+\section{Twに対するc-unital性}
+
+\begin{lemma} \label{prop_TwA_is_also_unital}
+  $\A$が恒等射を持つとき, $\Tw\A$は恒等射を持つ.
+\end{lemma}
+
+\begin{proof}
+  任意の$X \in \Ob\A$に対して, $e_X$が$\A$における単位元であるとする. 
+  このとき
+  \begin{align*}
+    E_X &= (E_X^{j,i}) \\
+    E_X^{j,i} &:= 
+    \begin{cases}
+      \id_{V^i} \otimes e_{X^i} & (j=i) \\
+      0 & (j \neq i)  
+    \end{cases}
+  \end{align*}
+  は$\Tw\A$における単位元である. 
+  \footnote{
+    つまり, $\Tw\A$における単位元は「単位行列」である.
+  }
+\end{proof}
+
+\begin{lemma} \label{prop_TwG_is_also_unital}
+  $\G : \A \to \B$が単位的であるとき, $\Tw\G : \Tw\A \to \Tw\B$は恒等射を持つ.
+\end{lemma}
+
+\begin{lemma} \label{prop_Tw_is_also_unital}
+  $\C$を恒等射を持たない$\Ainf$圏とする. 
+  $\A$が恒等射を持つとき, $\Tw : \nufun{\C}{\A} \to \nufun{\Tw\C}{\Tw\A}$は恒等射を持つ.
+\end{lemma}
+
+以上の命題をc-unitalである場合に拡張する.
+
+\begin{theorem} \label{prop_TwA_is_also_c_unital}
+  $\A$がc-unitalであるとき, $\Tw\A$はc-unitalである.
+\end{theorem}
+
+\begin{proof}
+  $\Phi^1=\id_{\hom_\A(X_0,X_1)}$である形式的微分同相を$\Phi$, $\tilA := \Phi_\ast \A$を恒等射を持つ$\Ainf$圏とする. 
+  $\Phi : \A \to \tilA$はコホモロジー圏上で忠実充満なので, \cref{prop_TwG_is_also_cohomologically_fully_faithful}より$\Tw\Phi : \Tw\A \to \Tw\tilA$もコホモロジー圏上で忠実充満である.
+  \cref{prop_TwA_is_also_unital}より, $\Tw\tilA$は恒等射を持つ.
+  $\Tw\Phi$はコホモロジー圏上で忠実充満なので, $\Tw\A$はc-unitalである. 
+\end{proof}
+
+\begin{theorem} \label{prop_TwG_is_also_c_unital}
+  $\G : \A \to \B$がc-unitalであるとき, $\Tw\G : \Tw\A \to \Tw\B$はc-unitalである.
+\end{theorem}
+
+\begin{proof}
+  
+\end{proof}
+
+\begin{theorem} \label{prop_Tw_is_also_c_unital}
+  $\C$を恒等射を持たない$\Ainf$圏とする. 
+  $\A$がc-unitalであるとき, $\Tw : \nufun{\C}{\A} \to \nufun{\Tw\C}{\Tw\A}$はc-unitalである.
+\end{theorem}
+
+\begin{proof}
+  \cref{prop_TwA_is_also_c_unital}の証明で用いた記法を用いる.
+  $\G : \C \to \A$を単位元のない$\Ainf$関手, $\tilG := \Phi \circ \G$とする. 
+  \cref{prop_Tw_is_commutative_with_comp_func}より, 次の図式は可換である. 
+  \[\begin{tikzcd}
+    {\hom_{\nufun{\C}{\A}}(\G,\G)} & {\hom_{\nufun{\C}{\tilA}}(\tilG,\tilG)} \\
+    {\hom_{\nufun{\Tw\C}{\Tw\A}}(\Tw\G,\Tw\G)} & {\hom_{\nufun{\Tw\C}{\Tw\tilA}}(\Tw\tilG,\Tw\tilG)}
+    \arrow["{\L^1_\Phi}", from=1-1, to=1-2]
+    \arrow["{\Tw^1}", from=1-2, to=2-2]
+    \arrow["{\L^1_{\Tw\Phi^{-1}}}", from=2-2, to=2-1]
+    \arrow["{\Tw^1}"', from=1-1, to=2-1]
+  \end{tikzcd}\]
+  \cref{prop_LG_is_also_c_unital}より, $\L_\Phi$はc-unitalである.
+  よって, 図式の平行な矢印はコホモロジー圏上においてc-unitalな単位元をc-unitalな単位元に移す.
+  右側の垂直な矢印も同様に, c-unitalな単位元をc-unitalな単位元に移す.
+  図式の可換性より, $\Tw : \nufun{\C}{\A} \to \nufun{\Tw\C}{\Tw\A}$はc-unitalである.
+\end{proof}
+
+$\Ainf$擬同値が$H^0$において逆関手をもつことと\cref{prop_TwG_is_also_c_unital}より, 次の命題が従う.
+この命題は$\Ainf$増強の話で重要である.
+
+\begin{lemma} \label{prop_Tw_is_Ainf_qeq}
+  $\A,\B$をc-unitalな$\Ainf$圏とする.
+  $\G : \A \to \B$が$\Ainf$擬同値であるとき, $\Tw\G : \Tw\A \to \Tw\B$は$\Ainf$擬同値である.
+\end{lemma}
+
+\section{ねじれ複体の直和とテンソル積}
+
+$\A$を恒等射を持たない$\Ainf$圏, $\Sigma\A$を加法的拡大, $\Tw\A$をねじれ複体のなす$\Ainf$圏とする. 
+
+\begin{definition}[加法的拡大とねじれ複体の直和]
+  $\Sigma\A$において$Y_0$と$Y_1$の形式的な直和として表していた$Y_0 \oplus Y_1$を$Y_0$と$Y_1$の直和(direct sum)という.
+\end{definition}
+
+\begin{definition}[ねじれ複体の直和]
+  $\Tw\A$において$(Y_0,\delta_{Y_0})$と$(Y_1,\delta_{Y_1})$の形式的な直和として表していた$(Y_0 \oplus Y_1, \delta_{Y_0} \oplus \delta_{Y_1})$を$(Y_0,\delta_{Y_0})$と$(Y_1,\delta_{Y_1})$の直和(direct sum)という.
+\end{definition}
+
+\begin{definition}[加法的拡大のテンソル積]
+  $Y = \bigoplus_{i \in I} W^i \otimes Y^i \in \Ob\Sigma\A$と次数付き有限次元ベクトル空間$Z$に対して
+  \begin{align*}
+    Z \otimes Y 
+    := \bigoplus_{i \in I} (Z \otimes W^i) \otimes Y^i
+  \end{align*}
+  を$Y$のテンソル積(tensor product)という. 
+\end{definition}
+
+テンソル積をとる操作は$\Sigma\A$上の恒等射を考えない$\Ainf$関手を定める.
+
+\begin{definition}[$\Sigma\A$上のテンソル積関手]
+  恒等射を考えない$\Ainf$関手$Z \otimes - : \Sigma\A \to \Sigma\A$を次のように定義する.
+  \begin{description}
+    \item[($d=0$)] 任意の$Y \in \Ob\Sigma\A$に対して$(Z \otimes -)(Y) := Z \otimes Y$
+    \item[($d=1$)] 任意の$a_1 = (a_1^{ji}) = (\phi_1^{j,i} \otimes y_1^{j,i}) \in \hom_{\Sigma\A}(Y_0,Y_1)$に対して
+    \begin{align*}
+      (Z \otimes -)^1(a_1) 
+      &:= \id_Z \otimes a 
+      := \bigoplus_{i,j} (\id_Z \otimes \phi_1^{j,i}) \otimes y_1^{j,i} \\
+      &\in \bigoplus_{i,j} \hom_{\bbK}(Z \otimes W_0^i, Z \otimes W_1^j) \otimes \hom_\A(Y_0^i,Y_1^j)
+    \end{align*}
+    \item[($d \geq 2$)] 任意の$a_1 = (a_1^{j,i}) = (\phi_1^{j,i} \otimes x_1^{j,i}), \cdots, a_d = (a_d^{j,i}) = (\phi_d^{j,i} \otimes x_d^{j,i})$に対して
+    \begin{align*}
+      (Z \otimes -)^d(a_d,\cdots,a_1)
+      := 0
+    \end{align*}
+  \end{description}
+\end{definition}
+
+\begin{definition}[ねじれ複体のテンソル積]
+  $(Y = \bigoplus_{i \in I} W^i \otimes Y^i, \delta_Y) \in \Ob\Tw\A$と有限次元次数付きベクトル空間$Z$に対して
+  \begin{align*}
+    Z \otimes Y 
+    &:= \bigoplus_{i \in I} (Z \otimes W^i) \otimes Y^i \\
+    \delta_{Z \otimes Y}
+    &:= \id_Z \otimes \delta_Y 
+    = \qty(\sum_{k} (\id_Z \otimes \phi^{jik}) \otimes y^{jik})
+  \end{align*}
+  \footnote{
+    これは$\delta = (\delta^{ji})$と同じ記法である. 
+  }
+  をねじれ複体のテンソル積(tensor product of twisted complex)という. 
+  ここで
+  \begin{align*}
+    (\id_Z \otimes \phi^{jik})(z \otimes w) 
+    = (-1)^{|\phi^{jik}| \cdot |z|} \otimes \phi^{jik}(w)
+  \end{align*}
+  である.
+\end{definition}
+
+テンソル積をとる操作は$\Tw\A$上の恒等射を考えない$\Ainf$関手を定める.
+
+\begin{definition}[$\Tw\A$上のテンソル積関手]
+  恒等射を考えない$\Ainf$関手$Z \otimes - : \Tw\A \to \Tw\A$を次のように定める.
+  \begin{description}
+    \item[($d=0$)] 任意の$(Y,\delta_Y) \in \Ob\Tw\A$に対して
+    \begin{align*}
+      (Z \otimes -)(Y,\delta_Y) 
+      := (Z \otimes Y, \delta_{Z \otimes Y})
+    \end{align*}
+    \item[($d=1$)] 任意の$a_1 = (a_1^{ji}) = (\phi_1^{j,i} \otimes y_1^{j,i}) \in \hom_{\Tw\A}((Y_0,\delta_{Y_0}),(Y_1,\delta_{Y_1}))$に対して
+    \begin{align*}
+      (Z \otimes -)^1(a) 
+      &:= \id_Z \otimes a 
+      := \bigoplus_{i,j} (\id_Z \otimes \phi^{ji}) \otimes y^{ji} \\
+      &\in \bigoplus_{i,j} \hom_{\bbK}(Z \otimes W_0^i, Z \otimes W_1^j) \otimes \hom_\A(Y_0^i,Y_1^j)
+    \end{align*}
+    \item[($d \geq 2$)] 任意の$a_1 = (a_1^{j,i}) = (\phi_1^{j,i} \otimes x_1^{j,i}), \cdots, a_d = (a_d^{j,i}) = (\phi_d^{j,i} \otimes x_d^{j,i})$に対して
+    \begin{align*}
+      (Z \otimes -)^d(a_d,\cdots,a_1)
+      := 0
+    \end{align*}
+  \end{description}
+\end{definition}
+
+\begin{remark}
+  $\Ainf$-Yoneda埋め込みによって, $\Tw\A$上のテンソル積関手$Z \otimes - : \Tw\A \to \Tw\A$は$\mod{\Tw\A}$上のテンソル積関手
+  \begin{align*}
+    \Z \otimes - : \mod{\Tw\A} \to \mod{\Tw\A}
+  \end{align*}
+  を定める.
+\end{remark}
+
+\section{ねじれ複体のシフト}
+
+$1$次元ベクトル空間$\K$を$-\sigma$シフトさせた$\bbK[\sigma] = (\bbK[\sigma],d_{\bbK[\sigma]})$を複体とみなす. 
+
+\begin{definition}[ねじれ複体のシフト]
+  複体$\bbK[\sigma]$と$(Y = \bigoplus_{i \in I} W^i \otimes Y^i, \delta_Y) \in \Ob\Tw\A$のテンソル積をねじれ複体の$\sigma$重シフト($\sigma$-shift)といい, $\SsigmaY$と表す.
+  \begin{align*}
+    \SsigmaY 
+    &:= \bbK[\sigma] \otimes Y 
+    = \bigoplus_{i \in I} W^i[\sigma] \otimes Y^i \\
+    \delta_{\SsigmaY}
+    &:= \id_{\bbK[\sigma]} \otimes Y 
+    = \qty(\sum_{k} (-1)^{\sigma |\phi^{jik}|} \phi^{jik} \otimes y^{jik})
+  \end{align*}
+  $1$重シフトを単にシフト(shift)といい, $SY$と表す.
+\end{definition}
+
+\begin{definition}[$\Tw\A$上のシフト関手]
+  $\bbK[\sigma]$のテンソル積関手をシフト関手(shift functor)といい, $S^\sigma := \bbK[\sigma] \otimes - : \Tw\A \to \Tw\A$と表す. 
+  \begin{description}
+    \item[($d=0$)] 任意の$(Y,\delta_Y) \in \Ob\Tw\A$に対して
+    \begin{align*}
+      S^\sigma(Y) := (\SsigmaY, \delta_{\SsigmaY})
+    \end{align*}
+    \item[($d=1$)] 任意の$a_1 = (a_1^{ji}) = (\phi_1^{j,i} \otimes y_1^{j,i}) \in \hom_{\Tw\A}((Y_0,\delta_{Y_0}),(Y_1,\delta_{Y_1}))$に対して
+    \begin{align*}
+      (S^\sigma)^1(a) 
+      &:= \qty(\sum_{k} (-1)^{\sigma |\phi^{jik}|} \otimes y^{jik}) \\
+      &\in \hom_{\bbK}(W_0^i[\sigma], W_1^j[\sigma]) \otimes \hom_\A(Y_0^i,Y_1^j)
+    \end{align*}
+    \item[($d \geq 2$)] 任意の$a_1 = (a_1^{j,i}) = (\phi_1^{j,i} \otimes x_1^{j,i}), \cdots, a_d = (a_d^{j,i}) = (\phi_d^{j,i} \otimes x_d^{j,i})$に対して
+    \begin{align*}
+      (S^\sigma)^d(a_d,\cdots,a_1)
+      := 0
+    \end{align*}
+  \end{description}
+\end{definition}
+
+\begin{lemma} \label{prop_shift_functor_is_Ainf_iso}
+  $\Tw\A$上のシフト関手$S^\sigma : \Tw\A \to \Tw\A$は$\Ainf$同型である. 
+\end{lemma}
+
+\section{ねじれ複体における微分の取り換え}
+
+$\A$は恒等射を持つ$\Ainf$圏であるとする.
+
+\begin{definition}
+  
+\end{definition}
+
+\section{ねじれ複体の写像錐}
+
+\begin{definition}[ねじれ複体の写像錐]
+  $\mu^1_{\Tw\A}(c)=0$である$c \in \hom^0_{\Tw\A}(Y_0,Y_1)$に対して
+  \begin{align*}
+    (\rmCone(c), \delta_{\rmCone(c)}) 
+    := \qty(SY_0 \oplus Y_1, \begin{pmatrix}
+      \delta_{SY_0} & 0 \\
+      -Sc & \delta_{Y_1} 
+    \end{pmatrix})
+  \end{align*}
+  を$c$の写像錐$\rmCone(c)$という.
+\end{definition}
+
+\section{\texorpdfstring{$\Tw\A$}{TwA}における完全三角}
+
+$\A$は恒等射を持つとする. 
+
+\begin{theorem}
+  $\Tw\A$は三角$\Ainf$圏である.
+\end{theorem}
+
+\begin{theorem}
+  $H^0(\Tw\A)$は三角圏である.
+\end{theorem}
+
+\begin{lemma}
+  $H(\Tw\F) : H(\Tw\A) \to H(\Tw\B)$は完全三角を完全三角をうつす.
+  よって, $H^0(\Tw\F) : H^0(\Tw\A) \to H^0(\Tw\B)$は完全関手である.
+\end{lemma}
+
+\section{\texorpdfstring{$\Tw\A$}{TwA}への完全三角の埋め込み} \label{section_triangle_embedding_in_TwA}
+
+\begin{lemma}
+  次の2つは同値である.
+  \begin{enumerate}
+    \item $H(\A)$において三角図式
+    \[\begin{tikzcd}
+      {Y_0} && {Y_1} \\
+      & {[1]} \\
+      & {Y_2}
+      \arrow["{[c_1]}", from=1-1, to=1-3]
+      \arrow["{[c_2]}", from=1-3, to=3-2]
+      \arrow["{[c_3] }", from=3-2, to=1-1]
+    \end{tikzcd}\]
+    は完全である. 
+    \item 埋め込み$H(\A) \to H(\Tw\A)$の像における三角図式は完全である. 
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  
+\end{proof}
+
+% \begin{proof}[Proof of \cref{prop_exact_is_equivalent_to_Ainf_functor_D_to_A}]
+  
+% \end{proof}
+
+\section{\texorpdfstring{$\mod{\A}$}{mod(A)}が三角\texorpdfstring{$\Ainf$}{Ainf}圏であることについて}
+
+\bibliographystyle{jalpha}
+\bibliography{../A_infty_cf}
+
+\end{document}
