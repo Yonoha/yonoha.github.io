@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="stylesheet.css">
 
     <!-- for tex from http://www.ic.daito.ac.jp/~mizutani/html/mathexpress.html -->
-    <script type="text/javascript"
+    <!-- <script type="text/javascript"
       src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
     <script type="text/x-mathjax-config">
@@ -31,14 +31,17 @@
         displayAlign: "left",
         displayIndent: "2em"
       });
-    </script>
-
-    <!-- <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({TeX:{equationNumbers:{autoNumber:"AMS"}}});
-    </script>
-    <script type="text/javascript" async 
-      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML,/www_func/MathJax/MyConfig.js">
     </script> -->
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$']]
+        }
+      };
+    </script>
   </head>
 
   <body>
@@ -102,7 +105,7 @@
     <h2 id="sec:hms">ホモロジカルミラー対称性</h2>
     <ul>
       <li><a href="mirror_symmetry/tudoi4/slide.pdf">ホモロジカルミラー対称性について</a> <br> 
-        第4回 数学徒の集いオンラインで「ホモロジカルミラー対称性について」として発表したスライドです. 
+        第4回 数学徒の集いオンラインで「ホモロジカルミラー対称性について」として発表したスライド(適宜更新予定)
       </li>
     </ul>
 
