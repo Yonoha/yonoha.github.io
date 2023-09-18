@@ -1,0 +1,121 @@
+\RequirePackage{plautopatch}
+\documentclass[uplatex, a4paper, 12pt, dvipdfmx]{jsarticle}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\usepackage{comment}
+\usepackage{enumitem}
+% \usepackage[top=30truemm, bottom=30truemm, left=25truemm, right=25truemm]{geometry}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{intersections, calc, arrows.meta, shadows}
+% \usepackage{quiver} % if use
+\usepackage{mathrsfs, mathtools}
+\usepackage{nameref}
+\usepackage{physics}
+\usepackage{hyperref}
+\usepackage{cleveref} %have order
+\usepackage{here}
+\usepackage{anyfontsize}
+\usepackage{nameref}
+\usepackage{ulem}
+\usepackage{url}
+
+% change colors
+\hypersetup{
+	colorlinks=true,
+	citecolor=blue,
+	linkcolor=teal,
+	urlcolor=orange,
+}
+
+% new thorem style
+\newtheoremstyle{jplain} % name
+{} % space above
+{} % space below
+{\normalfont} % body font
+{} % indent amount
+{\bfseries} % theorem head font
+{.} % punctuation after theorem head
+{4pt} % space after theorem head (default: 5pt)
+{\thmname{#1}\thmnumber{#2}\thmnote{\hspace{2pt}(#3)}} % theorem head spec
+
+\theoremstyle{jplain}
+\newtheorem{theorem}{定理}
+\newtheorem{prop}[theorem]{命題}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{cor}[theorem]{系}
+\newtheorem{example}[theorem]{例}
+\newtheorem{definition}[theorem]{定義}
+\newtheorem{remark}[theorem]{注意}
+\newtheorem{cons}[theorem]{構成}
+\newtheorem{que}[theorem]{疑問}
+\newtheorem{nota}[theorem]{記法}
+\newtheorem{exe}[theorem]{練習}
+
+% show theorem depth
+\numberwithin{theorem}{subsection}
+\numberwithin{equation}{subsection}
+
+% proof environment without \qed
+\makeatletter
+\newenvironment{Proof}[1][\Proofname]{\par
+  \normalfont
+  \topsep6\p@\@plus6\p@ \trivlist
+  \item[\hskip\labelsep{\bfseries #1}\@addpunct{\bfseries.}]\ignorespaces
+}{
+  \endtrivlist
+}
+\newcommand{\Proofname}{証明}
+\makeatother
+
+% code for \csim
+\usepackage{relsize}
+\usepackage[bbgreekl]{mathbbol}
+\usepackage{amsfonts}
+\DeclareSymbolFontAlphabet{\mathbb}{AMSb} % to ensure that the meaning of \mathbb does not change
+\DeclareSymbolFontAlphabet{\mathbbl}{bbold}
+
+% newcommands
+% mathcal
+\newcommand{\A}{\mathcal{A}}
+
+% mathrm
+\newcommand{\coh}{\mathrm{coh}}
+\newcommand{\Fuk}{\mathrm{Fuk}}
+\renewcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\Tw}{\mathrm{Tw}}
+
+\newcommand{\Ainf}{A_{\infty}}
+
+\setcounter{secnumdepth}{3}
+\title{$\Ainf$圏論とホモロジカルミラー対称性}
+\author{よの}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+  ホモロジカルミラー対称性(HMS)はミラー対称性の圏論的定式化としてKontsevichにより提案された. \\
+  HMSはシンプレクティック多様体$M$上のFukaya圏$\Fuk(M)$と, $M$にミラー双対な複素多様体$\hat{M}$上の連接層の導来圏$D^b(\coh(\hat{M}))$の等価性といえる. \\
+  $\Fuk(M)$は$\Ainf$圏であり, $D^b(\coh(\hat{M}))$は三角圏である. \\
+  この2つを比べるために, $\Ainf$圏$\A$から三角圏を構成する方法が考えられた. \\
+  この構成で得られる三角圏を$\Tr(\A)$と表すと, HMSは三角圏同値
+  \begin{align*}
+    \Tr(\Fuk(M)) \cong D^b(\coh(\hat{M}))
+  \end{align*}
+  と定式化される. \\
+
+  本講演では, まずホモロジー代数から三角圏の導入までの自然な流れを話す. \\
+  特に, 三角圏のdg増強や$\Ainf$増強に注目し, dg圏と$\Ainf$圏の定義を紹介する. \\
+  また, $\Ainf$圏からねじれ複体の圏を考えることで, 三角圏を構成できることを示す. \\
+  最後に, HMSに表れる三角圏同値に対する本質的な命題を紹介する. \\
+  時間が余れば, $\Ainf$増強の存在性や一意性について話す. \\
+
+  $\Ainf$圏の定義を理解するために必要な知識はほとんどないが, dg圏や複体の圏を知っていると好ましい. \\
+  三角圏の構成法については, 三角圏の基本的な知識があるとよい. \\
+\end{abstract}
+
+\end{document}

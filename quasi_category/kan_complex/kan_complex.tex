@@ -1,0 +1,786 @@
+\RequirePackage{plautopatch}
+\documentclass[uplatex, a4paper, 14Q, dvipdfmx]{jsreport}
+\usepackage{docmute}
+\usepackage{../new_mypackage}
+
+\setcounter{secnumdepth}{4}
+\title{Kan複体について}
+\author{よの}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  本稿は\cite{kerodon}のChapter3: Kan Complexesを和訳したものである. 
+  
+  行間は適宜補うようにするが, 和訳と特に見分けのつかないように書く. 
+  Variantは定義や注意などに表記を変えている. 
+
+  Chapter3以降の参照はkerodonの該当箇所へのリンクを貼る. 
+  \cite{kerodon}のChapter1の和訳は\url{https://yonoha.github.io/quasi_category/kerodon/kerodon.pdf}を参照. 
+
+  特に断らない限り, $n$を$0$より大きい整数とする. 
+\end{abstract}
+
+\setcounter{tocdepth}{2}
+\tableofcontents
+
+\setcounter{chapter}{2}
+\chapter{Kan複体について}
+
+単体的集合$X$が任意$0 \leq i \leq n$に対して, $\sigma_0 : \Lambda^n_i \to X$が拡張$\sigma : \Delta^n \to X$を持つとき, $X$はKan複体と呼ばれていた.
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXExhbWJkYV5uX2kiXSxbMSwwLCJYIl0sWzAsMSwiXFxEZWx0YV5uIl0sWzAsMSwiXFxzaWdtYV8wIl0sWzAsMiwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMiwxLCJcXHNpZ21hIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+\[\begin{tikzcd}
+	{\Lambda^n_i} & X \\
+	{\Delta^n}
+	\arrow["{\sigma_0}", from=1-1, to=1-2]
+	\arrow[hook, from=1-1, to=2-1]
+	\arrow["\sigma"', dashed, from=2-1, to=1-2]
+\end{tikzcd}\]
+
+Kan複体は$\infty$圏論において, 次の3つの理由で重要である. 
+
+\begin{itemize}
+  \item 任意のKan複体は$\infty$圏である. (例1.3.0.3)
+  逆に, 任意の$\infty$圏$\C$は$\C$に含まれる最大のKan複体$\C^\simeq$を持つ. (構成4.4.3.1)
+  この$\C^\simeq$は$\C$の重要な不変量である.
+  そして, Kan複体のホモトピー圏を理解することは, $\infty$圏のホモトピー圏を理解することへの第一歩である.
+  \item $\C$を$\infty$圏とする. 
+  任意の点$X,Y \in \C$に対して, Kan複体$\Hom_\C(X,Y)$を考えることができる. 
+  この$\Hom_\C(X,Y)$は$X$から$Y$への射の空間と呼ばれる. (構成4.6.1.1)
+  この射空間は$\C$の構造を理解するために不可欠である.
+  $\infty$圏の関手$F : \C \to \D$がホモトピー逆射をもつことと, ホモトピー圏のレベルで本質的全射であって, 任意の$X,Y \in \C$に対して, $\Hom_\C(X,Y) \to \Hom_\C(FX,FY)$がホモトピー同値であることは同値である. (定理4.6.2.17)
+  \item 執筆中
+\end{itemize}
+
+この章の目標はKan複体のホモトピー論を理解することである.
+1節では, 単体的ホモトピー論の基礎について学ぶ.
+特に, Kanファイブレーション(定義3.1.1.1)と緩射(定義3.1.2.1), 単体的集合の(弱)ホモトピー同値(定義3.1.6.1と3.1.6.12)を定義し, 基本的な性質を見る.
+
+\newpage
+\section{Kan複体のホモトピー論}
+
+\subsection{Kanファイブレーション}
+
+単体的集合$X$が次の条件を満たすとき, $X$はKan複体と呼ばれていた.
+\begin{itemize}
+  \item 任意$0 \leq i \leq n$に対して, $\sigma_0 : \Lambda^n_i \to X$が拡張$\sigma : \Delta^n \to X$を持つ. 
+\end{itemize} 
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXExhbWJkYV5uX2kiXSxbMSwwLCJYIl0sWzAsMSwiXFxEZWx0YV5uIl0sWzAsMSwiXFxzaWdtYV8wIl0sWzAsMiwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMiwxLCJcXHNpZ21hIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+\[\begin{tikzcd}
+	{\Lambda^n_i} & X \\
+	{\Delta^n}
+	\arrow["{\sigma_0}", from=1-1, to=1-2]
+	\arrow[hook, from=1-1, to=2-1]
+	\arrow["\sigma"', dashed, from=2-1, to=1-2]
+\end{tikzcd}\]
+このKan複体の定義を単体的集合の射においても考えることは非常に有用である.
+
+\begin{definition}[Kanファイブレーション]
+  $f : X \to S$を単体的集合の射とする.
+  任意の$0 \leq i \leq n$に対して, 次のリフト問題が解決(図中のドットで描かれる矢印)をもつとき, $f$をKanファイブレーション(Kan fibration)という. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXExhbWJkYV5uX2kiXSxbMSwwLCJYIl0sWzAsMSwiXFxEZWx0YV5uIl0sWzEsMSwiUyJdLFswLDEsIlxcc2lnbWFfMCJdLFswLDIsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzIsMSwiXFxzaWdtYSIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsyLDMsIlxcYmFye1xcc2lnbWF9IiwyXSxbMSwzLCJmIl1d
+  \[\begin{tikzcd}
+    {\Lambda^n_i} & X \\
+    {\Delta^n} & S
+    \arrow["{\sigma_0}", from=1-1, to=1-2]
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow["\sigma"', dashed, from=2-1, to=1-2]
+    \arrow["{\bar{\sigma}}"', from=2-1, to=2-2]
+    \arrow["f", from=1-2, to=2-2]
+  \end{tikzcd}\]
+  つまり, 任意の単体的集合の射$\sigma_0 : \Lambda^n_i \to X$と$\bar{\sigma} : \Delta^n \to S$に対して, $\sigma_0$を$f \circ \sigma = \bar{\sigma}$を満たす$n$単体$\sigma : \Delta^n \to X$に拡張できるときである. 
+\end{definition}
+
+\begin{example}
+  $X$を単体的集合とする.
+  射影$X \to \Delta^0$がKanファイブレーションであることと, $X$がKan複体であることは同値である. 
+\end{example}
+
+\begin{proof}
+  射影$X \to \Delta^0$がKanファイブレーションであるとき, 次の図式は可換である.
+  \[\begin{tikzcd}
+    {\Lambda^n_i} & X \\
+    {\Delta^n} & {\Delta^0}
+    \arrow["{\sigma_0}", from=1-1, to=1-2]
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow["\sigma"', dashed, from=2-1, to=1-2]
+    \arrow["{\bar{\sigma}}"', from=2-1, to=2-2]
+    \arrow["f", from=1-2, to=2-2]
+  \end{tikzcd}\]
+  このとき, 左上の三角はKan複体の定義そのものである. \\
+  逆に, $X$がKan複体であるとき, 次の図式は可換である. 
+  \[\begin{tikzcd}
+    {\Lambda^n_i} & X \\
+    {\Delta^n}
+    \arrow["{\sigma_0}", from=1-1, to=1-2]
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow["\sigma"', dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+  $\Delta^0$は$\sset$における終対象なので, 次の図式は可換である. 
+  \[\begin{tikzcd}
+    {\Lambda^n_i} & X \\
+    {\Delta^n} & {\Delta^0}
+    \arrow["{\sigma_0}", from=1-1, to=1-2]
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow["\sigma"', dashed, from=2-1, to=1-2]
+    \arrow["{\bar{\sigma}}"', from=2-1, to=2-2]
+    \arrow["f", from=1-2, to=2-2]
+  \end{tikzcd}\]
+\end{proof}
+
+Kanファイブレーションは包含$\Lambda^n_i \hookrightarrow \Delta^n$に対してRLPを持つ射であるので, RLPに関する一般論からいくつかの命題(例3.1.1.3, 注意3.1.1.5, 注意3.1.1.6, 注意3.1.1.8, 注意3.1.1.10)を示すことができる. 
+詳細は\cite[\href{https://kerodon.net/tag/006B}{Tag 006B}]{kerodon}を参照. 
+
+\begin{example}
+  任意の単体的集合の同型射はKanファイブレーションである. 
+\end{example}
+
+\begin{example}
+  summandについて
+\end{example}
+
+\begin{remark}
+  Kanファイブレーションの集まりはレトラクトで閉じる.
+\end{remark}
+
+\begin{remark}
+  Kanファイブレーションの集まりはpullbackで閉じる.
+\end{remark}
+
+注意3.1.1.6の逆は次のような形で成立する. 
+
+\begin{remark}
+  $f : X \to S$を単体的集合の射とする.
+  任意の$n$単体$\Delta^n \to S$に対して, 射影$\Delta^n \times_S X \to \Delta^n$はKanファイブレーションであるとする.
+  このとき, $f$はKanファイブレーションである. 
+
+  このことから, 次のことがいえる. 
+  次の図式がpullbackであり, $g$がepi射で$f'$がKanファイブレーションであるとき, $f$もKanファイブレーションである. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYJyJdLFsxLDAsIlgiXSxbMSwxLCJTIl0sWzAsMSwiUyciXSxbMCwxXSxbMSwyLCJmIl0sWzAsMywiZiciLDJdLFszLDIsImciLDJdXQ==
+  \[\begin{tikzcd}
+    {X'} & X \\
+    {S'} & S
+    \arrow[from=1-1, to=1-2]
+    \arrow["f", from=1-2, to=2-2]
+    \arrow["{f'}"', from=1-1, to=2-1]
+    \arrow["g"', from=2-1, to=2-2]
+  \end{tikzcd}\]
+\end{remark}
+
+\begin{proof}
+  前半を示す. 
+  射影$\Delta^n \times_S X \to \Delta^n$はKanファイブレーションなので, 次の図式が存在する.
+  % https://q.uiver.app/#q=WzAsNixbMCwwLCJcXExhbWJkYV5uX2kiXSxbMSwwLCJcXERlbHRhXm4gXFx0aW1lc19TIFgiXSxbMCwxLCJcXERlbHRhXm4iXSxbMSwxLCJcXERlbHRhXm4iXSxbMiwwLCJYIl0sWzIsMSwiUyJdLFswLDEsIlxcc2lnbWFfMCJdLFswLDIsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzIsMSwiXFxzaWdtYSIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsyLDMsIlxcaWQiLDJdLFsxLDMsInBfMiJdLFsxLDQsInBfMSJdLFs0LDUsImYiXSxbMyw1LCJcXGJhcntcXHNpZ21hfSIsMl1d
+  \[\begin{tikzcd}
+    {\Lambda^n_i} & {\Delta^n \times_S X} & X \\
+    {\Delta^n} & {\Delta^n} & S
+    \arrow["{\sigma_0}", from=1-1, to=1-2]
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow["\sigma"', dashed, from=2-1, to=1-2]
+    \arrow["\id"', from=2-1, to=2-2]
+    \arrow["{p_2}", from=1-2, to=2-2]
+    \arrow["{p_1}", from=1-2, to=1-3]
+    \arrow["f", from=1-3, to=2-3]
+    \arrow["{\bar{\sigma}}"', from=2-2, to=2-3]
+  \end{tikzcd}\]
+  ここで, 右側の四角はpullbackである. 
+  pullbackの普遍性より, $\sigma' := p_1 \circ \sigma : \Delta^n \to X$は$f$のリフトである. 
+
+  後半を示す.
+  前半の主張より, 射影$\Delta^n \times_S' \to \Delta^n$がKanファイブレーションであることを示せばよい. 
+
+\end{proof}
+
+\begin{remark}
+  Kanファイブレーションの集まりはフィルター付き余極限で閉じる
+\end{remark}
+
+\begin{remark}
+  $f : X \to S$をKanファイブレーションとする. 
+  任意の点$s \in S$に対して, pullback $\{s\} \times_S X$はKan複体である.
+\end{remark}
+
+\begin{proof}
+  次の図式は可換である. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHtzXFx9IFxcdGltZXNfUyBYIl0sWzEsMCwiWCJdLFsxLDEsIlMiXSxbMCwxLCJcXHtzXFx9Il0sWzAsMV0sWzEsMiwiZiJdLFszLDJdLFswLDNdLFswLDIsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dXQ==
+  \[\begin{tikzcd}
+    {\{s\} \times_S X} & X \\
+    {\{s\}} & S
+    \arrow[from=1-1, to=1-2]
+    \arrow["f", from=1-2, to=2-2]
+    \arrow[from=2-1, to=2-2]
+    \arrow[from=1-1, to=2-1]
+  \end{tikzcd}\]
+  $\{s\} \cong \Delta^0$であるので, 例3.1.1.2と注意3.1.1.6 (Kanファイブレーションの集まりはpullbackで閉じる)より従う. 
+\end{proof}
+
+\begin{remark}
+  Kanファイブレーションの集まりは合成で閉じる.
+\end{remark}
+
+\begin{remark}
+  $f : X \to S$をKanファイブレーションとする. 
+  $Y$がKan複体であるとき, $X$もKan複体である. 
+\end{remark}
+
+\begin{proof}
+  例3.1.1.2より, $Y$がKan複体であるとき, $g : Y \to \Delta^0$はKanファイブレーションである. 
+  注意3.1.1.10より, $fg : X \to \Delta^0$もKanファイブレーションである. 
+  例3.1.1.2より, $X$はKan複体である. 
+\end{proof}
+
+\subsection{緩射}
+
+Kanファイブレーションは包含$\Lambda^n_i \hookrightarrow \Delta^n$に対してRLPを持つ射であるが, より広い射のクラスに対してRLPを持つことが分かる.
+
+\begin{definition}[緩射]
+  $T$を次の条件を満たす$\sset$の最小の射の集まりとする. 
+  \begin{itemize}
+    \item 任意の$0 \leq i \leq n$に対して, 包含$\Lambda^n_i \hookrightarrow \Delta^n$は$T$に属する.
+    \item $T$は弱飽和である. 
+  \end{itemize}
+  $T$に属する単体的集合の射を緩射(anodyne morphism)
+  \footnote{
+    anodyne morphismの和訳は執筆時点では定着していないように思える. 
+    例えば, \cite{Suz}では「緩和射」と訳されている. 
+  }
+  という. 
+\end{definition}
+
+\begin{remark}
+  緩射の集まりは\cite{GZ}により導入された. 
+\end{remark}
+
+\begin{remark}
+  任意の緩射は単体的集合のmono射である. 
+\end{remark}
+
+\begin{proof}
+  任意の$0 \leq i \leq n$に対して, 包含$\Lambda^n_i \hookrightarrow \Delta^n$は単体的集合のmono射である.
+  命題1.4.5.13より, 単体的集合のmono射の集まりは弱飽和である. 
+  $T$の最小性より, 任意の緩射は単体的集合のmono射である.
+\end{proof}
+
+\begin{example}
+  任意の内緩射は緩射である. 
+  逆は一般には成立しない.
+\end{example}
+
+\begin{proof}
+  前半は内緩射の定義からすぐに分かる. 
+  逆は, 包含$\Lambda^n_0 \hookrightarrow \Delta^n$と$\Lambda^n_n \hookrightarrow \Delta^n$は緩射ではあるが, 内緩射ではないことから分かる. 
+\end{proof}
+
+\begin{example}
+  
+\end{example}
+
+\begin{remark}
+  緩射の定義より, 緩射の集まりは弱飽和である.
+\end{remark}
+
+次の命題は, 単体的集合の射がKanファイブレーションであるか確かめるときに有用である.
+これは自明なKanファイブレーションであるか確かめる命題1.4.5.4の類似である.  
+
+\begin{remark}
+  $f : X \to S$を単体的集合の射とする.
+  このとき, 次の2つは同値である.
+  \begin{enumerate}
+    \item $f$はKanファイブレーションである.
+    \item 任意の緩射$i : A \to B$に対して, 次のリフト問題は解決(図中のドットで描かれる矢印)を持つ. 
+    \[\begin{tikzcd}
+      A & X \\
+      B & S
+      \arrow[from=1-1, to=1-2]
+      \arrow["f", from=1-2, to=2-2]
+      \arrow[from=2-1, to=2-2]
+      \arrow["i"', from=1-1, to=2-1]
+      \arrow[dashed, from=2-1, to=1-2]
+    \end{tikzcd}\] 
+  \end{enumerate}
+\end{remark}
+
+\begin{proof}
+  (2)から(1)を示す. 
+  包含$\Lambda^n_i \hookrightarrow \Delta^n$は緩射なので, $i : \Lambda^n_i \hookrightarrow \Delta^n$とすると, Kanファイブレーションの定義に一致する. 
+
+  (1)から(2)を示す.
+  命題1.4.4.16より, $f$に対してLLPを持つ射の集まりは弱飽和である. 
+  $T$の最小性より, (2)は従う. 
+\end{proof}
+
+次の命題は, 緩射の集まりに対する安定性を表している.
+
+\begin{prop}
+  $f : A \hookrightarrow B$と$f' : A' \hookrightarrow B'$を単体的集合のmono射とする.
+  $f$か$f'$の一方が緩射であるとき, 誘導される射
+  \begin{align*}
+    (A \times B') \coprod_{A \times A'} (B \times A') \hookrightarrow B \times B'
+  \end{align*}
+  は緩射である.
+\end{prop}
+
+この命題の証明は, この節の最後に与える. 
+
+\begin{lemma}
+  任意の$0 < i \leq n$に対して, 包含$\Lambda^n_i \hookrightarrow \Delta^n$は誘導される射
+  \begin{align*}
+    (\Delta^1 \times \Lambda^n_i) \coprod_{\{1\} \times \Lambda^n_i} (\{1\} \times \Delta^n) \hookrightarrow \Delta^1 \times \Delta^n
+  \end{align*}
+  のレトラクトである.
+\end{lemma}
+
+\begin{proof}
+  ある射$f$が存在して, 次の図式が可換になることを示せばよい. (らしい)
+  % https://q.uiver.app/#q=WzAsNixbMCwwLCJcXHswXFx9IFxcdGltZXMgXFxMYW1iZGFebl9pIl0sWzEsMCwiKFxcRGVsdGFebiBcXHRpbWVzIFxcTGFtYmRhXm5faSkgXFxhbWFsZyAoXFx7MVxcfSBcXHRpbWVzIFxcRGVsdGFebikiXSxbMiwwLCJcXExhbWJkYV5uX2kiXSxbMiwxLCJcXERlbHRhXm4iXSxbMSwxLCJcXERlbHRhXjEgXFx0aW1lcyBcXERlbHRhXm4iXSxbMCwxLCJcXHswXFx9IFxcdGltZXMgXFxEZWx0YV5uIl0sWzAsMV0sWzEsMl0sWzIsMywiZl8wIl0sWzEsNCwiZiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFswLDUsImZfMCJdLFs1LDRdLFs0LDNdLFswLDIsIlxcaWQiLDAseyJjdXJ2ZSI6LTN9XSxbNSwzLCJcXGlkIiwyLHsiY3VydmUiOjN9XV0=
+  \[\begin{tikzcd}
+    {\{0\} \times \Lambda^n_i} & {(\Delta^n \times \Lambda^n_i) \amalg (\{1\} \times \Delta^n)} & {\Lambda^n_i} \\
+    {\{0\} \times \Delta^n} & {\Delta^1 \times \Delta^n} & {\Delta^n}
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow["{f_0}", from=1-3, to=2-3]
+    \arrow["f", dashed, from=1-2, to=2-2]
+    \arrow["{f_0}", from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+    \arrow["r", from=2-2, to=2-3]
+    \arrow["\id", curve={height=-18pt}, from=1-1, to=1-3]
+    \arrow["\id"', curve={height=18pt}, from=2-1, to=2-3]
+  \end{tikzcd}\]
+\end{proof}
+
+\begin{lemma}
+  $n$を$0$以上の整数とする.
+  このとき, 次の条件を満たす単体的部分集合の鎖が存在する. 
+  \begin{align*}
+    X(0) \subset X(1) \subset \cdots \subset X(n) \subset X(n+1) = \Delta^1 \times \Delta^n
+  \end{align*}
+  \begin{enumerate}
+    \item $X(0)$は$\Delta^1 \times \partial \Delta^n$と$\{1\} \times \Delta^n$の直和
+    \item 任意の$0 \leq i \leq n$に対して, 包含$X(i) \hookrightarrow X(i+1)$は次のpushoutで与えられる. 
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXExhbWJkYV57bisxfV97aSsxfSJdLFsxLDAsIlgoaSkiXSxbMSwxLCJYKGkrMSkiXSxbMCwxLCJcXERlbHRhXntuKzF9Il0sWzAsMV0sWzEsMl0sWzAsM10sWzMsMl1d
+    \[\begin{tikzcd}
+      {\Lambda^{n+1}_{i+1}} & {X(i)} \\
+      {\Delta^{n+1}} & {X(i+1)}
+      \arrow[from=1-1, to=1-2]
+      \arrow[from=1-2, to=2-2]
+      \arrow[from=1-1, to=2-1]
+      \arrow[from=2-1, to=2-2]
+    \end{tikzcd}\]
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  任意の$0 \leq i \leq n$に対して, $\sigma_i : \Delta^{n+1} \to \Delta^1 \times \Delta^n$の点の対応を次のように定義する.
+  任意の$0 \leq j \leq n+1$に対して, 
+  \begin{align*}
+    \sigma_i(j) := 
+    \begin{cases}
+      (0,j) & (j \leq i) \\
+      (1,j-1) & (j > i)
+    \end{cases}
+  \end{align*}
+  このとき, $\Delta^1 \times \Delta^n$の単体的部分集合$X(i)$を次のように定義する.
+  \begin{align*}
+    X(0) &:= (\Delta^1 \times \partial \Delta^n) \amalg (\{1\} \times \Delta^n) \\
+    X(i+1) &:= X(i) \amalg \myim(\sigma_i)
+  \end{align*}
+  ここで, $\Delta^1 \times \Delta^n$は$\{\myim(\sigma_i)\}_{0 \leq i \leq n}$と同一視でき, $X(n+1)$に等しいことが分かる.
+  このとき, 条件(1)と(2)を満たすことをみる.
+  まず, (1)は$X(0)$の定義から従うことが分かる.
+  (2)は任意の$0 \leq i \leq n$に対して, $\sigma_i^{-1}(X(i))$が$\Delta^{n+1}_{i+1}$に等しいことを見ればよい.
+
+\end{proof}
+
+\begin{proof}{命題 3.1.2.8}
+  $f' : A' \hookrightarrow B'$を単体的集合のmono射, $T$を任意の射$f : A \to B$から誘導される射
+  \begin{align*}
+    (\Delta^1 \times \Lambda^n_i) \coprod_{\{1\} \times \Lambda^n_i} (\{1\} \times \Delta^n) \hookrightarrow \Delta^1 \times \Delta^n
+  \end{align*}
+  が緩射となるような射$f$の集まりを$T$とする.
+  このとき, 任意の緩射が$T$に属すことを示せばよい.
+  注意3.1.2.6より, $T$は弱飽和である.
+  よって, 任意の$n>0$に対して, 包含$\Lambda^n_i \hookrightarrow \Delta^n$が$T$に属すことを示せばよい.
+  補題3.1.2.9より, $f$は 
+  \begin{align*}
+    g : (\Delta^1 \times \Lambda^n_i) \coprod_{\{1\} \times \Lambda^n_i} (\{1\} \times \Delta^n) \hookrightarrow \Delta^1 \times \Delta^n
+  \end{align*}
+  のレトラクトである.
+  $T$は弱飽和なので, $g$が$T$に属することを示せばよい.
+  (執筆中)
+\end{proof}
+
+\subsection{Kanファイブレーションのべき乗}
+
+$B$と$X$を単体的集合とする.
+$X$が$\infty$圏であるとき, 単体的集合$\Fun(B,X)$は$\infty$圏である. (定理1.4.3.7)
+$X$がKan複体であるとき, 単体的集合$\Fun(B,X)$はKan複体であることが言える. (系3.1.3.4)
+これは次の命題の系である. 
+
+\begin{theorem}
+  $f : X \to S$をKanファイブレーション, $i : A \hookrightarrow B$を単体的集合のmono射とする.
+  このとき, 誘導される射
+  \begin{align*}
+    \Fun(B,X) \to \Fun(B,S) \times_{\Fun(A,S)} \Fun(A,X)
+  \end{align*}
+  はKanファイブレーションである.
+\end{theorem}
+
+\begin{proof}
+  注意3.1.2.7より, 任意の緩射$i' : A' \hookrightarrow B'$に対して, 次のリフト問題が解決を持つことを示せばよい. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJBJyJdLFsxLDAsIlxcZnVuKEIsWCkiXSxbMSwxLCJcXGZ1bihCLFMpIFxcdGltZXNfe1xcZnVuKEEsUyl9IFxcZnVuKEEsWCkiXSxbMCwxLCJCJyJdLFswLDFdLFsxLDIsImYiXSxbMywyXSxbMCwzLCJpJyIsMl0sWzMsMSwiIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+  \[\begin{tikzcd}
+    {A'} & {\Fun(B,X)} \\
+    {B'} & {\Fun(B,S) \times_{\Fun(A,S)} \Fun(A,X)}
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=2-2]
+    \arrow[from=2-1, to=2-2]
+    \arrow["{i'}"', from=1-1, to=2-1]
+    \arrow[dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+  これは次の図式のリフト問題の解決と同値である. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCIoQSBcXHRpbWVzIEInKSBcXGNvcHJvZF97QSBcXHRpbWVzIEEnfSAoQiBcXHRpbWVzIEEnKSJdLFsxLDAsIlgiXSxbMSwxLCJTIl0sWzAsMSwiQiBcXHRpbWVzIEInIl0sWzAsMV0sWzEsMiwiZiJdLFswLDNdLFszLDJdLFszLDEsIiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+  \[\begin{tikzcd}
+    {(A \times B') \coprod_{A \times A'} (B \times A')} & X \\
+    {B \times B'} & S
+    \arrow[from=1-1, to=1-2]
+    \arrow["f", from=1-2, to=2-2]
+    \arrow[from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+    \arrow[dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+  命題3.1.2.8より, $(A \times B') \coprod_{A \times A'} (B \times A') \hookrightarrow B \times B'$は緩射である. 
+  注意3.1.2.7より, 求める射はKanファイブレーションである.
+\end{proof}
+
+\begin{corollary}
+  $f : X \to S$をKanファイブレーションとする.
+  このとき, 任意の単体的集合$B$に対して, $f$の誘導する射$\Fun(B,X) \to \Fun(B,S)$はKanファイブレーションである.
+\end{corollary}
+
+\begin{proof}
+  定理3.1.3.1において, $A = \emptyset$とすればよい.
+\end{proof}
+
+\begin{corollary}
+  $i : A \hookrightarrow B$を単体的集合のmono射, $X$をKan複体とする.
+  このとき, 制限$\Fun(B,X) \to \Fun(A,X)$はKanファイブレーションである.
+\end{corollary}
+
+\begin{proof}
+  定理3.1.3.1において, $S = \Delta^0$とすればよい.
+\end{proof}
+
+\begin{corollary}
+  $X$をKan複体, $B$を単体的集合とする.
+  このとき, $\Fun(B,X)$はKan複体である.
+\end{corollary}
+
+\begin{proof}
+  定理3.1.3.1において, $S = \Delta^0$とすると, $\Fun(B,X) \to \Delta^0$はKanファイブレーションである. 
+  例3.1.1.2より, $\Fun(B,X)$はKan複体である.
+\end{proof}
+
+自明なKanファイブレーションに対して定理3.1.3.1と同様の結果がある. 
+定理3.1.3.1では$i$はmono射であったが, 定理3.1.3.5は緩射である. 
+
+\begin{theorem}
+  $f : X \to S$をKanファイブレーション, $i : A \hookrightarrow B$を緩射とする.
+  このとき, 誘導される射
+  \begin{align*}
+    \Fun(B,X) \to \Fun(B,S) \times_{\Fun(A,S)} \Fun(A,X)
+  \end{align*}
+  は自明なKanファイブレーションである.
+\end{theorem}
+
+\begin{proof}
+  定理3.1.3.1と同様に証明できる.
+  命題1.4.5.4より, 任意のmono射$i' : A' \hookrightarrow B'$に対して, 次のリフト問題が解決を持つことを示せばよい. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJBJyJdLFsxLDAsIlxcZnVuKEIsWCkiXSxbMSwxLCJcXGZ1bihCLFMpIFxcdGltZXNfe1xcZnVuKEEsUyl9IFxcZnVuKEEsWCkiXSxbMCwxLCJCJyJdLFswLDFdLFsxLDIsImYiXSxbMywyXSxbMCwzLCJpJyIsMl0sWzMsMSwiIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+  \[\begin{tikzcd}
+    {A'} & {\Fun(B,X)} \\
+    {B'} & {\Fun(B,S) \times_{\Fun(A,S)} \Fun(A,X)}
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=2-2]
+    \arrow[from=2-1, to=2-2]
+    \arrow["{i'}"', from=1-1, to=2-1]
+    \arrow[dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+  これは次の図式のリフト問題の解決と同値である. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCIoQSBcXHRpbWVzIEInKSBcXGNvcHJvZF97QSBcXHRpbWVzIEEnfSAoQiBcXHRpbWVzIEEnKSJdLFsxLDAsIlgiXSxbMSwxLCJTIl0sWzAsMSwiQiBcXHRpbWVzIEInIl0sWzAsMV0sWzEsMiwiZiJdLFswLDNdLFszLDJdLFszLDEsIiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+  \[\begin{tikzcd}
+    {(A \times B') \coprod_{A \times A'} (B \times A')} & X \\
+    {B \times B'} & S
+    \arrow[from=1-1, to=1-2]
+    \arrow["f", from=1-2, to=2-2]
+    \arrow[from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+    \arrow[dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+  命題3.1.2.8より, $(A \times B') \coprod_{A \times A'} (B \times A') \hookrightarrow B \times B'$は緩射である. 
+  例3.1.2.3より, この射はmono射である. 
+  命題1.4.5.4より, 求める射はKanファイブレーションである.
+\end{proof}
+
+\begin{corollary}
+  $i : A \hookrightarrow B$を緩射, $X$をKan複体とする.
+  このとき, 制限$\Fun(B,X) \to \Fun(A,X)$は自明なKanファイブレーションである. 
+\end{corollary}
+
+\begin{proof}
+  系3.1.3.3と同様
+\end{proof}
+
+\begin{construction}
+  $B,X$を単体的集合, $\Fun(B,X)$を$B$から$X$への射の単体的集合とする. (定義1.4.3.1)
+  \begin{itemize}
+    \item $A$を単体的集合, $i : A \to B, f : A \to X$を単体的集合の射とする. 
+    このとき, 点$f \in \Fun(A,X)$上の$i$の前合成$\Fun(B,X) \to \Fun(A,X)$のファイバーを$\Fun_{A /}(B,X) \subset \Fun(B,X)$と表す. 
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEZ1bl97QSAvfShCLFgpIl0sWzEsMCwiXFxGdW4oQixYKSJdLFswLDEsIlxce2ZcXH0iXSxbMSwxLCJcXEZ1bihBLFgpIl0sWzAsMV0sWzAsMl0sWzIsMywiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMSwzLCItIFxcY2lyYyBpIl0sWzAsMywiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
+    \[\begin{tikzcd}
+      {\Fun_{A /}(B,X)} & {\Fun(B,X)} \\
+      {\{f\}} & {\Fun(A,X)}
+      \arrow[from=1-1, to=1-2]
+      \arrow[from=1-1, to=2-1]
+      \arrow[hook, from=2-1, to=2-2]
+      \arrow["{- \circ i}", from=1-2, to=2-2]
+    \end{tikzcd}\]
+    \item $S$を単体的集合, $g : B \to S, q : X \to S$を単体的集合の射とする. 
+    このとき, 点$g \in \Fun(B,S)$上の$q$の後合成$\Fun(B,X) \to \Fun(B,S)$のファイバーを$\Fun_{/ S}(B,X) \subset \Fun(B,X)$と表す. 
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEZ1bl97LyBTfShCLFgpIl0sWzEsMCwiXFxGdW4oQixYKSJdLFswLDEsIlxce3FcXH0iXSxbMSwxLCJcXEZ1bihCLFMpIl0sWzAsMV0sWzAsMl0sWzIsMywiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMSwzLCJxIFxcY2lyYyAtIl0sWzAsMywiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
+    \[\begin{tikzcd}
+      {\Fun_{/ S}(B,X)} & {\Fun(B,X)} \\
+      {\{q\}} & {\Fun(B,S)}
+      \arrow[from=1-1, to=1-2]
+      \arrow[from=1-1, to=2-1]
+      \arrow[hook, from=2-1, to=2-2]
+      \arrow["{q \circ -}", from=1-2, to=2-2]
+    \end{tikzcd}\]
+    \item 次の可換図式が存在するとき, 共通部分$\Fun_{A /}(B,X) \cap \Fun_{/ S}(B,X)$を$\Fun_{A/ / S}(B,X)$と表す. 
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJBIl0sWzEsMCwiWCJdLFsxLDEsIlMiXSxbMCwxLCJCIl0sWzAsMSwiZiJdLFsxLDIsInEiXSxbMCwzLCJpIiwyXSxbMywyLCJnIiwyXV0=
+    \[\begin{tikzcd}
+      A & X \\
+      B & S
+      \arrow["f", from=1-1, to=1-2]
+      \arrow["q", from=1-2, to=2-2]
+      \arrow["i"', from=1-1, to=2-1]
+      \arrow["g"', from=2-1, to=2-2]
+    \end{tikzcd}\]    
+  \end{itemize}
+\end{construction}
+
+\begin{remark}
+  $B,X$を単体的集合とし, $\Fun(B,X)$の点を単体的集合の射$\bar{f} : B \to X$と同一視する.
+  \begin{itemize}
+    \item $A$を単体的集合, $i : A \to B, f : A \to X$を単体的集合の射とする. 
+    単体的集合$\Fun_{A /}(B,X)$の点は射$g = q \circ \bar{f}$を満たす射$\bar{f}$と同一視できる. 
+  \end{itemize}
+\end{remark}
+
+\subsection{被覆射}
+
+Kanファイブレーションの定義において, リフトの解決が一意であるような射を被覆射という. 
+
+\begin{definition}[被覆射]
+  $f : X \to S$を単体的集合の射とする.
+  任意の$0 \leq i \leq n$に対して, 次のリフト問題が一意な解決(図中のドットで描かれる矢印)をもつとき, $f$を被覆射(covering map)という. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXExhbWJkYV5uX2kiXSxbMSwwLCJYIl0sWzAsMSwiXFxEZWx0YV5uIl0sWzEsMSwiUyJdLFswLDEsIlxcc2lnbWFfMCJdLFswLDIsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzIsMSwiXFxzaWdtYSIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsyLDMsIlxcYmFye1xcc2lnbWF9IiwyXSxbMSwzLCJmIl1d
+  \[\begin{tikzcd}
+    {\Lambda^n_i} & X \\
+    {\Delta^n} & S
+    \arrow["{\sigma_0}", from=1-1, to=1-2]
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow["\sigma"', dashed, from=2-1, to=1-2]
+    \arrow["{\bar{\sigma}}"', from=2-1, to=2-2]
+    \arrow["f", from=1-2, to=2-2]
+  \end{tikzcd}\]
+  つまり, 任意の単体的集合の射$\sigma_0 : \Lambda^n_i \to X$と$\bar{\sigma} : \Delta^n \to S$に対して, $\sigma_0$を$f \circ \sigma = \bar{\sigma}$を満たす$n$単体$\sigma : \Delta^n \to X$に一意に拡張できるときである. 
+\end{definition}
+
+\begin{remark}
+  $f : X \to S$を単体的集合の射とする.
+  $f$が被覆射であることと, $f^\myop : X^\myop \to S^\myop$が被覆射であることは同値である. 
+\end{remark}
+
+\begin{remark}
+  $f : X \to S$を単体的集合の射, $\delta : X \to X \times_S X$を$f$のrelative diagonalとする.
+  このとき, $f$が被覆射であることと, $f$と$\delta$がともにKanファイブレーションであることは同値である.
+  特に, 任意の被覆射はKanファイブレーションである. 
+\end{remark}
+
+\begin{proof}
+  $\Rightarrow$を示す.
+  まず, $f$が被覆射のとき, Kanファイブレーションであることは明らかである. 
+  次の図式を考えると, pullbackの一意性より, 左上の2つの三角は可換である.
+  % https://q.uiver.app/#q=WzAsNyxbMCwwLCJcXExhbWJkYV5uX2kiXSxbMSwwLCJYIl0sWzEsMSwiWCBcXHRpbWVzX1MgWCJdLFswLDEsIlxcRGVsdGFebiJdLFsyLDEsIlgiXSxbMiwyLCJTIl0sWzEsMiwiWCJdLFswLDFdLFsxLDIsIlxcZGVsdGEiXSxbMCwzXSxbMywyXSxbMiw0XSxbNCw1LCJmIl0sWzIsNl0sWzYsNV0sWzIsNSwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzMsMSwiIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+  \[\begin{tikzcd}
+    {\Lambda^n_i} & X \\
+    {\Delta^n} & {X \times_S X} & X \\
+    & X & S
+    \arrow[from=1-1, to=1-2]
+    \arrow["\delta", from=1-2, to=2-2]
+    \arrow[from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+    \arrow[from=2-2, to=2-3]
+    \arrow["f", from=2-3, to=3-3]
+    \arrow[from=2-2, to=3-2]
+    \arrow[from=3-2, to=3-3]
+    % \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=2-2, to=3-3]
+    \arrow[dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+  よって, $\delta$はKanファイブレーションである. 
+
+  $\Leftarrow$を示す.
+  $f$はkanファイブレーションなので, リフト問題は解決を持つ. 
+  よって, この解決が一意であることを示せばよいが, これはpullbackの一意性から従う. 
+\end{proof}
+
+\begin{remark}
+  被覆射の集まりはpullbackで閉じる. 
+\end{remark}
+
+\begin{remark}
+  $f : X \to S$を単体的集合の射, $g : Y \to Z$を被覆射とする.
+  このとき, $g$が被覆射であることと, $gf$が被覆射であることは同値である.
+  特に, 被覆射の集まりは合成で閉じる. 
+\end{remark}
+
+\begin{remark}
+  $f : X \to S$を単体的集合の射とする.
+  このとき, 次の2つは同値である.
+  \begin{enumerate}
+    \item $f$は被覆射である.
+    \item 任意の緩射$i : A \to B$に対して, 次のリフト問題は一意な解決(図中のドットで描かれる矢印)を持つ. 
+    \[\begin{tikzcd}
+      A & X \\
+      B & S
+      \arrow[from=1-1, to=1-2]
+      \arrow["f", from=1-2, to=2-2]
+      \arrow[from=2-1, to=2-2]
+      \arrow["i"', from=1-1, to=2-1]
+      \arrow[dashed, from=2-1, to=1-2]
+    \end{tikzcd}\] 
+  \end{enumerate}
+\end{remark}
+
+\begin{proof}
+  注意3.1.2.7と注意3.1.4.3より従う. 
+\end{proof}
+
+\begin{prop}
+  $f : X \to S$を被覆射, $i : A \hookrightarrow B$を単体的集合のmono射とする.
+  このとき, 誘導される射
+  \begin{align*}
+    \Fun(B,X) \to \Fun(B,S) \times_{\Fun(A,S)} \Fun(A,X)
+  \end{align*}
+  は被覆射である.
+\end{prop}
+
+\begin{proof}
+  注意3.1.4.6より, 任意の緩射$i' : A' \hookrightarrow B'$に対して, 次のリフト問題が一意な解決を持つことを示せばよい. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJBJyJdLFsxLDAsIlxcZnVuKEIsWCkiXSxbMSwxLCJcXGZ1bihCLFMpIFxcdGltZXNfe1xcZnVuKEEsUyl9IFxcZnVuKEEsWCkiXSxbMCwxLCJCJyJdLFswLDFdLFsxLDIsImYiXSxbMywyXSxbMCwzLCJpJyIsMl0sWzMsMSwiIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+  \[\begin{tikzcd}
+    {A'} & {\Fun(B,X)} \\
+    {B'} & {\Fun(B,S) \times_{\Fun(A,S)} \Fun(A,X)}
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=2-2]
+    \arrow[from=2-1, to=2-2]
+    \arrow["{i'}"', from=1-1, to=2-1]
+    \arrow[dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+  これは次の図式のリフト問題の解決と同値である. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCIoQSBcXHRpbWVzIEInKSBcXGNvcHJvZF97QSBcXHRpbWVzIEEnfSAoQiBcXHRpbWVzIEEnKSJdLFsxLDAsIlgiXSxbMSwxLCJTIl0sWzAsMSwiQiBcXHRpbWVzIEInIl0sWzAsMV0sWzEsMiwiZiJdLFswLDNdLFszLDJdLFszLDEsIiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+  \[\begin{tikzcd}
+    {(A \times B') \coprod_{A \times A'} (B \times A')} & X \\
+    {B \times B'} & S
+    \arrow[from=1-1, to=1-2]
+    \arrow["f", from=1-2, to=2-2]
+    \arrow[from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+    \arrow[dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+  命題3.1.2.8より, $(A \times B') \coprod_{A \times A'} (B \times A') \hookrightarrow B \times B'$は緩射である. 
+  注意3.1.4.6より, 求める射は被覆射である.
+\end{proof}
+
+\begin{corollary}
+  $f : X \to S$を被覆射とする.
+  このとき, 任意の単体的集合$B$に対して, $f$の誘導する射$\Fun(B,X) \to \Fun(B,S)$は被覆射である.
+\end{corollary}
+
+\begin{proof}
+  定理3.1.3.2と同様に, 命題3.1.4.7において, $A = \emptyset$とすればよい.
+\end{proof}
+
+\begin{prop}
+  $f : X \to S$を位相空間の被覆とする.
+  このとき, $\Sing(f) : \Sing(X) \to \Sing(S)$は定義3.1.4.1の意味の被覆射である.
+\end{prop}
+
+\begin{proof}
+  $\delta : X \to X \times_S X$を$f$のrelative diagonalとする.
+
+\end{proof}
+
+\subsection{Kan複体のホモトピー圏}
+
+1.3.6節では$\infty$圏におけるホモトピーを定義した.
+この節では, 一般の単体的集合におけるホモトピーを定義する. 
+
+\begin{definition}[ホモトピック]
+  $X,Y$を単体的集合, 単体的集合の射$f : X \to Y$を単体的集合$\Fun(X,Y)$の点と同一視する.
+  $f$と$g$が$\Fun(X,Y)$において同じ連結成分に属しているとき, $f$と$g$はホモトピック(homotopic)であるという.
+\end{definition}
+
+定義3.1.5.1を具体的に書き下す.
+
+\begin{definition}[ホモトピー]
+  $X,Y$を単体的集合, $f_1,f_2: X \to Y$を単体的集合の射とする.
+  $\Fun(X,Y)$における射$h : \Delta^1 \times X \to Y$が$f_0 = h|_{\{0\} \times X}$と$f_1 = h|_{\{1\} \times X}$を満たすとき, $h$を$f_0$から$f_1$へのホモトピーという.
+\end{definition}
+
+\begin{remark}[ホモトピー拡張リフト性質]
+  $f : X \to S$をKanファイブレーションとする. 
+
+\end{remark}
+
+\begin{prop}
+  $X,Y$を単体的集合, $f,g : X \to Y$を単体的集合の射とする.
+  このとき, 次の2つが成立する.
+  \begin{enumerate}
+    \item $f$と$g$がホモトピックであることと, $X$から$Y$への射の列$=_0,_1,\cdots,f_n=g$が存在して, 任意の$0 \leq i \leq n$に対して, $f_{i-1}$から$f_i$へのホモトピーか$f_i$から$f_{i-1}$へのホモトピーが存在することは同値である. 
+    \item $Y$をKan複体とする. 
+    このとき, $f$と$g$がホモトピックであることと, $f$から$g$へのホモトピーが存在することは同値である. 
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  まず, (1)を示す.
+  注意1.1.6.23において, $S\bullet = \Fun(X,Y)$とすればよい(らしい). 
+
+  次に(2)を示す.
+  $Y$がKan複体であるとき, 系3.1.3.4より, $\Fun(X,Y)$もKan複体である.
+  命題1.1.9.10において, $S\bullet = \Fun(X,Y)$とする. 
+  $\Fun(X,Y)$の点は$f,g$と同一視できる.
+  $f$と$g$が$\Fun(X,Y)$において同じ連結成分に属することと, $f$と$g$がホモトピックであることは同値(それが定義)である. 
+  ある射$h : \Delta^1 \times X \to Y$が存在して, $d_0(h) = f$かつ$d_1(h) = g$を満たすことと, $f_0$から$f_1$へのホモトピーが存在することは同値である. 
+\end{proof}
+
+\begin{example}
+  
+\end{example}
+
+
+
+
+
+
+
+
+\newpage
+\bibliographystyle{alpha}
+\bibliography{../cf_kerodon}
+
+\end{document}

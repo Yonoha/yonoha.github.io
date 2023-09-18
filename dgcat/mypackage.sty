@@ -1,0 +1,149 @@
+\usepackage[uplatex]{otf} 
+\usepackage{xparse}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\usepackage{comment}
+\usepackage{enumitem}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{intersections, calc, arrows.meta, shadows}
+\usepackage{../quiver}
+\usepackage{mathrsfs, mathtools}
+\usepackage{nameref}
+\usepackage{physics}
+\usepackage{hyperref}
+\usepackage{pxjahyper}
+\usepackage{cleveref}
+\usepackage{here}
+\usepackage{anyfontsize}
+\usepackage{nameref}
+\usepackage{ulem}
+\usepackage{url}
+\usepackage{subfiles}
+\usepackage{relsize}
+\usepackage[bbgreekl]{mathbbol}
+\usepackage{amsfonts}
+% \usepackage{mycommand}
+
+% change colors
+\hypersetup{
+	colorlinks=true,
+	citecolor=blue,
+	linkcolor=teal,
+	urlcolor=orange,
+}
+
+% new thorem style
+\newtheoremstyle{jplain} % name
+{} % space above
+{} % space below
+{\normalfont} % body font
+{} % indent amount
+{\bfseries} % theorem head font
+{.} % punctuation after theorem head
+{4pt} % space after theorem head (default: 5pt)
+{\thmname{#1}\thmnumber{#2}\thmnote{\hspace{2pt}(#3)}} % theorem head spec
+
+\theoremstyle{jplain}
+\newtheorem{theorem}{定理}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{corollary}[theorem]{系}
+\newtheorem{example}[theorem]{例}
+\newtheorem{definition}[theorem]{定義}
+\newtheorem{remark}[theorem]{注意}
+\newtheorem{notation}[theorem]{記法}
+\newtheorem{question}[theorem]{問題}
+\newtheorem{answer}[theorem]{答え}
+
+% cref
+\crefname{chapter}{第}{第}
+\creflabelformat{chapter}{#2#1章#3}
+\crefname{section}{第}{第}
+\creflabelformat{section}{#2#1章#3}
+\crefname{subsection}{第}{第}
+\creflabelformat{subsection}{#2#1節#3}
+\crefname{appendix}{}{}
+\creflabelformat{appendix}{#2#1#3}
+
+\crefname{theorem}{定理}{定理}
+\crefname{lemma}{補題}{補題}
+\crefname{corollary}{系}{系}
+\crefname{definition}{定義}{定義}
+\crefname{remark}{注意}{注意}
+\crefname{notation}{記法}{記法}
+\crefname{example}{例}{例}
+\crefname{question}{問題}{問題}
+\crefname{answer}{答え}{答え}
+
+% show theorem depth
+\numberwithin{theorem}{section}
+\numberwithin{equation}{section}
+
+% proof environment
+\makeatletter
+\newenvironment{Proof}[1][\Proofname]{\par
+  \normalfont
+  \topsep6\p@\@plus6\p@ \trivlist
+  \item[\hskip\labelsep{\bfseries #1}\@addpunct{\bfseries.}]\ignorespaces
+}{
+  \endtrivlist
+}
+\newcommand{\Proofname}{証明}
+\makeatother
+
+% Delta \to Prism
+\DeclareSymbolFontAlphabet{\mathbb}{AMSb} %to ensure that the meaning of \mathbb does not change
+\DeclareSymbolFontAlphabet{\mathbbl}{bbold}
+\newcommand{\Prism}{{\mathlarger{\mathbbl{\Delta}}}}
+
+% mathbf
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+% mathbf
+\newcommand{\f}{\mathbf{f}}
+\newcommand{\g}{\mathbf{g}}
+\newcommand{\h}{\mathbf{h}}
+\newcommand{\m}{\mathbf{m}}
+
+% mathcal
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\J}{\mathcal{J}}
+\newcommand{\K}{\mathcal{K}}
+\renewcommand{\L}{\mathcal{L}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\Q}{\mathcal{Q}}
+\newcommand{\R}{\mathcal{R}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\Z}{\mathcal{Z}}
+
+\newcommand{\Ab}{\mathbf{Ab}}
+
+% mathrm
+\newcommand{\myop}{\mathrm{op}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\Id}{\mathrm{Id}}
+\newcommand{\Ob}{\mathrm{Ob}}
+
+\renewcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\Tw}{\mathrm{Tw}}
+\newcommand{\Tot}{\mathrm{Tot}}
+\newcommand{\Pretr}{\mathrm{Pre} \text{-} \mathrm{Tr}}
+\newcommand{\Cone}[1]{\mathrm{Cone}({#1})}
+\newcommand{\myabs}[1]{\lvert {#1} \rvert}
+
+\newcommand{\dgfun}{\mathrm{dg}\text{-}\mathrm{Fun}}
+\newcommand{\dgcat}{\mathrm{dg}\text{-}\mathrm{Cat}}

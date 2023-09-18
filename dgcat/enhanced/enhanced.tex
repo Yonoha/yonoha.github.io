@@ -1,0 +1,137 @@
+\RequirePackage{plautopatch}
+\documentclass[uplatex, a4paper, 14Q, dvipdfmx]{jsarticle}
+\usepackage{docmute}
+\usepackage{../mypackage}
+
+\title{dg増強}
+\author{よの}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  
+\end{abstract}
+
+\tableofcontents
+
+\section{ねじれ複体}
+
+加法圏から複体の圏を構成したように, dg圏からねじれ複体の圏を構成する. 
+$\A$をdg圏とする. 
+
+\begin{definition}[ねじれ複体]
+  $\{E_i\}_{i \in \bbZ}$を$\A$の対象, $q_{i,j} : E_i \to E_j$を次数$i-j+1$の$\A$の射とする. 
+  $\{E_i\}_{i \in \bbZ}$が有限個を除いて$0$であり,
+  \begin{align*}
+    dq_{i,j} + \sum_k q_{k,j}q_{i,k} = 0
+  \end{align*}
+  を満たすとき, 組$\{(E_i)_{i \in \bbZ}, q_{i,j} : E_i \to E_j\}$を$\A$上のねじれ複体(twisted complex)という.
+\end{definition}
+
+\begin{example}
+  $\A$が加法圏$\B$上の複体の圏のとき, ねじれ複体は通常の複体に一致する. 
+\end{example}
+
+\begin{proof}
+  加法圏は自明な微分を持つので, $dq = 0$である. 
+  よって, ねじれ複体の条件は$q^2 = 0$となり, 通常の複体の定義に一致する. 
+\end{proof}
+
+dg圏上のねじれ複体の圏はdg圏の構造を持つ. 
+
+\begin{lemma}
+  ねじれ複体$C = \{E_i, q_{i,j}\}, C'=\{E'_i, q'_{i,j}\}$に対して
+  \begin{align*}
+    \Hom^k(C,C') := \bigoplus_{l+j-i=k} \Hom^l_\A(E_i,E'_j)
+  \end{align*}
+  として, 任意の$f \in \Hom^l_\A(E_i,E'_j)$に対して
+  \begin{align*}
+    df := d_\A f + \sum_m \qty(q_{j,m}f + (-1)^{l(i-m+1)}fq_{m,i})
+  \end{align*}
+  と定義すると, ねじれ複体の圏はdg圏の構造を持つ. 
+\end{lemma}
+
+\begin{definition}
+  ねじれ複体の次数$0$の閉じた射をねじれ射(twisted morphism)という.
+\end{definition}   
+
+$\A^\oplus$を$\A$に対象の有限直和を付け加えた圏とする. 
+$\A^\oplus$上のねじれ複体のdg圏を$\Pretr(\A)$, その$0$次コホモロジー圏を$\Tr(\A)$と表す. 
+
+\begin{lemma}
+  dg関手$F : \A \to \A'$はdg関手
+  \begin{align*}
+    \Pretr(F) : \Pretr(\A) \to \Pretr(A')
+  \end{align*}
+  と関手
+  \begin{align*}
+    \Tr(F) : \Tr(\A) \to \Tr(\A)
+  \end{align*}
+  を定める. 
+\end{lemma}
+
+
+\begin{definition}[シフト]
+  
+\end{definition}
+
+\begin{definition}[錐]
+  $C = \{E_i, q_{i,j}\}, C'=\{E'_i, q'_{i,j}\}$をねじれ複体, $f = \{f_{i,j} : E_i \to E'_j\}$をねじれ射とする. 
+  このとき, ねじれ複体$\Cone{f} = \{E''_i, q''_{i,j}\}$を次のように定義して, $f$の錐(cone)という.
+  \begin{align*}
+    E''_i := E_i \oplus E'_{i-1}, ~~ 
+    q''_{i,j} := 
+    \begin{pmatrix}
+      q_{i,j} & f_{i,j} \\
+      0       & q_{i,j}  
+    \end{pmatrix} 
+  \end{align*}
+\end{definition}
+
+\begin{definition}
+  dg関手
+  \begin{align*}
+    \alpha : \Pretr(\A)^\myop \to \dgfun^0(\A,C(\Ab))
+  \end{align*}
+  を次のように定義する. 
+  $K=\{E_i,q_{i,j}\}$を$\Pretr{\A}$の任意の対象とする.
+  任意の$E \in \A$に対して, dg関手$\alpha(K) : \A \to C(\Ab)$を
+  \begin{align*}
+    \alpha(K)(E) := \bigoplus_i(E,E_i)[i]
+  \end{align*}
+  として, 微分を$d+Q$とする. 
+\end{definition}
+
+$(\Pretr)^2(\A) :=\Pretr(\Pretr(\A))$とする. 
+
+\begin{definition}
+  dg関手
+  \begin{align*}
+    \Tot_\A : (\Pretr)^2(\A) \to \Pretr(\A)
+  \end{align*}
+  を次のように定義する. 
+  $C=\{(C_{i,j})_{i,j \in \bbZ}, q_{i,j,k,l} : C_{i,j} \to C_{k,l}\}$を$(\Pretr)^2(\A)$の任意の対象とする.
+  このとき, 
+  \begin{align*}
+    \Tot_\A(C) := \{(D_k)_{k \in \bbZ}, r_{k,l} : D_k \to D_l\}
+  \end{align*}
+  を
+  \begin{align*}
+    D_k := \bigoplus_{i+j=k}C_{i,j}, r_{k,l} := \myabs{q_{i,j,m,n}}, i+j=k, m+n=l
+  \end{align*}
+  とする.
+  このとき, $\Tot_\A(C)$を$\Pretr(\A)$上のねじれ複体のconvolutionという.
+\end{definition}
+
+
+
+\begin{definition}[前三角的]
+  $\A$上の任意のねじれ複体$K$に対するdg関手$\alpha(K)$が表現可能であるとき, $\A$は前三角的(pre-triangulated)であるという. 
+\end{definition}
+
+
+
+\end{document}

@@ -43,3 +43,7 @@ p {
     color: #333;
     font-weight: bold;
 }  
+
+.italic {
+    font-style: italic;
+}

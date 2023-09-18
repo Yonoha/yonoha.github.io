@@ -1,0 +1,164 @@
+\usepackage[deluxe, expert, uplatex]{otf}
+\usepackage{xparse}
+\usepackage{bxdpx-beamer}
+\usepackage{pxjahyper} % しおりの文字化け解消 for uplatex
+\usepackage{minijs}
+\usepackage{mathrsfs, mathtools}
+\usepackage{amsmath, amsfonts, amsthm, amssymb}
+\usepackage{color}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+% \usetikzlibrary{intersections, calc, arrows.meta, shadows}
+\usepackage{quiver}
+\usepackage{bm, bbm}
+\usepackage{picture}
+\usepackage{fancybox}
+\usepackage{physics}
+% \usepackage{comment}
+% \usepackage{enumitem}
+% \usepackage{nameref}
+% \usepackage{hyperref}
+% \usepackage{cleveref} %have order
+\usepackage{here}
+\usepackage{anyfontsize}
+\usepackage{nameref}
+\usepackage{ulem}
+\usepackage{url}
+% \usepackage{biblatex} % biblatex．標準のバックエンドはbiber
+
+% セクションの後に自動で目次スライドを入れる
+\AtBeginSection[]{
+  \begin{frame}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+% 既定をゴシック体に
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+% % 数式環境をサンセリフに
+% \renewcommand{\familydefault}{\sfdefault}
+% タイトル色
+\setbeamercolor{title}{fg=structure, bg=}
+% フレームタイトル色
+\setbeamercolor{frametitle}{fg=structure, bg=}
+
+% ナビゲーションバー非表示
+\setbeamertemplate{navigation symbols}{}
+% スライド番号のみ表示
+\setbeamertemplate{footline}[frame number]
+
+% 定理などに番号をふるために必要
+\setbeamertemplate{theorems}[numbered] 
+% % 定理内でイタリックにしない
+% \setbeamertemplate{theorems}[normal font]
+
+\theoremstyle{jplain}
+\newtheorem{theorem}{定理}
+\newtheorem{prop}[theorem]{命題}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{cor}[theorem]{系}
+\newtheorem{example}[theorem]{例}
+\newtheorem{definition}[theorem]{定義}
+\newtheorem{corollary}[theorem]{系}
+\newtheorem{remark}[theorem]{注意}
+\newtheorem{conjecture}[theorem]{予想}
+\newtheorem{notation}[theorem]{記法}
+\newtheorem{question}[theorem]{疑問}
+
+% % cref
+% \crefname{chapter}{第}{第}
+% \creflabelformat{chapter}{#2#1章#3}
+% \crefname{section}{第}{第}
+% \creflabelformat{section}{#2#1章#3}
+% \crefname{subsection}{第}{第}
+% \creflabelformat{subsection}{#2#1節#3}
+% \crefname{appendix}{}{}
+% \creflabelformat{appendix}{#2#1#3}
+
+% \crefname{theorem}{定理}{定理}
+% \crefname{lemma}{補題}{補題}
+% \crefname{corollary}{系}{系}
+% \crefname{definition}{定義}{定義}
+% \crefname{remark}{注意}{注意}
+% \crefname{notation}{記法}{記法}
+% \crefname{example}{例}{例}
+% \crefname{question}{問題}{問題}
+% \crefname{answer}{答え}{答え}
+% \crefname{conjecture}{予想}{予想}
+
+% show theorem depth
+\numberwithin{theorem}{section}
+\numberwithin{equation}{section}
+
+% 証明の最後に四角を入れる
+\makeatletter
+\newenvironment{Proof}[1][\Proofname]{\par
+  \normalfont
+  \topsep6\p@\@plus6\p@ \trivlist
+  \item[\hskip\labelsep{\bfseries #1}\@addpunct{\bfseries.}]\ignorespaces
+}{
+  \endtrivlist
+}
+\newcommand{\Proofname}{証明}
+\makeatother
+
+% beamerのテーマ選択(省略可)．テーマ一覧は http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+\usetheme{Berlin}
+% カラーテーマの選択(省略可)
+\usecolortheme{orchid}
+% フォントテーマの選択(省略可)
+\usefonttheme{professionalfonts}
+% フレーム内のテーマの選択(省略可)
+\useinnertheme{circles}
+% フレーム外側のテーマの選択(省略可)
+\useoutertheme{infolines}
+
+% itemizeの調整
+\setbeamertemplate{itemize item}{\small\raise0.5pt\hbox{$\bullet$}}
+\setbeamertemplate{itemize subitem}{\tiny\raise1.5pt\hbox{$\blacktriangleright$}}
+\setbeamertemplate{itemize subsubitem}{\tiny\raise1.5pt\hbox{$\bigstar$}}
+
+% % bibtexのファイル
+% \addbibresource{A_infty_cf.bib}
+% % 参考文献のインデックスを文字列で表示
+% \setbeamertemplate{bibliography item}[text]
+
+% newcommands
+\newcommand{\Ainf}{A_\infty}
+
+% mathbb
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+% mathrm 
+\renewcommand{\Im}{\mathrm{Im}}
+\newcommand{\Coim}{\mathrm{Coim}}
+\newcommand{\Ker}{\mathrm{Ker}}
+\newcommand{\Ob}{\mathrm{Ob}}
+\newcommand{\Tw}{\mathrm{Tw}}
+\renewcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\Cone}{\mathrm{Cone}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\coh}{\mathrm{coh}}
+\newcommand{\Ho}{\mathrm{Ho}}
+\newcommand{\Hom}{\mathrm{Hom}}
+
+% category (mathbf)
+\newcommand{\Mod}{\mathbf{Mod}}
+\newcommand{\Ab}{\mathbf{Ab}}
+\newcommand{\Spectra}{\mathbf{Spectra}}
+
+% mathcal
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\S}{\mathcal{S}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\X}{\mathcal{X}}
+
+% mathfrak
+\newcommand{\Fuk}{\mathfrak{Fuk}}
