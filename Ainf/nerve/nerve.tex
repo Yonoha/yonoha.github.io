@@ -1,0 +1,278 @@
+\RequirePackage{plautopatch}
+\documentclass[uplatex, a4paper, 14Q, dvipdfmx]{jsarticle}
+\usepackage{docmute}
+\usepackage{../mypackage}
+
+\title{\texorpdfstring{$\Ainf$}{Ainf}圏と\texorpdfstring{$\infty$}{infty}圏の関係}
+\author{よの}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  通常の圏の脈体(nerve)を考えると, これは$\infty$圏(quasi-category)の構造を持つ.
+  同様に, $\Ainf$圏の$\Ainf$脈体を定義し, $\Ainf$圏の$\Ainf$脈体も同様に擬圏となることを示す. \cite{Fao}
+  また, $\Ainf$脈体はdg-nerve \cite{Lurie08}の一般化であることが分かる. 
+
+  特に断らない限り, $\Ainf$圏は恒等射を持ち, $\Ainf$関手と$\Ainf$加群は恒等射を保つとする.
+\end{abstract}
+
+\tableofcontents
+
+\section{\texorpdfstring{$\Ainf$}{Ainf}圏の\texorpdfstring{$\Ainf$}{Ainf}脈体}
+
+線形順序集合$\Prism$を自然に圏とみなすのと同様に, $\Prism$を$\Ainf$圏とみなす. 
+
+\begin{definition} \label{def_Ainf_Delta}
+  $\Ainf$圏$\Ainf[\Prism^n]$を次のように定義する. 
+  \begin{itemize}
+    \item 対象の集まり $\Ob\Ainf[\Prism^n] := [n] = \{0,1,\cdots,n\}$
+    \item 任意の$i_0,i_1 \in \Ob\Ainf[\Prism^n]$に対して 
+    \begin{align*}
+      \hom_{\Ainf[\Prism^n]}(i_0,i_1) := 
+      \begin{cases}
+        \bbK \cdot (i_0,i_1) & (i_0 < i_1) \\
+        \id_\bbK & (i_0 = i_1) \\
+        \emptyset & (i_0 > i_1)
+      \end{cases}
+    \end{align*}
+    ここで, $\deg((i,j))=0$である. %付け加える
+    \item 任意の$d \geq 1$と$i_0,\cdots,i_k \in \Ob\Ainf[\Prism^n]$に対して
+    \begin{align*}
+      \mu_{\Ainf[\Prism^n]}^d : \hom_{\Ainf[\Prism^n]}(i_0,i_1) \otimes \cdots \otimes \hom_{\Ainf[\Prism^n]}(i_{d-1},i_d) \to \hom_{\Ainf[\Prism^n]}(i_0,i_d)[2-d]
+    \end{align*}
+    \begin{description}
+      \item[($d=1$)] $m_{\Ainf[\Prism^n]}^1 := 0$
+      \item[($d=2$)] $m_{\Ainf[\Prism^n]}^2((i_0,i_1),(i_1,i_2)) := (i_0,i_2)$ $(i_0 \leq i_1 \leq i_2)$
+      \item[($d \geq 3$)] $m_{\Ainf[\Prism^n]}^d := 0$ 
+    \end{description}
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  関手
+  \begin{align*}
+    \Ainf[\Prism^-] : \Prism \to \Ainfcat
+  \end{align*}
+  を次のように定義する.
+  \begin{itemize}
+    \item 任意の$[n] \in \Prism$に対して
+    \begin{align*}
+      \Ainf[\Prism^-]([n]) := \Ainf[\Prism^n]
+    \end{align*}
+    \item $\Prism^n_j : [n-1] \to [n]$に対して
+    \begin{align*}
+      (\Prism^n_j)_\star := \Ainf[\Prism^-](\Prism^n_j) : \Ainf[\Prism^{n-1}] \to \Ainf[\Prism^n]
+    \end{align*}
+    \begin{description}
+      \item[($d=0$)] 任意の$i \in \Ob\Ainf[\Prism^{n-1}]$に対して$(\Prism^n_j)_\star^0(k) := \Prism^n_j(k)$
+      \item[($d=1$)] 任意の$(i_0,i_1)$に対して$(\Prism^n_j)_\star^1((i_0,i_1)) := (\Prism^n_j(i_0),\Prism^n_j(i_1))$
+      \item[($d \geq 2$)] $(\Prism^n_j)_\star^d := 0$
+    \end{description}
+    \item $\sigma^n_j : [n] \to [n-1]$に対して, $\Ainf$関手
+    \begin{align*}
+      (\sigma^n_j)_\star := \Ainf[\Prism^-](\sigma^n_j) : \Ainf[\Prism^n] \to \Ainf[\Prism^{n-1}]
+    \end{align*}
+    \begin{description}
+      \item[($d=0$)] 任意の$i \in \Ob\Ainf[\Prism^n]$に対して$(\sigma^n_j)_\star^0(k) := \sigma^n_j(k)$
+      \item[($d=1$)] 任意の$(i_0,i_1)$に対して$(\sigma^n_j)_\star^1((i_0,i_1)) := (\sigma^n_j(i_0),\sigma^n_j(i_1))$
+      \item[($d \geq 2$)] $(\sigma^n_j)_\star^d := 0$
+    \end{description}
+  \end{itemize}
+\end{definition}
+
+\begin{definition}[$\Ainf$脈体] \label{def_Ainf_nerve}
+  $\Ainf$圏$\A$に対して, 単体的集合
+  \begin{align*}
+    N_{\Ainf}(\A) : \Prism^\myop \to \set
+  \end{align*}
+  を次のように定義する.
+  \begin{itemize}
+    \item 任意の$n \in \Ob\Prism$に対して$N_{\Ainf}(\A)_n := \hom_{\Ainfcat} (\Ainf[\Prism^n],\A)$
+    \item 任意の$\alpha \in \hom_{\Prism^n}([m],[n])$に対して, 単体的構造は$\Ainf[\Prism^-](\alpha)$の右合成
+  \end{itemize}  
+  $N_{\Ainf}(\A)$を$\A$の$\Ainf$脈体(simplicial nerve of $\Ainf$-category)という.
+\end{definition}
+
+\begin{remark} \label{rem_n_simplex_of_Ainf_nerve}
+  $\Ainf$脈体の$n$単体は$\Ainf$関手$\F : \Ainf[\Prism^n] \to \A$である. 
+  \begin{description}
+    \item[($d=0$)] 任意の$i \in \Ob\Ainf[\Prism^n]$に対して, 対象の対応
+    \begin{align*}
+      \F : \Ob\Ainf[\Prism^n] \to \Ob\A
+    \end{align*}
+    は$\A$の$n+1$個の対象
+    \begin{align*}
+      X_i := \F(i)
+    \end{align*}
+    と同一視できる. 
+    \item[($1 \leq d \leq n$)] 任意の$i_0,\cdots,i_k \in \Ob\Ainf[\Prism^n] ~ (0 \leq i_0 < \cdots < i_k \leq n)$に対して 
+    \begin{align*}
+      \F^d : \hom_{\Ainf[\Prism^n]}(i_0,i_1) \otimes \cdots \otimes \hom_{\Ainf[\Prism^n]}(i_{d-1},i_d) \to \hom_{\Ainf[\Prism^n]}(X_{i_0},X_{i_d})[1-d]
+    \end{align*}
+    は次数$1-d$の射
+    \begin{align*}
+      f_{i_0,\cdots,i_d} := \F^d((i_0,i_1) \otimes \cdots \otimes (i_{d-1},i_d)) \in \hom_\A^{1-d}(X_{i_0},X_{i_d})
+    \end{align*}
+    と同一視できる.
+  \end{description}
+\end{remark}
+
+\begin{lemma}
+  $f_{i_0,\cdots,i_d} \in \hom_\A^{1-d}(X_{i_0},X_{i_d})$を\cref{rem_n_simplex_of_Ainf_nerve}で定義された写像とする. 
+  任意の$0 \leq i_0 < \cdots < i_d \leq n$に対して, 次の2つが成立する. 
+  \begin{align*}
+    &(1) ~ f_{i_0,i_0} = \id_{X_{i_0}} \\ 
+    &(2) ~ f_{i_0,\cdots,i_p,i_p,\cdots,i_d} = 0 ~ (2 \leq d \leq n)
+  \end{align*}
+\end{lemma} 
+
+\begin{proof}
+  それぞれ次のように示すことができる.
+  \begin{align*}
+    (1) : f_{i_0,i_0}
+    = \F^1((i_0,i_1)) 
+    = \F^1(\id_{i_0}) 
+    = \id_{\F i_0} 
+    = \id_{X_{i_0}} 
+  \end{align*}
+  \begin{align*}
+    (2) : f_{i_0,\cdots,i_p,i_p,\cdots,i_d}
+    &= \F^d((i_0,i_1), \cdots, (i_p,i_p), \cdots, (i_{d-1},i_d)) \\
+    &= \F^d((i_0,i_1), \cdots, \id_{i_p}, \cdots, (i_{d-1},i_d)) \\
+    &= 0
+  \end{align*}
+\end{proof}
+
+また, $\Ainf$関手の結合式は次のようになる. 
+
+\begin{remark}[執筆中]
+  ここで, 
+  \begin{align*}
+    \varepsilon_r = \varepsilon(i_1,\cdots,i_r)
+    := \sum_{2 \leq k \leq r} (1-j_k+j_{k-1}) \cdot j_{k-1} 
+  \end{align*}
+\end{remark}
+
+\begin{remark} \label{rem_face_map_of_Ainf_nerve}
+  $\Ainf$脈体の単体的構造は次のようになる. 
+  \begin{itemize}
+    \item $\Ainf$脈体の$j$番目の面写像$d^n_j : N_{\Ainf}(\A)_n \to N_{\Ainf}(\A)_{n-1}$は$d^n_j(f)= f \circ (\Prism^n_j)_\star$で定まる.
+    \item $\Ainf$脈体の$j$番目の退化写像$s^n_j : N_{\Ainf}(\A)_{n-1} \to N_{\Ainf}(\A)_n$は$s^n_j(f)= f \circ (\sigma^n_j)_\star$で定まる.
+  \end{itemize}
+\end{remark}
+
+\begin{lemma}
+  任意の$1 \leq p \leq d \leq n$と$0 \leq i_0 < \cdots < i_d \leq n-1$に対して, $d^n_j(f)$は次のようになる. 
+  \begin{align*}
+    d^n_j(f)_{i_0,\cdots,i_d} = 
+    \begin{cases}
+      f_{i_0,\cdots,i_{p-1},i_{p}+1,\cdots,i_{d}+1} & (j \leq i_p, 0 \leq p \leq d) \\
+      f_{i_0,\cdots,i_d} & (j > i_d)
+    \end{cases}
+  \end{align*}
+\end{lemma}
+
+\begin{lemma}
+  任意の$1 \leq d \leq n$と$0 \leq i_0 < \cdots < i_d \leq n-1$に対して, $s^n_j(f)$は次のようになる. \\
+  $d=1$のとき
+  \begin{align*}
+    s^n_j(f)_{i_0,i_1} = 
+    \begin{cases}
+      f_{(i_0-1)(i_1-1)} & (j \leq i_0-1) \\
+      f_{i_0(i_1-1)} & (i_0 < j < i_1-1) \\
+      \Id_{X_{i_0}} & (i_0=j, i_1=j+1) \\
+      f_{i_0,i_1} & (j \geq i_d)
+    \end{cases}
+  \end{align*}
+  $d \geq 2$のとき
+  \begin{align*}
+    s^n_j(f)_{i_0,\cdots,i_d} = 
+    \begin{cases}
+      f_{(i_0-1)(i_d-1)} & (j \leq i_0-1) \\
+      f_{i_0,\cdots,i_{p-1},i_{p+1}-1,\cdots,i_{d}-1} & (i_p < j < i_{p+1}-1, 0 < p < d) \\
+      0 & (i_p=j, i_{p+1}=j+1) \\
+      f_{i_0,\cdots,i_d} & (j > i_d)
+    \end{cases}
+  \end{align*}
+\end{lemma}
+
+\begin{definition}[$\Ainf$脈体の射] \label{def_morphism_of_Ainf_nerve}
+  $\Ainf$関手$\G : \A \to \B$に対して, 単体的集合の射
+  \begin{align*}
+    \G_\star : N_{\Ainf}(\A) \to N_{\Ainf}(\B)
+  \end{align*}
+  を次のように定義する. 
+  \begin{description}
+    \item[($d=0$)] 任意の$\F : \Ainf[\Prism^n] \to \A \in N_{\Ainf}(\A)_n$に対して 
+    \begin{align*}
+      (g_\star(f))_0 = (\G_\star(\F))^0 := \G^0 \circ \F^0 : \Ob\Ainf[\Prism^n] \to \Ob\A \to \Ob\B
+    \end{align*}
+    \item[($1 \leq d \leq n$)] 任意の$0 \leq i_0 < \cdots < i_d \leq n$に対して
+    \footnote{
+      通常の$\Ainf$関手の合成であると\cite{Fao}には書かれているが, \cite{Sei}の定義と符号が異なっている. 
+      本稿では, \cite{Fao}の書き方に合わせたが, \cite{Sei}で計算しても問題ない.
+      もしかすると, \cite{Lurie08}で定義されている小dg脈体の符号と整合するようにしているのかも(勉強中).  
+    } 
+    \begin{align*}
+      (g_\star (f))_{i_0,\cdots,i_d} = (\G_\star(\F))^d := \sum_r \sum_{s_1,\cdots,s_r} (-1)^{\varepsilon(i_1,\cdots,i_r)} g_r(f_{i_{s_r+\cdots+s_2},\cdots,s_r}, \cdots, f_{i_0,\cdots,i_{s_r}})
+    \end{align*}
+  \end{description}
+  $\G_\star$を$\Ainf$脈体の射(morphism of $\Ainf$-nerve)という. 
+\end{definition}
+
+\begin{lemma}
+  \cref{def_Ainf_nerve}と\cref{def_morphism_of_Ainf_nerve}は関手
+  \begin{align*}
+    N_{\Ainf} : \Ainfcat \to \sset
+  \end{align*}
+  を定める. 
+\end{lemma}
+
+$\Ainf$脈体は小dg脈体の一般化である. 
+
+\begin{remark}
+  dg圏に対する$\Ainf$脈体は\cite{Lurie08}で定義されたdg脈体に一致する.
+\end{remark}
+
+\begin{theorem}
+  $\Ainf$圏$\A$の$\Ainf$脈体$N_{\Ainf}(\A)$は$\infty$圏である. 
+\end{theorem}
+
+\begin{proof}
+  $n>0, 0<p<n$とする. 
+  単体的集合の射
+  \begin{align*}
+    \gamma : \Lambda^n_p \to N_{\Ainf}(\A)
+  \end{align*}
+  は$N_{\Ainf}(\A)$の$n$単体
+  \begin{align*}
+    ( \{X_{i_0}\}_{0 \leq i_0 \leq n}, \{f_{i_0,i_1}\}_{0 \leq i_0 \leq i_1 \leq n}, \cdots, \{f_{0,\cdots,n}\} )
+  \end{align*}
+  と同一視できる.
+  ここで, $p=0,n$にあたる$f_{0,\cdots,n}$と$f_{0,\cdots,\hat{p},\cdots,n}$は与えられていないが, 次のように定義すればよい. 
+  \begin{align*}
+    f_{0,\cdots,n} = 0
+  \end{align*}
+  また, 
+  \begin{align*}
+    f_{0,\cdots,\hat{p},\cdots,n} = 
+    &  \sum_{0<j<n, j \neq p} (-1)^{j-1+p} f_{0,\cdots,\hat{j},\cdots,n} \\
+    &+ \sum_{0<j<n} (-1)^{1+n(j-1)+p} f_{j,\cdots,n} \circ f_{0,\cdots,j} \\
+    &+ \sum_{\substack{1 \leq r \leq n \\ 0<j_1<\cdots<j_{r-1}<n}} (-1)^{1+\varepsilon(j_1,\cdots, j_{r-1})+p} 
+    \mu_r(f_{i_{j_r-1},\cdots,i_k}, \cdots, f_{i_0,\cdots,i_{j_1}})
+  \end{align*}
+\end{proof}
+
+
+\section{三角\texorpdfstring{$\Ainf$}{Ainf}圏の\texorpdfstring{$\Ainf$}{Ainf}脈体}
+
+\cite{Fao}は$\Ainf$圏の$\Ainf$脈体が$\infty$圏となることを示したが, \cite{Orn}は前三角$\Ainf$圏の$\Ainf$脈体が安定$\infty$圏となることを示した. 
+
+
+\bibliographystyle{jalpha}
+\bibliography{../A_infty_cf}
+
+\end{document}

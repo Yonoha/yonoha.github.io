@@ -12,8 +12,24 @@
 \maketitle
 
 \begin{abstract}
-  恒等射を持たない$\Ainf$圏の定義と, その間の恒等射を考えない$\Ainf$関手を定義する.
-  $\Ainf$-Yoneda埋め込みまでの$\Ainf$圏論の基礎を説明する. 
+  $\Ainf$圏はFukaya \cite{Fuk93}\cite{Fuk96}によりLagrangian部分多様体のFukaya圏の構造を調べるために導入された. 
+  $\Ainf$圏は$\Ainf$代数の多対象版であり, 射の高次の結合まで考えるdg圏の一般化である. 
+
+  % $\Ainf$構造の概念はStasheffにより, ループ空間を特徴付けるために導入された. 
+  % CW空間$X$がdeloopできることと, $X$が$\Ainf$空間であることは同値であると言える. 
+  % また, $\Ainf$空間はStasheff結合多面体からなる位相的オペラドの上の代数として定義できる. 
+
+  % $\Ainf$圏はdg圏の一般化であるので, dg圏論を$\Ainf$圏論に一般化することが考えられる. 
+  % 例えば, dg圏から三角圏を構成するBondalとKapranovの構成法 \cite{BK}の一般化がある. 
+
+  % また, Lurieにより考えられたdg圏のdg脈体の一般化として, Faonte \cite{Fao}は$\Ainf$脈体を定義した.
+  % これにより, $\Ainf$圏(の$\Ainf$脈体)は擬圏の構造をもつことが分かる. 
+  % 更に, 前三角$\Ainf$圏の$\Ainf$脈体が安定擬圏になることがMuro \cite{Orn}により示されている. 
+
+  本稿では, まず恒等射を持たない$\Ainf$圏と,その間の恒等射を考えない$\Ainf$関手を定義する. 
+  ホモロジー的摂動論によって, $\Ainf$圏から新たな$\Ainf$圏を構成することができる. 
+  これにより, 任意の$\Ainf$圏がある極小$\Ainf$圏と$\Ainf$擬同型であることが分かる. 
+
 \end{abstract}
 
 \tableofcontents
@@ -254,7 +270,7 @@
 恒等射を持たない$\Ainf$圏から$0$次コホモロジーをとる圏も定義される. 
 
 \begin{definition}[$0$次コホモロジー圏]
-  恒等射を持たない$\Ainf$圏$(\A,\mu_\A)$に対して, 恒等射を持たない次数つき線形圏$H^0(\A)$を次のように定義する. 
+  恒等射を持たない$\Ainf$圏$(\A,\mu_\A)$に対して, 恒等射を持たない線形圏$H^0(\A)$を次のように定義する. 
   \begin{itemize}
     \item 対象の集まり$\Ob H^0(\A) := \Ob\A$
     \item 任意の$X_0, X_1 \in \Ob H^0(\A)$に対して, $\hom_{H^0(\A)}(X_0,X_1)$は$0$次コホモロジー群
@@ -280,56 +296,55 @@
 \end{proof}
 
 \begin{lemma}
-  恒等射を持たない$\Ainf$圏$\A$に対して, Koszul符号を除いて
+  恒等射を持たない$\Ainf$圏$\A$に対して, Koszul符号を除いて次の圏同型が成立する. 
   \begin{align*}
     H(\A)^{\mathrm{op}} = H(\Aop)
   \end{align*}
-  が成立する. 
 \end{lemma}
 
-$d \geq 2$に対して$\mu^d_\A$は鎖写像ではないが, コホモロジー圏上ではMassey積の形で現れる. 
+$d \geq 2$に対して$\mu^d_\A$は鎖写像ではないが, コホモロジー圏上ではMassey積の形で現れる. [\cite{Sei} remark 1.2] 
 
-\begin{remark}[\cite{Sei} remark 1.2]
-  次の恒等射を持たない$\Ainf$圏$\A$を考える. 
-  \[\begin{tikzcd}
-    & {X_0} \\
-    {X_1} && {X_2} \\
-    & {X_3}
-    \arrow["{a_1}"', from=1-2, to=2-1]
-    \arrow["{a_2}"', from=2-1, to=2-3]
-    \arrow["{a_3}", from=2-3, to=3-2]
-    \arrow["{h_1}", from=1-2, to=2-3]
-    \arrow["{h_2}"', from=2-1, to=3-2]
-  \end{tikzcd}\]
-  \begin{align*}
-    \mu^1_\A(h_i) = \mu^2_\A(a_{i+1},a_i) ~ (i=1,2)
-  \end{align*}
-  であって, コホモロジー圏において 
-  \begin{align*}
-    [a_3] \cdot [a_2] = [a_2] \cdot [a_1] = 0 
-  \end{align*}
-  である. 
-  ここで, $c \in \hom_\A(X_0,X_3)$を
-  \begin{align*}
-    c := \mu^3_\A(a_3,a_2,a_1) - \mu^2_\A(h_2,a_1) - \mu^2_\A(a_3,h_1)
-  \end{align*}
-  と定義する.
-  このとき, 次数$|a_1|+|a_2|+|a_3|-1$において
-  \begin{align*}
-    \mu^1_\A(c)=0
-  \end{align*}
-  である.
-  また
-  \begin{align*}
-    [c] \in \frac{\hom_{H(\A)}(X_0,X_3)}{[a_3] \cdot \hom_{H(\A)}(X_0,X_2) + \hom_{H(\A)}(X_1,X_3) \cdot [a_1]}
-  \end{align*}
-  は$[a_i]$のみによる.
-  このとき
-  \begin{align*}
-    \langle [a_3],[a_2],[a_1] \rangle := (-1)^{|a_2|} [c]
-  \end{align*}
-  と表す. 
-\end{remark}
+% \begin{remark}[\cite{Sei} remark 1.2]
+%   次の恒等射を持たない$\Ainf$圏$\A$を考える. 
+%   \[\begin{tikzcd}
+%     & {X_0} \\
+%     {X_1} && {X_2} \\
+%     & {X_3}
+%     \arrow["{a_1}"', from=1-2, to=2-1]
+%     \arrow["{a_2}"', from=2-1, to=2-3]
+%     \arrow["{a_3}", from=2-3, to=3-2]
+%     \arrow["{h_1}", from=1-2, to=2-3]
+%     \arrow["{h_2}"', from=2-1, to=3-2]
+%   \end{tikzcd}\]
+%   \begin{align*}
+%     \mu^1_\A(h_i) = \mu^2_\A(a_{i+1},a_i) ~ (i=1,2)
+%   \end{align*}
+%   であって, コホモロジー圏において 
+%   \begin{align*}
+%     [a_3] \cdot [a_2] = [a_2] \cdot [a_1] = 0 
+%   \end{align*}
+%   である. 
+%   ここで, $c \in \hom_\A(X_0,X_3)$を
+%   \begin{align*}
+%     c := \mu^3_\A(a_3,a_2,a_1) - \mu^2_\A(h_2,a_1) - \mu^2_\A(a_3,h_1)
+%   \end{align*}
+%   と定義する.
+%   このとき, 次数$|a_1|+|a_2|+|a_3|-1$において
+%   \begin{align*}
+%     \mu^1_\A(c)=0
+%   \end{align*}
+%   である.
+%   また
+%   \begin{align*}
+%     [c] \in \frac{\hom_{H(\A)}(X_0,X_3)}{[a_3] \cdot \hom_{H(\A)}(X_0,X_2) + \hom_{H(\A)}(X_1,X_3) \cdot [a_1]}
+%   \end{align*}
+%   は$[a_i]$のみによる.
+%   このとき
+%   \begin{align*}
+%     \langle [a_3],[a_2],[a_1] \rangle := (-1)^{|a_2|} [c]
+%   \end{align*}
+%   と表す. 
+% \end{remark}
 
 \section{恒等射を考えない\texorpdfstring{$\Ainf$}{Ainf}関手} \label{section_non_unital_Ainf_functor}
 
@@ -501,7 +516,7 @@ $d \geq 2$に対して$\mu^d_\A$は鎖写像ではないが, コホモロジー�
   を次のように定義する.
   \begin{itemize}
     \item 任意の$X \in \Ob H(\A) = \Ob\A$に対して$H(\F)(X) := \F X$
-    \item 任意の$[a] \in \hom_{H(\A)}(X_0,X_1)$に対して$H(\F)(a) := [\F^1(a)]$
+    \item 任意の$[a] \in \hom_{H(\A)}(X_0,X_1)$に対して$H(\F)([a]) := [\F^1(a)]$
   \end{itemize}
   $H(\F)$を恒等射を考えないコホモロジー圏上の関手(non-unital functor on cohomological category)という.
 \end{definition}
@@ -1046,30 +1061,30 @@ $\A$と$\Phi_\ast \A$はdg-quiverとして同型である.
   このとき, 任意の恒等射を持たない$\Ainf$圏$\C$に対して, $\RG : \nufun{\B}{\C} \to \nufun{\A}{\C}$はコホモロジー圏上で忠実充満である. 
 \end{lemma}
 
-\section{恒等射を考えない\texorpdfstring{$\Ainf$}{Ainf}関手の拡張}
+% \section{恒等射を考えない\texorpdfstring{$\Ainf$}{Ainf}関手の拡張}
 
-恒等射を持たない$\Ainf$圏$\A, \B$に対して$\Q := \nufun{\A}{\B}, A := H(\A), B := H(\B)$と表す. 
-$\tilA$を$\A$の充満部分圏として, $\tilde{A} := H(\tilA)$と表す. 
-$G : A \to B$を恒等射を考えない関手, 組$(G,G)$のHochschildコホモロジーを$HH(A,B)$とする.  
+% 恒等射を持たない$\Ainf$圏$\A, \B$に対して$\Q := \nufun{\A}{\B}, A := H(\A), B := H(\B)$と表す. 
+% $\tilA$を$\A$の充満部分圏として, $\tilde{A} := H(\tilA)$と表す. 
+% $G : A \to B$を恒等射を考えない関手, 組$(G,G)$のHochschildコホモロジーを$HH(A,B)$とする.  
 
-\begin{lemma}
-  任意の$r \geq 3$に対して$HH^2(A,B)^{2-r} = 0$であるとする.
-  このとき, ある恒等射を考えない$\Ainf$関手$\G : \A \to \B$が存在して, $H(\G) = G$を満たす. 
-\end{lemma}
+% \begin{lemma}
+%   任意の$r \geq 3$に対して$HH^2(A,B)^{2-r} = 0$であるとする.
+%   このとき, ある恒等射を考えない$\Ainf$関手$\G : \A \to \B$が存在して, $H(\G) = G$を満たす. 
+% \end{lemma}
 
-\begin{lemma}
-  $\tilde{G} : \tilde{A} \to B$を$G : A \to B$の$\tilde{A}$への制限とする.
-  Hochschildコホモロジー上に誘導される射
-  \begin{align*}
-    HH^{r+s}(A,B)^s \to HH^{r+s}(\tilde{A},B)^s
-  \end{align*}
-  が次の条件を満たすとする.
-  \begin{itemize}
-    \item 任意の$r + s = 2$かつ$r \geq 3$を満たす$(r,s)$に対して, この射は単射である.
-    \item 任意の$r + s = 1$かつ$r \geq 2$を満たす$(r,s)$に対して, この射は全射である.
-  \end{itemize}
-  $H(\tilG) = \tilde{G}$である恒等射を考えない$\Ainf$関手$\tilG : \tilA \to \B$が存在するとき, $\tilG$を$H(\G) = G$である恒等射を考えない$\Ainf$関手$\G : \A \to \B$が存在する.
-\end{lemma}
+% \begin{lemma}
+%   $\tilde{G} : \tilde{A} \to B$を$G : A \to B$の$\tilde{A}$への制限とする.
+%   Hochschildコホモロジー上に誘導される射
+%   \begin{align*}
+%     HH^{r+s}(A,B)^s \to HH^{r+s}(\tilde{A},B)^s
+%   \end{align*}
+%   が次の条件を満たすとする.
+%   \begin{itemize}
+%     \item 任意の$r + s = 2$かつ$r \geq 3$を満たす$(r,s)$に対して, この射は単射である.
+%     \item 任意の$r + s = 1$かつ$r \geq 2$を満たす$(r,s)$に対して, この射は全射である.
+%   \end{itemize}
+%   $H(\tilG) = \tilde{G}$である恒等射を考えない$\Ainf$関手$\tilG : \tilA \to \B$が存在するとき, $\tilG$を$H(\G) = G$である恒等射を考えない$\Ainf$関手$\G : \A \to \B$が存在する.
+% \end{lemma}
 
 \section{恒等射を考えない\texorpdfstring{$\Ainf$}{Ainf}関手圏におけるホモトピー}
 
@@ -1194,43 +1209,43 @@ $G : A \to B$を恒等射を考えない関手, 組$(G,G)$のHochschildコホモ
   
 \end{definition}
 
-ホモトピーは有理ホモトピー論の視点から次のように考えることができる(らしい).
+ホモトピーは有理ホモトピー論の視点から次のように考えることができる. [\cite{Sei} remark 1.11]
 
-\begin{remark}[\cite{Sei} remark 1.11]
-  次のdg代数$I$を考える.
-  \begin{align*}
-    &I := \bbK u_0 \oplus \bbK u_1 \oplus \bbK h \\
-    &|u_0|=|u_1| = 0,~ |h| = 1 \\
-    &d u_0 = -d u_1 = h \\
-    &u_0u_0=u_0,~ u_1u_1=u_1,~ u_0u_1=u_1u_0=0 \\
-    &u_1h=h,~ hu_1=u_0h=0,~ hu_0=h  
-  \end{align*}
-  である.
-  このとき, $H(I) \cong \bbK$である. 
-  % つまり, $u_k$によって生成される部分空間への射影$f_k : I \to \bbK$は擬同型である.
-  単位元のない$\Ainf$代数$\B$に対して, テンソル積$I \otimes \B$を次のように定義する. (省略)
-  このとき, 次の2つは同値である.
-  \begin{enumerate}
-    \item $T$は$\Ainf$準同型$\F_0,\F_1 : \A \to \B$のホモトピーである. 
-    \item 写像
-    \begin{align*}
-      \G : \A &\to I \otimes \B \\
-      (a_d,\cdots,a_1) &\mapsto u_0 \otimes \F_0(a_d,\cdots,a_1) + u_1 \otimes \F_1(a_d,\cdots,a_1) + (-1)^{\maltese d} h \otimes T(a_d,\cdots,a_1)
-    \end{align*}  
-    は準同型を定める.
-    つまり, 次の図式は可換である.
-    \[\begin{tikzcd}
-      && \B \\
-      \A & {I \otimes \B} \\
-      && \B
-      \arrow["\G", from=2-1, to=2-2]
-      \arrow["{f_0 \otimes \id_\B}"', from=2-2, to=1-3]
-      \arrow["{f_1 \otimes \id_\B}", from=2-2, to=3-3]
-      \arrow["{\F_0}", curve={height=-12pt}, from=2-1, to=1-3]
-      \arrow["{\F_1}"', curve={height=12pt}, from=2-1, to=3-3]
-    \end{tikzcd}\]
-  \end{enumerate}
-\end{remark}
+% \begin{remark}[\cite{Sei} remark 1.11]
+%   次のdg代数$I$を考える.
+%   \begin{align*}
+%     &I := \bbK u_0 \oplus \bbK u_1 \oplus \bbK h \\
+%     &|u_0|=|u_1| = 0,~ |h| = 1 \\
+%     &d u_0 = -d u_1 = h \\
+%     &u_0u_0=u_0,~ u_1u_1=u_1,~ u_0u_1=u_1u_0=0 \\
+%     &u_1h=h,~ hu_1=u_0h=0,~ hu_0=h  
+%   \end{align*}
+%   である.
+%   このとき, $H(I) \cong \bbK$である. 
+%   % つまり, $u_k$によって生成される部分空間への射影$f_k : I \to \bbK$は擬同型である.
+%   単位元のない$\Ainf$代数$\B$に対して, テンソル積$I \otimes \B$を次のように定義する. (省略)
+%   このとき, 次の2つは同値である.
+%   \begin{enumerate}
+%     \item $T$は$\Ainf$準同型$\F_0,\F_1 : \A \to \B$のホモトピーである. 
+%     \item 写像
+%     \begin{align*}
+%       \G : \A &\to I \otimes \B \\
+%       (a_d,\cdots,a_1) &\mapsto u_0 \otimes \F_0(a_d,\cdots,a_1) + u_1 \otimes \F_1(a_d,\cdots,a_1) + (-1)^{\maltese d} h \otimes T(a_d,\cdots,a_1)
+%     \end{align*}  
+%     は準同型を定める.
+%     つまり, 次の図式は可換である.
+%     \[\begin{tikzcd}
+%       && \B \\
+%       \A & {I \otimes \B} \\
+%       && \B
+%       \arrow["\G", from=2-1, to=2-2]
+%       \arrow["{f_0 \otimes \id_\B}"', from=2-2, to=1-3]
+%       \arrow["{f_1 \otimes \id_\B}", from=2-2, to=3-3]
+%       \arrow["{\F_0}", curve={height=-12pt}, from=2-1, to=1-3]
+%       \arrow["{\F_1}"', curve={height=12pt}, from=2-1, to=3-3]
+%     \end{tikzcd}\]
+%   \end{enumerate}
+% \end{remark}
 
 \section{ホモロジー的摂動論と極小模型}
 
@@ -1325,7 +1340,7 @@ $G : A \to B$を恒等射を考えない関手, 組$(G,G)$のHochschildコホモ
 % \end{lemma}
 
 \begin{theorem}[極小模型定理] \label{prop_minimal_model_theorem}
-  任意の恒等射を持たない$\Ainf$圏は恒等射を持たない極小$\Ainf$圏と$\Ainf$擬同値である. 
+  任意の恒等射を持たない$\Ainf$圏は恒等射を持たない極小$\Ainf$圏と$\Ainf$擬同型である. 
 \end{theorem}
 
 \begin{proof}
@@ -1427,7 +1442,7 @@ $\A$を恒等射を持たない$\Ainf$圏とする.
   恒等射を持たないdg圏
   \footnote{
     $\Ch$は恒等射を持つ(通常のdg圏)が, 今は単位元の存在を課していない. 
-    \cref{section_unital_Ainf_cat}以降の$\Ainf$加群(後述)では, $\Ch$を恒等射を持つdg圏としている. 
+    恒等射を考える$\Ainf$圏以降では, $\Ch$を恒等射を持つdg圏としている. 
   }
   $\Ch$を次のように定義する. 
   \begin{itemize}

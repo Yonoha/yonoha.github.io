@@ -1,0 +1,792 @@
+\RequirePackage{plautopatch}
+\documentclass[uplatex, a4paper, 14Q, dvipdfmx]{jsarticle}
+\usepackage{docmute}
+\usepackage{../mypackage_for_segal}
+
+\title{完備Segal空間}
+\author{よの}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\end{abstract}
+
+\tableofcontents
+
+\section{単体的空間} \label{sec:simplicial_space}
+
+\begin{definition}[単体的集合]
+  関手$\Delta^\myop \to \Set$を単体的集合(simplicial set)といい, 単体的集合の圏$\Fun(\Delta^\myop,\Set)$を$\sSet$と表す. 
+\end{definition}
+
+\begin{definition}[単体的空間]
+  関手$\Delta^\myop \to \sSet$を単体的空間(simplicial space)といい, 単体的空間の圏$\Fun(\Delta^\myop,\sSet)$を$\sSpace$と表す. 
+\end{definition}
+
+\begin{remark}
+  積-Hom随伴より, 次の同型が存在する. 
+  \begin{align*}
+    \sSpace \cong \Fun(\Delta^\myop,\sSet) \cong \Fun(\Delta^\myop, \Fun(\Delta^\myop,\Set)) \cong \Fun(\Delta^\myop \times \Delta^\myop, \Set)
+  \end{align*}
+  よって, 単体的空間は両単体的集合(bisimplicial set)とも呼ばれる. 
+\end{remark}
+
+\begin{remark}
+  単体的集合を単体的空間に2種類の方法で埋め込むことができる. 
+  \begin{enumerate}
+    \item 関手
+    \begin{align*}
+      i_F : \Delta \times \Delta \to \Delta : ([n],[m]) \mapsto [n]
+    \end{align*}
+    は関手
+    \begin{align*}
+      i_F^\ast : \sSet \to \sSpace : i_F^\ast(F)_{k,l} \mapsto S_k
+    \end{align*}
+    を定める. 
+    この埋め込み$i_F^\ast$を垂直埋め込み(vertical embedding)という. 
+    \item 関手
+    \begin{align*}
+      i_\Delta : \Delta \times \Delta \to \Delta : ([n],[m]) \mapsto [m]
+    \end{align*}
+    は関手
+    \begin{align*}
+      i_\Delta^\ast : \sSet \to \sSpace : i_F^\ast(F)_{k,l} \mapsto S_l
+    \end{align*}
+    を定める. 
+    この埋め込み$\i_\Delta^\ast$を水平埋め込み(horizontal embedding)という. 
+  \end{enumerate}
+\end{remark}
+
+\begin{definition}[空間関手と標準的単体]
+  単体的空間$F(n)$を次のように定義し, $n$次空間関手($n$-th space functor)という. 
+  \begin{align*}
+    (F(n))_{k,l} := i_F^\ast(\Delta^n) = \Hom_\Delta([k],[n])
+  \end{align*}
+  単体的空間$\Delta^n$を次のように定義し, 標準的$n$単体(standard $n$-simplex)という.
+  \begin{align*}
+    (\Delta^n)_{k,l} := i_\Delta^\ast(\Delta^n) = \Hom_\Delta([l],[n])
+  \end{align*}
+\end{definition}
+
+\begin{definition}[空間関手の境界]
+  単体的空間$\partial F(n)$を次のように定義し, $n$次空間関手の境界(boundary of the $n$-th space functor)という. 
+  \begin{align*}
+    \partial F(n) := i_F^\ast(\partial \Delta^n)
+  \end{align*}
+\end{definition}
+
+\begin{remark} \label{rem:yoneda_for_sSpace}
+  Yonedaの補題より, 次の同型が存在する. 
+  \begin{align*}
+    \Map_\sSpace(F(n),X) \cong X_n
+  \end{align*}
+  特に, 次の2つの同型が存在する. 
+  \begin{align*}
+    &\Map_\sSpace(F(0),X)_l \cong \Map_\sSpace(\Delta^l,X) \cong X_{0,l} \\
+    &\Map_\sSpace(\partial F(0),X) \cong \Map_\sSpace(\emptyset,X) \cong \Delta^0 \cong \{\ast\}
+  \end{align*}
+\end{remark}
+
+\begin{definition}[べき乗]
+  単体的空間$X,Y \in \sSpace$に対して, 単体的空間$Y^X$を次のように定義する. 
+  \begin{align*}
+    (Y^X)_{n,l} := \Hom_\sSpace(F(n) \times \Delta^l \times X,Y)
+  \end{align*}
+\end{definition}
+
+\begin{lemma}
+  単体的空間の圏$\sSpace$はCartesian閉である. 
+  つまり, 次の同型が存在する. 
+  \begin{align*}
+    \Map_\sSpace(X \times Y,Z) \cong \Map_\sSpace(X,Z^Y)
+  \end{align*}
+\end{lemma}
+
+
+\section{Reedyファイブラント} \label{sec:reedy_fibrant}
+
+\begin{definition}[Reedyファイブレーション]
+  $X \to Y$を単体的空間の射とする. 
+  任意の$n,l \geq 0$と$0 \leq i \leq n$に対して, 次の図式がリフトを持つとき, $f$をReedyファイブレーション(Reedy fibration)という. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHBhcnRpYWwgRihuKSBcXHRpbWVzIFxcRGVsdGFebCBcXGNvcHJvZF97XFxwYXJ0aWFsIEYobikgXFx0aW1lcyBcXExhbWJkYV5uX2l9IEYobikgXFx0aW1lcyBcXExhbWJkYV5uX2kiXSxbMSwwLCJYIl0sWzEsMSwiWSJdLFswLDEsIkYobikgXFx0aW1lcyBcXERlbHRhXmwiXSxbMCwxXSxbMSwyLCJmIl0sWzAsM10sWzMsMl0sWzMsMSwiIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+  \[\begin{tikzcd}
+    {\partial F(n) \times \Delta^l \coprod_{\partial F(n) \times \Lambda^l_i} F(n) \times \Lambda^l_i} & X \\
+    {F(n) \times \Delta^l} & Y
+    \arrow[from=1-1, to=1-2]
+    \arrow["f", from=1-2, to=2-2]
+    \arrow[from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+    \arrow[dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+\end{definition}
+
+\begin{definition}[Reedyファイブラント]
+  単体的空間$X$に対して, 単体的空間の射$X \to \Delta^0$がReedyファイブレーションのとき, $X$をReedyファイブラント(Reedy fibrant)という. 
+\end{definition}
+
+\begin{theorem}
+  任意の$n$に対して, $F(n)$はReedyファイブラントである. 
+\end{theorem}
+
+\begin{proof}
+  次の図式のリフト$\alpha : F(k) \times \Delta^l \to F(n)$が存在することを言えばよい. 
+  % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXHBhcnRpYWwgRihrKSBcXHRpbWVzIFxcRGVsdGFebCBcXGNvcHJvZF97XFxwYXJ0aWFsIEYoaykgXFx0aW1lcyBcXExhbWJkYV5sX2l9IEYoaykgXFx0aW1lcyBcXExhbWJkYV5sX2kiXSxbMCwxLCJGKGspIFxcdGltZXMgXFxEZWx0YV5sIl0sWzEsMCwiRihuKSJdLFswLDFdLFsxLDIsIlxcYWxwaGEiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMCwyXV0=
+  \[\begin{tikzcd}
+    {\partial F(k) \times \Delta^l \coprod_{\partial F(k) \times \Lambda^l_i} F(k) \times \Lambda^l_i} & {F(n)} \\
+    {F(k) \times \Delta^l}
+    \arrow[from=1-1, to=2-1]
+    \arrow["\alpha"', dashed, from=2-1, to=1-2]
+    \arrow[from=1-1, to=1-2]
+  \end{tikzcd}\]
+  Yonedaの補題より, 
+  \begin{align*}
+    \Map_\sSpace(F(k) \times \Delta^l, F(n)) 
+    &\cong \Hom_{\Delta \times \Delta}({k} \times [l], [n] \times [0]) \\
+    &\cong \Hom_{\Delta \times \Delta}([k],[l]) \\
+    &\cong \Map_\sSpace(F(k),F(n))
+  \end{align*}
+  次の図式において, $\theta$と$\theta'$は一致するので, $\alpha := \theta \circ p_1$とすればよい. 
+  % https://q.uiver.app/#q=WzAsNSxbMSwwLCJcXHBhcnRpYWwgRihrKSBcXHRpbWVzIFxcRGVsdGFebCBcXGNvcHJvZF97XFxwYXJ0aWFsIEYoaykgXFx0aW1lcyBcXExhbWJkYV5sX2l9IEYoaykgXFx0aW1lcyBcXExhbWJkYV5sX2kiXSxbMSwxLCJGKGspIFxcdGltZXMgXFxEZWx0YV5sIl0sWzIsMCwiRihuKSJdLFsyLDEsIkYoaykiXSxbMCwwLCJGKGspIFxcdGltZXMgXFxMYW1iZGFebF9pIl0sWzAsMV0sWzEsMiwiXFxhbHBoYSIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFswLDJdLFsxLDMsInBfMSIsMl0sWzMsMiwiXFx0aGV0YSIsMl0sWzQsMCwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNCwyLCJcXHRoZXRhJyIsMCx7ImN1cnZlIjotM31dXQ==
+  \[\begin{tikzcd}
+    {F(k) \times \Lambda^l_i} & {\partial F(k) \times \Delta^l \coprod_{\partial F(k) \times \Lambda^l_i} F(k) \times \Lambda^l_i} & {F(n)} \\
+    & {F(k) \times \Delta^l} & {F(k)}
+    \arrow[from=1-2, to=2-2]
+    \arrow["\alpha"', dashed, from=2-2, to=1-3]
+    \arrow[from=1-2, to=1-3]
+    \arrow["{p_1}"', from=2-2, to=2-3]
+    \arrow["\theta"', from=2-3, to=1-3]
+    \arrow[hook, from=1-1, to=1-2]
+    \arrow["{\theta'}", curve={height=-18pt}, from=1-1, to=1-3]
+  \end{tikzcd}\]
+\end{proof}
+
+\begin{remark}
+  任意の$0 \leq i \leq n$における関手
+  \begin{align*}
+    i : [0] \to [n] : 0 \mapsto i
+  \end{align*}
+  は単体的空間$X$に対して, 単体的集合の射
+  \begin{align*}
+    i^\ast : X_n \to X_0
+  \end{align*}
+  を定める. 
+  また, $i$は次の単体的集合の射
+  \begin{align*}
+    (0^\ast, \cdots, n^\ast) : X_n \to X_0 \times \cdots \times X_0 \cong (X_0)^{n+1}
+  \end{align*}
+  を定める. 
+\end{remark}
+
+\begin{lemma} \label{lem:Xn_to_X0^n+1_is_Kan_fibration}
+  $X$をReedyファイブラント単体的空間とする. 
+  任意の$n \geq 0$に対して, 単体的集合の射$X_n \to (X_0)^{n+1}$はKanファイブレーションである. 
+\end{lemma}
+
+\begin{proof}
+  次の図式のリフト$\Delta^k \to X_n$が存在することを言えばよい. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXExhbWJkYV5rX2kiXSxbMSwwLCJYX24gXFxjb25nIFxcTWFwX1xcc1NwYWNlKEYobiksWCkiXSxbMCwxLCJcXERlbHRhXmsiXSxbMSwxLCIoWF8wKV57bisxfSBcXGNvbmcgXFxNYXBfXFxzU3BhY2UoXFxjb3Byb2Rfe24rMX1GKDApLFgpIl0sWzAsMV0sWzAsMiwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMiwzXSxbMSwzXSxbMiwxLCIiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+  \[\begin{tikzcd}
+    {\Lambda^k_i} & {X_n \cong \Map_\sSpace(F(n),X)} \\
+    {\Delta^k} & {(X_0)^{n+1} \cong \Map_\sSpace(\coprod_{n+1}F(0),X)}
+    \arrow[from=1-1, to=1-2]
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+    \arrow[from=1-2, to=2-2]
+    \arrow[dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+\end{proof}
+
+\begin{lemma}
+  $X$をReedyファイブラント単体的空間とする. 
+  任意の$n \geq 0$に対して, $X_n$はKanファイブラントである. 
+\end{lemma}
+
+\begin{proof}
+  単体的空間$X$はReedyファイブラントなので, 
+  \begin{align*}
+    \Map_\sSpace(F(n),X) \to \Map_\sSpace(\partial F(n),X)
+  \end{align*}
+  はKanファイブレーションである. 
+  $n=0$のとき, \cref{rem:yoneda_for_sSpace}より, 
+  \begin{align*}
+    \Map_\sSpace(F(0),X) \cong X_0 \\
+    \Map_\sSpace(\partial F(0),X) \cong \Delta^0
+  \end{align*}
+  なので, 
+  \begin{align*}
+    X_0 \to \Delta^0
+  \end{align*}
+  はKanファイブレーションである. 
+  よって, $X_0$はKanファイブラントである.
+  \cref{lem:Xn_to_X0^n+1_is_Kan_fibration}より, $X_n \to (X_0)^{n+1}$はKanファイブレーションである.
+  Kanファイブラントは合成で閉じるので, $X_n$もKanファイブラントである.
+\end{proof}
+
+
+\section{Segal空間} \label{sec:segal_space}
+
+単体的空間のReedyファイブラント条件は単体的空間の図式における垂直成分が空間のようにふるまうことを意味している. 
+この章では, 単体的空間の図式における並行成分が圏の性質をもつようにふるまうための条件であるSegal空間を定義する. 
+
+\begin{definition}[Segal空間]
+  $X$をReedyファイブラント単体的空間$X$とする. 
+  任意の$n \geq 2$に対して, 単体的集合の射
+  \begin{align*}
+    \varphi_n : X_n \to X_1 \times_{X_0} \cdots \times_{X_0} X_1
+  \end{align*}
+  が自明なKanファイブレーションのとき, $X$をSegal空間(Segal space)という. 
+\end{definition}
+
+Segal空間$X$は単体的空間なので, 空間$X_0,X_0,X_2,\cdots$を持つ. 
+Segal条件により, $X_0$を「点の空間」, $X_1$を「射の空間」, $X_2$を「合成の空間」のように思うことができる. 
+具体的には, 次のように考えることができる. (次の章でこの議論を厳密に考える.)
+
+\begin{remark} \label{rem:2_segal_condition}
+  $n=2$のSegal空間の条件は$X_2 \xrightarrow{\cong} X_1 \times_{X_0} X_1$である. 
+  $X_2$は2単体の集まりなので, 2単体$\sigma \in X_2$は次のように表せる. 
+  \[
+    \begin{tikzpicture}[auto,->]
+      \node (x) at (0,0) {$x$};
+      \node (z) at (3,0) {$z$};
+      \node (y) at (1.5,2) {$y$};
+      \node (sigma) at (1.5,0.7) {$\sigma$};
+      \draw (x) -- node {$f$} (y);
+      \draw (y) -- node {$g$} (z);
+      \draw (x) -- (z);  
+    \end{tikzpicture}
+  \]
+  同様に, $X_1 \times_{X_0} X_1$は2つの合成可能な射の集まりとみなせて, 次のように表せる. 
+  \[
+    \begin{tikzpicture}[auto,->]
+      \node (x) at (0,0) {$x$};
+      \node (z) at (3,0) {$z$};
+      \node (y) at (1.5,2) {$y$};
+      \draw (x) -- node {$f$} (y);
+      \draw (y) -- node {$g$} (z);
+    \end{tikzpicture}
+  \]
+  Segal条件はこのような図式が次の2単体に埋めることができる, つまり次のように表せることを意味している. 
+  \[
+    \begin{tikzpicture}[auto,->]
+      \node (x) at (0,0) {$x$};
+      \node (z) at (3,0) {$z$};
+      \node (y) at (1.5,2) {$y$};
+      \node (sigma) at (1.5,0.7) {$\sigma$};
+      \draw (x) -- node {$f$} (y);
+      \draw (y) -- node {$g$} (z);
+      \draw[dashed] (x) -- node[swap] {$h$} (z);  
+    \end{tikzpicture}
+  \]
+  よって, $h$を$gf$と表すことが多いが, $h$は$g$と$f$(と$\sigma$)に対して一意に定まらないことに注意. 
+  しかし, \cref{theorem:composition_is_homotopic}で$h$はホモトピーの違いを除いて一意であることが分かる.  
+\end{remark}
+
+\begin{remark} \label{rem:3_segal_condition}
+  $n=3$のSegal空間の条件は$X_3 \xrightarrow{\cong} X_1 \times_{X_0} X_1 \times_{X_0} X_1$である. 
+  $X_3$は3単体の集まりで, 3単体は次のように表せる. 
+  \[
+    \begin{tikzpicture}[auto,->]
+      \node (x) at (0,0) {$x$};
+      \node (y) at (4,0.5) {$y$};
+      \node (z) at (3,-1) {$z$};
+      \node (w) at (2,3) {$w$};
+      \node (sigma) at (2.5,-0.3) {$\sigma$};
+      \node (gamma) at (3,1) {$\gamma$};
+      \draw (x) -- node {$f$} (y);
+      \draw (y) -- node {$g$} (z);
+      \draw (z) -- node {$h$} (w);
+      \draw (x) -- (z);
+      \draw (x) -- (w);
+      \draw (y) -- (w);
+    \end{tikzpicture}
+  \]
+  同様に, $X_1 \times_{X_0} X_1 \times_{X_0} X_1$は3つの合成可能な射の集まりとみなせて, 次のように表せる.
+  \[
+    \begin{tikzpicture}[auto,->]
+      \node (x) at (0,0) {$x$};
+      \node (y) at (4,0.5) {$y$};
+      \node (z) at (3,-1) {$z$};
+      \node (w) at (2,3) {$w$};
+      \draw (x) -- node {$f$} (y);
+      \draw (y) -- node {$g$} (z);
+      \draw (z) -- node {$h$} (w);
+    \end{tikzpicture}
+  \]
+  Segal条件はこのような図式が次の3単体に埋めることができる, つまり次のように表せることを意味している.
+  \[
+    \begin{tikzpicture}[auto,->]
+      \node (x) at (0,0) {$x$};
+      \node (y) at (4,0.5) {$y$};
+      \node (z) at (3,-1) {$z$};
+      \node (w) at (2,3) {$w$};
+      \node (sigma) at (2.5,-0.3) {$\sigma$};
+      \node (gamma) at (3,1) {$\gamma$};
+      \draw (x) -- node {$f$} (y);
+      \draw (y) -- node {$g$} (z);
+      \draw (z) -- node {$h$} (w);
+      \draw[dashed] (x) -- node[swap] {$gf$} (z);
+      \draw[dashed] (x) -- node {$h(gf),~ (hg)f$}  (w);
+      \draw[dashed] (y) -- node[swap] {$hg$} (w);
+    \end{tikzpicture}
+  \]
+  よって, この3単体は合成可能な射の結合性を表している. 
+  2単体において合成は一意ではなかったが, 3単体において$(hg)f$と$h(gf)$は等しいことを意味している. 
+\end{remark}
+
+\begin{example} \label{eg:NC_is_Segal_space}
+  任意の圏$\C$に対して, 脈体$N\C$はSegal空間である. 
+\end{example}
+
+\begin{proof}
+  $N\C$が単体的集合のSegal条件を満たすことから従う.
+\end{proof}
+
+
+\section{Segal空間における射の合成} \label{sec:composition_in_Segal_space}
+
+Segal空間とはReedyファイブラント条件とSegal条件を満たすような単体的空間であった. 
+\cref{sec:segal_space}で見たように, Segal空間における射の合成は一意ではなかった (\cref{rem:2_segal_condition}).
+しかし, 射の合成に関する結合律は成立していた (\cref{rem:3_segal_condition}).
+この理由を考える.
+
+$X$をSegal空間とする. 
+
+\begin{definition}[単体的空間における対象]
+  $X$をSegal空間とする. 
+  $X_0$の点を$X$の対象(object)という. 
+  $X$の対象の集まりを$\Ob(X)$と表すと, $\Ob(X) = T_{0,0}$である. 
+\end{definition}
+
+\begin{definition}[合成の空間]
+  $X$の対象$x_0,\cdots,x_n$に対して, 単体的集合$\map_X(x_0,\cdots,x_n)$を次のpullbackで定義し, $\map_X(x_0,\cdots,x_n)$を合成の空間(space of composition)という.  
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hcF9YKHhfMCxcXGNkb3RzLHhfbikiXSxbMSwwLCJYX24iXSxbMSwxLCIoWF8wKV57bisxfSJdLFswLDEsIlxcRGVsdGFeMCJdLFswLDFdLFswLDNdLFszLDJdLFsxLDJdLFswLDIsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dXQ==
+  \[\begin{tikzcd}
+    {\map_X(x_0,\cdots,x_n)} & {X_n} \\
+    {\Delta^0} & {(X_0)^{n+1}}
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-1, to=2-1]
+    \arrow["{(x_0,\cdots,x_n)}"', from=2-1, to=2-2]
+    \arrow[from=1-2, to=2-2]
+    \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+  \end{tikzcd}\]
+\end{definition}
+
+\begin{remark}
+  \cref{lem:Xn_to_X0^n+1_is_Kan_fibration}より, $X_n \to (X_0)^{n+1}$はKanファイブレーションである.
+  Kanファイブラントはpullbackで閉じるので, $\map_X(x_0,\cdots,x_n) \to \Delta^0$はKanファイブレーションである.
+  つまり, $\map_X(x_0,\cdots,x_n)$はKanファイブラントである.
+\end{remark}
+
+\begin{definition}[単体的空間における射]
+  合成の空間において, $n=1$のとき, 単体的集合$\map_X(x_0,x_1)$を射空間(mapping space)という. 
+  $\map_X(x_0,x_1)$の点を$X$の射(morphism)といい, $f : x_0 \to x_1$と表す. 
+\end{definition}
+
+\begin{remark}
+  $X$はSegal空間なので, $\varphi_n : X_n \to X_1 \times_{X_0} \cdots \times_{X_0} X_1$は自明なKanファイブレーションである.
+  よって, 次の図式が得られる. 
+  % https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXG1hcF9YKHhfMCxcXGNkb3RzLHhfbikiXSxbMSwwLCJYX24iXSxbMSwxLCIoWF8wKV57bisxfSJdLFswLDEsIlxcRGVsdGFeMCJdLFsyLDAsIlhfMSBcXHRpbWVzX3tYXzB9IFxcdGltZXMgXFx0aW1lc197WF8wfSBYXzEiXSxbMCwxXSxbMCwzXSxbMywyLCIoeF8wLFxcY2RvdHMseF9uKSIsMl0sWzEsMl0sWzAsMiwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzEsNCwiXFxjb25nIl0sWzQsMl1d
+  \[\begin{tikzcd}
+    {\map_X(x_0,\cdots,x_n)} & {X_n} & {X_1 \times_{X_0} \cdots \times_{X_0} X_1} \\
+    {\Delta^0} & {(X_0)^{n+1}}
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-1, to=2-1]
+    \arrow["{(x_0,\cdots,x_n)}"', from=2-1, to=2-2]
+    \arrow[from=1-2, to=2-2]
+    \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+    \arrow["\cong", from=1-2, to=1-3]
+    \arrow[from=1-3, to=2-2]
+  \end{tikzcd}\]
+  よって, 次の単体的集合の射
+  \begin{align*}
+    \map_X(x_0,\cdots,x_n) \to \map_X(x_0,x_1) \times \cdots \times \map_X(x_{n-1},x_n)
+  \end{align*}
+  は自明なKanファイブレーションである.
+\end{remark}
+
+\begin{remark}
+  $x,y,z$を$X$の対象とする. 
+  上の議論から, 次の図式が得られる. 
+  % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hcF9YKHgseSx6KSJdLFsxLDAsIlxcbWFwX1goeCx6KSJdLFswLDEsIlxcbWFwX1goeCx5KSBcXHRpbWVzIFxcbWFwX1goeSx6KSJdLFswLDEsImRfMSJdLFswLDIsIlxcY29uZyIsMl1d
+  \[\begin{tikzcd}
+    {\map_X(x,y,z)} & {\map_X(x,z)} \\
+    {\map_X(x,y) \times \map_X(y,z)}
+    \arrow["{d_1}", from=1-1, to=1-2]
+    \arrow["\cong"', from=1-1, to=2-1]
+  \end{tikzcd}\]
+  2つの射$f \in \map_X(x,y), g \in \map_X(y,z)$に対して, $\map_X(x,y,z)$の単体的部分集合$\Comp(f,g)$を次のpullbackで定義する. 
+  % https://q.uiver.app/#q=WzAsNSxbMSwwLCJcXG1hcF9YKHgseSx6KSJdLFsyLDAsIlxcbWFwX1goeCx6KSJdLFsxLDEsIlxcbWFwX1goeCx5KSBcXHRpbWVzIFxcbWFwX1goeSx6KSJdLFswLDAsIlxcQ29tcChmLGcpIl0sWzAsMSwiXFxEZWx0YV4wIl0sWzAsMSwiZF8xIl0sWzAsMiwiXFxjb25nIiwyXSxbMywwLCIiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFszLDRdLFs0LDJdLFszLDIsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dXQ==
+  \[\begin{tikzcd}
+    {\Comp(f,g)} & {\map_X(x,y,z)} & {\map_X(x,z)} \\
+    {\Delta^0} & {\map_X(x,y) \times \map_X(y,z)}
+    \arrow["{d_1}", from=1-2, to=1-3]
+    \arrow["\cong"', from=1-2, to=2-2]
+    \arrow[hook, from=1-1, to=1-2]
+    \arrow[from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+    \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+  \end{tikzcd}\]
+  自明なKanファイブレーションはpullbackで閉じるので, $\Comp(f,g) \to \Delta^0$は自明なKanファイブレーションである. 
+  つまり, $\Comp(f,g)$は可縮なKanファイブラントである. 
+  よって, $\Comp(f,g)$の任意の2点は同型である. 
+  従って, 射の合成は可縮な空間の違いを除いて一意に定めることができる.
+\end{remark}
+
+\begin{example}
+  $X$を任意の圏$\C$の脈体とする. 
+  $X$の対象$x,y,z$と射$f:x \to y, g: y \to z$に対して, $\Comp(f,g) \cong \Delta^0$である. 
+  % このとき, 2つの射がホモトピックであることと, 2つの射が等しいことは同値である. 
+  % 更に, 射がホモトピー同値であることと, 射が同型であることは同値である. 
+\end{example}
+
+\begin{proof}
+  次の図式において, 同型がpullbackで閉じることから従う. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXENvbXAoZixnKSJdLFsxLDAsIk4oXFxDKV8yIl0sWzEsMSwiTihcXEMpXzEgXFx0aW1lc197TihcXEMpXzB9IE4oXFxDKV8xIl0sWzAsMSwiXFxEZWx0YV4wIl0sWzAsMV0sWzEsMiwiXFxjb25nIl0sWzAsM10sWzMsMl0sWzAsMiwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
+  \[\begin{tikzcd}
+    {\Comp(f,g)} & {N\C_2} \\
+    {\Delta^0} & {N\C_1 \times_{N\C_0} N\C_1}
+    \arrow[from=1-1, to=1-2]
+    \arrow["\cong", from=1-2, to=2-2]
+    \arrow[from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+    \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+  \end{tikzcd}\]
+\end{proof}
+
+\begin{definition}[単体的空間における恒等射]
+  任意の$X$の対象$x$に対して, $s_0 : X_0 \to X_1$の$x$の像$s_0(x)$を$x$の恒等射(identity map)といい, $\id_x$と表す.
+  \begin{align*}
+    s_0 : X_0 \to X_1 : x \mapsto \id_x
+  \end{align*}
+\end{definition}
+
+\begin{definition}[単体的空間におけるホモトピック]
+  $x,y$を$X$の対象, $f,g \in \map_X(x,y)$を$X$の射とする.
+  単体的集合の射$f,g : \Delta^0 \to \map_X(x,y)$が単体的集合の意味でホモトピックであるとき, $f$と$g$はホモトピック(homotopic)であるといい, $f \sim g$と表す.  
+\end{definition}
+
+射の合成はホモトピーの違いを除いて結合的かつ単位を持つ. 
+
+\begin{theorem} \label{theorem:composition_is_homotopic}
+  $x,y,z,w$を$X$の対象, $f \in \map_X(x,y), g \in \map_X(y,z), h \in \map_X(z,w)$を$X$の射とする. 
+  このとき, $h(gf) \sim (hg)f$かつ$f\id_x \sim \id_yf \sim f$である. 
+\end{theorem}
+
+\cref{theorem:composition_is_homotopic}より, 単体的空間の対して通常の圏が定まる. 
+
+\begin{definition}[単体的空間のホモトピー圏]
+  単体的空間$X$に対して, 通常の圏$\Ho(X)$を次のように定義し, $X$のホモトピー圏(homotopy category)という. 
+  \begin{itemize}
+    \item $\Ho(X)$の対象は$X$の対象と同じ
+    \item 任意の$x,y \in \Ho(X)$に対して, $\Hom_{\Ho(X)}(x,y)$は$x$から$y$への射のホモトピー類の空間
+    \begin{align*}
+      \Hom_{\Ho(X)}(x,y) := \pi_0(\map_X(x,y))
+    \end{align*}
+    \item 任意の$x,y,z \in \Ho(X)$に対して, 合成
+    \begin{align*}
+      \Hom_{\Ho(X)}(x,y) \times \Hom_{\Ho(X)}(y,z) \to \Hom_{\Ho(X)}(x,z)
+    \end{align*}
+    は
+    \begin{align*}
+      \map_X(x,y) \times \map_X(y,z) \to \map_X{\Ho(X)}(x,z)
+    \end{align*}
+    から定まる自然な対応
+  \end{itemize}
+\end{definition}
+
+\begin{theorem} \label{thrm:C_is_HoNC}
+  任意の圏$\C$は$\Ho(N\C)$と圏同型である.
+\end{theorem}
+
+\begin{proof}
+  $\Ho(N\C)$の対象は
+  \begin{align*}
+    \Ob\Ho(N\C) = \Ob(N\C) = N\C_0 = \Ob(\C)
+  \end{align*}
+  任意の$x,y \in \Ho(N\C)$に対して, 
+  \begin{align*}
+    \Hom_{\Ho(N\C)} = \pi_0(\Map_{N\C}(x,y)) = \pi_0(N\C_1 \times_{N\C_0 \times N\C_0} \ast)
+  \end{align*}
+  $N\C_1$と$N\C_0 \times N\C_0$は離散的なので, 
+  \begin{align*}
+    \pi_0(N\C_1 \times_{N\C_0 \times N\C_0} \ast) = N\C_1 \times_{N\C_0 \times N\C_0} \ast = \Hom_\C(x,y)
+  \end{align*}
+  よって, $\Ho(N\C)$と$\C$は圏同型である.
+\end{proof}
+
+
+\section{ホモトピー同値}
+
+\cref{sec:composition_in_Segal_space}では主にSegal空間の圏論的な側面を見た. 
+この章では, Segal空間のもつホモトピー論的な性質に着目する.
+
+$X$をSegal空間とする. 
+
+\begin{definition}[ホモトピー同値]
+  $X$の射$f \in \map_X(x,y)$に対して, ある射$g,h \in \map_X(y,x)$が存在して, 
+  \begin{align*}
+    gf \sim \id_x,~ fh \sim \id_y
+  \end{align*}
+  を満たすとき, $f$をホモトピー同値(homotopy equivalence)という.  
+  このとき, $g$を$f$の左ホモトピー逆射(left homotopy inverse), $h$を$f$の右ホモトピー逆射(right homotopy inverse)という. 
+\end{definition}
+
+ホモトピー逆射はホモトピーの違いを除いて一意である. 
+
+\begin{remark}
+  \cref{theorem:composition_is_homotopic}より, 
+  \begin{align*}
+    g \sim g \id_y \sim g f h \sim \id_x h \sim h
+  \end{align*}
+  なので, ホモトピー逆射はホモトピーの違いを除いて一意である. 
+\end{remark}
+
+\begin{example} \label{eq:id_is_homotopy_equivalence}
+  任意の$X$の対象$x$に対して, $x$の恒等射$\id_x$はホモトピー逆射である.
+\end{example}
+
+ホモトピー同値はホモトピーに関して保たれる. 
+
+\begin{lemma}
+  $f,g \in X_1$を$X$の射とする. 
+  ある$\gamma : \Delta^1 \to X_1$が存在して, $\gamma(0)=f, \gamma(1)=g$を満たすとする. 
+  $g$がホモトピー同値のとき, $f$もホモトピー同値である. 
+\end{lemma}
+
+\begin{definition}[ホモトピー同値の空間]
+  $X$のホモトピー同値で生成される$X_1$の単体的部分空間を$X_\hoequiv$と表し, $X$のホモトピー同値の空間(space of homotopy equivalences)という. 
+\end{definition}
+
+\begin{remark}
+  $X_\hoequiv$の点は$X$の射である.
+  具体的には, $X_\hoequiv$はホモトピー逆射が存在するような$X$の射のなす$X_1$の充満部分空間である.  
+\end{remark}
+
+ホモトピー同値の空間は可縮である. 
+つまり, 射がホモトピー同値となるような逆射の選択はホモトピーの違いを除いて一意である. 
+
+\begin{lemma}
+  $X$のホモトピー同値$f$, $f$の左ホモトピー逆射$g$, $f$の右ホモトピー逆射$h$の3つ組$(f,g,h)$で生成される$X_3$の単体的部分空間を$X_\hoeqchoice$と表す. 
+  $U : X_\hoeqchoice \to X_\hoequiv : (f,g,h) \mapsto f$をホモトピー逆射を忘れる射とする. 
+  このとき, $U$は次の図式を可換にする自明なKanファイブレーションである. 
+  % https://q.uiver.app/#q=WzAsMyxbMCwwLCJYX1xcaG9lcXVpdiJdLFsxLDAsIlhfXFxob2VxY2hvaWNlIl0sWzEsMSwiWF8xIl0sWzEsMCwiVSIsMl0sWzEsMl0sWzAsMiwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XV0=
+  \[\begin{tikzcd}
+    {X_\hoequiv} & {X_\hoeqchoice} \\
+    & {X_1}
+    \arrow["U"', from=1-2, to=1-1]
+    \arrow[from=1-2, to=2-2]
+    \arrow[hook, from=1-1, to=2-2]
+  \end{tikzcd}\]
+  また, 次のpullbackが存在する.
+  % https://q.uiver.app/#q=WzAsNSxbMCwwLCJYX1xcaG9lcXVpdiJdLFsxLDAsIlhfXFxob2VxY2hvaWNlIl0sWzEsMSwiWF8xIl0sWzIsMCwiWF8zIl0sWzIsMSwiWF8xIFxcdGltZXNfe1hfMH1YXzEgXFx0aW1lc197WF8wfSBYXzEiXSxbMSwwLCJcXGNvbmciLDJdLFsxLDJdLFswLDIsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzEsMywiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMyw0LCIoZF8xZF8zLGRfMGRfMyxkXzFkXzApIl0sWzIsNCwiKHNfMGRfMCxcXGlkX3t4XzF9LHNfMGRfMSkiLDJdLFsxLDQsIiIsMCx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dXQ==
+  \[\begin{tikzcd}
+    {X_\hoequiv} & {X_\hoeqchoice} & {X_3} \\
+    & {X_1} & {X_1 \times_{X_0}X_1 \times_{X_0} X_1}
+    \arrow["\cong"', from=1-2, to=1-1]
+    \arrow[from=1-2, to=2-2]
+    \arrow[hook, from=1-1, to=2-2]
+    \arrow[hook, from=1-2, to=1-3]
+    \arrow["{(d_1d_3,d_0d_3,d_1d_0)}", from=1-3, to=2-3]
+    \arrow["{(s_0d_0,\id_{x_1},s_0d_1)}"', from=2-2, to=2-3]
+    \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-2, to=2-3]
+  \end{tikzcd}\] 
+\end{lemma}
+
+ホモトピー同値を用いて定義される空間として, 次の2つが重要である. 
+
+\begin{definition}[Segal空間亜群]
+  $X$の任意の射がホモトピー同値のとき, $X$をSegal空間亜群(Segal space groupoid)という. 
+\end{definition}
+
+局所的なホモトピー同値の定義を与える. 
+
+\begin{definition}[$x$と$y$の間のホモトピー同値の空間]
+  
+\end{definition}
+
+\begin{example} \label{eg:homotopy_equivalence_is_isomorphism_in_NC}
+  $\C$を通常の圏とする. 
+  脈体$N\C$におけるホモトピー同値は$\C$における同型射である. 
+\end{example}
+
+\begin{proof}
+  $N\C$において射$f$がホモトピー同値であることと, $\Ho(N\C)$において射$[f]$が同型射であることは同値である. 
+  \cref{thrm:C_is_HoNC}より, $\Ho(N\C) = \C$である. 
+  よって, $N\C$において射$f$がホモトピー同値であることと, $\C$において射$[f]$が同型射であることは同値である. 
+\end{proof}
+
+\section{完備Segal空間} \label{sec:complete_segal_space}
+
+\cref{sec:reedy_fibrant}と\cref{sec:segal_space}でSegal空間がホモトピー論と圏論の2つの性質を持つことを見た. 
+しかし, Segal空間のホモトピー論と圏論は次で見るように整合性がない.
+
+\begin{definition}
+  $I(1)$を2つの対象$x,y$とその間の可逆な射からなる圏とする. 
+  \footnote{
+    恒等射はもちろん存在するが, 恒等射は明記しない. 
+  }
+  % https://q.uiver.app/#q=WzAsMixbMCwwLCJ4Il0sWzEsMCwieSJdLFswLDEsImYiLDAseyJvZmZzZXQiOi0xfV0sWzEsMCwiZl57LTF9IiwwLHsib2Zmc2V0IjotMX1dXQ==
+  \[\begin{tikzcd}
+    x & y
+    \arrow["f", shift left, from=1-1, to=1-2]
+    \arrow["{f^{-1}}", shift left, from=1-2, to=1-1]
+  \end{tikzcd}\]
+\end{definition}
+
+\begin{remark} \label{rem:E(1)}
+  Segal空間$i_F^\ast(NI(1))$を$E(1)$と表す. 
+  $NI(1)$は離散単体的空間なので, 任意の$n$に対して, 
+  \begin{align*}
+    E(1)_n = \{x,y\}^n
+  \end{align*}
+  である. 
+  具体的には, $E(1)_n$は集合$\{0,\cdots,n-1\}$から$\{x,y\}$への射の集まりである. 
+  よって, $E(1)_n$は$2^{n+1}$個の元を持つ.
+  例えば, $E(1)_0$は$\{x,y\}$である. 
+  また, $E(1)_1$は$\{\id_x,\id_y, f, f^{-1}\}$である. 
+\end{remark}
+
+\begin{lemma}
+  圏$I(1)$と$\{\ast\}$は圏同値である. 
+  しかし, $E(1) := i_F^\ast(NI(1))$と$F(1) := i_F^\ast(N\{\ast\})$はSegal空間として圏同値ではない.
+\end{lemma}
+
+\begin{proof}
+  $E(1)$は各次元で可縮ではないが, $F(1)$は各次元で可縮であることから, 明らかにSegal空間として圏同値でない.
+\end{proof}
+
+Segal空間のホモトピー論と圏論に整合性を持たせる条件が完備性である. 
+
+\begin{remark}
+  単体的空間$X$に対して, ホモトピー同値の空間$X_\hoequiv \subset X_1$が存在する. 
+  恒等射の定義
+  \begin{align*}
+    s_0 : X_0 \to X_1 : x \mapsto \id_x
+  \end{align*}
+  において, \cref{eg:id_is_homotopy_equivalence}より, 恒等射はホモトピー同値である. 
+  よって, $s_0$は$X_\hoequiv$を経由して分解される. 
+  % https://q.uiver.app/#q=WzAsMyxbMCwwLCJYXzAiXSxbMiwwLCJYXzEiXSxbMSwxLCJYX1xcaG9lcXVpdiJdLFswLDEsInNfMCJdLFswLDJdLFsyLDEsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV1d
+\[\begin{tikzcd}
+	{X_0} && {X_1} \\
+	& {X_\hoequiv}
+	\arrow["{s_0}", from=1-1, to=1-3]
+	\arrow[from=1-1, to=2-2]
+	\arrow[hook, from=2-2, to=1-3]
+\end{tikzcd}\]
+\end{remark}
+
+単体的空間の射$s_0 : X_0 \to X_1$は単射ではあるが, 全射ではない. 
+($X_1$の任意の同型射が恒等射のみであるとき, $s_0$は全射である.)
+よって, 完備Segal空間は次のように定義される. 
+
+\begin{definition}[完備Segal空間]
+  $X$をSegal空間とする.
+  単体的空間の射
+  \begin{align*}
+    s_0 : X_0 \to X_\hoequiv
+  \end{align*}
+  が弱同値のとき, $X$を完備Segal空間(complete Segal space)という. 
+\end{definition}
+
+\begin{example}
+  単体的空間$E(1)$は完備Segal空間ではない.
+\end{example}
+
+\begin{proof}
+  \cref{rem:E(1)}より, 
+  \begin{align*}
+    E(1)_0 &= \{x,y\} \\
+    E(1)_1 &= \{\id_x,\id_y, f, f^{-1}\} \\
+    E(1)_\hoequiv &= \{\id_x,\id_y, f, f^{-1}\} = E(1)_1
+  \end{align*}
+  であるが, 
+  \begin{align*}
+    E(1)_0 \to E(1)_\hoequiv = \{x,y\} \to \{\id_x,\id_y, f, f^{-1}\}
+  \end{align*}
+  は弱同値ではない. 
+  よって, $E(1)$は完備Segal空間ではない.
+\end{proof}
+
+完備Segal空間の定義と同値な条件がある. 
+
+\begin{theorem}
+  単体的空間$X$に対して, 次は同値である. 
+  \begin{enumerate}
+    \item $X$は完備Segal空間である. 
+    \item 次の図式はホモトピーpullbackである. 
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYXzAiXSxbMSwwLCJYXzMiXSxbMCwxLCJYXzEiXSxbMSwxLCJYXzEgXFx0aW1lc197WF8wfSBYXzEgXFx0aW1lc197WF8wfSBYXzEiXSxbMCwxXSxbMCwyXSxbMSwzXSxbMiwzXSxbMCwzLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
+    \[\begin{tikzcd}
+      {X_0} & {X_3} \\
+      {X_1} & {X_1 \times_{X_0} X_1 \times_{X_0} X_1}
+      \arrow[from=1-1, to=1-2]
+      \arrow[from=1-1, to=2-1]
+      \arrow[from=1-2, to=2-2]
+      \arrow[from=2-1, to=2-2]
+      \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+    \end{tikzcd}\]
+    \item 次の単体的空間の射は弱同値である. 
+    \begin{align*}
+      \Map_\sSpace(E(1),X) \to \Map_\sSpace(F(0),X)
+    \end{align*}
+    \item 任意の対象$x,y \in X$に対して, $x$と$y$の間のホモトピー同値の空間$\hoequiv_X(x,y)$は$x$から$y$への$X_0$における道の空間と弱同値である. 
+  \end{enumerate}
+\end{theorem}
+
+完備Segal空間の条件をまとめる. 
+
+\begin{remark}
+  完備Segal空間は次の条件を満たす単体的空間である. 
+  \begin{itemize}
+    \item[(Reedyファイブラント条件)] 垂直な軸はホモトピー論の性質をもつ. 
+    \item[(Segal条件)] 水平な軸は圏論的な性質をもつ. 
+    \item[(完備性)] ホモトピー論の性質と圏論の性質は整合的である.  
+  \end{itemize}
+\end{remark}
+
+Segal空間亜群の完備性も定義できる. 
+
+\begin{definition}[完備Segal空間亜群]
+  $X$を完備Segal空間とする. 
+  $X$の任意の射がホモトピー同値のとき, $X$を完備Segal空間亜群(complete Segal space groupoid)という.
+\end{definition}
+
+\begin{theorem}
+  $\C$を通常の圏とする. 
+  脈体$N\C$が完備Segal空間であることと, $\C$が恒等射以外の同型射を持たないことは同値である. 
+\end{theorem}
+
+\begin{proof}
+  ($\Rightarrow$) : $N\C$が完備Segal空間であるとする. 
+  このとき, 単体的空間の射
+  \begin{align*}
+    N\C_0 \to N^C_\hoequiv
+  \end{align*}
+  は弱同値である. 
+  $N\C_0$と$N^C_\hoequiv$は離散的なので, 
+  \begin{align*}
+    N\C_0 \to N^C_\hoequiv
+  \end{align*}
+  は集合の全単射である. 
+  よって, 恒等射以外のホモトピー同値は存在しない. 
+  \cref{eg:homotopy_equivalence_is_isomorphism_in_NC}より, $N\C$におけるホモトピー同値は$\C$における同型射である.
+  よって, $\C$は恒等射以外の同型射を持たない.
+
+  ($\Leftarrow$) : $\C$が恒等射以外の同型射を持たないとすると, 
+  \begin{align*}
+    N\C_0 \to N\C_\hoequiv = \Iso\C : x \mapsto \id_x
+  \end{align*}
+  は集合の全単射である. 
+  よって, ホモトピー同値である. 
+  従って, 脈体$N\C$は完備Segal空間である.
+\end{proof}
+
+
+\section{$\sset$と$\sSpace$のモデル構造}
+
+
+
+
+\end{document}

@@ -1,0 +1,125 @@
+\RequirePackage{plautopatch}
+\documentclass[uplatex, a4paper, 14Q, dvipdfmx]{jsarticle}
+\usepackage{docmute}
+\usepackage{../mypackage}
+
+\title{三角圏の\texorpdfstring{$\infty$}{infty}増強}
+\author{よの}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+\tableofcontents
+
+\section{\texorpdfstring{$\infty$}{infty}増強}
+
+\begin{definition}[$\infty$増強を持つ]
+  $\T$を三角圏とする. 
+  ある安定$\infty$圏$\C$が存在して, 三角圏同値$h\C \cong \T$が成立するとき, $\T$は$\infty$増強を持つ(admits an $\infty$-categorical enhancement)という.
+
+  このような$\C$が$\infty$圏同値を除いて一意に定まるとき, $\T$は一意な$\infty$増強を持つ(admits a unique $\infty$-categorical enhancement)という.
+\end{definition}
+
+$\infty$圏の表現可能性の定義だけ書いておく.
+
+\begin{definition}[表現可能]
+  
+\end{definition}
+
+三角圏のコンパクト生成について復習する.
+
+\begin{definition}[生成する]
+  $\T$は有限余直積を持つとする. 
+  $\{X_i\}$を$\T$の対象の集まりとする.
+  $Y \in \T$が任意の$X_i$と$n$に対して$\Hom_\T(X_i,Y[n])$ならば$Y \cong 0$であるとき, $\{X_i\}$は$\T$を生成する(generate)という. 
+\end{definition}
+
+\begin{definition}[コンパクト]
+  $\T$は有限余直積を持つとする. 
+  $\T$の対象$X$に対して, $\Hom_\T(X,-)$が余直積を保つとき, $X$はコンパクト(compact)であるという.
+\end{definition}
+
+\begin{definition}[コンパクト生成]
+  $\T$は有限余直積を持つとする. 
+  コンパクト対象のなす$\T$の充満部分圏を$T^\omega$と表す. 
+  $\T$が$\T^\omega$で生成されるとき, $\T$はコンパクト生成(compactly generated)であるという. 
+\end{definition}
+
+\begin{theorem}[HA 1.4.4.2, 1.4.4.3]
+  $\T$はコンパクト生成かつ$\infty$増強$\C$を持つとする.
+  このとき, $\C$は表現可能である. 
+\end{theorem}
+
+三角圏の$t$構造と安定$\infty$圏の$t$構造について復習する.
+
+\begin{definition}[三角圏の$t$構造]
+  
+\end{definition}
+
+\begin{definition}[安定$\infty$圏の$t$構造]
+  
+\end{definition}
+
+特別な性質を持つ$t$構造を定義する. 
+$(\T_{\geq 0}, \T_{\leq 0})$を三角圏の$t$構造, $(\C_{\geq 0}, \C_{\leq 0})$を安定$\infty$圏の$t$構造とする. 
+
+\begin{definition}[分離的]
+  $\T$上の$t$構造$(\T_{\geq 0}, \T_{\leq 0})$に対して, 
+  \begin{align*}
+    \bigcap_{n \in \bbZ} \T_{\geq n} = 0
+  \end{align*}
+  であるとき, $(\T_{\geq 0}, \T_{\leq 0})$は左分離的(left separated)であるという. 
+
+  双対的に, $\T$上の$t$構造$(\T_{\geq 0}, \T_{\leq 0})$に対して,
+  \begin{align*}
+    \bigcap_{n \in \bbZ} \T_{\leq n} = 0
+  \end{align*}
+  であるとき, $(\T_{\geq 0}, \T_{\leq 0})$は右分離的(right separated)であるという.  
+\end{definition}
+
+\begin{definition}[完備]
+  $\C$上の$t$構造$(\C_{\geq 0}, \C_{\leq 0})$に対して, 自然な射
+  \begin{align*}
+    \C \to \lim (\cdots \C_{\leq 2} \xrightarrow{\tau_{\leq 1}} \C_{\leq 1} \xrightarrow{\tau_{\leq 0}} \C_{\leq 0})
+  \end{align*}
+  が圏同値であるとき, $(\C_{\geq 0}, \C_{\leq 0})$は左完備(left complete)であるという. 
+
+  双対的に,   $\C$上の$t$構造$(\C_{\geq 0}, \C_{\leq 0})$に対して, 自然な射
+  \begin{align*}
+    \C \to \lim (\cdots \C_{\geq -2} \xrightarrow{\tau_{\geq -1}} \C_{\geq -1} \xrightarrow{\tau_{\geq 0}} \C_{\geq 0})
+  \end{align*}
+  が圏同値であるとき, $(\C_{\geq 0}, \C_{\leq 0})$は右完備(right complete)であるという.
+\end{definition}
+
+\begin{lemma}
+  $\T$上の$t$構造$(\T_{\geq 0}, \T_{\leq 0})$が左分離的であるとする. 
+  対象$X \in \T$が任意の$n$に対して$\tau_{\leq n}X \cong 0$であるとき, $X \cong 0$である.   
+\end{lemma}
+
+\begin{proof}
+  条件を満たす$X$に対して完全三角を考えると, 任意の$n$に対して$\tau_{\leq n}X \cong 0$なので, 任意の$n$に対して$\tau_{\geq n+1}X \cong X$である. 
+  $(\T_{\geq 0}, \T_{\leq 0})$は左分離的なので, 
+  \begin{align*}
+    X = \bigcap_{n \in \bbZ} \tau_{\geq n+1}X \in \bigcap_{n \in \bbZ} \T_{\geq n} = 0
+  \end{align*}
+  となる. 
+\end{proof}
+
+\begin{lemma}
+  $\C$が左(右)完備であるとき, $\C$は左(右)分離的である. 
+\end{lemma}
+
+
+
+
+
+
+
+
+\end{document}
