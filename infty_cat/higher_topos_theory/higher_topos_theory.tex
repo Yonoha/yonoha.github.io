@@ -1,0 +1,4200 @@
+\RequirePackage{plautopatch}
+\documentclass[uplatex, a4paper, 14Q, dvipdfmx]{jsreport}
+\usepackage{docmute}
+\usepackage{mypackage}
+
+\setcounter{secnumdepth}{4}
+\title{Higher Topos Theory 覚え書き}
+\author{よの}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+% \begin{abstract}
+%   本稿は\cite{HTT}の覚え書きである. 
+%   章立ては\cite{HTT}に従うが和訳ではないので, 命題の番号などは\cite{HTT}と異なる. 
+%   \cite{HTT}のほかに
+% \end{abstract}
+
+\setcounter{tocdepth}{2}
+\tableofcontents
+
+\chapter{高次圏論の概要}
+
+\section{高次圏論のための準備}
+
+\subsection{目標と障害 (省略)}
+
+% \begin{definition}[$\infty$圏]
+%   $(\infty,0)$圏を$\infty$亜群($\infty$-groupoid), $(\infty,2)$圏を$\infty$双圏($\infty$-bicategory)という.
+%   特に, $(\infty,1)$圏を$\infty$圏($\infty$-category)という. 
+% \end{definition}
+
+\begin{definition}[位相的圏] \label{def.1.1.1.6}
+  $\CGWH$で豊穣された圏を位相的圏(topological category)という. 
+\end{definition}
+
+\begin{notation}
+  位相的圏と位相的関手のなす圏を$\CatTop$と表す. 
+\end{notation}
+
+\cref{def.1.1.1.6}を高次圏論の基礎づけに用いることは可能である. 
+つまり, 位相的圏を$\infty$圏として定義するということである. 
+しかし, この定義には様々な欠点がある. 
+そこで,  $\infty$圏の定義として変わりとなる(しかし等価な)定式化をすることにする. 
+
+\subsection{\texorpdfstring{$\infty$}{infty}圏の定義 (省略)}
+
+\subsection{位相的圏の同値}
+
+% まず, 2つの位相的圏が同値であることを定義する. 
+% まずは, 豊穣圏として圏同値が考えられるが, これは強すぎることが分かる.
+
+% \begin{definition}[強同値]
+%   $F : \C \to \D$を位相的圏の関手とする. 
+%   $F$が豊穣圏として圏同値のとき, $F$を強同値(strong equivalence)という. 
+% \end{definition}
+
+2つの位相的圏の間の同値について考える. 
+まず豊穣圏としての圏同値が考えられるが, これは(通常の圏論における圏同型と同様に)強すぎることが分かる. 
+そこで, 位相的圏のホモトピー圏を定義し, ホモトピー型の情報のみを比較するような同値を定義する. 
+
+\begin{definition}[位相的圏のホモトピー圏]
+  $\C$を位相的圏とする. 
+  このとき, 通常の圏$\h\C$を次のように定義し, $\C$のホモトピー圏(homotopy category)という.
+  \begin{itemize}
+    \item $\h\C$の対象は$\C$の対象と同じ
+    \item $\h\C$の任意の対象$X,Y$に対して, $\Hom_{\h\C}(X,Y) := \pi_0 \Hom_\C(X,Y)$
+    \item $\h\C$における射の合成は$\C$における射の合成に関手$\pi_0$を作用させて得られる対応
+  \end{itemize}
+\end{definition}
+
+\begin{example}[空間のホモトピー圏]
+  $\C$をCW複体のなす位相的圏とする. 
+  ここで, $\Map_\C(X,Y)$は$X$から$Y$への連続写像の集合にコンパクト開位相を入れたものとする. 
+  このとき, $\C$のホモトピー圏を空間のホモトピー圏(homotopy category of spaces)といい, $\H$と表す. 
+\end{example}
+
+空間のホモトピー圏$\H$は次のように定義することもできる. 
+次の定義は高次圏論において非常に重要である. 
+
+\begin{remark}
+  $\CGWH$の任意の対象$X$に対して, あるCW複体$X'$と弱ホモトピー同値$\phi : X' \to X$が存在する. 
+  この$X'$は一意ではないが, ホモトピー同値を除いて一意に定まる. 
+  よって, 構成$X \mapsto X'$は関手$\theta : \CGWH \to \H$を定める. 
+  構成より, $\theta$は$\CGWH$における弱ホモトピー同値を$\H$における同型射にうつす. 
+  CW複体の弱ホモトピー同値はホモトピー同値を持つので, $\H$は$\CGWH$にすべての弱ホモトピー同値を添加した圏とみなせる. 
+\end{remark}
+
+\begin{remark}
+  関手$\theta : \CGWH \to \H$は有限直性を保つ. 
+  \cite{HTT} Remark.A.1.4.3より, $\H$豊穣圏が得られる. 
+  $\H$は$\CGWH$にすべての弱ホモトピー同値を添加した圏であるので, この$\H$豊穣圏を位相的圏$\C$のホモトピー圏といい, $\h\C$と表す. 
+
+  この意味の$\h\C$は次のように具体的に表せる. 
+  \begin{itemize}
+    \item $\h\C$の対象は$\C$と同じ
+    \item $\h\C$の任意の対象$X,Y$に対して, $\Map_{\h\C}(X,Y) := [\Map_\C(X,Y)]$
+    \item $\h\C$における射の合成は$\C$における射の合成に関手$\theta : \CGWH \to \H$を作用させて得られる対応
+  \end{itemize}
+\end{remark}
+
+\begin{remark}
+  位相的圏$\C$に対して, ホモトピー圏$\h\C$を2種類の方法で構成した. 
+  1つは通常の圏として, もう1つは$\H$で豊穣された圏としてである. 
+  これらが等価であることは, 任意の位相空間$X$に対して自然な全単射$\pi_0X \cong \Map_\H(\ast,[X])$が存在することから従う.
+\end{remark}
+
+位相的圏$\C$のホモトピー圏$\h\C$は$\C$の位相的な射空間の情報は忘れて, その(弱)ホモトピー型のみを抽出したような圏と思える. 
+このように本質的に重要なのはホモトピー型の情報であって, 位相的圏の同値もこのレベルで考えるべきであることが分かる. 
+
+\begin{definition}[位相的圏の同値]
+  $F : \C \to \D$を位相的圏の関手とする. 
+  誘導される関手$\h F : \h\C \to \h\D$が$\H$豊穣圏として圏同値のとき, $F$を同値(equivalence)という. 
+\end{definition}
+
+\begin{remark}
+  $F$が同値であることと, 次の2つを満たすことは同値である.
+  \begin{itemize}
+    \item $\C$の任意の対象$X,Y$に対して, $\Map_\C(X,Y) \to \Map_\D(FX,FY)$は弱ホモトピー同値である. 
+    \item $\D$の任意の対象$Y$に対して, $\C$のある対象$X$が存在して, $\h\D$において$FX$と$Y$は同型である. 
+  \end{itemize}
+\end{remark}
+
+\begin{remark}
+  % 2つの位相的圏の間に同値が存在するとき, これらは同値(equivalent)であるという. 
+  定義より, 関手$F : \C \to \D$が同値であることと, $\h F : \h\C \to \h\D$が圏同値であることは同値である. 
+  つまり, ホモトピー圏$\h\C$は$\C$の不変量である. 
+  ここで, $\h\C$は$\C$によって同値の違いを除いて定まるわけではないことに注意. 
+\end{remark}
+
+\subsection{単体的圏}
+
+これまで, 高次圏論への基礎として位相的圏と単体的集合という2つの方法によるアプローチを見てきた.
+これら2つが等価であることを示すために, 3つ目のアプローチである単体的圏を考える.
+
+\begin{definition}[単体的圏]
+  $\sSet$で豊穣された圏を単体的圏(simplicial category)という. 
+\end{definition}
+
+\begin{notation}
+  単体的圏と単体的関手のなす圏を$\Cat_\Delta$と表す. 
+\end{notation}
+
+\begin{remark} % \cite[\href{https://kerodon.net/tag/00JQ}{Tag 00JQ}]{kerodon}
+  $\C$を単体的圏とする. 
+  このとき, 構成$[n] \mapsto \C_n$は関手$\Delta^\myop \to \Cat$を定める. 
+  構成$\C \mapsto ([n] \mapsto \C_n)$は関手$\Cat_\Delta \to \Fun(\Delta^\myop, \Cat)$を定める. 
+  また, 次の圏のpullbackの図式が得られる. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXENhdF9cXERlbHRhIl0sWzAsMSwiXFxTZXQiXSxbMiwwLCJcXEZ1bihcXERlbHRhXlxcbXlvcCxcXENhdCkiXSxbMiwxLCJcXEZ1bihcXERlbHRhXlxcbXlvcCxcXFNldCkiXSxbMCwxLCJcXE9iIiwyXSxbMCwyLCJcXEMgXFxtYXBzdG8gKG4gXFxtYXBzdG8gQ19uKSJdLFsyLDMsIlxcT2IiXSxbMSwzXV0=
+  \[\begin{tikzcd}
+    {\Cat_\Delta} && {\Fun(\Delta^\myop,\Cat)} \\
+    \Set && {\Fun(\Delta^\myop,\Set)}
+    \arrow["\Ob"', from=1-1, to=2-1]
+    \arrow["{\C \mapsto (n \mapsto \C_n)}", from=1-1, to=1-3]
+    \arrow["\Ob", from=1-3, to=2-3]
+    \arrow[from=2-1, to=2-3]
+  \end{tikzcd}\]
+  ここで, 下の水平線は集合$S$に対して$S$に値をとる定値関手$\Delta^\myop \to \Set$を与える対応である. 
+  つまり, 任意の単体的圏は対象$[n] \mapsto \Ob(\C_n)$のなす台単体的集合が定値であるような$\Cat$における単体的対象とみなすことができる. 
+  特に, 関手$\Cat_\Delta \to \Fun(\Delta^\myop, \Cat)$は忠実充満である.
+\end{remark}
+
+% 位相的圏と同様に, 単体的圏も高次圏のモデルとみることができる. 
+% 単体的圏$\C$に対して, 単体的集合$\Map_\C(X,Y)$は$\infty$亜群のホモトピー型の情報を持っていると思える(らしい).
+
+% \begin{remark}
+%   $\C$を単体的圏とする. 
+%   単体的圏の任意の対象$X,Y$に対して, 単体的集合$\Map_\C(X,Y)$が$\infty$圏のとき, $\C$は$(\infty,2)$圏とみなすことができる. 
+% \end{remark}
+
+$\sSet$と$\CGWH$の間には幾何学的実現と特異単体関手が存在し, これらはともに有限直積と交換する. 
+これを用いて, 単体的圏から位相的圏, 位相的圏から単体的圏をそれぞれ構成することができる. 
+
+\begin{definition}
+  単体的圏$\C$に対して, 位相的圏$|\C|$を次のように定義する. 
+  \begin{itemize}
+    \item $|\C|$の対象は$\C$の対象と同じ
+    \item $|\C|$の任意の対象$X,Y$に対して, $\Map_{|\C|}(X,Y) := |\Map_\C(X,Y)|$
+    \item $|\C|$における射の合成は$\C$における射の合成に幾何学的実現を作用させて得られる対応
+  \end{itemize}
+\end{definition}
+
+同様に, 位相的圏$\C$からそれぞれの射空間$\Map_\C(X,Y)$の特異単体を作用させることで単体的圏$\Sing\C$が得られる. 
+
+\begin{definition}
+  位相的圏$\D$に対して, 単体的圏$\Sing\D$を次のように定義する. 
+  \begin{itemize}
+    \item $\Sing\D$の対象は$\D$と同じ 
+    \item $\Sing\D$の任意の対象$X,Y$に対して, $\Map_{\Sing\D}(X,Y) := \Sing(\Map_\D(X,Y))$
+    \item $\Sing\D$における射の合成は$\D$における射の合成に特異単体関手を作用させて得られる対応
+  \end{itemize}
+\end{definition}
+
+\begin{remark}
+  構成$\C \mapsto |\C|$と$\D \mapsto \Sing\D$はそれぞれ関手$|-| : \Cat_\Delta \to \CatTop$と$\Sing : \CatTop \to \Cat_\Delta$を定める. 
+  幾何学的実現と特異単体関手が定めるこれらの関手は$\Cat_\Delta$と$\CatTop$の随伴を定める. 
+\end{remark}
+
+単体的圏のホモトピー圏について考える. 
+
+\begin{remark}
+  $\H$は$\CGWH$にすべての弱ホモトピー同値を添加した圏であった.
+  $\sSet$と$\CGWH$との等価性
+  \footnote{
+    $\sSet$上のKan-Quillenモデル構造と$\CGWH$上のQuillenモデル構造のQuillen同値のことである. 
+  }
+  から, $\H$は$\sSet$にすべての単体的集合の弱ホモトピー同値を添加した圏ともみなせる. 
+  よって, $\H$は単体的圏のホモトピー圏ともみなせる. 
+\end{remark}
+
+% \begin{definition}[単体的圏のホモトピー圏]
+%   単体的圏$\C$に対して, $\H$豊穣圏$\h\C$を次のように定義し, $\C$のホモトピー圏(homotopy category)という. 
+%   \begin{itemize}
+%     \item $\h\C$の対象は$\C$の対象と同じ 
+%     \item $\h\C$の任意の対象$X,Y$に対して, $\Map_{\h\C}(X,Y) := \theta'(\Map_\C(X,Y))$
+%   \end{itemize}
+% \end{definition}
+
+\begin{remark}
+  $\CGWH$と$\sSet$のホモトピー圏は同一視できるので, 任意の単体的圏$\C$と位相的圏$\D$に対して, 次の自然な同型が存在する. 
+  \begin{align*}
+    \h\C \cong \h|\C|, ~~~ \h\D \cong \h\Sing\D
+  \end{align*}
+  よって, 位相的圏のホモトピー圏と単体的圏のホモトピー圏は同一視できる.
+\end{remark}
+
+位相的圏の同値と同様に, 単体的圏の同値を定義する.
+
+\begin{definition}[単体的圏の同値]
+  $F : \C \to \D$を単体的関手とする. 
+  誘導される関手$\h F : \h\C \to \h\D$が$\H$豊穣圏として圏同値のとき, $F$を同値(equivalence)という. 
+\end{definition}
+
+単体的関手$C \to \C'$が同値であることと, 幾何学的実現$|\C| \to |\C'|$が位相的圏の同値であることは同値である. 
+幾何学的実現と特異単体関手による$\Cat_\Delta$と$\CatTop$の随伴の(余)単位を考えると, 
+\begin{align*}
+  \C \to \Sing|\C|, ~~~ |\Sing\D| \to \D
+\end{align*}
+はそれぞれのホモトピー圏において同型を定める. 
+つまり, 単体的圏$\C$を位相的圏$|\C|$で置き換えても, 位相的圏$\D$を単体的圏$\Sing\D$で置き換えてもよい. 
+この意味で, 位相的圏の理論と単体的圏の理論は(高次圏として)等価である. 
+\footnote{
+  $\Cat_\Delta$上のBergnerモデル構造と$\CatTop$上のBergnerモデル構造がQuillen同値であるという意味である. 
+}
+
+\subsection{\texorpdfstring{$\infty$}{infty}圏と単体的圏の比較}
+
+1.1.4節では, 単体的圏を導入して, 単体的圏の理論が位相的圏の理論と等価であることを示した.
+1.1.5節では, 単体的圏の理論が$\infty$圏の理論と深く関係していることを示す. 
+
+通常の圏$\C$に対して, 通常の脈体$\N(\C)$は$\N(\C)_n := \Hom_{\Cat}([n],\C)$により定義された. 
+単体的圏$\C$から単体的集合を定義するとき, この定義では$\C$の単体的構造を用いていない. 
+よって, 単体的圏の脈体を定義するときには, $[n]$のthickeningである単体的圏$\mathfrak{C}[\Delta^n]$を用いる. 
+
+\begin{definition} \label{def.1.1.5.1}
+  $J$を空でない線形順序集合とする. 
+  このとき, 単体的圏$\mathfrak{C}[\Delta^J]$を次のように定義する. 
+  \begin{itemize}
+    \item $\mathfrak{C}[\Delta^J]$の対象は$J$の対象と同じ
+    \item $\mathfrak{C}[\Delta^J]$の任意の対象$i,j$に対して, 
+    \begin{align*}
+      \Map_{\mathfrak{C}[\Delta^J]}(i,j)
+      := \begin{cases}
+        \emptyset & (j < i) \\
+        \N(P_{i,j}) & (i \leq j)
+      \end{cases}
+    \end{align*}
+    ここで, $P_{i,j}$は$i$と$j$を含む任意の集合$[i,j]$のなす集合に包含による順序を入れた線形順序集合
+    \item $i_0 \leq \cdots \leq i_n$のとき, 合成 
+    \begin{align*}
+      \Map_{\mathfrak{C}[\Delta^J]}(i_0,i_1) \times \cdots \times \Map_{\mathfrak{C}[\Delta^J]}(i_{n-1},i_n) \to \Map_{\mathfrak{C}[\Delta^J]}(i_0,i_n)
+    \end{align*}
+    は線形順序集合の写像
+    \begin{align*}
+      P_{i_0,i_1} \times \cdots \times P_{i_{n-1},i_n} \to P_{i_0,i_n} : (I_1, \cdots, I_n) \mapsto I_1 \cup \cdots \cup I_n
+    \end{align*}
+    から定まる対応
+  \end{itemize}
+\end{definition}
+
+位相的圏$|\mathfrak{C}[\Delta^n]|$について考える. 
+
+\begin{example}
+  $|\mathfrak{C}[\Delta^n]|$の対象は集合$[n] = \{0,\cdots,n\}$の元である. 
+  任意の$0 \leq i \leq j \leq n$に対して, 位相空間$\Map_{|\mathfrak{C}[\Delta^n]|}(i,j)$は$|\Delta^1|^{j-i-1}$と同相である. 
+  $\Map_{|\mathfrak{C}[\Delta^n]|}(i,j)$は$p(i)=p(j)=1$を満たす連続写像$p : \{k \in [n] : i \leq k \leq j\} \to [0,1]$の集合ともみなせる. 
+\end{example}
+
+通常の圏$[n]$と単体的圏$\mathfrak{C}[\Delta^n]$を比較する. 
+
+\begin{remark}
+  $[n]$の任意の対象$i < j$に対して, 射$q_{i,j} : i \to j$が一意に存在する.
+  $[n]$の任意の対象$i < j < k$に対して, $q_{j,k} \circ q_{i,j} = q_{i,k}$を満たす.  
+
+  $\mathfrak{C}[\Delta^n]$の対象は$[n] = \{0,\cdots,n\}$の対象と同じである.
+  $\mathfrak{C}[\Delta^n]$の任意の対象$i \leq j$に対して, $\{i,j\} \in P_{i,j}$から定まる点$p_{i,j} \in \Map_{\mathfrak{C}[\Delta^n]}(i,j)$が存在する. 
+  しかし, $i=j$または$j=k$のときを除いて, $p_{j,k} \circ p_{i,j} \neq p_{i,k}$である. 
+  実際, $i=i_0< \cdots < i_n=j$に対して, 全ての合成$p_{i_n,i_{n-1}} \circ \cdots \circ p_{i_1,i_0}$の集まりは$\Map_{\mathfrak{C}[\Delta^n]}(i,j)$は異なるすべての辺で構成される. 
+  つまり, 合成は一意ではないがホモトピーの違いを除いて一意である. 
+
+  また, 対象上で恒等的である関手$\mathfrak{C}[\Delta^n] \to [n]$が一意に存在して, 単体的圏の同値を定める. 
+  よって, $\mathfrak{C}[\Delta^n]$は強結合性$q_{j,k} \circ q_{i,j} = q_{i,k}$は満たさないが, ホモトピーの違いを除いて結合的である. 
+  この意味で, $\mathfrak{C}[\Delta^n]$は合成のホモトピーの情報を持っているような$[n]$のthickness版と思える. 
+\end{remark}
+
+$\mathfrak{C}[\Delta^n]$の部分圏$\mathfrak{C}[\partial \Delta^n]$と$\mathfrak{C}[\Lambda^n_i]$を具体的に書き下す. 
+この構成は\cref{thrm.2.2.5.1}や\cref{lem.2.2.5.2}で用いる. 
+
+\begin{example} \label{eg.mathfrakC_partial_Delta^n}
+  任意の$n \geq 1$に対して, $\mathfrak{C}[\partial \Delta^n]$は次のように表せる. 
+  \begin{itemize}
+    \item $\mathfrak{C}[\partial \Delta^n]$の対象は$\mathfrak{C}[\Delta^n]$と同じである. 
+    つまり, $[n]=\{0,\cdots,n\}$の元である.
+    \item $\mathfrak{C}[\partial \Delta^n]$の任意の対象$j \leq k$に対して, $j=0$と$k=n$の場合を除いて
+    \begin{align*}
+      \Hom_{\mathfrak{C}[\partial \Delta^n]}(j,k) = \Hom_{\mathfrak{C}[\Delta^n]}(j,k)
+    \end{align*}
+    である. 
+    $j=0$と$k=n$の場合, $\Hom_{\mathfrak{C}[\partial \Delta^n]}(j,k)$は$(\Delta^1)^{n-1} \cong \Hom_{\mathfrak{C}[\Delta^n]}(j,k)$の境界に一致する.
+  \end{itemize}
+\end{example}
+
+\begin{example} \label{eg.mathfrakC_Lambda^n_i}
+  任意の$n \geq 1$と$0<i<n$に対して, $\mathfrak{C}[\Lambda^n_i]$は次のように表せる. 
+  \begin{itemize}
+    \item $\mathfrak{C}[\Lambda^n_i]$の対象は$\mathfrak{C}[\Delta^n]$と同じである. 
+    \item $\mathfrak{C}[\Lambda^n_i]$の任意の対象$j \leq k$に対して, $j=0$と$k=n$の場合を除いて
+    \begin{align*}
+      \Hom_{\mathfrak{C}[\Lambda^n_i]}(j,k) = \Hom_{\mathfrak{C}[\Delta^n]}(j,k)
+    \end{align*}
+    である. 
+    $j=0$と$k=n$の場合, $\Hom_{\mathfrak{C}[\Lambda^n_i]}(j,k)$は$(\Delta^1)^{n-1} \cong \Hom_{\mathfrak{C}[\Delta^n]}(j,k)$の内部と1つの面を除いた$(\Delta^1)^{n-1}$の単体的部分集合と一致する. 
+  \end{itemize}
+\end{example}
+
+構成$J \mapsto \mathfrak{C}[\Delta^J]$は関手的である. 
+
+\begin{definition} \label{def.1.1.5.3}
+  $f : J \to J'$を線形順序集合の間の順序を保つ写像とする. 
+  このとき, 単体的関手$\mathfrak{C}[f] : \mathfrak{C}[\Delta^J] \to \mathfrak{C}[\Delta^{J'}]$を次のように定義する. 
+  \begin{itemize}
+    \item $\mathfrak{C}[\Delta^J]$の任意の対象$i$に対して, $\mathfrak{C}[f](i) := f(i) \in \mathfrak{C}[\Delta^{J'}]$
+    \item $J$において$i \leq j$のとき, $\Map_{\mathfrak{C}[\Delta^J]}(i,j) \to \Map_{\mathfrak{C}[\Delta^{J'}]}(f(i),f(j))$は, $f$が定める写像
+    \begin{align*}
+      P_{i,j} \to P_{f(i),f(j)} : I \mapsto f(I)
+    \end{align*}
+    の脈体の射$\N(P_{i,j}) \to \N(P_{f(i),f(j)})$
+  \end{itemize}
+\end{definition}
+
+構成$n \mapsto \mathfrak{C}[\Delta^n]$は関手$\Delta \to \Cat_\Delta$を定める. 
+
+\begin{definition}[単体的脈体]
+  $\C$を単体的圏とする. 
+  単体的集合$\mathfrak{N}(\C)$を任意の$n \geq 0$に対して次のように定めることで定義し, $\C$の単体的脈体(simplicial nerve)という. 
+  \begin{align*}
+    \mathfrak{N}(\C)_n := \Hom_{\Cat_\Delta}(\mathfrak{C}[\Delta^n],\C)
+  \end{align*}
+\end{definition}
+
+% \begin{definition}[単体的脈体]
+%   構成$n \mapsto \mathfrak{C}[\Delta^n]$は関手$\Delta \to \Cat_\Delta$を定める. 
+%   普遍随伴の一般論より, 関手$\mathfrak{C} : \sSet \to \Cat_\Delta$と$\N : \Cat_\Delta \to \sSet$が存在して, 随伴$\mathfrak{C} \dashv N$を定める. 
+%   % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXHNTZXQiXSxbMiwyLCJcXENhdF9cXERlbHRhIl0sWzAsMiwiXFxEZWx0YSJdLFswLDEsIlxcbWF0aGZyYWt7Q30iLDAseyJjdXJ2ZSI6LTF9XSxbMSwwLCJcXE4iLDAseyJjdXJ2ZSI6LTF9XSxbMiwxLCJcXG1hdGhmcmFre0N9W1xcRGVsdGFeLV0iLDJdLFsyLDAsIuOCiCJdLFszLDQsIiIsMCx7ImxldmVsIjoxLCJzdHlsZSI6eyJuYW1lIjoiYWRqdW5jdGlvbiJ9fV1d
+%   \[\begin{tikzcd}
+%     \sSet \\
+%     \\
+%     \Delta && {\Cat_\Delta}
+%     \arrow[""{name=0, anchor=center, inner sep=0}, "{\mathfrak{C}}", curve={height=-6pt}, from=1-1, to=3-3]
+%     \arrow[""{name=1, anchor=center, inner sep=0}, "\N", curve={height=-6pt}, from=3-3, to=1-1]
+%     \arrow["{\mathfrak{C}[\Delta^-]}"', from=3-1, to=3-3]
+%     \arrow["{よ}", from=3-1, to=1-1]
+%     \arrow["\dashv"{anchor=center, rotate=-148}, draw=none, from=0, to=1]
+%   \end{tikzcd}\]
+% \end{definition}
+
+\begin{definition}[位相的脈体]
+  $\C$を位相的圏とする. 
+  このとき, 特異単体$\Sing\C$の単体的脈体$\mathfrak{N}(\Sing\C)$を$\C$の位相的脈体(topological nerve)といい, 単に$\mathfrak{N}(\C)$と表す. 
+\end{definition}
+
+% \begin{example}
+%   通常の圏$\C$は任意の$\Map_\C(X,Y)$が定値であるような単体的圏とみなすことができる. 
+%   単体的関手$\mathfrak{C} \to \C$の集合は$[n]$から$\C$への関手の集合と同一視できる. 
+%   よって, $\C$の単体的脈体は$\C$の通常の脈体と同一視できる. 
+% \end{example}
+
+\begin{example}
+  $\C$を位相的圏とする.
+  $\C$の位相的脈体$\mathfrak{N}(\C)$の低次元の単体は次のように表せる. 
+  \begin{itemize}
+    \item $\mathfrak{N}(\C)$の$0$単体は$\C$の対象と同一視できる. 
+    \item $\mathfrak{N}(\C)$の$1$単体は$\C$の射と同一視できる.
+    \item $\mathfrak{N}(\C)$の$2$単体の境界は次のような(可換とは限らない)図式とみなせる. 
+    % https://q.uiver.app/#q=WzAsMyxbMCwxLCJYIl0sWzIsMSwiWiJdLFsxLDAsIlkiXSxbMCwxLCJmX3tYLFp9IiwyXSxbMCwyLCJmX3tYLFl9Il0sWzIsMSwiZl97WSxafSJdXQ==
+    \[\begin{tikzcd}
+      & Y \\
+      X && Z
+      \arrow["{f_{X,Z}}"', from=2-1, to=2-3]
+      \arrow["{f_{X,Y}}", from=2-1, to=1-2]
+      \arrow["{f_{Y,Z}}", from=1-2, to=2-3]
+    \end{tikzcd}\]
+    $\mathfrak{N}(\C)$の$2$単体は$\Map_\C(X,Z)$において$f_{X,Z}$から$f_{Y,Z} \circ f_{X,Y}$への道を与えることと等価である. 
+  \end{itemize}
+\end{example}
+
+単体的脈体は左随伴を持つ. 
+
+\begin{definition}
+  普遍随伴の一般論より, 単体的脈体$\mathfrak{N} : \Cat_\Delta \to \sSet$の左随伴$\mathfrak{C}[-] : \sSet \to \Cat_\Delta$が存在する. 
+  % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXHNTZXQiXSxbMiwyLCJcXENhdF9cXERlbHRhIl0sWzAsMiwiXFxEZWx0YSJdLFswLDEsIlxcbWF0aGZyYWt7Q30iLDAseyJjdXJ2ZSI6LTF9XSxbMSwwLCJcXE4iLDAseyJjdXJ2ZSI6LTF9XSxbMiwxLCJcXG1hdGhmcmFre0N9W1xcRGVsdGFeLV0iLDJdLFsyLDAsIuOCiCJdLFszLDQsIiIsMCx7ImxldmVsIjoxLCJzdHlsZSI6eyJuYW1lIjoiYWRqdW5jdGlvbiJ9fV1d
+  \[\begin{tikzcd}
+    \sSet \\
+    \\
+    \Delta && {\Cat_\Delta}
+    \arrow[""{name=0, anchor=center, inner sep=0}, "{\mathfrak{C}[-]}", curve={height=-6pt}, from=1-1, to=3-3]
+    \arrow[""{name=1, anchor=center, inner sep=0}, "{\mathfrak{N}}", curve={height=-6pt}, from=3-3, to=1-1]
+    \arrow["{\mathfrak{C}[\Delta^-]}"', from=3-1, to=3-3]
+    \arrow["{よ}", from=3-1, to=1-1]
+    \arrow["\dashv"{anchor=center, rotate=-148}, draw=none, from=0, to=1]
+  \end{tikzcd}\]
+\end{definition}
+
+\begin{proposition} \label{prop.1.1.5.10}
+  $\C$を単体的圏とする. 
+  $\C$の任意の対象$X,Y$に対して$\Map_\C(X,Y)$がKan複体のとき, 単体的脈体$\mathfrak{N}(\C)$は$\infty$圏である.
+\end{proposition}
+
+\begin{proof}
+  任意の$n \geq 1$と$0 < i < n$に対して, 次の拡張が存在することを示す. 
+  % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXExhbWJkYV5uX2kiXSxbMCwxLCJcXERlbHRhXm4iXSxbMSwwLCJcXG1hdGhmcmFre059KFxcQykiXSxbMCwxLCIiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDIsIkYiXSxbMSwyLCIiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+  \[\begin{tikzcd}
+    {\Lambda^n_i} & {\mathfrak{N}(\C)} \\
+    {\Delta^n}
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow["F", from=1-1, to=1-2]
+    \arrow[dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+  随伴より,  次の拡張が存在することを示せばよい.
+  % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhmcmFre0N9W1xcTGFtYmRhXm5faV0iXSxbMCwxLCJcXG1hdGhmcmFre0N9W1xcRGVsdGFebl0iXSxbMSwwLCJcXEMiXSxbMCwxLCIiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDJdLFsxLDIsIiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+  \[\begin{tikzcd}
+    {\mathfrak{C}[\Lambda^n_i]} & \C \\
+    {\mathfrak{C}[\Delta^n]}
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow[from=1-1, to=1-2]
+    \arrow[dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+  \cref{eg.mathfrakC_Lambda^n_i}より, 次の拡張が存在することを示せばよい.
+  % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXEhvbV97XFxtYXRoZnJha3tDfVtcXExhbWJkYV5uX2ldfSgwLG4pIl0sWzAsMSwiXFxIb21fe1xcbWF0aGZyYWt7Q31bXFxEZWx0YV5uXX0oMCxuKSJdLFsxLDAsIlxcSG9tX1xcQyhGKDApLEYobikpIl0sWzAsMSwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCwyXSxbMSwyLCIiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+  \[\begin{tikzcd}
+    {\Map_{\mathfrak{C}[\Lambda^n_i]}(0,n)} & {\Map_\C(F(0),F(n))} \\
+    {\Map_{\mathfrak{C}[\Delta^n]}(0,n)}
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow[from=1-1, to=1-2]
+    \arrow[dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+  仮定より, $\Map_\C(F(0),F(n))$はKan複体である. 
+  $\Map_{\mathfrak{C}[\Delta^n]}(0,n)$は$(\Delta^1)^{\{1,\cdots,n-1\}}$とみなせる. 
+  また, $\Map_{\mathfrak{C}[\Lambda^n_i]}(0,n)$は$(\Delta^1)^{\{1,\cdots,n-1\}}$から内部と$i$番目の頂点の向かいにある面を除いた単体的部分集合とみなせる. 
+  よって, $\Map_{\mathfrak{C}[\Lambda^n_i]}(0,n) \hookrightarrow \Map_{\mathfrak{C}[\Delta^n]}(0,n)$は緩射(弱ホモトピー同値かつmono射)である. 
+  Kanファイブレーションは緩射に対してRLPを持つので, この図式は拡張を持つ. 
+\end{proof}
+
+\begin{remark} \label{rem.1.1.5.11}
+  \cref{prop.1.1.5.10}の証明から, より強いこと主張がいえる.
+  $F : \C \to \D$を単体的圏の関手とする. 
+  $\C$の任意の対象$C,C'$に対して, $\Map_\C(C,C') \to \Map_\D(F(C),F(C'))$がKanファイブレーションのとき, 無限圏の関手$\mathfrak{N}(\C) \to \mathfrak{N}(\D)$は内ファイブレーションである.  
+\end{remark}
+
+\begin{corollary} \label{cor.1.1.5.12}
+  $\C$を位相的圏とする. 
+  このとき, 位相的脈体$\mathfrak{N}(\C)$は$\infty$圏である.
+\end{corollary}
+
+\begin{proof}
+  \cref{prop.1.1.5.10}と, 任意の位相空間の特異単体がKan複体であることから従う.
+\end{proof}
+
+次の命題は2.2.4節と2.2.5節で証明する. 
+
+\begin{theorem} \label{thrm.1.1.5.13}より, 
+  $\C$を位相的圏, $X,Y$を$\C$の任意の対象とする. 
+  このとき, 随伴$(|\mathfrak{C}[-]|, \mathfrak{N}(\Sing))$が定める余単位
+  \begin{align*}
+    u : |\Map_{\mathfrak{C}[\mathfrak{N}(\C)]}(X,Y)| \to \Map_\C(X,Y)
+  \end{align*}
+  は位相空間の弱ホモトピー同値である. 
+\end{theorem}
+
+\cref{thrm.1.1.5.13}より, $\infty$圏の理論と位相的圏の理論が等価であることが分かる. 
+実際, 随伴$(|\mathfrak{C}[-]|, \mathfrak{N}(\Sing))$は互いに圏同値ではないが, ホモトピー同値を定める. 
+これを定式化するために, 単体的集合のホモトピー圏を定義する. 
+
+\begin{definition}[単体的集合のホモトピー圏]
+  $S$を単体的集合とする. 
+  このとき, 単体的圏$\mathfrak{C}[S]$のホモトピー圏$\h\mathfrak{C}[S]$を$S$のホモトピー圏(homotopy category)といい, $\h S$と表す. 
+\end{definition}
+
+\begin{remark}
+  $S$を単体的集合とする. 
+  このとき, $S$のホモトピー圏$\h S$は$\H$で豊穣された圏とみなすことができる. 
+  つまり, $S$の任意の2点$x,y$に対して, $\Map_{\h S}(x,y) = [\Map_{\mathfrak{C}[S]}(x,y)]$である. 
+\end{remark}
+
+\begin{definition}[単体的集合の圏同値]
+  $f : S \to T$を単体的集合の射とする. 
+  誘導される関手$\h f : \h S \to \h T$が$\H$豊穣圏の圏同値のとき, $f$を圏同値(categorical equivalence)という. 
+\end{definition}
+
+\begin{remark}
+  $f : S \to T$を単体的集合の射とする. 
+  $S \to T$が圏同値であることと, $\mathfrak{C}[S] \to \mathfrak{C}[T]$が単体的圏の同値であることと, $|\mathfrak{C}[S]| \to |\mathfrak{C}[T]|$が位相的圏の同値であることはすべて同値である. 
+\end{remark}
+
+\begin{remark}
+  随伴$(|\mathfrak{C}[-]|, \mathfrak{N}(\Sing))$は(圏同値の違いを除いた)単体的集合の理論と(同値の違いを除いた)位相的圏の理論が等価であることを示している. 
+  つまり, 任意の位相的圏$\C$に対して余単位$|\mathfrak{C}[\mathfrak{N}(\C)]| \to \C$は位相的圏の同値であり, 任意の単体的集合$S$に対して, 単位$S \to \mathfrak{N}|\mathfrak{C[S]}|$は単体的集合の圏同値である.
+  余単位$|\mathfrak{C}[\mathfrak{N}(\C)]| \to \C$が位相的圏の同値であることは, \cref{thrm.1.1.5.13}より, より従う. 
+  後半の主張は前半の主張より従う. 
+\end{remark}
+
+\section{高次圏論のいろは}
+
+本稿の目標は古典的な圏論における様々な概念が高次圏論においても考えられることを示すことである. 
+この節では, 最も基本的な例を挙げる. 
+
+\subsection{反対\texorpdfstring{$\infty$}{infty}圏}
+
+通常の圏$\C$に対して, 反対圏$\C^\myop$が定義される. 
+この定義は位相的圏や単体的圏に対しても一般化される. 
+しかし, $\infty$圏の枠組みに一般化するためには, いくつか準備が必要である. 
+より一般に, 単体的集合に対して反対単体的集合を定義する. 
+
+\begin{definition}[反対単体的集合]
+  $S$を単体的集合とする. 
+  このとき, 単体的集合$S^\myop$を次のように定義し, $S$の反対(opposite)という. 
+  \begin{itemize}
+    \item 任意の$n \geq 0$に対して, $S^\myop_n := S_n$
+    \item 任意の$n \geq 0$と$0 \leq i \leq n$に対して, 
+    \begin{align*}
+      & d_i : S^\myop_n \to S^\myop_{n-1} := d_{n-i} : S_n \to S_{n-1} \\
+      & s_i : S^\myop_n \to S^\myop_{n+1} := s_{n-i} : S_n \to S_{n+1}
+    \end{align*}
+  \end{itemize}
+\end{definition}
+
+\begin{remark}
+  $S$を単体的集合とする. 
+  $S$が$\infty$圏であることと, $S^\myop$が$\infty$圏であることは同値である. 
+\end{remark}
+
+本稿で登場する全ての概念は双対的であり, 高次圏の枠組みにおいて双対命題が成立する. 
+
+\subsection{高次圏における射空間}
+
+通常の圏$\C$の任意の対象$X,Y$に対して, 射集合$\Hom_\C(X,Y)$が存在する. 
+高次圏論においては, 射空間$\Map_\C(X,Y)$が定義されている. 
+位相的圏や単体的圏においては, $\Map_\C(X,Y)$は豊穣圏の枠組みとして定義されいてる.
+しかし, $\infty$圏における$\Map_\C(X,Y)$の定義は少し非自明である. 
+この節の目標は$\infty$圏における射空間の定義を理解することである. 
+$\infty$圏における射空間はホモトピー圏のレベルで定義すれば十分である. 
+
+\begin{definition}[単体的集合の射空間]
+  $S$を単体的集合, $x,y$を$S$の任意の点, $\H$を空間のホモトピー圏とする. 
+  $S$のホモトピー圏$\h S$を$\H$豊穣圏とみなす. 
+  このとき, 
+  \begin{align*}
+    \Map_S(x,y) := \Map_{\h S}(x,y) \in \H
+  \end{align*}
+  と表す. 
+  $\Map_{\h S}(x,y)$は$S$における$x$から$y$への射の空間を表している.
+\end{definition}
+
+単体的集合$S$と$S$の点$x,y$に対して, どのように$\Map_S(x,y)$を計算すればいいのだろうか. 
+$\Map_S(x,y)$は$\H$の対象として定義されたが, $\Map_S(x,y)$を表すような単体的集合$M$を選ぶ必要がある.
+このような$M$として$\Map_{\mathfrak{C}[S]}(x,y)$がまず考えられる.
+この定義の利点は$S$が$\infty$圏でないときも計算することができ, 強結合的な結合則を備えている.
+しかし, $\Map_{\mathfrak{C}[S]}(x,y)$の構成は複雑であり, 一般にはKan複体にはならない. 
+そのため, ホモトピー群のような代数的な不変量を取り出すことも難しい. 
+
+この欠点に対処するために,  $\Map_S(x,y)$のホモトピー型を表すような単体的集合$\Hom^\R_S(x,y)$を定義する. 
+これは$S$が$\infty$圏の時のみに定義される. 
+\footnote{
+  $\Hom^\R_S(x,y)$は一般の単体的集合$S$に対して定義されるが, $S$が$\infty$圏のときによい性質を持つことが分かる. 
+  \cref{prop.1.2.2.3}や\cref{rem.1.2.2.4}などを参照. 
+}
+
+\begin{definition}[右射空間]
+  $S$を$\infty$圏, $x,y$を$S$の任意の点とする. 
+  単体的集合$\Hom^\R_S(x,y)$の$n$単体を, $z|_{\Delta^{\{n+1\}}} = y$かつ$z|_{\Delta^{\{0,\cdots,n\}}}$が点$x$の定値単体であるような$S$の$n+1$単体$z : \Delta^{n+1} \to S$の集合として定義する. 
+  $\Hom^\R_S(x,y)_n$の退化写像や面写像は$S_{n+1}$のそれらと一致するように定義する. 
+  この$\Hom^\R_S(x,y)$を$x$から$y$への右射空間(space of right morphism)という. 
+\end{definition}
+
+\begin{remark}
+  $S$を単体的集合とする. 
+  $X,Y$が$S$の点のとき, $\Map_S(X,Y)$は$\H$の対象である. 
+  一方, $X,Y$が$(\sSet)_{/S}$の対象
+  \footnote{
+    $ (\sSet)_{\S}$の対象は単体的集合の射$X \to S$であるが, このような省略を用いる. 
+    これは今後でも断りなく用いる. 
+  }
+  のときは$Y^X \times_{S^X} \{X \to S\}$を$\Map_S(X,Y)$と表す.
+\end{remark}
+
+$S$が$\infty$圏のとき, 単体的集合$\Hom^\R_S(x,y)$が空間のようにふるまうことを見る. 
+
+\begin{proposition} \label{prop.1.2.2.3}
+  $\C$を$\infty$圏, $x,y$を$\C$の点とする. 
+  このとき, $\Hom^\R_\C(x,y)$はKan複体である.
+\end{proposition}
+
+\begin{remark} \label{rem.1.2.2.4}
+  $S$を単体的集合, $x,y,z$を$S$の任意の点とする. 
+  このとき, 一般には次のような合成は存在しない. 
+  \begin{align*}
+    \Hom^\R_S(x,y) \times \Hom^\R_S(y,z) \to \Hom^\R_S(x,z)
+  \end{align*}
+  $S$が$\infty$圏のときはこのような合成が定まり, 可縮な空間の選択を除いてwell-definedであることを後で示す. 
+  この合成則の標準的な選択がないことは$\Map_{\mathfrak{C}[S]}(x,y)$に比べて$\Map^\R_S(x,y)$の欠点である. 
+  2.2節の目標は$\Map^\R_S(x,y)$と$\Map_{\mathfrak{C}[S]}(x,y)$の間にホモトピー圏$\H$において自然な同型が存在することを示すことである. 
+  特に, $S$が$\infty$圏のとき, $\Hom^\R_S(x,y)$は$\Map_S(x,y)$を表すことを示す. 
+\end{remark}
+
+\begin{remark}
+  $\Hom^\R_S(x,y)$の定義は自己双対的ではない. 
+  そこで, 
+  \begin{align*}
+    \Hom^\L_S(x,y) := \Hom^\R_{S^\myop}(y,x)^\myop
+  \end{align*}
+  と定義し, $x$から$y$への左射空間(left morphism)という. 
+  つまり, $\Hom^\L_S(x,y)_n$は$z|_{\Delta^{0}} = x$かつ$z|_{\Delta^{\{1,\cdots,n+1\}}}$が点$y$の定値単体であるような$S$の$n+1$単体$z$の集合である. 
+\end{remark}
+
+\begin{remark}
+  $\Hom^\L_S(x,y)$と$\Hom^\R_S(x,y)$は一般には単体的集合として同型ではない.
+  $S$が$\infty$圏のときは, これらはホモトピー同値である. 
+  これを示すために, 
+  \begin{align*}
+    \Hom_S(x,y) := \{x\} \times_{S} S^{\Delta^1} \times_S \{y\}
+  \end{align*}
+  と定義する. 
+  $\Hom_S(x,y)$の定義は自己双対的である. 
+  このとき, 次の自然な包含が存在する. 
+  \begin{align*}
+    \Hom^\R_S(x,y) \hookrightarrow \Hom_S(x,y) \hookleftarrow \Hom^\L_S(x,y)
+  \end{align*}
+  \cite{HTT} Cor.4.2.1.8で, $S$が$\infty$圏のとき, これらの包含がホモトピー同値であることを示す. 
+\end{remark}
+
+\subsection{ホモトピー圏 (途中)}
+
+通常の圏$\C$に対して, 脈体$\N(\C)$は$\infty$圏である. 
+脈体関手は圏のなす2圏から$\infty$圏のなす$\infty$双圏への忠実充満関手であるといえる. 
+更に, 脈体関手は左随伴を持つ. 
+
+\begin{proposition}
+  脈体関手$\N : \Cat \to \sSet$は単体的集合$S$に対してホモトピー圏$\h S$を与える関手$\h : \sSet \to \Cat$の右随伴である.
+\end{proposition}
+
+\begin{proof}
+  脈体関手を$\N : \Cat \to \sSet$, 単体的脈体関手を$\mathfrak{N} : \Cat_\Delta \to \sSet$と表す. 
+  ここで, $\N$は合成
+  \begin{align*}
+    \Cat \overset{i}{\hookrightarrow} \Cat_\Delta \xrightarrow{\mathfrak{N}} \sSet
+  \end{align*}
+  として表される. 
+  関手$\pi_0 : \sSet \to \Set$は包含$\Set \to \sSet$の左随伴である.
+  よって, 関手
+  \begin{align*}
+    \h : \Cat_\Delta \to \Cat : \C \mapsto \h\C
+  \end{align*}
+  は包含$i : \Cat \to \Cat_\Delta$の左随伴である. 
+  よって, $\N=\mathfrak{N} \circ i$は左随伴を持ち, 合成
+  \begin{align*}
+    \sSet \xrightarrow{\mathfrak{C}[-]} \Cat_\Delta \xrightarrow{\h} \Cat
+  \end{align*}
+  で与えられる. 
+  これは定義より, ホモトピー圏を与える関手$\h : \sSet \to \Cat$と一致する.
+  % https://q.uiver.app/#q=WzAsNCxbMiwwLCJcXHNTZXQiXSxbMiwyLCJcXENhdF9cXERlbHRhIl0sWzUsMiwiXFxDYXQiXSxbMCwyLCJcXERlbHRhIl0sWzAsMSwiXFxtYXRoZnJha3tDfVstXSIsMCx7ImN1cnZlIjotMX1dLFsxLDIsIlxcaCIsMCx7ImN1cnZlIjotMX1dLFsxLDAsIlxcTiciLDAseyJjdXJ2ZSI6LTF9XSxbMiwxLCJpIiwwLHsiY3VydmUiOi0yfV0sWzMsMSwiXFxtYXRoZnJha3tDfVtcXERlbHRhXi1dIiwyXSxbMywwLCLjgogiXSxbMiwwLCJcXE4iLDAseyJjdXJ2ZSI6LTF9XSxbMCwyLCJcXGgiLDAseyJjdXJ2ZSI6LTF9XSxbNCw2LCIiLDAseyJsZXZlbCI6MSwic3R5bGUiOnsibmFtZSI6ImFkanVuY3Rpb24ifX1dLFs1LDcsIiIsMCx7ImxldmVsIjoxLCJzdHlsZSI6eyJuYW1lIjoiYWRqdW5jdGlvbiJ9fV0sWzExLDEwLCIiLDAseyJsZXZlbCI6MSwic3R5bGUiOnsibmFtZSI6ImFkanVuY3Rpb24ifX1dXQ==
+  \[\begin{tikzcd}
+    && \sSet \\
+    \\
+    \Delta && {\Cat_\Delta} &&& \Cat
+    \arrow[""{name=0, anchor=center, inner sep=0}, "{\mathfrak{C}[-]}", curve={height=-6pt}, from=1-3, to=3-3]
+    \arrow[""{name=1, anchor=center, inner sep=0}, "\h", curve={height=-6pt}, from=3-3, to=3-6]
+    \arrow[""{name=2, anchor=center, inner sep=0}, "{\mathfrak{N}}", curve={height=-6pt}, from=3-3, to=1-3]
+    \arrow[""{name=3, anchor=center, inner sep=0}, "i", curve={height=-12pt}, from=3-6, to=3-3]
+    \arrow["{\mathfrak{C}[\Delta^-]}"', from=3-1, to=3-3]
+    \arrow["{よ}", from=3-1, to=1-3]
+    \arrow[""{name=4, anchor=center, inner sep=0}, "\N", curve={height=-6pt}, from=3-6, to=1-3]
+    \arrow[""{name=5, anchor=center, inner sep=0}, "\h", curve={height=-6pt}, from=1-3, to=3-6]
+    \arrow["\dashv"{anchor=center, rotate=-180}, draw=none, from=0, to=2]
+    \arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=1, to=3]
+    \arrow["\dashv"{anchor=center, rotate=-124}, draw=none, from=5, to=4]
+  \end{tikzcd}\]
+\end{proof}
+
+$\infty$圏$\C$に対して, 通常の圏$\pi(\C)$を次のように定義する.
+$\infty$圏$\C$に対して, $\pi(\C)$はホモトピー圏$\h\C$と一致する. 
+
+% \begin{definition}
+%   $\C$を$\infty$圏とする. 
+%   このとき, 通常の圏$\pi(\C)$を次のように定義する. 
+%   \begin{itemize}
+%     \item $\pi(\C)$の対象は$\C$の点の集まり
+%     \item $\C$の辺$\phi : \Delta^1 \to \C$に対して, $C = \phi(0)$をsourse, $C' = \phi(1)$をtargetとする$C$から$C'$への射として, $\phi : C \to C'$と表す. 
+%     \item $\pi(\C)$の任意の対象$C$に対して, 退化する辺$s_0(C) : C \to C$を$C$上の恒等射として, $\id_C$と表す. 
+%   \end{itemize}
+% \end{definition}
+
+% $\C$の辺$\phi : \Delta^1 \to \C$に対して, $C = \phi(0)$をsourse, $C' = \phi(1)$をtargetといい, $\phi : C \to C'$と表す. 
+
+\begin{proposition}
+  $\C$を$\infty$圏とする. 
+  このとき, $\pi(\C)$は通常の圏である. 
+\end{proposition}
+
+\begin{proposition}
+  $\C$を$\infty$圏とする. 
+  このとき, 次を満たす一意な関手$F : \h\C \to \pi(\C)$が存在する. 
+  \begin{itemize}
+    \item $F$は対象上で恒等的である. 
+    \item $\C$の任意の辺$\phi$に対して, $F(\tilde{\phi}) = [\phi]$である. 
+  \end{itemize}
+  更に, $F$は圏同型である.
+\end{proposition}
+
+% \begin{proof}
+%   $F$の存在性は$\h\C$の定義から従う. 
+%   $F$が対象上で恒等的であることはそれぞれの圏の定義から従う. 
+%   また, $F$が射に関して全射であることも同様に従う. 
+%   よって, 後は$F$が忠実であることを示せばよい. 
+% \end{proof}
+
+\subsection{高次圏における対象, 射, 同値}
+
+通常の圏と同様に, 高次圏における対象や射を定義する. 
+$\C$が単体的圏か位相的圏のとき, 対象や射はそれぞれの圏における通常の対象や射とすればよい. 
+$\C$が$\infty$圏のときは次のように定義する. 
+
+\begin{definition}
+  $S$を単体的集合とする. 
+  $S$の点$\Delta^0 \to S$を$S$の対象(object)という.
+  $S$の辺$\Delta^1 \to S$を$S$の射(morphism)という.
+  $X : \Delta^0 \to S$を$S$の対象とする. 
+  $s_0(X) : X \to X$を$X$上の恒等射(identity morphism)といい, $\id_X$と表す.
+\end{definition}
+
+\begin{definition}[同値]
+  $\C$を$\infty$圏, $\h\C$を$\C$のホモトピー圏, $f : X \to Y$を$\C$の射とする. 
+  $f$が$\h\C$における同型射のとき, $f$を同値(equivalence)という.
+\end{definition}
+
+$\infty$圏における同値は角体の拡張条件で表せる. 
+
+\begin{lemma}
+  $\C$を$\infty$圏, $f : X \to Y$を$\C$の射とする. 
+  このとき, 次は同値である. 
+  \begin{enumerate}
+    \item $f$は同値である. 
+    \item 次のように表せる射$\sigma^L_0 : \Lambda^2_0 \to \C$と$\sigma^R_0 : \Lambda^2_2 \to \C$
+    % https://q.uiver.app/#q=WzAsNixbMCwxLCJ4Il0sWzIsMSwieCJdLFsxLDAsInkiXSxbMywxLCJ5Il0sWzUsMSwieSJdLFs0LDAsIngiXSxbMCwxLCJcXGlkX3giLDJdLFswLDIsImYiXSxbMyw0LCJcXGlkX3kiLDJdLFs1LDQsImYiXV0=
+    \[\begin{tikzcd}
+      & y &&& x \\
+      x && x & y && y
+      \arrow["{\id_x}"', from=2-1, to=2-3]
+      \arrow["f", from=2-1, to=1-2]
+      \arrow["{\id_y}"', from=2-4, to=2-6]
+      \arrow["f", from=1-5, to=2-6]
+    \end{tikzcd}\]
+    がそれぞれ2単体$\sigma^L : \Delta^2 \to \C$と$\sigma^R : \Delta^2 \to \C$に拡張できる. 
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  (2)を満たすと仮定する.
+  $\sigma^L_0$が$\sigma^L$に拡張できるとき, $f$は$\h\C$において左逆射を持つ. 
+  $\sigma^R_0$が$\sigma^R$に拡張できるとき, $f$は$\h\C$において右逆射を持つ.
+
+  (1)を満たすと仮定する. 
+  このとき, ある1単体$g : y \to x$が存在して, $[fg]$と$[gf]$はそれぞれ$\h\C$における恒等射である. 
+  つまり, 次のような2単体がそれぞれ存在する. 
+  % https://q.uiver.app/#q=WzAsNixbMCwxLCJ4Il0sWzIsMSwieCJdLFsxLDAsInkiXSxbMywxLCJ4Il0sWzUsMSwieCJdLFs0LDAsIngiXSxbMCwxLCJoIiwyXSxbMCwyLCJmIl0sWzMsNCwiXFxpZF94IiwyXSxbNSw0LCJcXGlkX3giXSxbMiwxLCJnIl0sWzMsNSwiaCJdXQ==
+  \[\begin{tikzcd}
+    & y &&& x \\
+    x && x & x && x
+    \arrow["h"', from=2-1, to=2-3]
+    \arrow["f", from=2-1, to=1-2]
+    \arrow["{\id_x}"', from=2-4, to=2-6]
+    \arrow["{\id_x}", from=1-5, to=2-6]
+    \arrow["g", from=1-2, to=2-3]
+    \arrow["h", from=2-4, to=1-5]
+  \end{tikzcd}\]
+  また, $g$の退化する2単体$s^0(g)$から, 次のように表せる射$\Lambda^3_2 \to \C$が存在する. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwyLCJ4Il0sWzIsMiwieCJdLFsyLDEsInkiXSxbMSwwLCJ4Il0sWzAsMSwiaCIsMl0sWzAsMiwiZiIsMl0sWzIsMSwiZyJdLFsxLDMsIlxcaWRfeCIsMCx7ImxhYmVsX3Bvc2l0aW9uIjo2MH1dLFswLDMsIlxcaWRfeCJdLFsyLDMsImciLDJdXQ==
+  \[\begin{tikzcd}
+    & x \\
+    && y \\
+    x && x
+    \arrow["h"', from=3-1, to=3-3]
+    \arrow["f"', from=3-1, to=2-3]
+    \arrow["g", from=2-3, to=3-3]
+    \arrow["{\id_x}"{pos=0.6}, from=3-3, to=1-2]
+    \arrow["{\id_x}", from=3-1, to=1-2]
+    \arrow["g"', from=2-3, to=1-2]
+  \end{tikzcd}\]
+  $\C$は$\infty$圏なので, これは$\Delta^3 \to \C$に拡張できる. 
+  このとき, 2単体$\Delta^{\{0,1,3\}}$は$\sigma^L$とみなせる. 
+  $\sigma^R$に対しても同様である. 
+\end{proof}
+
+位相的圏$\C$において, $\C$の射$f$が同値であることは$f$が同型であることよりも次の意味で弱い. 
+
+\begin{proposition} \label{prop.1.2.4.1}
+  $\C$を位相的圏, $f$を$\C$の射とする. 
+  このとき, 次はすべて同値である.
+  \begin{enumerate}
+    \item $f$は$\C$における同値である. 
+    \item $f$はホモトピー同値$g$を持つ. 
+    \item $\C$の任意の対象$W$に対して, 写像$\Map_\C(W,X) \to \Map_\C(W,Y)$はホモトピー同値である. 
+    \item $\C$の任意の対象$W$に対して, 写像$\Map_\C(W,X) \to \Map_\C(W,Y)$は弱ホモトピー同値である. 
+    \item $\C$の任意の対象$Z$に対して, 写像$\Map_\C(Y,Z) \to \Map_\C(Y,Z)$はホモトピー同値である.
+    \item $\C$の任意の対象$Z$に対して, 写像$\Map_\C(Y,Z) \to \Map_\C(Y,Z)$は弱ホモトピー同値である. 
+  \end{enumerate}
+\end{proposition}
+
+次の命題は$\infty$圏の枠組みにおける同値を特徴づける定理である. 
+証明は2.1.2節で行う. 
+
+\begin{proposition}[Joyalの拡張定理] \label{prop.1.2.4.3}
+  $\C$を$\infty$圏, $\phi : \Delta^1 \to \C$を$\C$の射とする. 
+  このとき, $\phi$が同値であることと, 任意の$n \geq 2$と$f_0|_{\Delta^{\{0,1\}}} = \phi$を満たす射$f_0 : \Lambda^n_0 \to \C$に対して, $f_0$が$\Delta^n \to \C$に拡張できることは同値である. 
+\end{proposition}
+
+\subsection{\texorpdfstring{$\infty$}{infty}亜群と古典的ホモトピー論}
+
+通常の圏論における亜群と同様に, 高次圏論における$\infty$亜群を定義する. 
+
+\begin{definition}[$\infty$亜群]
+  $\C$を$\infty$圏とする. 
+  ホモトピー圏$\h\C$が通常の亜群(つまり, $\C$の任意の射が同値)のとき, $\C$を$\infty$亜群($\infty$-groupoid)という. 
+\end{definition}
+
+1.1.1節で$\infty$亜群の理論と古典的ホモトピー論が等価であることを見た. 
+この考えは次のように定式化することができる.
+
+\begin{proposition} \label{prop.1.2.5.1}
+  $\C$を単体的集合とする. 
+  このとき, 次はすべて同値である. 
+  \begin{enumerate}
+    \item $\C$は$\infty$亜群である. 
+    \item $\C$は任意の$0 \leq i < n$に対して, 包含$\Lambda^n_i \hookrightarrow \Delta^n$は拡張を持つ.
+    \item $\C$は任意の$0 < i \leq n$に対して, 包含$\Lambda^n_i \hookrightarrow \Delta^n$は拡張を持つ.
+    \item $\C$は任意の$0 \leq i \leq n$に対して, 包含$\Lambda^n_i \hookrightarrow \Delta^n$は拡張を持つ.
+    つまり, $\C$はKan複体である. 
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  (1)と(2)の同値性は\cref{prop.1.2.4.3}より従う. 
+  (1)と(3)の同値性は$\C^\myop$において\cref{prop.1.2.4.3}を用いると従う. 
+  (2)かつ(3)と(4)の同値性は明らかに従う. 
+\end{proof}
+
+Kan複体から$\infty$圏への包含は小Kan複体のなす$\infty$圏を小$\infty$圏のなす$\infty$双圏の充満部分圏として実現できることを表している. 
+逆に, 任意の$\infty$圏$\C$から$\C$の可逆でない射を捨てることで, $\infty$亜群を得ることができる. 
+
+\begin{proposition} \label{prop.1.2.5.3}
+  $\C$を$\infty$圏, $\C' (\subset \C)$を任意の辺が$\C$における同値であるような$\C$の最大の部分単体的集合とする. 
+  このとき, $\C'$はKan複体である. 
+  また, 任意のKan複体$K$に対して, $\Hom_{\sSet}(K,\C') \to \Hom_{\sSet}(K,\C)$は全単射である. 
+\end{proposition}
+
+\begin{definition}[最大Kan複体]
+  \cref{prop.1.2.5.3}で得られるKan複体$\C'$を$\C$に含まれる最大Kan複体(largest Kan complex)という.
+\end{definition}
+
+\cref{prop.1.2.5.3}は次のようにまとめることができる. 
+
+\begin{remark}
+  構成$\C \mapsto \C'$は$\infty$圏の$\infty$圏からKan複体の$\infty$圏への関手を定める. 
+  この関手はKan複体から$\infty$圏への包含が定める関手の右随伴である. 
+  3章で詳しく議論する.
+\end{remark}
+
+% Rem.1.2.5.6を理解する.
+
+\subsection{ホモトピー可換とホモトピー連接 (途中)}
+
+$\C$を$\infty$圏(位相的圏, 単体的圏)とする. 
+$\C$における操作はホモトピー圏$\h\C$における操作とほとんど同等である.
+同値の違いを除いて, $\C$と$\h\C$は同じ対象と射を持つ. 
+最も大きな違いは, $\C$においては2つの射が「等しい」かどうかではなく「ホモトピック」であるかが重要であるという点である.
+この場合, ホモトピー自身が考慮すべき追加のデータである. 
+このとき, $\h\C$における可換図式は$\C$におけるホモトピー可換図式(homotopy commutative diagram)と対応する. 
+しかし, これは不自然であり, より洗練された概念であるホモトピー連接図式(homotopy coherent diagram)を考えるべきであることが分かる. 
+
+この問題を考えるために, 次のような状況を考える. 
+$\J$を通常の圏, $\H$を空間のホモトピー圏とし, $F : \J \to \H$を関手とする. 
+つまり, $F$は$\J$の対象$X$に対して空間$F(X)$を, $\J$の射$\phi : X \to Y$に対して(ホモトピーの違いを除いて)空間の連続写像$F(\phi) : F(X) \to F(Y)$を対応させ, $\J$の合成可能な射$\phi, \psi$に対して, $F(\phi)F(\psi)$は$F(\phi\psi)$とホモトピーの違いを除いて一致する.
+このことから分かるように, $F$は厳密な関手ではない.  
+$F$を$\J$から位相空間の圏への(厳密な意味の)関手$\tilde{F}$へリフトさせることができるかを考える. 
+(このとき, $\tilde{F}$は$F$と同型な関手$\J \to \H$を定める.)
+一般には, ホモトピーの違いを除いても, リフト$\tilde{F}$の存在性と一意性の両方に障害が生じる. 
+
+このような$\tilde{F}$が存在するとする. 
+つまり, ホモトピー$k_\phi : \tilde{F}(\phi) \to F(\phi)$が存在するとする. 
+このホモトピーは$F$に追加のデータを与えることになる.
+実際, $F(\phi\psi)$から$F(\phi)F(\psi)$へのホモトピー$h_{\phi,\psi}$が合成
+\begin{align*}
+  F(\phi\psi) \simeq \tilde{F}(\phi\psi) =  \tilde{F}(\phi)\tilde{F}(\psi) \simeq F(\phi)F(\psi)
+\end{align*}
+により定まる. 
+
+ホモトピー$k_\phi$から定まる関手$F$は$\tilde{F}$をかなり反映している. 
+上の議論から, ホモトピー$h_{\phi,\psi}$から$\tilde{F}$を反映させるような関手について考える. 
+まず, ホモトピー$h_{\phi,\psi}$は任意ではない. 
+合成の結合律から, $\J$における合成可能な射$(\phi,\psi,\theta)$に対して, $h_{\phi,\psi}, h_{\psi,\theta}, h_{\phi, \psi\theta}, h_{\phi\psi,\theta}$の間には関係式が存在する. 
+この関係は, より高次のホモトピー(ホモトピーの間のホモトピー)を用いてあらわすことができ, これは$\tilde{F}$から自然に定まる.
+
+\subsection{高次圏の関手}
+
+高次圏$\C$におけるホモトピー連接図式は関手$\J \to \C$の特殊な場合である. 
+全ての通常の圏の集まりが関手を1射, 自然変換を2射とする2圏をなすように, 全ての$\infty$圏の集まりが$\infty$双圏をなすようにしたい. 
+このために, 任意の$\infty$圏$\C,\C'$に対して, $\C$から$\C'$への関手のなす$\infty$圏$\Fun(\C,\C')$を定義する必要がある. 
+
+位相的圏の枠組みにおいて, 適切な$\Fun(\C,\C')$を定義することはとても難しい. 
+$\Fun(\C,\C')$は$\C$から$\C'$への位相的関手のなす圏であってほしいが, 1.2.6節で見たようにこれはrigidすぎる. 
+
+$\infty$圏の枠組みにおいては, 関手圏の構成は非常に簡単である. 
+$\C,\D$を$\infty$圏とするとき, $\C$から$\D$への関手は単体的集合の射$\C \to \D$とすればよい. 
+
+\begin{definition}[関手$\infty$圏]
+  $\C,\D$を単体的集合とする. 
+  $\C$から$\D$へのparametrizing mapのなす単体的集合$\Map_{\sSet}(\C,\D)$を$\Fun(\C,\D)$と表す. 
+  つまり, 任意の$n \geq 0$に対して, $\Fun(\C,\D)_n := \Hom_{\sSet}(\C \times \Delta^n, \D)$として定義する. 
+
+  この定義は$\D$が$\infty$圏の場合のみに用いて, $\Fun(\C,\D)$を$\C$から$\D$への関手$\infty$圏($\infty$-category of functors)という. 
+  $\Fun(\C,\D)$における射を関手の自然変換(natural transformation)といい, $\Fun(\C,\D)$における同値を自然同値(natural equivalence)という. 
+\end{definition}
+
+次の命題は2.2.5節で証明する.
+
+\begin{proposition} \label{prop.1.2.7.3}
+  $K$を単体的集合とする. 
+  このとき, 次が成立する. 
+  \begin{enumerate}
+    \item 任意の$\infty$圏$\C$に対して, 単体的集合$\Fun(K,\C)$は$\infty$圏である.
+    \item $\C \to \D$を$\infty$圏の圏同値とする. 
+    このとき, 誘導される射$\Fun(K,\C) \to \Fun(K,\D)$は圏同値である. 
+    \item $\C$を$\infty$圏, $K \to K'$を単体的集合の圏同値とする. 
+    このとき, 誘導される射$\Fun(K',\C) \to \Fun(K,\C)$は圏同値である. 
+  \end{enumerate}
+\end{proposition}
+
+\subsection{\texorpdfstring{$\infty$}{infty}圏のジョイン}
+
+通常の圏論におけるジョインの構成は図式圏や極限, 余極限を議論するときに有用である. 
+この節では, このジョインの構成を$\infty$圏の枠組みに一般化する.
+まず, 通常の圏のジョインを復習する. 
+
+\begin{definition}[圏のジョイン]
+  $\C,\C'$を通常の圏とする. 
+  このとき, 圏$\C \star \C'$を次のように定義し, $\C$と$\C'$のジョイン(join)という.
+  \begin{itemize}
+    \item $\C \star \C'$の対象は$\C$の対象と$\C'$の直和 
+    \item $\C \star \C'$の任意の対象$X,Y$に対して, 
+    \begin{align*}
+      \Hom_{\C \star \C'}(X,Y) = 
+      \begin{cases}
+        \Hom_\C(X,Y)    & (X,Y \in \C) \\
+        \Hom_{\C'}(X,Y) & (X,Y \in \C') \\
+        \emptyset       & (X \in \C', Y \in \C) \\
+        \star           & (X \in \C, Y \in \C')
+      \end{cases}
+    \end{align*}
+  \end{itemize}
+\end{definition}
+
+\begin{remark}
+  圏のジョインは対称的ではない. 
+  つまり, 通常の圏$\C,\C'$に対して, $\C \star \C'$と$\C' \star \C$は一般には一致しない. 
+\end{remark}
+
+\begin{definition}[単体的集合のジョイン] \label{def.1.2.8.1}
+  $S,S'$を単体的集合とする. 
+  このとき, 単体的集合$S \star S'$を任意の$n \geq 0$に対して次のように定めることで定義し, $S$と$S'$のジョイン(join)という. 
+  \begin{align*}
+    % (S \star S')_n := S_n \subset S'_n \bigcup_{i+j=n-1} S_i \times S'_j
+    % (S \star S')_n := \coprod_{\substack{[J] = [I] \star [I'] \\ I , I' \in \Delta}} X_I \times X_{I'}
+    (S \star S')_n := S_n \coprod \qty(\coprod_{\substack{i+j=n-1 \\ i,j \geq 0}} S_i \star S'_j) \coprod S'_n
+  \end{align*}
+  % $I$や$I'$が空集合のときは$S(\emptyset)=S(\emptyset) = \ast$と定める.
+\end{definition}
+
+% ジョインを与える対応は$\sSet$上のモノイダル構造を与える. (A.1.3を参照.)
+% ジョインを与える操作の恒等射は空単体的集合$\emptyset = \Delta^{-1}$で与えられる. 
+
+\begin{remark}
+  任意の$i,j \geq 0$に対して, 自然同型$\phi_{i,j} : \Delta^{i-1} \star \Delta^{j-1} \cong \Delta^{i+j-1}$が存在する. 
+\end{remark}
+
+圏のジョインの脈体は単体的集合(圏の脈体)のジョインで表される. 
+よって, $\infty$圏論におけるジョインは通常の圏論におけるジョインの一般化とみなせる. 
+
+\begin{proposition}
+  $\C,\C'$を圏とする. 
+  このとき, 自然な同型$\N(\C \star \C') \cong \N(\C) \star \N(\C')$が存在する.
+\end{proposition}
+
+\begin{proof}
+  任意の$n \geq 0$に対して, 次の同型が成立する. 
+  \begin{align*}
+    & \N(\C) \star \N(\C')
+    & \cong \N(\C)_n \sqcup \qty(\coprod_{i+j=n-1} \N(\C)_i \times \N(\D)_j) \sqcup \N(\D)_n \\
+    & \Hom_\Cat([n],\C) \sqcup \qty(\coprod_{i+j=n-1} \Hom_\Cat([i],\C) \times \Hom_\Cat([j],n)) \sqcup \Hom_\Cat([n],\D) \\
+    & \N(\C \star \C')_n
+  \end{align*}
+\end{proof}
+
+\begin{remark} \label{rem.1.2.8.2}
+  構成$(S,S') \mapsto S \star S'$は関手$- \star ? : \sSet \times \sSet \to \sSet$を定める. 
+\end{remark}
+
+ジョインを与える対応は余極限と交換する. 
+このときの関手のcodomainは$\sSet$ではなく$(\sSet)_{S/}$であることに注意. 
+
+\begin{remark} 
+  任意の単体的集合$S$に対して, 関手$- \star S, S \star ? : \sSet \to (\sSet)_{S/}$は余極限と交換する. 
+  % つまり, 任意の単体的集合$S'$に対して, $\colim(S \star S')$と$S' \mapsto \colim(S) \star \colim(S') \to S$
+\end{remark}
+
+\begin{remark}
+  任意の単体的集合$S$に対して, 関手$- \star S, S \star ? : \sSet \to \sSet$は余極限と交換しない. 
+  例えば, $S \star \emptyset \cong \emptyset \star S \cong S$であるが, $S$が$\sSet$における始対象とは限らない. 
+  一方, $(\sSet)_{/S}$の対象とみなすと, $\id_S : S \to S$は$(\sSet)_{S/}$における始対象である. 
+\end{remark}
+
+ジョインを与える対応は$\mathfrak{C}[-]$と交換しない. 
+
+\begin{remark}
+  関手$- \star ? : \sSet \times \sSet \to \sSet$は剛化関手$\mathfrak{C} : \sSet \to \Cat_\Delta$と交換しない.
+  しかし, 単体的圏$\mathfrak{C}[S \star S']$は$\mathfrak{C}[S]$と$\mathfrak{C}[S']$を充満部分圏として含み, $\mathfrak{C}[S \star S']$において$\mathfrak{C}[S']$の対象から$\mathfrak{C}[S]$への対象への射は存在しない. 
+  よって, 射$\phi : \mathfrak{C}[S \star S'] \to \mathfrak{C}[S] \star \mathfrak{C}[S']$が一意に存在して, $\mathfrak{C}[S]$と$\mathfrak{C}[S']$へのそれぞれへの制限は恒等関手となる. 
+  \cite{HTT} Corollary.4.2.1.4でこの射が単体的圏の同値であることを見る. 
+  つまり, $\phi$は同型ではないが同値ではある. 
+\end{remark}
+
+$\infty$圏のジョインは$\infty$圏である.
+
+\begin{proposition} \label{prop.1.2.8.3}
+  $S,S'$を$\infty$圏とする. 
+  このとき, 単体的集合$S \star S'$は$\infty$圏である.
+\end{proposition}
+
+\begin{notation}[左錐と右錐]
+  $S$を単体的集合とする. 
+  このとき, 単体的集合$\Delta^0 \star S$を$S$の左錐(left cone)といい, $S^\triangleleft$と表す.
+  双対的に, 単体的集合$S \star \Delta^0$を$S$の右錐(right cone)といい, $S^\triangleright$と表す. 
+  $S^\triangleleft, S^\triangleright$において, $\Delta^0$に属する点を錐点(cone point)という. 
+\end{notation}
+
+\subsection{\texorpdfstring{$\infty$}{infty}圏のオーバー圏とアンダー圏}
+
+\begin{definition}[単体的集合のスライス]
+  $p : X \to S$を単体的集合の射とする. 
+  このとき, 単体的集合$S_{/ p}$を次のように定義し, $S$のスライス(slice)という. 
+  \begin{itemize}
+    \item 任意の$n \geq 0$に対して, $(S_{/ p})_n := \{\overline{p} : \Delta^n \star X \to S ~|~ \overline{p}|_{X} = p\}$
+    \item $\Delta^n$の任意の射$\alpha : [m] \to [n]$に対して, $S_{/ p}(\alpha) : (S_{/ p})_n \to (S_{/ p})_m$を
+    \begin{align*}
+      (\Delta^n \star X \xrightarrow{\overline{p}} S) \mapsto (\Delta^m \star X \xrightarrow{\alpha \star \id_X} \Delta^n \star X \xrightarrow{\overline{p}} S)
+    \end{align*}
+  \end{itemize}
+\end{definition}
+
+\begin{definition}[オーバー圏]
+  $p : X \to S$を単体的集合の射とする. 
+  $S$が$\infty$圏のとき, $S_{/ p}$を$S$のオーバー圏(overcategory)または$p$上の$S$の対象の$\infty$圏($\infty$-category of objects of $S$ over $p$)という.
+  双対的に, $S$のアンダー圏も定義する. 
+\end{definition}
+
+オーバー圏をとる対応は関手を定める. 
+
+\begin{remark}
+  構成$(X \xrightarrow{p} S) \mapsto S_{/ p}$は関手$(\sSet)_{X /} \to \sSet$を定める.
+\end{remark}
+
+オーバー圏をとる操作は圏同値で保たれる. 
+証明は2.1.2節と2.4.5節で行う.
+
+\begin{proposition} \label{prop.1.2.9.3}
+  $\C$を$\infty$圏, $p : K \to \C$を単体的集合の射とする. 
+  このとき, $\C_{p/}$は$\infty$圏である.  
+  更に, $q : \C \to \C'$を$\infty$圏の圏同値とする. 
+  このとき, 誘導される射$\C_{p/} \to \C_{q \circ p/}$は$\infty$圏の圏同値である. 
+\end{proposition}
+
+圏のスライスの脈体は圏の脈体のスライスで表せる. 
+よって, $\infty$圏論におけるスライスは通常の圏論におけるスライスの一般化とみなせる. 
+
+\begin{remark} \label{rem.1.2.9.6}
+  $F : \J \to \C$を関手, $\Delta : \C \to \C^\J$を対角関手とする. 
+  $F$を関手$[0] \to \C^\J$とみなす. 
+  このとき, 同型$\N(\C)_{/F} \cong \N(\Delta \downarrow F)$が存在する. 
+  特に, $\C$の任意の対象$X$に対して, 同型$\N(\C)_{/X} \cong \N(\C_{/X})$が存在する. 
+\end{remark}
+
+\subsection{忠実充満と本質的全射}
+
+通常の圏論と同様に, 高次圏の関手の忠実充満性と本質的全射を定義する. 
+圏同値であることと忠実充満かつ本質的全射であることが同値であるという命題は高次圏論でも成立する. 
+
+\begin{definition}[忠実充満]
+  $F : \C \to \D$を単体的集合(位相的圏, 単体的圏)の関手とする.
+  誘導される関手$\h F : \h\C \to \h\D$が$\H$豊穣圏の関手として忠実充満のとき, $F$は忠実充満(fully faithful)であるという. 
+\end{definition}
+
+\begin{definition}[本質的全射]
+  $F : \C \to \D$を単体的集合(位相的圏, 単体的圏)の関手とする.
+  誘導される関手$\h F : \h\C \to \h\D$が通常の本質的全射のとき, $F$は本質的全射(essentially surjective)であるという.
+\end{definition}
+
+\begin{proposition}
+  $F : \C \to \D$を単体的集合(位相的圏, 単体的圏)の関手とする.
+  このとき, $F$が同値であることと, $F$が忠実充満かつ本質的全射であることは同値である. 
+\end{proposition}
+
+\subsection{\texorpdfstring{$\infty$}{infty}圏の部分圏}
+
+通常の圏論と同様に, 高次圏における部分圏を定義する. 
+% https://math.stackexchange.com/questions/1489079/definition-of-the-notion-of-a-subcategory-of-an-infty-category?rq=1
+
+\begin{definition}[$\infty$圏の部分圏] \label{def.subcategory}
+  $\C$を$\infty$圏, $\h\C$を$\C$のホモトピー圏, $(\h\C)'$を$\h\C$の部分圏とする. 
+  このとき, 次の単体的集合のpullbackで定義される$\C'$を$(\h\C)'$で貼られる$\C$の部分圏(subcategory)という. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEMnIl0sWzEsMCwiXFxDIl0sWzAsMSwiXFxOKChcXGhcXEMpJykiXSxbMSwxLCJcXE4oXFxoXFxDKSJdLFswLDFdLFswLDIsIiIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsxLDNdLFsyLDNdLFswLDMsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dXQ==
+  \[\begin{tikzcd}
+    {\C'} & \C \\
+    {\N((\h\C)')} & {\N(\h\C)}
+    \arrow[from=1-1, to=1-2]
+    \arrow[dashed, from=1-1, to=2-1]
+    \arrow[from=1-2, to=2-2]
+    \arrow[from=2-1, to=2-2]
+    \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+  \end{tikzcd}\]
+\end{definition}
+
+\begin{remark}
+  \cref{prop.subcategory_equal_inner_fibration}より, $\infty$圏の部分圏は$\infty$圏である. 
+\end{remark}
+
+\begin{definition}[充満部分圏]
+  $\C$を$\infty$圏, $\h\C$を$\C$のホモトピー圏とする. 
+  $(\h\C)'$が$\h\C$の充満部分圏のとき, $\C'$を$\C$の充満部分圏(full subcategory)という. 
+  \footnote{
+    $\C'$が$\C$の充満部分圏のとき, $\C'$は$\C'$に属する$\C$の対象のなす集合$\C'_0$より定まる. 
+    このことから, $\C'$を$\C'_0$で貼られる$\C$の部分圏ということもある. 
+  }
+\end{definition}
+
+$\infty$圏の部分圏は内ファイブレーション(2章)を用いて表すことができる.
+
+\begin{lemma} \label{prop.subcategory_equal_inner_fibration}
+  $\C$を$\infty$圏, $\C'$を$\C$の単体的部分集合とする. 
+  このとき, 次は全て同値である. 
+  \begin{enumerate}
+    \item $\C'$は$\C$の部分圏である. 
+    \item 包含$\C' \hookrightarrow \C$は内ファイブレーションである. 
+  \end{enumerate}
+\end{lemma}
+
+\begin{example} \label{eg.subcategory_of_nerve}
+  $\C$を通常の圏, $\C'$を$\C$の通常の部分圏とする. 
+  包含$\N(\C') \hookrightarrow \N(\C)$は内ファイブレーションなので, $\N(\C')$は$\N(\C)$の部分圏である. 
+\end{example}
+
+\begin{remark} \label{rem.pullback_of_subcategory}
+  $F : \C \to \D$を$\infty$圏の関手, $\D'$を$\D$の部分圏とする. 
+  内ファイブレーションはプルバックで閉じるので, 逆像$F^{-1}(\D')$は$\C$の部分圏である. 
+\end{remark}
+
+$\N(\C)$の任意の部分圏がこのように表されることを示す. 
+つまり, \cref{def.subcategory}の部分圏は通常の部分圏$の\infty$圏の枠組みにおける一般化と思える.
+
+\begin{proposition}
+  $\C$を$\infty$圏, $\h\C$を$\C$のホモトピー圏とする. 
+  自然な射$F : \C \to \N(\h\C)$に対して, 構成$(\D \subset \h\C) \mapsto (F^{-1}(\N\D) \subset \C)$は, $\h\C$の通常の部分圏と$\C$の部分圏の間の全単射を定める. 
+\end{proposition}
+
+\begin{proof}
+  $\D$を$\h\C$の部分圏とする. 
+  \cref{eg.subcategory_of_nerve}より, $\N\D$は$\N(\h\C)$の部分圏である. 
+  \cref{rem.pullback_of_subcategory}より, $F^{-1}(\N\D)$は$\C$の部分圏である.
+  $F : \C \to \N(\h\C)$は単体的集合のepi射なので, $\D$は$F^{-1}(\N\D)$から一意に定まる. 
+  (途中)
+\end{proof}
+
+\begin{remark}
+  $\C$を$\infty$圏, $\C'$を$\C$の部分圏とする. 
+  $\infty$圏の定義より, 包含$C' \hookrightarrow \C$は忠実充満である. 
+\end{remark}
+
+\subsection{終対象と始対象}
+
+通常の圏論と同様に, 高次圏における終対象と始対象を定義する. 
+位相的圏$\C$に対して, 射空間の位相を無視して$\C$を通常の圏とみなしたときの終対象を$\C$における終対象と定義することが考えられる. 
+しかし, この定義は強すぎることが分かる. 
+例えば, $\CGWH$において, 1点からなる位相空間$\ast$はこの意味の終対象である.
+しかし, $\ast$と同値な(つまり, 任意の可縮空間)位相空間は$\ast$と同相ではなく, $\CGWH$における終対象ではない. 
+$\infty$圏における概念は同値で保たれるべきであるので, 弱い定義が必要である.  
+
+\begin{definition}[終対象]
+  $\C$を単体的集合(位相的圏, 単体的圏), $\C$のホモトピー圏$\h\C$を$\H$豊穣圏とみなす. 
+  $\C$の対象$X$が$\h\C$における通常の終対象のとき, $X$を終対象(final object)という. 
+  双対的に, 始対象も定義する. 
+\end{definition}
+
+$\infty$圏の枠組みにおいては, より良い定義として強終対象がある. 
+\cref{cor.1.2.12.5}で$\infty$圏において終対象と同値な定義であることを見る. 
+
+\begin{definition}[強終対象]
+  $\C$を単体的集合とする. 
+  $\C$の点$X$に対して, 射影$\C_{/ X} \to \C$が自明なKanファイブレーションのとき, $X$を強終対象(strongly final object)という. 
+  双対的に, 強始対象も定義する. 
+\end{definition}
+
+\begin{remark}
+  $\C$を単体的集合とする. 
+  $\C$の点$X$が終対象であることと, $f_0(n)=X$を満たす射$f_0 : \partial \Delta^n \to \C$が$f : \Delta^n \to \C$に拡張できることは同値である. 
+\end{remark}
+
+\begin{proposition}
+  $\C$を$\infty$圏, $Y$を$\C$の対象とする. 
+  $Y$が強終対象であることと, $\C$の任意の対象$X$に対して$\Hom^\R_\C(X,Y)$が可縮なKan複体であることは同値である. 
+\end{proposition}
+
+\begin{proof} 
+  $\Hom^\R_\C(X,Y)$はファイバー$(\C_{/ Y})_X = \C_{/ Y} \times_\C \{X\}$と同一視できる. 
+  $Y$が強終対象のとき, 射影$p : \C_{/ Y} \to \C$は自明なKanファイブレーションである. 
+  自明なKanファイブレーションの集まりはプルバックで閉じるので, ファイバー$\C_{/ Y} \times_\C \{X\}$は可縮なKan複体である. 
+
+  逆に, $\C$の任意の対象$X$に対して, $\Hom^\R_\C(X,Y) = (\C_{/ Y})_X$が可縮であるとする. 
+  \cref{prop.2.1.2.1}より, $p$は右ファイブレーションである. 
+  \cref{lem.2.1.3.4}より, $p$は自明なKanファイブレーションである. 
+\end{proof}
+
+\begin{corollary} \label{cor.1.2.12.5}
+  $\C$を単体的集合とする. 
+  $\C$における任意の強終対象は終対象である. 
+  逆は$\C$が$\infty$圏のときに成立する.
+\end{corollary}
+
+\begin{example}
+  $\C$を通常の圏とする. 
+  $\N(\C)$における対象が終(始)対象であることと, $\C$において通常の意味で終(始)対象であることは同値である. 
+  これは圏同値$\h\N(\C) \cong \C$が成立することから従う. 
+\end{example}
+
+通常の圏における終対象は同型を除いて一意に定まる. 
+$\infty$圏における終対象も同様の主張ができるが, 「一意に」という概念をホモトピー論的な言葉に置き換える必要がある. 
+
+\begin{proposition}[Joyal]
+  $\C$を$\infty$圏, $\C'$を$C$の終対象で貼られる$\C$の充満部分圏とする. 
+  このとき, $\C'$は空または可縮なKan複体である.  
+\end{proposition}
+
+\subsection{極限と余極限 (途中)}
+
+ホモトピー可換とホモトピー連接の違いから, 高次圏$\C$における(余)極限が$\C$のホモトピー圏$\h\C$における(余)極限と一致しないということが挙げられる. 
+通常の(余)極限と区別するために, 高次圏における(余)極限をホモトピー(余)極限ということもある. 
+
+ホモトピー極限とホモトピー余極限は位相的圏において定義できるが, この定義はとても複雑である. 
+この節では, A.2.8節で議論されている一部を復習する. 
+
+\subsection{\texorpdfstring{$\infty$}{infty}圏の表現可能性 (省略)}
+
+\subsection{集合論的なテクニック (省略)}
+
+\subsection{空間の\texorpdfstring{$\infty$}{infty}圏}
+
+通常の圏論において, 多くの圏は$\Set$で豊穣された圏であった. 
+この$\Set$豊穣圏の高次圏論におけるアナロジーは空間で豊穣された$\infty$圏である.
+
+\begin{definition}[空間の$\infty$圏] \label{def.1.2.16.1}
+  小Kan複体のなす$\sSet$の充満部分圏を$\Kan$と表す. 
+  $\Kan$を単体的圏とみなし, $\Kan$の単体的脈体$\mathfrak{N}(\Kan)$を空間の$\infty$圏($\infty$-category of spaces)といい, $\S$と表す. 
+\end{definition}
+
+\begin{remark}
+  $\Kan$の任意の対象$X,Y$に対して, 単体的集合$\Map_{\Kan}(X,Y) = Y^X$はKan複体である. 
+  \cref{prop.1.1.5.10}より, $\S$は$\infty$圏である. 
+\end{remark}
+
+\begin{remark}
+  空間の$\infty$圏として, CW複体のなす圏の位相的脈体なども考えられる. 
+  このようなものは全て$\S$と等価であることが分かる. 
+  \cref{def.1.2.16.1}の定義は$\infty$圏におけるYonedaの補題を示すときに扱いやすいからである. 
+  詳しくは5.1.3節で議論する.
+\end{remark}
+
+\begin{remark}
+  $\S$は小Kan複体のなす圏に対して定義されていた. 
+  小とは限らないすべてのKan複体に対して定義される空間の$\infty$圏を$\hat{\S}$と表す. 
+  $\S$は大きい$\infty$圏であるが, $\hat{\S}$はより大きな$\infty$圏であることを後で見る. 
+\end{remark}
+
+\newpage
+
+\chapter{単体的集合のファイブレーション}
+
+単体的集合のホモトピー論における重要な概念の多くはリフト性質を用いて定義される. 
+
+\begin{example}[Kanファイブレーション]
+  $p : X \to S$を単体的集合の射とする. 
+  $p$が任意の$n \geq 0$と$0 \leq i \leq n$において, 包含$\Lambda^n_i \hookrightarrow \Delta^n$に対してRLPを持つとき, $p$をKanファイブレーション(Kan fibration)という. 
+\end{example}
+
+\begin{example}[自明なKanファイブレーション]
+  $p : X \to S$を単体的集合の射とする. 
+  $p$が任意の$n \geq 0$において, 包含$\partial \Delta^n \hookrightarrow \Delta^n$に対してRLPを持つとき, $p$を自明なKanファイブレーション(trivial Kan fibration)という. 
+\end{example}
+
+\begin{example}[コファイブレーション]
+  $i : A \to B$を単体的集合の射とする. 
+  $i$が任意の自明なKanファイブレーションに対してLLPを持つとき, $i$をコファイブレーション(cofibration)という. 
+  これは$i$が単体的集合のmono射であることと同値である. 
+\end{example}
+
+\begin{definition}[ファイブレーションと緩射]
+  $f : X \to S$を単体的集合の射とする. 
+  $f$が任意の$n \geq 0$と
+  \begin{itemize}
+    \item $0 \leq i < n$において, 包含$\Lambda^n_i \hookrightarrow \Delta^n$に対してRLPを持つとき, $f$を左ファイブレーション(left fibration)という.
+    \item $0 < i \leq n$において, 包含$\Lambda^n_i \hookrightarrow \Delta^n$に対してRLPを持つとき, $f$を右ファイブレーション(right fibration)という.
+    \item $0 < i < n$において, 包含$\Lambda^n_i \hookrightarrow \Delta^n$に対してRLPを持つとき, $f$を内ファイブレーション(inner fibration)という.
+  \end{itemize}
+  $i : A \to B$を単体的集合の射とする. 
+  \begin{itemize}
+    \item 任意の左ファイブレーションに対してLLPを持つとき, $i$を左緩射(left anodyne)という. 
+    \item 任意の右ファイブレーションに対してLLPを持つとき, $i$を右緩射(right anodyne)という. 
+    \item 任意の内ファイブレーションに対してLLPを持つとき, $i$を内緩射(inner anodyne)という. 
+  \end{itemize}
+\end{definition}
+
+2章の目的はこれらのファイブレーションを用いて$\infty$圏の理論を調べることである. 
+2.1節では, 右(左)ファイブレーション$p : X \to S$の理論が, $S$上で亜群で(コ)ファイバー付けられた圏の$\infty$圏の枠組みにおける類似概念であることを見る. 
+2.2節では, このアイデアを用いて$\infty$圏の理論が単体的圏の理論と等価であることを見る. 
+
+ファイバーが亜群とは限らない(コ)ファイバー付けられた圏のより一般的な類似概念はいろいろある. 
+例えば(co)Cartesianファイブレーションの理論があり, 2.4節でこれを定義する. 
+CartesianファイブレーションとcoCartesianファイブレーションはともに内ファイブレーションの例であり, 2.3節で調べる. 
+
+\begin{remark}
+  左ファイブレーション(左緩射)の理論は右ファイブレーション(右緩射)の理論とそれぞれ双対的である. 
+  つまり, 単体的集合の射$f : S \to T$が左ファイブレーションであることと, $f^\myop : S^\myop \to T^\myop$が右ファイブレーションであることは同値である. 
+  よって, 2.1節では左ファイブレーションの場合のみを考えるが, 右ファイブレーションについても双対命題が成立する. 
+\end{remark}
+
+\section{左ファイブレーション}
+
+この節では, 単体的集合の左ファイブレーションのクラスを調べる. 
+2.1.1節では, 亜群(やほかの圏)でコファイバーづけられた圏の理論を調べる. 
+そして, 左ファイブレーションの理論がこの概念の$\infty$圏論的な自然な一般化であることを見る. 
+2.1.2節では, 左ファイブレーションのクラスが重要な操作に対して安定であることを見る. 
+
+定義より, 任意のKanファイブレーションは左ファイブレーションである. 
+逆は一般には成立しない.
+しかし, 左ファイブレーションがKanファイブレーションであるかを確かめる簡単な方法がある. 
+2.1.3節でこれについて調べ, ここから分かる主張をいくつか証明する. 
+
+単体的集合の射$p : X \to S$がKanファイブレーションであることと, $(\sSet)_{/ S}$上の通常のモデル構造において$X$がファイブラント対象であることは同値である. 
+左ファイブレーションに対しても同様の特徴づけがある. 
+単体的集合の射$p : X \to S$が左ファイブレーションであることと, $(\sSet)_{/ S}$上の共変モデル構造において$X$がファイブラント対象であることは同値である. 
+2.1.4節で, この共変モデル構造を定義し, 基本的な主張をいくつか確認する. 
+
+\subsection{古典的圏論における左ファイブレーション} % karodon.4.2.2
+
+左ファイブレーションを勉強する前に, 古典的な圏論におけるGrothendieck構成について復習する. 
+
+\begin{definition}[Grothendieck構成] 
+  $\D$を通常の圏, $\Gpd$を亜群のなす圏, $\chi : \D \to \Gpd$を関手とする. 
+  このとき, 通常の圏$\C_\chi$を次のように定義する. 
+  \begin{itemize}
+    \item $\C_\chi$の対象は$\D$の対象$D$と亜群$\chi(D)$の対象$\eta$の組$(D,\eta)$
+    \item $\C_\chi$の任意の対象$(D,\eta),(D',\eta')$に対して, $(D,\eta)$から$(D',\eta')$への射は, $\D$の射$f : D \to D'$と亜群$\chi(D)$における同型射$\alpha : \chi(f)(\eta) \to \eta'$の組$(f,\alpha)$
+  \end{itemize} 
+  この構成をGrothendieck構成(Grothendieck construction)という. 
+\end{definition}
+
+\begin{remark}
+  $\C_\chi$をGrothendieck構成で得られた圏とする. 
+  このとき, 忘却関手$\C_\chi \to \D : (D,\eta) \mapsto D$が存在する. 
+  構成$\chi \mapsto (\C_\chi \to \D)$は関手$\Fun(\D,\Gpd) \to (\Cat)_{/ \D}$を定める. 
+  しかし, この関手は圏同値ではない. 
+\end{remark}
+
+この関手が圏同値になるための条件として, $\C_\chi$が$\D$上で亜群内でコファイバー付けられているという条件が考えられる. 
+
+\begin{definition}[亜群内でコファイバー付けられている] \label{def.2.1.1.1}
+  $F : \C \to \D$を関手とする. 
+  次の条件を満たすとき, $\C$は$\D$上で亜群内でコファイバー付けられている(cofibered in groupoids over $\D$)という. 
+  \begin{enumerate}
+    \item $\C$の任意の対象$C$と$\D$における射$\eta : F(C) \to D$に対して, $\C$においてある射$\tilde{\eta} : C \to \tilde{D}$が存在して, $F(\tilde{\eta})=\eta$である. 
+    \item $\C$の任意の対象$C''$と$\C$における射$\eta : C \to C'$に対して, 次の写像は全単射である.  
+    % https://q.uiver.app/#q=WzAsMixbMCwwLCJcXEhvbV9cXEMoQycsQycnKSJdLFswLDEsIlxcSG9tX1xcQyhDLEMnJykgXFx0aW1lc197XFxIb21fXFxEKEYoQyksRihDJycpKX0gXFxIb21fXFxEKEYoQycpLEYoQycnKSkiXSxbMCwxXV0=
+    \[\begin{tikzcd}
+      {\Hom_\C(C',C'')} \\
+      {\Hom_\C(C,C'') \times_{\Hom_\D(F(C),F(C''))} \Hom_\D(F(C'),F(C''))}
+      \arrow[from=1-1, to=2-1]
+    \end{tikzcd}\]
+  \end{enumerate}
+\end{definition}
+
+Grothendieck構成は亜群内でコファイバー付けられている圏の例である.
+
+\begin{example} \label{ex.2.1.1.2}
+  $\chi : \D \to \Gpd$を関手とする. 
+  このとき, 忘却関手$\C_\chi \to \D$によって, $\C_\chi$は$\D$上で亜群内でコファイバー付けられている圏である. 
+\end{example}
+
+\cref{ex.2.1.1.2}は逆が成立する. 
+$\C$を$\D$上で亜群内でコファイバー付けられている圏とする. 
+このとき, $\D$の任意の対象$D$に対して, $\C_D = \C \times_\D \{D\}$は亜群である. 
+更に, $\D$における任意の射$f : D \to D'$に対して, 関手$f_! : \C_D \to \C_{D'}$を次のように定義する. 
+$\C_D$の任意の対象$C$に対して, $f : D \to D'$のリフト$\overline{f} : C \to C'$を選び, $f_!(C) := C'$とする. 
+$\overline{f}$は一意ではないが, $\C$上の関手性と同型を除いて一意に定まる.
+よって, 関手$f_! : \C_D \to \C_{D'}$は同型を除いて一意に定まる. 
+ここから, 関手$\chi : \D \to \Gpd$は次のように定義できると考えられる. 
+\begin{align*}
+  D &\mapsto \C_D \\
+  f &\mapsto f_!
+\end{align*}
+しかし, $f_!$は同型を除いて一意にしか定まらないので, この構成は関手的ではない. 
+これは次のように考えることで対処することができる.
+\begin{itemize}
+  \item 亜群$\chi(D)=\ C \times_\D \{D\}$は次の図式を可換にするような関手$G$のなす圏として表せる. 
+  % https://q.uiver.app/#q=WzAsMyxbMCwxLCJcXHtEXFx9Il0sWzEsMSwiXFxEIl0sWzEsMCwiXFxDIl0sWzAsMSwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCwyLCJHIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzIsMSwiRiJdXQ==
+  \[\begin{tikzcd}
+    & \C \\
+    {\{D\}} & \D
+    \arrow[hook, from=2-1, to=2-2]
+    \arrow["G", dashed, from=2-1, to=1-2]
+    \arrow["F", from=1-2, to=2-2]
+  \end{tikzcd}\]
+  1点圏$\{D\}$をアンダー圏$\D_{D/}$で置き換えることによって, $\chi(D)$と同値な亜群を$D$のみによる形で得ることができる.
+  \item 亜群$\chi(D)$の定義は変えずに, $\chi$を$\D$から亜群のなす双圏への関手とみなす. 
+\end{itemize}
+
+上述の議論をまとめると, Grothendieck構成は関手$\chi : \D \to \Gpd$のなす圏と$\D$上でコファイバー付けられた圏のなす圏の間の圏同値を定める. 
+
+左ファイブレーションの理論は\cref{def.2.1.1.1}の$\infty$圏の枠組みにおける一般化と思える. 
+まずは, 次の命題が成立する.
+
+\begin{proposition}
+  $F : \C \to \D$を通常の関手とする. 
+  このとき, $\C$が$\D$上で亜群内でコファイバーづけられていることと, 誘導される関手$\N(F) : \N(\C) \to \N(\D)$が左ファイブレーションであることは同値である. 
+\end{proposition}
+
+% \begin{proof}
+%   脈体の定義より, $\N(F)$は内ファイブレーションである. 
+%   よって, $\C$が$\D$上で亜群内でコファイバーづけられていることと, $\N(F)$が任意の$n \geq 0$において包含$\Lambda^n_i \hookrightarrow \Delta^n$に対してRLPを持つことが同値であることを示せばよい. 
+
+%   $n=1$のとき, このリフト性質は\cref{def.2.1.1.1}の条件(1)と同値である. 
+
+%   $n=2$のとき, このリフト性質は\cref{def.2.1.1.1}の条件(2)(の全射性)と同値である. 
+
+%   $n=3$のとき, 単体的集合の射$\sigma_0 : \Lambda^3_i \hookrightarrow \N(\C)$は対象の集合$\{X_j\}_{0 \leq j \leq 3}$と
+%   \begin{align*}
+%     f_{0,3} = f_{1,3} \circ f_{0,1}, ~~ 
+%     f_{0,3} = f_{2,3} \circ f_{0,2}, ~~
+%     f_{1,3} = f_{2,3} \circ f_{1,2}
+%   \end{align*}
+%   を満たす射$\{f_{j,k} : X_j \to X_k\}_{0 \leq j < k \leq 3}$である. 
+%   このとき, $f_{0,2} = f_{1,2} \circ f_{0,1}$を満たして, $\sigma_0$が$\N(\C)$の$3$単体に拡張できることを示せばよい. 
+%   \cref{def.2.1.1.1}の条件(2)より, 
+%   \begin{align*}
+%     \Hom_\C(X_0,X_2) \to \Hom_\C(X_0,X_3)
+%   \end{align*}
+% \end{proof}
+
+\begin{example}
+  $p : X \to S$を左ファイブレーションとする. 
+  $S$が1点からなるときを考える. 
+  \cref{prop.1.2.5.1}より, $p$が左ファイブレーションであることと, $X$がKan複体であることは同値である. 
+  左ファイブレーションのクラスはプルバックで閉じるので, 任意の左ファイブレーション$p : X \to S$と$S$の任意の対象$s$に対して, ファイバー$X_s = X \times_S \{s\}$はKan複体である. 
+
+  $f : s \to s'$を$S$の辺とする. 
+  このとき, 包含$i : X_s \hookrightarrow X_s \times \Delta^1$を考える. 
+  2.1.2節で, $i$が左緩射であることを示す.
+  つまり, 次の四角はリフトを持つ. 
+  % https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXHswXFx9IFxcdGltZXMgWF9zIl0sWzIsMCwiWCJdLFswLDEsIlxcRGVsdGFeMSBcXHRpbWVzIFhfcyJdLFsxLDEsIlxcRGVsdGFeMSJdLFsyLDEsIlMiXSxbMCwxLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDIsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzIsM10sWzMsNCwiZiIsMl0sWzEsNCwicCJdLFsyLDEsIiIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+  \[\begin{tikzcd}
+    {\{0\} \times X_s} && X \\
+    {\Delta^1 \times X_s} & {\Delta^1} & S
+    \arrow[hook, from=1-1, to=1-3]
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+    \arrow["f"', from=2-2, to=2-3]
+    \arrow["p", from=1-3, to=2-3]
+    \arrow[dashed, from=2-1, to=1-3]
+  \end{tikzcd}\]
+  このとき, リフト$\Delta^1 \times X_s \to X$を$\{1\} \times X_s$に制限すると, 射$f_! : X_s \to X_{s'}$が定まる. 
+  $f_!$は一意ではないが, ホモトピーの違いを除いて一意に定まる. 
+\end{example}
+
+\begin{lemma} \label{lem.2.1.1.4}
+  $p : X \to S$を左ファイブレーション, $\H$を空間のホモトピー圏とする. 
+  このとき, 構成$s \mapsto X_s, f \mapsto f_!$は関手$\h S \to \H$を定める. 
+\end{lemma}
+
+\begin{proof}
+  $f : s \to s'$を$S$の射とする. 
+  $K$を任意の単体的集合, $\eta \in \Hom_\H(K,X_s), \eta' \in \Hom_\H(K,X_{s'})$を射のホモトピー類とする.
+  このとき, 次の図式
+  % https://q.uiver.app/#q=WzAsMyxbMCwxLCJLIl0sWzIsMSwiWF97cyd9Il0sWzEsMCwiWF9TIl0sWzAsMSwiXFxldGEnIiwyXSxbMCwyLCJcXGV0YSJdLFsyLDEsImZfISJdXQ==
+  \[\begin{tikzcd}
+    & {X_S} \\
+    K && {X_{s'}}
+    \arrow["{\eta'}"', from=2-1, to=2-3]
+    \arrow["\eta", from=2-1, to=1-2]
+    \arrow["{f_!}", from=1-2, to=2-3]
+  \end{tikzcd}\]
+  が可換であることと, ある射$p : K \times \Delta^1 \to X$が存在して, 次の図式 
+  % https://q.uiver.app/#q=WzAsNCxbMSwxLCJYIl0sWzIsMSwiUyJdLFsxLDAsIlxcRGVsdGFeMSJdLFswLDEsIksgXFx0aW1lcyBcXERlbHRhXjEiXSxbMCwxLCJxIiwyXSxbMiwxLCJmIl0sWzMsMl0sWzMsMCwicCIsMl1d
+  \[\begin{tikzcd}
+    & {\Delta^1} \\
+    {K \times \Delta^1} & X & S
+    \arrow["q"', from=2-2, to=2-3]
+    \arrow["f", from=1-2, to=2-3]
+    \arrow[from=2-1, to=1-2]
+    \arrow["p"', from=2-1, to=2-2]
+  \end{tikzcd}\]
+  が可換であって, $\eta$が$p|_{K \times \{0\}}$のホモトピー類かつ$\eta'$が$p|_{K \times \{1\}}$のホモトピー類であることは同値である. 
+  ここで, 次のように表される2単体$\sigma : \Delta^2 \to S$を考える. 
+  % https://q.uiver.app/#q=WzAsMyxbMCwxLCJ1Il0sWzIsMSwidyJdLFsxLDAsInYiXSxbMCwxLCJoIiwyXSxbMCwyLCJmIl0sWzIsMSwiZyJdXQ==
+  \[\begin{tikzcd}
+    & v \\
+    u && w
+    \arrow["h"', from=2-1, to=2-3]
+    \arrow["f", from=2-1, to=1-2]
+    \arrow["g", from=1-2, to=2-3]
+  \end{tikzcd}\]
+  \cref{cor.2.1.2.7}より, 包含$X_u \times \{0\} \hookrightarrow X_u \times \Delta^2$は左ファイブレーションである. (途中)
+\end{proof}
+
+\cref{lem.2.1.1.4}は次のようにまとめることができる. 
+単体的集合$S$を固定する.
+左ファイブレーション$q : X \to S$が与えられたとき, $S$の各対象$s$に対して, Kan複体$X_s$が定まる. 
+また, $S$の各射$f : s \to s'$に対して, 射$f_! : X_s \to X_{s'}$が定まる. 
+更に, $S$の高次の単体に対して, これらの射に対するホモトピーの情報が定まる. 
+つまり, 左ファイブレーションを与えることは単体的集合$S$から空間の$\infty$圏$\S$への関手を与えることと等価である. 
+\cref{lem.2.1.1.4}はこのことの弱い主張である. 
+より正確には2.1.4節で証明する. 
+
+この節の残りは\cref{prop.1.2.4.3}を証明するために必要な命題を証明する. 
+
+\begin{proposition} \label{prop.2.1.1.5}
+  $\C \to \D$を$\infty$圏の左ファイブレーション, $f: X \to Y$を$\C$の射として, $p(f)$が$\D$における同値であるとする. 
+  このとき, $f$は$\C$における同値である. 
+\end{proposition}
+
+\begin{proof}
+  $\overline{g}$を$\D$における$p(f)$のホモトピー逆射とする. 
+  つまり, 次のように表せる$\D$における2単体が存在するとする. 
+  % https://q.uiver.app/#q=WzAsMyxbMCwxLCJwKFgpIl0sWzIsMSwicChYKSJdLFsxLDAsInAoWSkiXSxbMCwxLCJcXGlkX3twKFgpfSIsMl0sWzAsMiwicChmKSJdLFsyLDEsIlxcb3ZlcmxpbmV7Z30iXV0=
+  \[\begin{tikzcd}
+    & {p(Y)} \\
+    {p(X)} && {p(X)}
+    \arrow["{\id_{p(X)}}"', from=2-1, to=2-3]
+    \arrow["{p(f)}", from=2-1, to=1-2]
+    \arrow["{\overline{g}}", from=1-2, to=2-3]
+  \end{tikzcd}\]
+  $p$は左ファイブレーションなので, この図式を$\C$における次の図式にリフトすることができる. 
+  % https://q.uiver.app/#q=WzAsMyxbMCwxLCJYIl0sWzIsMSwiWCJdLFsxLDAsIlkiXSxbMCwxLCJcXGlkX1giLDJdLFswLDIsImYiXSxbMiwxLCJnIl1d
+  \[\begin{tikzcd}
+    & Y \\
+    X && X
+    \arrow["{\id_X}"', from=2-1, to=2-3]
+    \arrow["f", from=2-1, to=1-2]
+    \arrow["g", from=1-2, to=2-3]
+  \end{tikzcd}\]
+  よって, $g \circ f \simeq \id_X$が成立するので, $g$は$f$の左ホモトピー逆射である. 
+  同様に, $f \circ g \simeq \id_Y$が成立するので, $g$は$f$の右ホモトピー逆射である. 
+  よって, $\C$において$f$は$g$のホモトピー逆射なので, $f$は同値である. 
+\end{proof}
+
+\begin{proposition}
+  $\C \to \D$を$\infty$圏の左ファイブレーション, $Y$を$\C$の対象, $\overline{f} : \overline{X} \to p(Y)$を$\D$における同値とする. 
+  このとき, $\C$におけるある射$f : X \to Y$が存在して, $p(f) = \overline{f}$である. 
+  (\cref{prop.2.1.1.5}より, この$p$は$\C$における同値である.)
+\end{proposition}
+
+\begin{proof}
+  $\overline{g} : p(Y) \to \overline{Y}$を$\D$における$\overline{f}$のホモトピー逆射とする. 
+  $p$は左ファイブレーションなので, $\C$におけるある射$g : Y \to X$が存在して, $\overline{g} = p(g)$である. 
+  $\overline{f}$と$\overline{g}$は互いにホモトピー逆射なので, 次のように表せる$\D$の2単体が存在する. 
+  % https://q.uiver.app/#q=WzAsMyxbMCwxLCJwKFkpIl0sWzIsMSwicChZKSJdLFsxLDAsIlxcb3ZlcmxpbmV7WH0gPSBwKFgpIl0sWzAsMSwiXFxpZF97cChZKX0iLDJdLFswLDIsIlxcb3ZlcmxpbmV7Z30gPSBwKGcpIl0sWzIsMSwiXFxvdmVybGluZXtmfSJdXQ==
+  \[\begin{tikzcd}
+    & {\overline{X} = p(X)} \\
+    {p(Y)} && {p(Y)}
+    \arrow["{\id_{p(Y)}}"', from=2-1, to=2-3]
+    \arrow["{\overline{g} = p(g)}", from=2-1, to=1-2]
+    \arrow["{\overline{f}}", from=1-2, to=2-3]
+  \end{tikzcd}\]
+  $p$は左ファイブレーションなので, この図式を$\C$における次の図式にリフトすることができる. 
+  % https://q.uiver.app/#q=WzAsMyxbMCwxLCJZIl0sWzIsMSwiWSJdLFsxLDAsIlgiXSxbMCwxLCJcXGlkX1kiLDJdLFswLDIsImciXSxbMiwxLCJmIl1d
+  \[\begin{tikzcd}
+    & X \\
+    Y && Y
+    \arrow["{\id_Y}"', from=2-1, to=2-3]
+    \arrow["g", from=2-1, to=1-2]
+    \arrow["f", from=1-2, to=2-3]
+  \end{tikzcd}\]
+  このとき, $f$は$p(f) = \overline{f}$を満たす. 
+\end{proof}
+
+\subsection{左ファイブレーションの安定性 (途中)}
+
+この節では, 左ファイブレーションが様々な操作で保たれることをみる. 
+1つ目の主定理は\cref{prop.2.1.2.1}であり, 左ファイブレーションの例を与える基本的なものである. 
+2つ目は\cref{cor.2.1.2.9}であり, 左ファイブレーションが関手圏の構成に対して安定であることをみる.
+
+$\C$を$\infty$圏, $\S$を空間の$\infty$圏とする. 
+このとき, $\C$から$\S$への関手は$\C$上の「余層空間」とみなせる.
+通常の圏論と同様に, 余層の基本的な例は$\C$の対象$C$から定まるものがある. 
+つまり, 次のように表されるような関手である. 
+\begin{align*}
+  D \mapsto \Map_\C(C,D)
+\end{align*}
+2.1.1節で見たように, このような関手が左ファイブレーション$\tilde{\C} \to \C$で表されるかを問うことは自然である. 
+実際, $\tilde{\C}$としてアンダー圏$\C_{C/}$が挙げられる. 
+ここで, 射$f : \C_{C/} \to \C$の$\C$の対象$D$上のファイバーはKan複体$\Hom^\L_\C(C,D)$である. 
+$f$が左ファイブレーションであることは, 次のより一般的な命題の帰結である. 
+
+\begin{proposition}[Joyal] \label{prop.2.1.2.1}
+  次の単体的集合の図式を考える.
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJBIl0sWzEsMCwiQiJdLFszLDAsIlMiXSxbMiwxLCJYIl0sWzAsMSwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMSwyLCJyIiwyXSxbMSwzLCJwIiwyXSxbMywyLCJxIiwyXSxbMCwzLCJwXzAiLDIseyJjdXJ2ZSI6Mn1dLFswLDIsInJfMCIsMCx7ImN1cnZlIjotMn1dXQ==
+  \[\begin{tikzcd}
+    A & B && S \\
+    && X
+    \arrow[hook, from=1-1, to=1-2]
+    \arrow["r"', from=1-2, to=1-4]
+    \arrow["p"', from=1-2, to=2-3]
+    \arrow["q"', from=2-3, to=1-4]
+    \arrow["{p_0}"', curve={height=12pt}, from=1-1, to=2-3]
+    \arrow["{r_0}", curve={height=-12pt}, from=1-1, to=1-4]
+  \end{tikzcd}\]
+  $q$が内ファイブレーションのとき, 誘導される射 
+  \begin{align*}
+    X_{p/} \to X_{p_0/} \times_{S_{r_0/}} S_{r/}
+  \end{align*}
+  は左ファイブレーションである. 
+  $q$が左ファイブレーションのとき, 誘導される射 
+  \begin{align*}
+    X_{/p} \to X_{/p_0} \times_{S_{/r_0}} S_{/r}
+  \end{align*}
+  も左ファイブレーションである. 
+\end{proposition}
+
+\cref{prop.2.1.2.1}を用いて\cref{prop.1.2.9.3}の一部を示すことができる. 
+
+\begin{corollary}[Joyal]
+  $\C$を$\infty$圏, $p : K \to \C$を任意のdiagramとする. 
+  このとき, 射影$\C_{p/} \to \C$は左ファイブレーションである. 
+  特に, $\C_{p/}$は$\infty$圏である.
+\end{corollary}
+
+\begin{proof}
+  \cref{prop.2.1.2.1}において, $X=\C, A = \emptyset, S=\Delta^0$とすればよい. 
+  後半は左ファイブレーションの定義より従う. 
+\end{proof}
+
+\cref{prop.2.1.2.1}を用いて\cref{prop.1.2.4.3}も示すことができる.
+
+\begin{proposition}[Joyal] 
+  $\C$を$\infty$圏, $\phi : \Delta^1 \to \C$を$\C$の射とする. 
+  このとき, $\phi$が同値であることと, 任意の$n \geq 2$と$f_0|_{\Delta^{\{0,1\}}} = \phi$を満たす射$f_0 : \Lambda^n_0 \to \C$に対して, $f_0$から$\Delta^n$への拡張が存在することは同値である. 
+\end{proposition}
+
+\begin{proof}
+  
+\end{proof}
+
+\cref{prop.2.1.2.1}の証明に戻る. 
+これは次の命題から従うことが分かる. (途中)
+
+\subsection{Kanファイブレーションの特徴づけ (途中)}
+
+2.1.1節で, 単体的集合の左ファイブレーション$p : X \to S$は$S$の各点$s$に対してKan複体$X_s$を, $S$の射$f : s \to s'$に対して(ホモトピーの違いを除いて)Kan複体の射$f_! : X_s \to X_{s'}$を定めることを見た.
+$p$がKanファイブレーションのとき, 射$X_{s'} \to X_s$が構成でき, $f_!$のホモトピー逆射となる. 
+本節の目標は次の主張を示すことである. 
+
+\begin{proposition} \label{prop.2.1.3.1}
+  $p : S \to T$を左ファイブレーションとする. 
+  このとき, 次は同値である. 
+  \begin{enumerate}
+    \item $p$はKanファイブレーションである. 
+    \item $T$の任意の射$f : t \to t'$に対して, 射$f_! : S_t \to S_{t'}$は空間のホモトピー圏$\H$における同型射である.
+  \end{enumerate}
+\end{proposition}
+
+この命題を示すために, いくつか準備をする.
+
+\begin{lemma} \label{lem.2.1.3.2}
+  $p : S \to T$を左ファイブレーションとする. 
+  $S$と$T$がKan複体かつ$p$がホモトピー同値のとき, $p$は$S_0$から$T_0$への全射を定める. 
+\end{lemma}
+
+\begin{proof}
+  $p$はホモトピー同値なので, $T$の任意の点$t$に対して, $S$のある点$s$と$T$の辺$e : p(s) \to t$が存在する. 
+  $p$は左ファイブレーションなので, この辺は$\S$における辺$e' : s \to s'$にリフトして, $p(s')=t$である.
+\end{proof}
+
+\begin{lemma} \label{lem.2.1.3.3}
+  $p : S \to T$を左ファイブレーションとする. 
+  $T$がKan複体のとき, $p$はKanファイブレーションである.
+\end{lemma}
+
+\begin{proof}
+  射影$T \to \Delta^0$は左ファイブレーションである. 
+  $p : S \to T$と$T \to \Delta^0$の合成を$S \to \Delta^0$とする. 
+  このとき, $S$はKan複体である. 
+
+  $A \hookrightarrow B$を単体的集合の緩射とする. (途中)
+\end{proof}
+
+\begin{lemma} \label{lem.2.1.3.4}
+  $p : S \to T$を左ファイブレーションとする. 
+  $T$の任意の点$t$に対して, ファイバー$S_t$が可縮であるとする. 
+  このとき, $p$は自明なKanファイブレーションである. 
+\end{lemma}
+
+\subsection{共変モデル構造}
+
+2.1.1節で, 左ファイブレーション$p : X \to S$が$\h S$からホモトピー圏$\H$への関手$\chi$を定めることをみた. 
+$S$上の左ファイブレーションと$S$から空間への関手の関係をモデル圏の言葉で正確に定式化する. 
+この節では, $(\sSet)_{/S}$上にファイブラント対象がちょうど左ファイブレーションであるような単体的モデル構造を定義する. 
+2.2節では, Grothendieck構成の$\infty$圏版を定義し, 右Quillen関手
+\begin{align*}
+  (\sSet)^{\mathfrak{C}[S]} \to (\sSet)_{/ S}
+\end{align*}
+として表すことができることを示す. 
+\cref{thrm.2.2.1.2}でこれがQuillen同値を定めることを見る. 
+
+\begin{definition}[左錐と右錐]
+  $f : X \to S$を単体的集合の射とする. 
+  このとき, 単体的集合$X^\triangleleft \coprod_X S$を$f$の左錐(left cone)といい, $C^\triangleleft(f)$と表す. 
+  双対的に, 単体的集合$S \coprod_X X^\triangleright$を$f$の右錐(right cone)といい, $C^\triangleright(f)$と表す. 
+\end{definition}
+
+\begin{example}
+  $S$を単体的集合とする. 
+  このとき, $C^\triangleleft(\id_S), C^\triangleright(\id_S)$はそれぞれ$S^\triangleleft, S^\triangleright$と同一視できる. 
+\end{example}
+
+\begin{remark}[錐点]
+  $f : X \to S$を単体的集合の射とする. 
+  このとき, 単体的集合のmono射$S \hookrightarrow C^\triangleleft(f)$が存在する. 
+  $S$をこのmono射の像とみなすと, $S$は$C^\triangleleft(f)$の単体的部分集合と思える. 
+  このとき, $S$に属さない$C^\triangleleft(f)$の点が存在する. 
+  このような点を$C^\triangleleft(f)$の錐点(cone point)という. 
+\end{remark}
+
+\begin{definition}[共変同値など]
+  $S$を単体的集合とする. 
+  $(\sSet)_{/ S}$における射$f : X \to Y$が 
+  \begin{itemize}
+    \item 単体的集合のmono射のとき, $f$を共変コファイブレーション(covariant cofibration)という. 
+    \item 誘導される射 
+    \begin{align*}
+      X^\triangleleft \coprod_X S \to Y^\triangleleft \coprod_Y S
+    \end{align*}
+    が単体的集合の圏同値のとき, $f$を共変同値(covariant equivalence)という. 
+    \item 任意の共変コファイブレーションかつ共変同値に対してRLPを持つとき, $f$を共変ファイブレーション(covariant fibration)という. 
+  \end{itemize}
+\end{definition}
+
+共変同値の定義には次のような意味がある. 
+% https://mathoverflow.net/questions/73877/the-weak-equivalences-in-the-covariant-model-structure
+
+\begin{remark}
+  まず, 通常の圏論において考える. 
+  $\E$を圏, $F : \E \to \Set$を関手とする.
+  Grothendieck構成によって, $F$は$\E$上で集合でコファイバー付けられた圏$\C$を定める. 
+  よって, $\E$の任意の対象$E$に対して, $F(E)$はファイバー$\C_E = \C \times_{\E} E$と同一視できる. 
+
+  次に, 圏$\E_F$を次のように定義し, $F$による$E$の拡大(enlargement)という. 
+  \begin{itemize}
+    \item $\E_F$の対象は$\E$の対象と1点$\{v\}$の直和
+    \item $\E$の任意の対象$E$に対して, $v$との射集合は
+    \begin{align*}
+      \Hom_{\E_F}(E,v) := \emptyset, \Hom_{\E_F}(v,E):=F(E), \Hom_{\E_F}(v,v):= \{\id_v\}
+    \end{align*}
+  \end{itemize}
+  $G : \E \to \Set$を関手とする. 
+  このとき, $G$は$\E$上で集合でコファイバー付けられた圏$\D$を定める. 
+  $F$から$G$への自然変換が存在するとき, この自然変換は次の関手を定める. 
+  \begin{align*}
+    \alpha : \C \to \D, ~~ \beta : \E_F \to \E_G
+  \end{align*}
+  このとき, 次はすべて同値である.
+  \begin{enumerate}
+    \item $F$から$G$への自然変換は自然同型である.
+    つまり, $F(E) \to G(E) \rightleftarrows \C_E \to \D_E$は全単射である. 
+    \item $\alpha$は圏同値である. 
+    \item $\beta$は圏同値である. 
+  \end{enumerate}
+  また, 圏$\E_F$はプッシュアウトを用いて次のように表される. 
+  % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXEMiXSxbMCwxLCJcXEUiXSxbMSwwLCJcXENeXFx0cmlhbmdsZWxlZnQiXSxbMCwxXSxbMCwyLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dXQ==
+  \[\begin{tikzcd}
+    \C & {\C^\triangleleft} \\
+    \E
+    \arrow[from=1-1, to=2-1]
+    \arrow[hook, from=1-1, to=1-2]
+  \end{tikzcd}\]
+  ここで, $\C^\triangleleft$は$\E$に新しい始対象を付け加えた圏である. 
+  (2)と(3)の同値性より, $\E$上で集合でコファイバー付けられた圏の関手$\C \to \D$が圏同値であることと, 誘導される関手
+  \begin{align*}
+    \E \coprod_\C \C^\triangleleft \to \E \coprod_\D \D^\triangleleft
+  \end{align*}
+  が圏同値であることは同値である. 
+
+  次に, $\infty$圏の枠組みにおいて考える. 
+  $S$を$\infty$圏, $f : X \to Y$を単体的集合の射, $X \to S$と$Y \to S$を左ファイブレーションとする. 
+  weak equivalenceが圏同値であるような$(\sSet)_{/S}$上のモデル構造を定義したい. 
+  上述の議論より, 誘導される射 
+  \begin{align*}
+    X^\triangleleft \coprod_X S \to Y^\triangleleft \coprod_Y S
+  \end{align*}
+  が圏同値のとき, $f$をweak equivalenceとする.
+
+  $X$と$Y$が$\infty$圏のとき, $f$が共変同値であることと, $S$の任意の点$s$に対してファイバー$X_s \to Y_s$がホモトピー同値であることは同値である. 
+\end{remark}
+
+共変同値の例を挙げる. 
+例えば, 任意の左緩射は共変同値である. 
+
+\begin{lemma} \label{lem.2.1.4.6}
+  $S$を単体的集合とする. 
+  このとき, $(\sSet)_{/ S}$における任意の左緩射は共変同値である. 
+\end{lemma}
+
+\begin{proof}
+  左緩射を生成する集合$\{\Lambda^n_i \hookrightarrow \Delta^n ~|~ 0 \leq i < n\}$が共変同値であることを示す. 
+  つまり, 誘導される射 
+  \begin{align*}
+    i : (\Lambda^n_i)^\triangleleft \coprod_{\Lambda^n_i} S \to (\Delta^n)^\triangleleft \coprod_{\Delta^n} S
+  \end{align*}
+  が圏同値であることを示せばよい.
+  (途中)
+\end{proof}
+
+\begin{proposition} \label{prop.2.1.4.7}
+  $S$を単体的集合とする. 
+  このとき, weak equivalenceを共変同値, fibrationを共変ファイブレーション, cofibrationを共変コファイブレーションとするような, $(\sSet)_{/ S}$上の左properかつ組み合わせ論的なモデル構造が存在する. 
+\end{proposition}
+
+\begin{proof}
+  \cite{HTT} Proposition.A.2.6.13の条件を満たすことを示す. 
+  \begin{enumerate}
+    \item $(\sSet)_{/ S}$における射$f : X \to Y$を共変同値とする. 
+    つまり, $X^\triangleleft \coprod_X S \to Y^\triangleleft \coprod_Y S$は圏同値である. 
+    \cref{thrm.2.2.5.1}より, 圏同値のクラスはperfectである.
+    関手$X \mapsto X^\triangleleft \coprod_X S$はフィルター余極限を保つので, \cite{HTT} Corollary.A.2.6.12より, weak equivalenceのクラスはフィルター余極限で閉じている.
+    よって, 共変同値のクラスはperfectである.
+    \item 次の単体的集合の図式を考える. 
+    % https://q.uiver.app/#q=WzAsNixbMCwxLCJYJyJdLFswLDAsIlgiXSxbMSwwLCJZIl0sWzEsMSwiWSciXSxbMSwyLCJZJyciXSxbMCwyLCJYJyciXSxbMSwwXSxbMSwyLCJmIl0sWzIsM10sWzAsM10sWzMsNCwiZyciXSxbMCw1LCJnIiwyXSxbNSw0XV0=
+    \[\begin{tikzcd}
+      X & Y \\
+      {X'} & {Y'} \\
+      {X''} & {Y''}
+      \arrow[from=1-1, to=2-1]
+      \arrow["f", from=1-1, to=1-2]
+      \arrow[from=1-2, to=2-2]
+      \arrow[from=2-1, to=2-2]
+      \arrow["{g'}", from=2-2, to=3-2]
+      \arrow["g"', from=2-1, to=3-1]
+      \arrow[from=3-1, to=3-2]
+    \end{tikzcd}\]
+    $f$が共変コファイブレーションかつ$g$が共変同値のときに, $g'$が共変同値であることを示す. 
+    関手$X \mapsto \mathfrak{C}(X^\triangleleft \coprod_X S)$を作用させると, 次の図式を得る. 
+    % https://q.uiver.app/#q=WzAsNixbMCwxLCJcXG1hdGhmcmFre0N9KFgnXlxcdHJpYW5nbGVsZWZ0IFxcY29wcm9kX1ggUykiXSxbMCwwLCJcXG1hdGhmcmFre0N9KFheXFx0cmlhbmdsZWxlZnQgXFxjb3Byb2RfWCBTKSJdLFsxLDAsIlxcbWF0aGZyYWt7Q30oWV5cXHRyaWFuZ2xlbGVmdCBcXGNvcHJvZF9YIFMpIl0sWzEsMSwiXFxtYXRoZnJha3tDfShZJ15cXHRyaWFuZ2xlbGVmdCBcXGNvcHJvZF9YIFMpIl0sWzEsMiwiXFxtYXRoZnJha3tDfShZJydeXFx0cmlhbmdsZWxlZnQgXFxjb3Byb2RfWCBTKSJdLFswLDIsIlxcbWF0aGZyYWt7Q30oWCcnXlxcdHJpYW5nbGVsZWZ0IFxcY29wcm9kX1ggUykiXSxbMSwwXSxbMSwyLCJmX1xcYXN0Il0sWzMsNCwiZydfXFxhc3QiXSxbMCw1LCJnX1xcYXN0IiwyXSxbNSw0XSxbMCwzXSxbMiwzXV0=
+    \[\begin{tikzcd}
+      {\mathfrak{C}(X^\triangleleft \coprod_X S)} & {\mathfrak{C}(Y^\triangleleft \coprod_X S)} \\
+      {\mathfrak{C}(X'^\triangleleft \coprod_X S)} & {\mathfrak{C}(Y'^\triangleleft \coprod_X S)} \\
+      {\mathfrak{C}(X''^\triangleleft \coprod_X S)} & {\mathfrak{C}(Y''^\triangleleft \coprod_X S)}
+      \arrow[from=1-1, to=2-1]
+      \arrow["{f_\ast}", from=1-1, to=1-2]
+      \arrow["{g'_\ast}", from=2-2, to=3-2]
+      \arrow["{g_\ast}"', from=2-1, to=3-1]
+      \arrow[from=3-1, to=3-2]
+      \arrow[from=2-1, to=2-2]
+      \arrow[from=1-2, to=2-2]
+    \end{tikzcd}\]
+    関手$X \mapsto \mathfrak{C}(X^\triangleleft \coprod_X S)$は余極限を保つので, $f_\ast$は$(\Cat_\Delta)_\Berg$におけるcofibrationである. 
+    \cref{thrm.2.2.5.1}より, 関手$\mathfrak{C}$はweak equivalenceを保つ. 
+    よって, $g_\ast$はBergner同値である. 
+    Bergner同値のクラスは\cite{HTT} Proposition.A.2.6.13の条件(2)を満たすので, $g'_\ast$はBergner同値である. 
+    Joyalモデル構造において, 任意の対象はコファイブラントである. 
+    関手$\mathfrak{C}$は左Quillen関手なので, コファイブラント対象の間のweak equivalenceを保つ. 
+    よって, $g' \coprod_{\id_X} \id_S  : Y'^\triangleleft \coprod_X S \to Y''^\triangleleft \coprod_X S$は圏同値である. 
+    つまり, $g'$は共変同値である. 
+    \item $(\sSet)_{/ S}$における射$p : X \to Y$が任意の共変コファイブレーションに対してRLPを持つとき, $p$が共変同値であることを示す. 
+    $(\sSet)_{/ S}^\cov$における共変同値は単体的集合のmono射なので, $p$は自明なKanファイブレーションである.
+    よって, 単体的集合のmono射$\emptyset \hookrightarrow Y$に対して, 次の図式はリフトを持つ.
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXGVtcHR5c2V0Il0sWzAsMSwiWSJdLFsxLDAsIlgiXSxbMSwxLCJZIl0sWzAsMSwiIiwxLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCwyXSxbMiwzLCJwIl0sWzEsMywiIiwxLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMSwyLCJzIl1d
+  \[\begin{tikzcd}
+    \emptyset & X \\
+    Y & Y
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow[from=1-1, to=1-2]
+    \arrow["p", from=1-2, to=2-2]
+    \arrow[Rightarrow, no head, from=2-1, to=2-2]
+    \arrow["s", from=2-1, to=1-2]
+  \end{tikzcd}\]
+  $p$と$s$がホモトピー圏$\h\Cat_\Delta$において$\mathfrak{C}[X^\triangleleft \coprod_X S]$と$\mathfrak{C}[Y^\triangleleft \coprod_X S]$の間の同型を定めることを示せばよい. 
+  このとき, $\mathfrak{C}[X^\triangleleft \coprod_X S] \to \mathfrak{C}[Y^\triangleleft \coprod_X S]$はBergner同値なので, $X^\triangleleft \coprod_X S \to Y^\triangleleft \coprod_X S$は圏同値である. 
+  つまり, $p : X \to Y$は共変同値である. 
+  $p \circ s = \id_Y$なので, $s \circ p : X \to X$が定める射$\mathfrak{C}[X^\triangleleft \coprod_X S] \to \mathfrak{C}[X^\triangleleft \coprod_X S]$が$\h\Cat_\Delta$において同型であることを示せばよい. 
+  ここで, $h : X \times \Delta^1 \to X$により, $s \circ p$と$\id_X$はホモトピー同値である. 
+  よって, $h$が共変同値であることを示せばよい.
+  $h$は左逆射$i : X \cong \{0\} \times X  \hookrightarrow \Delta^1 \times X$を持つ. 
+  \cref{cor.2.1.2.7}より, $i$は左緩射である. 
+  \cref{lem.2.1.4.6}より, $i$は共変同値である. 
+  2-out-of-3より, $h$も共変同値である. 
+  \end{enumerate}
+\end{proof}
+
+\begin{definition}[共変モデル構造]
+  \cref{prop.2.1.4.7}で得られるモデル構造を$(\sSet)_{/ S}$上の共変モデル構造(covariant model structure)といい, $(\sSet)_{/ S}^\cov$と表す. 
+\end{definition}
+
+\begin{proposition}
+  $(\sSet)_{/ S}^\cov$は標準的な単体的構造により単体的モデル圏となる. 
+\end{proposition}
+
+\begin{proof} % \cite{Ste17} 2.1
+  \cite{HTT} Prop.A.3.1.7を用いる. 
+  \begin{enumerate}
+    \item $(\sSet)_{/ S}$の任意の対象$X,Y$に対して, $\sSet$の対象$\Map_{/S}(X,Y)$を次のように定義する. 
+    \begin{align*}
+      \Map_{/S}(X,Y) := \Map_{\sSet}(X,Y) \times_{\Map_{\sSet}(X,S)} \Delta^0
+    \end{align*}
+    ($\Delta^0 \to \Map_{\sSet}(X,S)$は$(\sSet)_{/ S}$の対象$X \to S$と同一視できる.)
+    
+    テンソル$\otimes : (\sSet)_{/ S} \times \sSet \to (\sSet)_{/ S}$を任意の$X \in (\sSet)_{/ S}$と$K \in \sSet$に対して
+    \begin{align*}
+      X \otimes K := X \times K
+    \end{align*}
+    と定義して, 自然な射$X \times K \to X \to S$により$(\sSet)_{/ S}$の対象とみなす. 
+    
+    コテンソルを次のように定義する. 
+    \begin{align*}
+      X^K := \Map_{\sSet}(K,X) \times_{\Map_{\sSet}(K,S)} S
+    \end{align*}
+    ($S \to \Map_{\sSet}(K,S)$は随伴により$S \times K \to K$と同一視できる.)
+    
+    それぞれの定義より, 次の同型が存在する.
+    \begin{align*}
+      \Hom_{(\sSet)_{/ S}}(X \otimes K,Y) 
+      \cong \Hom_{\sSet}(K,\Map_{/S}(X,Y)) 
+      \cong \Hom_{(\sSet)_{/ S}}(X,Y^K) 
+    \end{align*}
+    よって, $(\sSet)_{/ S}$は$\sSet$でテンソルかつコテンソル付けられている.
+    \item $(\sSet)_{/ S}^\cov$におけるcofibrationは単体的集合のmono射なので, 条件内の誘導される射も単体的集合のmono射である. 
+    \item 任意の$n \geq 0$と$(\sSet)_{/ S}$の対象$X$に対して, 射影$p : X \times \Delta^n \to X$が共変同値であることを示す. 
+    $p$の切断$X \times \{0\} \to X \times \Delta^n$は左緩射なので, \cref{prop.2.1.4.9}より共変同値である. 
+    2-out-of-3より, $p$も共変同値である. 
+  \end{enumerate}
+\end{proof}
+
+$(\sSet)_{/ S}^\cov$におけるファイブラント対象がちょうど左ファイブレーション$p : X \to S$であることを後で見る.
+ここでは, すぐに分かる簡単な主張を確認する. 
+
+\begin{proposition} \label{prop.2.1.4.9}
+  $S$を単体的集合とする. 
+  このとき, 次が成立する.
+  \begin{enumerate}
+    \item $(\sSet)_{/ S}$における任意の左緩射は$(\sSet)_{/ S}^\cov$におけるtrivial cofibrationである. 
+    \item $(\sSet)_{/ S}^\cov$における任意のfibrationは単体的集合の左ファイブレーションである. 
+    \item $(\sSet)_{/ S}^\cov$における任意のファイブラントは左ファイブレーション$X \to S$を定める. 
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  (1)は\cref{lem.2.1.4.6}と左緩射が単体的集合のmono射であることから従う. 
+  (2)は左緩射の定義から従う. 
+  (3)は(2)から従う. 
+\end{proof}
+
+$\sSet$上のアンダー圏における基底の取り換えはQuillen随伴を定める. 
+
+\begin{remark}
+  $j : S \to S'$を単体的集合の射とする. 
+  このとき, $j$の合成の合成は関手$j_! : (\sSet)_{/ S} \to (\sSet)_{/ S'}$を定める.
+  この関手は右随伴$j^\ast : (\sSet)_{/ S'} \to (\sSet)_{/ S}$を持つ. 
+  $j^\ast$は次のように具体的に表せる.
+  \begin{itemize}
+    \item $(\sSet)_{/ S'}$の任意の対象$p : X' \to S'$に対して, $j^\ast(X') := X' \times_{S'} S$とし, $p' \times_{S'} \id_S : j^\ast(X') \to S$を$(\sSet)_{/ S}$の対象とみなす. 
+  \end{itemize}
+\end{remark}
+
+\begin{proposition} \label{prop.2.1.4.10}
+  $j : S \to S'$を単体的集合の射とする. 
+  $j_! : (\sSet)_{/ S} \to (\sSet)_{/ S'}$を$j$の合成から定まる関手, $j^\ast : (\sSet)_{/ S'} \to (\sSet)_{/ S}$を$f$に沿ったプルバックから定まる関手とする. 
+  このとき, 次のQuillen随伴が存在する. 
+  \begin{align*}
+    j_! : (\sSet)_{/ S}^\cov \rightleftarrows (\sSet)_{/ S'}^\cov : j^\ast
+  \end{align*}
+\end{proposition}
+
+\begin{proof} % Ped23
+  $j_!$がcofibrationを保つことは, $j_!$の定義から従う. 
+  次に, $j^\ast$がfibrationを保つことを示す. 
+  $f : X \to Y$を$(\sSet)_{/ S'}^\cov$におけるfibrationとする. 
+  $A \to B$をtrivial cofibrationとして, 次の単体的集合の図式を考える. 
+  % https://q.uiver.app/#q=WzAsNixbMCwwLCJBIl0sWzEsMCwial5cXGFzdChYKSA9IFggXFx0aW1lc197Uyd9UyJdLFsyLDAsIlgiXSxbMiwxLCJZIl0sWzAsMSwiQiJdLFsxLDEsImpeXFxhc3QoWSkgPSBZIFxcdGltZXNfe1MnfVMiXSxbMCwxXSxbMSwyXSxbMiwzXSxbMCw0XSxbNCw1XSxbNSwzXSxbMSw1XSxbNCwyLCIiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbNCwxLCIiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+  \[\begin{tikzcd}
+    A & {j^\ast(X) = X \times_{S'}S} & X \\
+    B & {j^\ast(Y) = Y \times_{S'}S} & Y
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow[from=1-3, to=2-3]
+    \arrow[from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+    \arrow[from=2-2, to=2-3]
+    \arrow[from=1-2, to=2-2]
+    \arrow[dashed, from=2-1, to=1-3]
+    \arrow[dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+  定義より, 外側の四角はリフト$B \to X$を持つ. 
+  プルバックの普遍性より, このリフトは$B \to j^\ast(X)$を定める. 
+  よって, $j^\ast(X) \to j^\ast(Y)$は$(\sSet)_{/ S}^\cov$におけるfibrationである.
+\end{proof}
+
+\begin{remark}
+  \cref{prop.2.1.4.10}において, $j$が圏同値のとき, Quillen随伴$(j_! \dashv j^\ast)$はQuillen同値である. 
+  これは\cref{thrm.2.2.1.2}と\cite{HTT} Proposition.A.3.3.8より従う. 
+\end{remark}
+
+共変モデル構造は自己双対的ではないので, $(\sSet)_{/ S}$上に新しいモデル構造を定義する必要がある. 
+
+\begin{definition}[反変同値など]
+  $S$を単体的集合とする. 
+  $(\sSet)_{/ S}$における射$f : X \to Y$が 
+  \begin{itemize}
+    \item 単体的集合のmono射のとき, $f$を反変コファイブレーションという. 
+    \item $f^\myop$が$(\sSet)_{/ S^\myop}$における共変同値のとき, $f$を反変同値(contravariant equivalence)という. 
+    \item $f^\myop$が$(\sSet)_{/ S^\myop}$が共変ファイブレーションのとき, $f$を反変ファイブレーション(contravariant fibration)という. 
+  \end{itemize}
+\end{definition}
+
+\begin{definition}[反変モデル構造]
+  weak equivalenceを反変同値, fibrationを反変ファイブレーション, cofibrationを反変コファイブレーションとするような$(\sSet)_{/ S}$上のモデル構造が存在する. 
+  このモデル構造を反変モデル構造(contravariant model structure)といい, $(\sSet)_{/ S}^\contra$と表す. 
+\end{definition}
+
+\section{単体的圏と\texorpdfstring{$\infty$}{infty}圏の関係}
+
+$\C$を位相的圏, $X,Y$を$\C$の任意の対象とする. 
+\cref{thrm.1.1.5.13}より, 随伴$(|\mathfrak{C}[-]|, \mathfrak{N})$が定める余単位
+\begin{align*}
+  u : |\Map_{\mathfrak{C}[\mathfrak{N}(\C)]}(X,Y)| \to \Map_\C(X,Y)
+\end{align*}
+は位相空間の弱ホモトピー同値である. 
+この結果は位相的圏の理論と$\infty$圏の理論が等価であることを示すために重要である. 
+この節の目標は\cref{thrm.1.1.5.13}を示し, そこから従う命題を示すことである. 
+
+まず, \cref{thrm.1.1.5.13}の主張を単体的圏における主張に書き変える. 
+次の合成を考える. 
+\begin{align*}
+  \Map_{\mathfrak{C}[\mathfrak{N}(\C)]}(X,Y) \xrightarrow{v} \Sing\Map_{|\mathfrak{C}[\mathfrak{N}(\C)]|}(X,Y) \xrightarrow{\Sing(u)} \Sing\Map_\C(X,Y) 
+\end{align*}
+古典的なホモトピー論から, $v$は単体的集合の弱ホモトピー同値である. 
+また, $u$が位相空間の弱ホモトピー同値であることと, $\Sing(v)$が単体的集合の弱ホモトピー同値であることは同値である. 
+\footnote{
+  $\sSet$上のKan-Quillenモデル構造と$\CGWH$上のQuillenモデル構造のQuillen同値から従う. (簡単ではない.)
+}
+よって, $u$が位相空間の弱ホモトピー同値であることと, $\Sing(u) \circ v$が単体的集合の弱ホモトピー同値であることは同値である. 
+従って, \cref{thrm.1.1.5.13}の単体的圏における主張を示すことにする. 
+
+\begin{theorem} \label{thrm.2.2.0.1}
+  $\C$をファイブラント単体的圏とする. 
+  $\C$の任意の対象$x,y$に対して, 余単位
+  \begin{align*}
+    u : \Map_{\mathfrak{C}[\mathfrak{N}(\C)]}(X,Y) \to \Map_\C(X,Y)
+  \end{align*}
+  は単体的集合の弱ホモトピー同値である. 
+\end{theorem}
+
+証明は2.2.4節で与える. 
+証明の概略は次のとおりである. 
+
+\begin{enumerate}
+  \item 任意の単体的集合$S$に対して, 右ファイブレーション$S' \to S$と単体的前層$\F : \mathfrak{C}[S]^\myop \to \sSet$の間に深い関係があることを示す. 
+  この関係はstraightening関手とunstraightening関手によって表される. 
+  これは2.2.1節で紹介する.
+  \item $S$を$\infty$圏とする. 
+  このとき, $S$の任意の対象$y$に対して, 射影$S_{/y} \to S$は右ファイブレーションであり, 単体的前層$\F : \mathfrak{C}[S]^\myop \to \sSet$と対応することを示す.
+  この単体的前層$\F$は次の2つの意味で$S_{/y}$と関係している. 
+  \begin{enumerate}
+    \item 単体的前層として, $\F$は関手$x \mapsto \Map_{\mathfrak{C}[S]}(x,y)$と弱同値である. 
+    \item $S$の任意の対象$x$に対して, 自然なホモトピー同値$\F(x) \to S_{/y} \times_S \{x\} \cong \Hom^\R_S(x,y)$が存在する.
+  \end{enumerate}
+  \item (a)と(b)より, 射空間$\Hom^\R_S(x,y)$は$\Map_{\mathfrak{C}[S]}(x,y)$とホモトピー同値である. 
+  \item $S$がファイブラント単体的圏$\C$の単体的脈体のとき, 自然な射$\Map_\C(x,y) \to \Hom^\R_S(x,y)$が存在する. 
+  この射がホモトピー同値であることを2.2.2節で示す.
+  \item (3)と(4)より, 空間のホモトピー圏において, 自然な同型 
+  \begin{align*}
+    \Map_\C(x,y) \cong \Map_{\mathfrak{C}[\mathfrak{N}(\C)]}(x,y)
+  \end{align*}
+  が存在する. 
+  この同型は\cref{thrm.2.2.0.1}の主張にある単位射から定まることを示す. 
+\end{enumerate}
+
+2.2.5節で, \cref{thrm.2.2.0.1}を用いて$\sSet$上のJoyalモデル構造を定義し, $\infty$圏と単体的圏の関係をより正確に表す.
+
+\subsection{Straightening構成とUnstraightening構成 (印付きでない場合)}
+
+2.1.1節では, 左ファイブレーション$X \to S$が$S$からKan複体のなす$\infty$圏への関手とみなせることを見た. 
+この節の目標はこの主張を正確に定式化することである. 
+技術的な理由でここでは右ファイブレーションを考える. 
+単体的関手$\phi : \mathfrak{C}[S] \to \C^\myop$に対して, unstraightening関手$\Un_\phi : \sSet^C \to (\sSet)_{/ S}$を定義する. 
+$\F : \C \to \sSet$がKan複体に値をとる関手のとき, 誘導される関手$\Un_\phi(\F) \to S$は点$s \in S$のファイバーがKan複体$\F(\phi(S))$とホモトピー同値であるような右ファイブレーションである. 
+
+\begin{definition}[straightening関手] \label{def:straightening_functor}
+  単体的集合$S$, 単体的圏$\C$, 関手$\phi : \mathfrak{C}[S] \to \C^\myop$を固定する. 
+  また, $(\sSet)_{/S}$の任意の対象$X$に対して, $X^\triangleright$の錐点を$v$と表す. 
+  次に, 単体的圏$\M_X$を次のプッシュアウトで定義する. 
+  % https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXG1hdGhmcmFre0N9W1hdIl0sWzEsMCwiXFxtYXRoZnJha3tDfVtTXSJdLFsyLDAsIlxcQ15cXG15b3AiXSxbMCwxLCJcXG1hdGhmcmFre0N9W1heXFx0cmlhbmdsZXJpZ2h0XSJdLFsyLDEsIlxcTV9YIl0sWzAsMSwiXFxtYXRoZnJha3tDfVtYXSJdLFsxLDJdLFswLDMsImkiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFsyLDRdLFszLDRdLFs0LDAsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dXQ==
+  \[\begin{tikzcd}
+    {\mathfrak{C}[X]} & {\mathfrak{C}[S]} & {\C^\myop} \\
+    {\mathfrak{C}[X^\triangleright]} && {\M_X}
+    \arrow["{\mathfrak{C}[X]}", from=1-1, to=1-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow["i"', hook, from=1-1, to=2-1]
+    \arrow[from=1-3, to=2-3]
+    \arrow[from=2-1, to=2-3]
+    \arrow["\lrcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-3, to=1-1]
+  \end{tikzcd}\]
+  このとき, 関手
+  \begin{align*}
+    \St_\phi(X) := \Map_{\M_X}(-,v) : \C \to \sSet 
+  \end{align*}
+  から, 関手
+  \begin{align*}
+    \St_\phi : (\sSet)_{/ S} \to \sSet^\C : (X \to S) \mapsto \St_\phi(X)
+  \end{align*}
+  が定まる. 
+  この関手をstraightening関手(straightening functor)という. 
+\end{definition}
+
+\begin{notation}
+  \cref{def:straightening_functor}において, $\C=\mathfrak{C}[S]^\myop$かつ$\phi = \Id_{\mathfrak{C}[S]}$のとき, $\St_\phi$を$\St_S$と表す. 
+\end{notation}
+
+straightening関手の定義より, 次の命題が従う. 
+
+\begin{proposition} \label{prop.2.2.1.1_1}
+  $p : S' \to S$を単体的集合の射, $\C$を単体的圏, $\phi : \mathfrak{C}[S] \to \C^\myop$を単体的関手とする. 
+  このとき, $\phi := \phi \circ \mathfrak{C}[p] : \mathfrak{C}[S'] \to \C^\myop$とし, $p_! : (\sSet)_{/ S'} \to (\sSet)_{/ S}$を$p$の合成から定まる関手とする.
+  このとき, 次の関手の自然同型が存在する. 
+  \begin{align*}
+    \St_\phi \circ p_! \cong \St_{\phi'} : (\sSet)_{/S'} \to \sSet^\C
+  \end{align*}
+\end{proposition}
+
+\begin{proposition} \label{prop.2.2.1.1_2}
+  $S$を単体的集合, $\pi : \C \to \C'$と$\phi : \mathfrak{C}[S] \to \C^\myop$を単体的関手とする. 
+  このとき, 次の関手の自然同型が存在する.  
+  \begin{align*}
+    \St_{\pi^\myop \circ \phi} \cong \pi_! \circ \St_\phi : (\sSet)_{/S} \to \sSet^{\C'}
+  \end{align*}
+  ここで, $\pi_! : \sSet^{\C} \to \sSet^{\C'}$は$\pi$の合成から定まる関手$\pi^\ast : \sSet^{\C'} \to \sSet^{\C}$の左随伴である. 
+\end{proposition}
+
+straightening関手は右随伴を持つ. 
+
+\begin{definition}[unstraightening関手]
+  随伴関手定理より, 単体的関手$\phi : \mathfrak{C}[S] \to \C^\myop$に対してstraightening関手$\St_\phi : (\sSet)_{/ S} \to \sSet^\C$の右随伴関手
+  \begin{align*}
+    \Un_\phi : \sSet^\C \to (\sSet)_{/ S} 
+  \end{align*}
+  が存在する. 
+  この関手をunstraightening関手(unstraightening functor)という. 
+\end{definition}
+
+% unstraightening関手を具体的に書き下す. 
+% 詳細は\href{https://mathoverflow.net/questions/301050/explicit-expression-of-the-unstraightening-functor}{Explicit expression of the unstraightening functor}を参照. 
+
+% \begin{remark}
+%   単体的集合$S$, 単体的圏$\C$, 関手$\phi : \mathfrak{C}[S] \to \C^\myop$を固定する. 
+%   $(\sSet)^\C$の任意の対象$F : \C \to \sSet$に対して, 
+% \end{remark}
+
+この節における主定理は次の命題である. 
+証明は2.2.3節で行う.
+
+\begin{theorem} \label{thrm.2.2.1.2}
+  $p : S' \to S$を単体的集合の射, $\C$を単体的圏, $\phi : \mathfrak{C}[S]^\myop \to \C$を単体的関手とする. 
+  このとき, straightening関手とunstraightening関手は次のQuillen随伴を定める. 
+  \begin{align*}
+    \St_\phi : (\sSet)_{/ S}^\contra \rightleftarrows (\sSet^\C)_\proj : \Un_\phi
+  \end{align*}
+  更に, $\phi$が単体的圏の同値のとき, Quillen随伴$(\St_\phi \dashv \Un_\phi)$はQuillen同値を定める. 
+\end{theorem}
+
+\subsection{1点上のstraightening}
+
+この節では, $S = \Delta^0$かつ$\phi = \Id_{\mathfrak{C}[\Delta^0]}$のときのstraightening関手について考える. 
+
+\begin{remark}
+  $\mathfrak{C}[\Delta^0]$の対象は1点$0$であり, $\Map_{\mathfrak{C}[\Delta^0]}(0,0) = \Delta^0$である.
+  よって, 次の自然な同型が存在する.
+  \begin{align*}
+    \sSet^{\mathfrak{C}[\Delta^0]} \cong \sSet , ~~ (\sSet)_{/ \Delta^0} \cong \sSet
+  \end{align*}
+  よって, $\St_{\Delta^0} : \sSet \to \sSet$であり, $\St_{\Delta^0}$は左随伴なので余極限を保つ. 
+\end{remark}
+
+この構成をKan拡張を用いた一般的な状況で議論する. % kerodon 1.1.7 (def.1.1.7.7以降)
+
+\begin{remark} % alg-d Kan_extension.pdf cor.27 etc
+  $\C$を任意の圏, 関手$C^\bullet : \Delta \to \C$を$\C$の余単体的対象とする. 
+  $\C$の任意の対象$X$に対して, 
+  \begin{align*}
+    \Sing_{C^\bullet}(X)_n := \Hom_\C(C^n,X)
+  \end{align*}
+  と定めると, 構成$X \mapsto \Sing_{C^\bullet}(X)$は関手 
+  \begin{align*}
+    \Sing_{C^\bullet} : \C \to \sSet 
+  \end{align*}
+  を定める. 
+  普遍随伴の一般論より, 関手$\Sing_{C^\bullet} : \C \to \sSet$は左随伴
+  \begin{align*}
+    |-|_{C^\bullet} : \sSet \to \C : S \mapsto |S|_{C^\bullet} := \int_{[n] \in \Delta} S_n \times C^n
+  \end{align*}
+  を持つ. 
+\end{remark}
+
+\begin{example}
+  $\C = \CGWH$として, 余単体的対象$C^\bullet : \Delta \to \C$を次のように定義する. 
+  \begin{align*}
+    C^n := \{(x_0,\cdots,x_n) \in [0,1]^{n+1} ~|~ x_0 + \cdots x_n = 1\}
+  \end{align*}
+  このとき, $|-|_{C^\bullet}$は単体的集合の通常の幾何学的実現であり, $\Sing_{C^\bullet}$は通常の特異単体関手である. 
+\end{example}
+
+\begin{example}
+  $\C=\sSet$として, 余単体的対象$C^\bullet : \Delta \to \C$を次のように定義する.
+  \begin{align*}
+    C^n := \Delta^n
+  \end{align*}
+  このとき, $|-|_{C^\bullet}$と$\Sing_{C^\bullet}$は$\Id_{\sSet}$と同型である. 
+\end{example}
+
+\begin{example}
+  $\C = \Cat$として, 余単体的対象$C^\bullet : \Delta \to \C$を埋め込みとする. 
+  このとき, $|-|_{C^\bullet}$は単体的集合のホモトピー圏を与える対応であり, $\Sing_{C^\bullet}$は通常の脈体関手である. 
+\end{example}
+
+\begin{example}
+  $\C=\Cat_\Delta$として, 余単体的対象$C^\bullet : \Delta \to \C$を\cref{def.1.1.5.1}と\cref{def.1.1.5.3}で定義した対応とする. 
+  このとき, $|-|_{C^\bullet}$は$\mathfrak{C}[-]$であり, $\Sing_{C^\bullet}$は単体的脈体関手である. 
+\end{example}
+
+straightening関手$\St_{\Delta^0}$の場合に戻る. 
+
+\begin{remark} \label{rem:St_Delta0}
+  随伴の一意性より, $\St_{\Delta^0}$はある余単体的集合$C^\bullet : \Delta \to \sSet$に対する$|-|_{C^\bullet} : \sSet \to \sSet$と同一視できる. 
+  $\St_{\Delta^0}$は左随伴なので余極限を保つ. 
+  $C^\bullet$は $\St_{\Delta^0}(\Delta^n) : \Delta \to \sSet$と同一視できるので, $C^n$は次のように計算できる. 
+  \begin{align*}
+    C^n = \St_{\Delta^0}(\Delta^n)
+  \end{align*}
+  このとき, 
+  \begin{align*}
+    \M_X 
+    = \mathfrak{C}[(\Delta^n)^\triangleright] \coprod_{\mathfrak{C}[\Delta^n]} \mathfrak{C}[\Delta^0]
+  \end{align*}
+  は$(\Delta^n)^\triangleright = \Delta^n \star \Delta^0 \cong \Delta^{n+1}$かつ, $\mathfrak{C}$は左随伴であり余極限を保つので, 
+  \begin{align*}
+    \M_X 
+    = \mathfrak{C}[(\Delta^n)^\triangleright] \coprod_{\mathfrak{C}[\Delta^n]} \mathfrak{C}[\Delta^0] 
+    = \mathfrak{C}[\Delta^{n+1}] \coprod_{\mathfrak{C}[\Delta^n]} \mathfrak{C}[\Delta^0] 
+    = \mathfrak{C}\qty[\Delta^{n+1} \coprod_{\Delta^n} \Delta^0]
+  \end{align*}
+  となる.  
+  $J^n := \Delta^{n+1} \coprod_{\Delta^n} \Delta^0$とすると, $C^n$は 
+  \begin{align*}
+    C^n 
+    = \Map_{\M_X}(-,v)
+    = \Map_{\mathfrak{C}[J^n]}(-,v)
+  \end{align*}
+  と表せる. 
+  左随伴は余極限と交換するので, 任意の単体的集合$X$に対して, 次が成立する. 
+  \begin{align*}
+    \St_{\Delta^0}(X) 
+    = \St_{\Delta^0}(\colim \Delta^n)
+    = \colim \St_{\Delta^0}(\Delta^n)
+    = \colim \Map_{\mathfrak{C}[J^n]}(-,v)
+  \end{align*}
+\end{remark}
+
+\begin{definition}
+  任意の$n \geq 0$に対して, $P([n])$を$[n]$の部分集合のべき集合に包含による順序を入れた半順序集合とする. 
+  このとき, 任意の$0 \leq i \leq n$と$S \in P([n])$に対して, $i \in S$のとき$e_i=1$, $i \not\in S$のとき$e_0$とすると, 次の半順序集合の同型が存在する.
+  \begin{align*}
+    P([n]) \xrightarrow{\cong} [1]^{n+1} : S \mapsto (e_0,\cdots,e_n)
+  \end{align*}
+  $P_{[n]}$を空でない部分集合のなす$P([n])$の充満部分圏とする. 
+  このとき, 単体的集合$\N(P_{[n]})$を$K_{[n]}$と表すと, 次の関係が成立する.
+  \begin{align*}
+    K_{[n]} := \N(P_{[n]}) \subset \N([1]^{n+1}) = \N([1])^{n+1} = \Delta^{n+1}
+  \end{align*}
+\end{definition}
+
+\begin{remark}
+  $\sup$をとる対応は関手
+  \begin{align*}
+    \sup : P_{[n]} \to [n] : S \mapsto \sup(S)
+  \end{align*}
+  を定める. 
+  この関手の脈体は単体的集合の射$K_{[n]} \to \Delta^n$を定める. 
+  また, 任意の$i \in [n]$に対して, 次の$K_{[n]}$の面を考える. 
+  \begin{align*}
+    (\Delta^1)^{\{0,\cdots,i-1\}} \times \{1\} \times (\Delta^1)^{\{i+1,\cdots,n\}} \subset K_{[n]}
+  \end{align*}
+  次に, 単体的集合$C^n$を次の単体的集合のpushoutで定義する. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXGNvcHJvZF97aSBcXGluIFtuXX0gKFxcRGVsdGFeMSlee1xcezAsXFxjZG90cyxpLTFcXH19IFxcdGltZXMgXFx7MVxcfSBcXHRpbWVzIChcXERlbHRhXjEpXntcXHtpKzEsXFxjZG90cyxuXFx9fSJdLFsyLDAsIktfe1tuXX0iXSxbMCwxLCJcXGNvcHJvZF97aSBcXGluIFtuXX0gKFxcRGVsdGFeMSlee1xce2krMSxcXGNkb3RzLG5cXH19Il0sWzIsMSwiUV5uIl0sWzAsMV0sWzAsMl0sWzIsM10sWzEsM10sWzMsMCwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
+  \[\begin{tikzcd}
+    {\coprod_{i \in [n]} (\Delta^1)^{\{0,\cdots,i-1\}} \times \{1\} \times (\Delta^1)^{\{i+1,\cdots,n\}}} && {K_{[n]}} \\
+    {\coprod_{i \in [n]} (\Delta^1)^{\{i+1,\cdots,n\}}} && {Q^n}
+    \arrow[from=1-1, to=1-3]
+    \arrow[from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-3]
+    \arrow[from=1-3, to=2-3]
+    \arrow["\lrcorner"{anchor=center, pos=0.125, rotate=225}, draw=none, from=2-3, to=1-1]
+  \end{tikzcd}\]
+  順序を保つ写像$f : [n] \to [m]$に対して, $P_f : P_{[n]} \to P_{[m]} : I \mapsto f(I)$が定まり, 単体的集合の射$K_{[n]} \to K_{[m]}$も定まる. 
+  プッシュアウトの普遍性より, $C^n \to C^m$が定まる. 
+  構成$n \mapsto C^n$は関手的なので, 余単体的集合$\Delta^n \to \sSet$が定まる.
+  単体的集合の射$K_{[n]} \to \Delta^n$とプッシュアウトの普遍性より, 余単体的集合の射$\pi : C^\bullet \to \Delta^\bullet$が定まる. 
+
+  \cref{rem:St_Delta0}より, $C^n$は$\St_{\Delta^0}(\Delta^n)$と同一視できる. 
+  よって, 任意の単体的集合$X$に対して, 次の同型が存在する. 
+  \begin{align*}
+    \St_{\Delta^0}(X)
+    &\cong \St_{\Delta^0}(\colim_{\Delta^n \to X}(\Delta^n))
+    \cong \colim \St_{\Delta^0}(\Delta^n)
+    \cong \colim C^n \\
+    X 
+    &\cong \colim_{\Delta^n \to X}(\Delta^n)
+  \end{align*}
+  よって, $\pi : C^\bullet \to \Delta^\bullet$は$\pi_X : \St_{\Delta^0}(X) \to X$を定める. 
+  $\pi_X$は$X$に対して自然なので, 自然変換$\pi : \St_{\Delta^0} \to \Id$を定める. 
+\end{remark}
+
+\begin{proposition} \label{prop.2.2.2.7}
+  自然変換$\pi : \St_{\Delta^0} \to \Id$は弱ホモトピー同値である.
+\end{proposition}
+
+\begin{proof}
+  $A$をこの命題の主張を満たす単体的集合の射の集まりとする. 
+  $A$がフィルター余極限とfinitely many nondegenerate simplicesをもつ単体的集合を含むことを示す. 
+  (途中)
+\end{proof}
+
+\begin{proposition} \label{prop.2.2.2.9}
+  関手$|-|_{C^\bullet}=\St_{\Delta^0}$と$\Sing_{C^\bullet}= \Un_{\Delta^0}$は次のQuillen同値を定める.
+  \begin{align*}
+    |-|_{C^\bullet} : (\sSet)_\KQ \rightleftarrows (\sSet)_\KQ : \Sing_{C^\bullet}
+  \end{align*}
+\end{proposition}
+
+\begin{proof}
+  まず, 随伴$(|-|_{C^\bullet}, \Sing_{C^\bullet})$がQuillen随伴であることを示す. 
+  \cref{rem:St_Delta0}より, $|-|_{C^\bullet}$はcofibrationを保つ. 
+  次の図式を考える. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJ8WHxfe0NeXFxidWxsZXR9Il0sWzAsMSwiWCJdLFsxLDAsInxZfF97Q15cXGJ1bGxldH0iXSxbMSwxLCJZIl0sWzAsMSwiXFxzaW0iLDJdLFswLDJdLFsxLDNdLFsyLDMsIlxcc2ltIl1d
+  \[\begin{tikzcd}
+    {|X|_{C^\bullet}} & {|Y|_{C^\bullet}} \\
+    X & Y
+    \arrow["\sim"', from=1-1, to=2-1]
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=2-1, to=2-2]
+    \arrow["\sim", from=1-2, to=2-2]
+  \end{tikzcd}\]
+  \cref{prop.2.2.2.7}より, 2-out-of-3から$|-|_{C^\bullet}$はweak equivalenceを保つ.
+  
+  次に, Quillen随伴$(|-|_{C^\bullet}, \Sing_{C^\bullet})$がQuillen同値であることを示す. 
+  $\mathbb{L}|-|_{C^\bullet}$が$\Id_\H$と同型であることを示せばよい. 
+  \cref{prop.2.2.2.7}より, 任意の単体的集合$X$に対して, $|X|_{C^\bullet} \to X$は弱ホモトピー同値である. 
+  よって, $\H$においてこの射は同型射である. 
+  従って, $\mathbb{L}|-|_{C^\bullet}$は$\Id_\H$と自然同型である. 
+\end{proof}
+
+\begin{corollary} \label{cor.2.2.2.10}
+  $X$をKan複体とする. 
+  このとき, 随伴$(|-|_{C^\bullet}, \Sing_{C^\bullet})$の余単位射 
+  \begin{align*}
+    v : |\Sing_{C^\bullet} (X)|_{C^\bullet} \to X
+  \end{align*}
+  は弱ホモトピー同値である.
+\end{corollary}
+
+\begin{remark} \label{rem.2.2.2.11}
+  $S$を単体的集合, $\C$を単体的圏, $\phi : \mathfrak{C}[S] \to \C^\myop$を単体的関手とする. 
+  $S$の点$s$に対して, $C := \phi(s) \in \C$とする. 
+  任意の単体的関手$\F : \C \to \sSet$に対して, 次の自然な同型が存在する. 
+  \begin{align*}
+    \Un_\phi(\F) \times_S \{s\} \cong \Sing_{C^\bullet}\F(C)
+  \end{align*}
+  特に, $\F(C)$がファイブラント対象のとき, $\F(C)$から$(\Un_\phi(\F)) \times_S \{s\}$への射はホモトピー同値である.
+\end{remark}
+
+\begin{proof} % https://mathoverflow.net/questions/301050/explicit-expression-of-the-unstraightening-functor
+  随伴$(\St_\phi, \Un_\phi)$より, 次の同型が存在する.
+  \begin{align*}
+    \Un_\phi(\F) \times_S \{s\}
+    \cong \Map_{(\sSet)_{/S}} (\{s\} \hookrightarrow S, \Un_\phi(\F))
+    \cong \Nat_{\sSet^\C} (\St_\phi(\{s\} \hookrightarrow S), \F)
+  \end{align*}
+  \cref{prop.2.2.1.1_1}と\cref{prop.2.2.1.1_2}より, $\St_\phi(\{s\} \hookrightarrow S)$は次のように計算できる. 
+  \begin{align*}
+    \St_\phi(\{s\} \hookrightarrow S)
+    \cong \St_\phi \circ (\{s\} \hookrightarrow S) (\id_{\{s\}})
+    \cong \St_{\phi(s)} \circ (\id_{\{s\}})
+    \cong (\phi(s))_! \circ \St_{\id_{\{s\}}} (\id_{\{s\}})
+  \end{align*}
+  よって, 次のように計算できる. 
+  \begin{align*}
+    \Nat_{\sSet^\C} (\St_\phi(\{s\} \hookrightarrow S), \F)
+    &\cong \Nat_{\sSet^\C} ((\phi(s))_! \circ \St_{\id_{\{s\}}} (\id_{\{s\}}), \F) \\
+    &\cong \Nat_{\sSet^{\{s\}}} (\St_{\id_{\{s\}}} (\id_{\{s\}}), \F \circ (\phi(s))) \\
+    &\cong \Nat_{\sSet^{\{s\}}} (|\id_{\{s\}}|_{C^\bullet}, \F \circ (\phi(s))) \\
+    &\cong \Nat_{\sSet^{\{s\}}} (\id_{\{s\}}, \Sing_{C^\bullet}(\F \circ (\phi(s)))) \\
+    &\cong  \Sing_{C^\bullet}\F(C)
+  \end{align*}
+\end{proof}
+
+\begin{proposition} \label{prop.2.2.2.13}
+  $\C$を単体的圏, $X,Y$を$\C$の点とする. 
+  このとき, 次の単体的集合の自然同型が存在する. 
+  \begin{align*}
+    \Hom^\R_{\mathfrak{N}(\C)}(x,y) \cong \Sing_{C^\bullet}\Map_\C(x,y)
+  \end{align*}
+\end{proposition}
+
+\begin{proof}
+  $\Hom^\R_\C(x,y)$の$n$単体は, $z|_{\Delta^{\{n+1\}}} = y$かつ$z|_{\Delta^{\{0,\cdots,n\}}}$が点$x$の定値単体であるような$\C$の$n+1$単体$z : \Delta^{n+1} \to \C$の集合である. 
+  これは次のようにも表せる. 
+  \begin{align*}
+    \Hom^\R_\C(x,y)_n = \{\sigma : J^n \to \C ~|~ \sigma(C)=x, \sigma(v)=y\}
+  \end{align*}
+  随伴より, $\Hom^\R_{\mathfrak{N}(\C)}(x,y)$の任意の$n$単体$\sigma : J^n \to \mathfrak{N}(\C)$は$\tilde{\sigma}(C)=x$かつ$\tilde{\sigma}(v)=y$を満たす$\tilde{\sigma} : \mathfrak{C}[J^n] \to \C$と同一視できる. 
+  よって, 任意の$n \geq 0$に対して, $\Hom^\R_{\mathfrak{N}(\C)}(x,y)$の$n$単体は次のように計算できる. 
+  \begin{align*}
+    \Hom^\R_{\mathfrak{N}(\C)}(x,y)_n 
+    & \cong \Hom_{\sSet}(\Hom_{\mathfrak{C}[J^n]}(C,v), \Hom_\C(x,y)) \\
+    & \cong \Hom_{\sSet}(C^n, \Hom_\C(x,y)) \\
+    & \cong \Hom_{\sSet}(\St_{\Delta^0}(\Delta^n), \Hom_\C(x,y)) \\
+    & \cong \Hom_{\sSet}(\Delta^n, \Un_{\Delta^0}(\Hom_\C(x,y))) \\
+    & \cong \Un_{\Delta^0}\Hom_\C(x,y)_n \\
+    & \cong (\Sing_{C^\bullet}\Map_\C(x,y))_n
+  \end{align*}
+\end{proof}
+
+\subsection{右ファイブレーションのstraightening (途中)}
+
+この節の目標は\cref{thrm.2.2.1.2}を示すことである. 
+まず, \cref{thrm.2.2.1.2}において, $S$が$\Delta^n$の場合を示す. 
+
+\begin{lemma} \label{lem.2.2.3.1}
+  任意の$n \geq 0$に対して, 圏$[n]$を離散単体的圏とみなし, $\phi : \mathfrak{C}[\Delta^n] \to [n]$を自然な単体的関手とする. 
+  このとき, 次のQuillen同値が存在する. 
+  \begin{align*}
+    \St_\phi : (\sSet)_{\Delta^n} \rightleftarrows \sSet^{[n]} : \Un_\phi
+  \end{align*}
+\end{lemma}
+
+\cref{lem.2.2.3.1}を扱いやすい形に言い換える. 
+
+\begin{definition}[各点同値] \label{def.2.2.3.2}
+  次の単体的集合の可換図式を考える. 
+  % https://q.uiver.app/#q=WzAsMyxbMCwwLCJYIl0sWzIsMCwiWSJdLFsxLDEsIlMiXSxbMCwxLCJmIl0sWzAsMiwicCIsMl0sWzEsMiwicSJdXQ==
+  \[\begin{tikzcd}
+    X && Y \\
+    & S
+    \arrow["f", from=1-1, to=1-3]
+    \arrow["p"', from=1-1, to=2-2]
+    \arrow["q", from=1-3, to=2-2]
+  \end{tikzcd}\]
+  $p$と$q$を右ファイブレーションとする. 
+  $S$の任意の点$s$に対して, 誘導される射$X_s \to Y_s$がKan複体のホモトピー同値のとき, $f$を$S$上の各点同値(pointwise equivalence over $S$)という. 
+\end{definition}
+
+\begin{remark} \label{rem.2.2.3.3}
+  \cref{def.2.2.3.2}において, 次はすべて同値である.
+  \begin{enumerate}
+    \item $f$は$S$上の各点同値である. 
+    \item $f$は$(\sSet)_{/S}$における反変同値である. 
+    \item $f$は単体的集合の圏同値である. 
+  \end{enumerate}
+\end{remark}
+
+\begin{proof}
+  (1)と(2)の同値性は\cref{cor.2.2.3.13}より従う. 
+  (1)と(3)の同値性は\cite{HTT} Proposition.3.3.1.5より従う. 
+\end{proof}
+
+\begin{lemma} \label{lem.2.2.3.4}
+  $S$を単体的集合, $S'$を$S$の単体的部分集合, $p : X \to S$を単体的集合の射, $q : Y \to S$を右ファイブレーションとする. 
+  $X' := X \times_S S', Y' := Y \times_S S'$と表す. 
+  このとき, 次の射はKanファイブレーションである.
+  \begin{align*}
+    \phi : \Map_{(\sSet)_{/S}}(X,Y) \to \Map_{(\sSet)_{/S}}(X',Y')
+  \end{align*}
+\end{lemma}
+
+\begin{lemma} \label{lem.2.2.3.5}
+  Lemma.2.2.3.5
+\end{lemma}
+
+\begin{lemma} \label{lem.2.2.3.6}
+  次の単体的集合の可換図式を考える. 
+  % https://q.uiver.app/#q=WzAsMyxbMCwwLCJYIl0sWzIsMCwiWSJdLFsxLDEsIlMiXSxbMCwxLCJmIl0sWzAsMiwicCIsMl0sWzEsMiwicSJdXQ==
+  \[\begin{tikzcd}
+    X && Y \\
+    & S
+    \arrow["f", from=1-1, to=1-3]
+    \arrow["p"', from=1-1, to=2-2]
+    \arrow["q", from=1-3, to=2-2]
+  \end{tikzcd}\]
+  $p$と$q$が右ファイブレーションのとき, 次はすべて同値である.
+  \begin{enumerate}
+    \item $f$は$S$上の各点同値である.
+    \item $f$は単体的圏$(\sSet)_{/S}$における同値である. つまり, $f$はホモトピー同値である. 
+    \item $(\sSet)_{/S}$の任意の対象$A$に対して, $f$の合成は次のKan複体のホモトピー同値を定める. 
+    \begin{align*}
+      \Map_{(\sSet)_{/S}}(A,X) \to \Map_{(\sSet)_{/S}}(A,Y)
+    \end{align*}
+  \end{enumerate}
+\end{lemma}
+
+\begin{lemma} \label{lem.2.2.3.7}
+  
+\end{lemma}
+
+\begin{notation}
+  $S$を単体的集合とする.
+  右ファイブレーション$X \to S$のなす$(\sSet)_{/S}$の充満部分圏を$\RFib(S)$と表す.
+\end{notation}
+
+\cref{prop.2.1.4.9}より, 単体的集合の射$p :X \to S$が$(\sSet)_{/S}^\contra$におけるファイブラント対象のとき, $p$は右ファイブレーションである. 
+\cref{cor.2.2.3.12}で, この主張の逆を示す. 
+ここでは, 弱い主張を示す. 
+
+\begin{lemma} \label{lem.2.2.3.9}
+  任意の$n \geq 0$に対して, 包含$i : (\sSet)_{/ \Delta^n}^\circ \hookrightarrow \RFib(\Delta^n)$
+  \footnote{
+    $(\sSet)_{/ \Delta^n}^\circ$は$(\sSet)_{/ \Delta^n}$におけるファイブラント-コファイブラント対象のなす部分圏である. 
+  }
+  は単体的圏の同値である.
+\end{lemma}
+
+\begin{lemma} \label{lem.2.2.3.10}
+  任意の$n \geq 0$に対して, unstraightening関手$\Un_{\Delta^n} : (\sSet^{\mathfrak{C}[\Delta^n]})^\circ \to \RFib(\Delta^n)$は単体的圏の同値である. 
+\end{lemma}
+
+\begin{proposition} \label{prop.2.2.3.11}
+  任意の単体的集合$S$に対して, unstraightening関手$\Un_S$は単体的圏の同値$\sSet^{\mathfrak{C}[S]} \to \RFib(S)$を定める. 
+\end{proposition}
+
+\begin{corollary} \label{cor.2.2.3.12}
+  $p :X \to S$を単体的集合の射とする. 
+  このとき, 次は同値である. 
+  \begin{enumerate}
+    \item $p$は右ファイブレーションである. 
+    \item $p$は$(\sSet)_{/S}^\contra$におけるファイブラント対象である.
+  \end{enumerate}
+\end{corollary}
+
+\subsection{比較定理 (途中)}
+
+$S$を$\infty$圏, $x,y$を$S$の対象, $C^\bullet : \Delta \to \sSet$を余単体的集合とする. 
+このとき, 次の自然な単体的集合の射が存在する. 
+\begin{align*}
+  f : |\Hom^\R_S(x,y)|_{C^\bullet} \to \Map_{\mathfrak{C}[S]}(x,y)
+\end{align*}
+$S$があるファイブラント単体的圏$\C$の単体的脈体のとき, 合成
+\begin{align*}
+  |\Hom^\R_{\mathfrak{N}(\C)}(x,y)|_{C^\bullet} \xrightarrow{f} \Map_{\mathfrak{C}[\mathfrak{N}(\C)]}(x,y) \to \Map_\C(x,y) 
+\end{align*}
+は余単位
+\begin{align*}
+  |\Sing_{C^\bullet}\Map_\C(x,y)|_{C^\bullet} \to \Map_\C(x,y)
+\end{align*}
+と同一視できる. 
+\cref{cor.2.2.2.10}より, この射は単体的集合の弱ホモトピー同値である.
+2-out-of-3より, \cref{thrm.2.2.0.1}は次のように言い換えることができる. 
+
+\begin{proposition}
+  $S$を$\infty$圏, $x,y$を$S$の対象とする.
+  このとき, 自然な射
+  \begin{align*}
+    f : |\Hom^\R_S(x,y)|_{C^\bullet} \to \Map_{\mathfrak{C}[S]}(x,y)
+  \end{align*}
+  は単体的集合の弱ホモトピー同値である. 
+\end{proposition}
+
+\subsection{Joyalモデル構造}
+
+単体的集合の圏上にはファイブラント対象が$\infty$圏であるようなモデル構造が存在する. 
+このモデル構造の存在はJoyalにより組み合わせ論的な手法を用いて証明された. 
+この節では, 単体的圏と$\infty$圏の関係を明らかにし, このモデル構造の別の表し方を与える. 
+この議論は単体的圏のなす圏$\Cat_\Delta$上のBergnerモデル構造の議論を用いる.
+
+\begin{definition}[圏同値など]
+  単体的集合の射$p : S \to S'$が
+  \begin{itemize}
+    \item 単体的集合のmono射のとき, $p$をコファイブレーション(cofibration)という. 
+    \item 誘導される射$\mathfrak{C}[S] \to \mathfrak{C}[S']$が単体的圏の同値のとき, $f$を圏同値(categorical equivalence)という. 
+    \item 任意のコファイブレーションかつ圏同値に対してRLPを持つとき, $f$を圏的ファイブレーション(categorical fibration)という.
+  \end{itemize}
+\end{definition}
+
+次の命題は本章の主定理の1つであり, 2.3節の単体的集合の内ファイブレーションの議論で重宝する. 
+
+\begin{theorem} \label{thrm.2.2.5.1}
+  weak equivalenceを圏同値, cofibrationをコファイブレーションとするような, $\sSet$上の左properかつ組み合わせ論的なモデル構造が存在する. 
+  このモデル構造を$\sSet$上のJoyalモデル構造といい, $(\sSet)_\Joyal$と表す. 
+
+  また, 随伴$(\mathfrak{C}[-], \mathfrak{N})$は次のQuillen同値を定める.
+  \begin{align*}
+    \mathfrak{C}[-] : (\sSet)_\Joyal \rightleftarrows (\Cat_\Delta)_\Berg : \mathfrak{N}
+  \end{align*}
+\end{theorem}
+
+\begin{proof}
+  \cite{HTT} Proposition.A.2.6.13の条件を満たすことを示す.
+  \begin{enumerate}
+    \item 関手$\mathfrak{C}[-]$はフィルター余極限を保ち, 単体的圏の同値のクラスはperfectなので, \cite{HTT} Corollary.A.2.6.12より$\sSet$における圏同値のクラスはperfectである. 
+    \item 次の単体的集合の図式を考える. 
+    % https://q.uiver.app/#q=WzAsNixbMCwxLCJYJyJdLFswLDAsIlgiXSxbMSwwLCJZIl0sWzEsMSwiWSciXSxbMSwyLCJZJyciXSxbMCwyLCJYJyciXSxbMSwwXSxbMSwyLCJmIl0sWzIsM10sWzAsM10sWzMsNCwiZyciXSxbMCw1LCJnIiwyXSxbNSw0XV0=
+    \[\begin{tikzcd}
+      X & Y \\
+      {X'} & {Y'} \\
+      {X''} & {Y''}
+      \arrow[from=1-1, to=2-1]
+      \arrow["f", from=1-1, to=1-2]
+      \arrow[from=1-2, to=2-2]
+      \arrow[from=2-1, to=2-2]
+      \arrow["{g'}", from=2-2, to=3-2]
+      \arrow["g"', from=2-1, to=3-1]
+      \arrow[from=3-1, to=3-2]
+    \end{tikzcd}\]
+    $f$がコファイブレーションかつ$g$が圏同値のときに, $g'$が圏同値であることを示す. 
+    関手$\mathfrak{C}[-]$を作用させると, 次の図式を得る. 
+    % https://q.uiver.app/#q=WzAsNixbMCwxLCJcXG1hdGhmcmFre0N9W1gnXSJdLFswLDAsIlxcbWF0aGZyYWt7Q31bWF0iXSxbMSwwLCJcXG1hdGhmcmFre0N9W1ldIl0sWzEsMSwiXFxtYXRoZnJha3tDfVtZJ10iXSxbMSwyLCJcXG1hdGhmcmFre0N9W1knJ10iXSxbMCwyLCJcXG1hdGhmcmFre0N9W1gnJ10iXSxbMSwwXSxbMSwyLCJmX1xcYXN0Il0sWzMsNCwiZydfXFxhc3QiXSxbMCw1LCJnX1xcYXN0IiwyXSxbNSw0XSxbMCwzXSxbMiwzXV0=
+    \[\begin{tikzcd}
+      {\mathfrak{C}[X]} & {\mathfrak{C}[Y]} \\
+      {\mathfrak{C}[X']} & {\mathfrak{C}[Y']} \\
+      {\mathfrak{C}[X'']} & {\mathfrak{C}[Y'']}
+      \arrow[from=1-1, to=2-1]
+      \arrow["{f_\ast}", from=1-1, to=1-2]
+      \arrow["{g'_\ast}", from=2-2, to=3-2]
+      \arrow["{g_\ast}"', from=2-1, to=3-1]
+      \arrow[from=3-1, to=3-2]
+      \arrow[from=2-1, to=2-2]
+      \arrow[from=1-2, to=2-2]
+    \end{tikzcd}\]
+    関手$\mathfrak{C}[-]$は左Quillen関手なので(後述), cofibrationを保つ. 
+    よって, $f_\ast$は単体的圏のコファイブレーションである. 
+    単体的圏のコファイブレーションの集まりはプッシュアウトで閉じるので, $\mathfrak{C}[X'] \to \mathfrak{C}[Y']$は単体的圏のコファイブレーションである.
+    $(\Cat_\Delta)_\Berg$における任意の対象はコファイブラントなので, 左properである. 
+    よって, この射に沿ったBergner同値$g_\ast$のプッシュアウト$g'_\ast$は単体的圏のコファイブレーションである. 
+    $(\sSet)_\Joyal$におけるweak equivalenceの定義より, $g'$は圏同値である. 
+    \item 任意のコファイブレーションに対してRLPを持つ射が圏同値であることを示す. 
+    つまり, 自明なKanファイブレーション$p : S \to S'$が圏同値であることを示せばよい. 
+    \cref{prop.2.1.4.7}と同様に, $p$は切断$s :S' \to S$を持つ. 
+    このとき, $\mathfrak{C}[p] \circ \mathfrak{C}[s] = \id_{\mathfrak{C}[S']}$は明らかである.
+    よって, $\mathfrak{C}[s] \circ \mathfrak{C}[p]$が$\id_{\mathfrak{C}[S]}$とホモトピックであることを示せばよい. 
+    (途中)
+  \end{enumerate}
+
+  次に, 随伴$(\mathfrak{C}[-], \mathfrak{N})$がQuillen随伴であることを示す.
+  まず, 関手$\mathfrak{C}[-]$がcofibrationを保つことを示す.
+  単体的集合のコファイブレーションは包含$\{\partial \Delta^n \hookrightarrow \Delta^n ~|~ n \geq 0\}$で生成される. 
+  よって, 任意の$n \geq 0$に対して, $\mathfrak{C}[\partial \Delta^n] \to \mathfrak{C}[\Delta^n]$が単体的圏のコファイブレーションであることを示せばよい. 
+  
+  $n=0$のとき, $\mathfrak{C}[\partial \Delta^n] \to \mathfrak{C}[\Delta^n]$は$\emptyset \hookrightarrow \ast$と同一視できる. 
+  この射は単体的圏のコファイブレーションである.
+
+  $n \geq 1$のとき, \cref{eg.mathfrakC_partial_Delta^n}より, 包含$\mathfrak{C}[\partial \Delta^n] \to \mathfrak{C}[\Delta^n]$は包含$[1]_{\partial (\Delta^1)^{n-1}} \hookrightarrow [1]_{(\Delta^1)^{n-1}}$のプッシュアウトで表せるので, この単体的圏の関手は単体的圏のコファイブレーションである.
+  (記法はA.3.2節を参照.)
+
+  次に, 関手$\mathfrak{C}[-]$がweak equivalenceを保つことを示す. 
+  これは$(\sSet)_\Joyal$におけるweak equivalenceの定義より従う.
+
+  最後に, Quillen随伴$(\mathfrak{C}[-], \mathfrak{N})$がQuillen同値であることを示す.
+  つまり, 任意の単体的集合$S$とファイブラント単体的圏$\C$に対して, 単体的集合の射$u : S \to \mathfrak{N}(\C)$が圏同値であることと, 単体的圏の関手$v : \mathfrak{C}[S] \to \C $が単体的圏の同値であることは同値であることを示せばよい. 
+  $v$は合成
+  \begin{align*}
+    \mathfrak{C}[S] \xrightarrow{\mathfrak{C}[u]} \mathfrak{C}[\mathfrak{N}[\C]] \xrightarrow{w} \C
+  \end{align*}
+  と分解できる.
+  $u$が圏同値であることと, $\mathfrak{C}[u]$が単体的圏の同値であることは同値である. 
+  \cref{thrm.2.2.0.1}より, 余単位$w$は単体的圏の同値である. 
+\end{proof}
+
+\begin{lemma} \label{lem.2.2.5.2}
+  単体的集合の任意の内緩射は圏同値である. 
+\end{lemma}
+
+$\sSet$上のJoyalモデル構造が持つ性質をいくつか述べる. 
+モデル圏の一般論から, $\infty$圏に関する命題をいくつか証明することができる.
+
+\begin{remark}
+  $(\sSet)_\Joyal$における任意の対象はコファイブラントである.
+\end{remark}
+
+\begin{remark}
+  $(\sSet)_\Joyal$は右properではない.
+\end{remark}
+
+\begin{corollary} \label{cor.2.2.5.4}
+  $f : A \to B$を単体的集合の圏同値とする. 
+  このとき, 任意の単体的集合$K$に対して, 誘導される射$A \times K \to B \times K$は圏同値である. 
+\end{corollary}
+
+\begin{proof}
+  $Q$を$\infty$圏, $B \to Q$を内緩射とする. 
+  このとき, $B \times K \to Q \times K$は内緩射である. 
+  \cref{lem.2.2.5.2}より, この射は圏同値である.
+  よって, $A \times K \to Q \times K$が圏同値であることを示せば, 2-out-of-3より, $A \times K \to B \times K$は圏同値である. 
+  つまり, $B$は$\infty$圏であるとしてよい. 
+
+  内緩射$f' : A \to R$と内ファイブレーション$f'' : R \to B$をとして, $f$は$A \xrightarrow{f'} R \xrightarrow{f''} B$と分解できる. 
+  $B$は$\infty$圏なので, $R$も$\infty$圏である. 
+  $f'$は内緩射なので, $A \times K \to R \times K$も内緩射であり, 圏同値である.
+  よって, $R \times K \to B \times K$が圏同値であることを示せば, 2-out-of-3より, $A \times K \to B \times K$は圏同値である. 
+  つまり, $A$も$\infty$圏であるとしてよい. 
+
+  $S$を$\infty$圏として, $K \to S$を内緩射とする. 
+  $A$と$B$は$\infty$圏なので, $A \times K \to A \times S$と$B \times K \to B \times S$はともに内緩射であり, 圏同値である.
+  次の単体的集合の図式を考えると, $A \times K \to B \times K$が圏同値であることを示すためには, $A \times S \to B \times S$が圏同値であることを示せばよい. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJBIFxcdGltZXMgSyJdLFswLDEsIkIgXFx0aW1lcyBLIl0sWzEsMCwiQSBcXHRpbWVzIFMiXSxbMSwxLCJCIFxcdGltZXMgUyJdLFswLDFdLFswLDIsIlxcc2ltIl0sWzIsM10sWzEsMywiXFxzaW0iLDJdXQ==
+  \[\begin{tikzcd}
+    {A \times K} & {A \times S} \\
+    {B \times K} & {B \times S}
+    \arrow[from=1-1, to=2-1]
+    \arrow["\sim", from=1-1, to=1-2]
+    \arrow[from=1-2, to=2-2]
+    \arrow["\sim"', from=2-1, to=2-2]
+  \end{tikzcd}\]
+  つまり, $K$も$\infty$圏であるとしてよい. 
+
+  $A, B, K$は$\infty$圏であり, ホモトピー圏をとる対応は有限直積と交換するので, 次の同型が存在する. 
+  \begin{align*}
+    \h(A \times K) \cong \h A \times \h K, ~~ \h(B \times K) \cong \h B \times \h K
+  \end{align*}
+  $A \times K \to B \times K$が本質的全射であることを示せば, $f : A \to B$が本質的全射であることが従う. 
+  (途中)
+\end{proof}
+
+\begin{remark} \label{rem.2.2.5.5}
+  任意の内緩射は圏同値なので, 任意の圏的ファイブレーション$p : X \to S$は内ファイブレーションである. 
+  逆は一般には成立しないが, $S$が1点のときは成立する. 
+  つまり, $(\sSet)_\Joyal$におけるファイブラント対象はちょうど$\infty$圏である. 
+  証明は2.4.6節で与える (\cref{thrm.2.4.6.1}). 
+  この節の残りはこの主張を認めて, いくつかの命題を示す. 
+  これらの命題は\cref{thrm.2.4.6.1}の証明には用いないので循環論法ではない.
+\end{remark}
+
+関手$\mathfrak{C}[-]$は一般には積と交換しない. 
+しかし, \cref{cor.2.2.5.4}から$\mathfrak{C}[-]$は有限直積と交換することが分かる. 
+
+\begin{corollary} \label{cor.2.2.5.6}
+  $S,S'$を単体的集合とする. 
+  このとき, 誘導される射$\mathfrak{C}[S \times S'] \to \mathfrak{C}[S] \times \mathfrak{C}[S']$は単体的圏の同値である.
+\end{corollary}
+
+\begin{proof}
+  まず, $\C,\C'$がファイブラント単体的圏の場合を示す. 
+  次の射の合成を考える. 
+  \begin{align*}
+    \mathfrak{C}[\mathfrak{N}(\C) \times \mathfrak{N}(\C')]
+    \xrightarrow{f} \mathfrak{C}[\mathfrak{N}(\C)] \times \mathfrak{C}[\mathfrak{N}(\C')]
+    \xrightarrow{g} \C \times \C'
+  \end{align*}
+  2-out-of-3より, $g$と$gf$が圏同値であることを示せばよい. (途中)
+\end{proof}
+
+\begin{proposition} \label{prop.2.2.5.7}
+  $\C$を$\infty$圏, $K$を単体的集合とする. 
+  射$f,g : K \to \C$がホモトピックであることと, $f,g$が(モデル圏の意味の)左ホモトピックであることは同値である.
+\end{proposition}
+
+\cref{prop.1.2.7.3}を示す. 
+
+\begin{proposition}
+  $K$を単体的集合とする. 
+  このとき, 次が成立する. 
+  \begin{enumerate}
+    \item 任意の$\infty$圏$\C$に対して, 単体的集合$\Fun(K,\C)$は$\infty$圏である.
+    \item $\C \to \D$を$\infty$圏の圏同値とする. 
+    このとき, 誘導される射$\Fun(K,\C) \to \Fun(K,\D)$は圏同値である. 
+    \item $\C$を$\infty$圏, $K \to K'$を単体的集合の圏同値とする. 
+    このとき, 誘導される射$\Fun(K',\C) \to \Fun(K,\C)$は圏同値である. 
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  (1)を示す. 
+  任意の包含$A \hookrightarrow B$に対して, $\Fun(K,\C) \to \Delta^0$がRLPを持つことを示す. 
+  随伴より, 包含$A \times K \hookrightarrow B \times K$に対してRLPを持つことを示せばよい.
+  $\C$は$\infty$圏であり, \cref{cor.2.3.2.4}よりこの射は内緩射なので, これは従う.
+
+  (2)を示す. (途中)
+\end{proof}
+
+Joyalモデル構造におけるweak equivalenceには他の定義が用いられることも多い.
+これらの定義の同値性を示す. 
+
+\begin{definition}[弱圏同値]
+  $f : A \to B$を単体的集合の射とする. 
+  任意の$\infty$圏$\C$に対して, 誘導される射
+  \begin{align*}
+    \h\Fun(B,\C) \to \h\Fun(A,\C)
+  \end{align*}
+  が通常の圏同値のとき, $f$を弱圏同値(weak categorical equivalence)という.
+\end{definition}
+
+\begin{proposition} \label{prop.2.2.5.8}
+  $f : A \to B$を単体的集合の射とする. 
+  このとき, $f$が圏同値であることと, $f$が弱圏同値であることは同値である.
+\end{proposition}
+
+\begin{proof}
+  $f$を圏同値とする. 
+  \cref{prop.1.2.7.3}より, 任意の$\infty$圏$\C$に対して, 誘導される射$\Fun(B,\C) \to \Fun(A,\C)$は圏同値である.
+  よって, $\h\Fun(B,\C) \to \h\Fun(A,\C)$は通常の圏同値である. 
+  つまり, $f$は弱圏同値である.
+
+  $f$を弱圏同値とする.
+  $f$がJoyalモデル構造を備えた$\sSet$のホモトピー圏$\h\sSet$における同型を定めることを示す. 
+  つまり, 任意のファイブラント対象$\C$に対して, $f$が全単射$[B,\C] \to [A,\C]$を定めることを示せばよい. 
+  \cref{prop.2.2.5.7}より, $[X,\C]$は$\h\Fun(X,\C)$における対象の同型類の集合と同一視できる. 
+  よって, $f$は圏同値である.
+\end{proof}
+
+\section{内ファイブレーション (途中)}
+
+この節では, 単体的集合の内ファイブレーションの理論を勉強する. 
+左ファイブレーションは古典的な圏論におけるGrothendieck構成の一般化であったが, 内ファイブレーションに対応する古典的な圏論における概念は存在しない. 
+つまり, 「任意の」通常の関手$F : \C \to \C'$に対して, $\N(F) : \N(\C) \to \N(\C')$は内ファイブレーションである. 
+
+$S$が1点のとき, 単体的集合の射$p : X \to S$が内ファイブレーションであることと, $X$が$\infty$圏であることは同値である. 
+また, 内ファイブレーションのクラスはプルバックで閉じる. 
+内ファイブレーション$p : X \to S$と$S$の任意の点$s$に対して, ファイバー$X_s=X \times_S \{s\}$は$\infty$圏である.
+よって, $p$は$S$でパラメタ付けられた$\infty$圏の族を表しているとみなせる. 
+$p$は関手$S$から$\infty$圏のなす$\infty$圏への関手を定めると考えられるが, ファイバー$X_s$は弱い意味でしか$s$に対して関手的ではない.
+
+\begin{example}
+  $F : \C \to \C'$を通常の関手, $C,D$を$\C'$の任意の対象とする. 
+  このとき, $\N(F) : \N(\C) \to \N(\C')$は内ファイブレーションである. 
+  しかし, ファイバー$\N(\C)_C = \N(\C \times_{\C'} \{C\})$と$\N(\C)_D = \N(\C \times_{\C'} \{D\})$は$C$と$D$が同型であっても, 2つが同型であるとは限らない. 
+\end{example}
+
+内ファイブレーションの異なるファイバーがどのように関係しているかを理解するために, $\infty$圏の同一視の概念を定義する. 
+2.3.1節で, 古典的な圏論における同一視の理論を復習し, どのように$\infty$圏の枠組みに一般化するかをみる. 
+
+2.3.2節では, 内緩射のクラスが任意のコファイブレーションとのスマッシュ積をとる対応で閉じていることを示す. 
+ここから, 内ファイブレーションのクラスが射空間をとる対応で閉じていることが分かる. 
+
+2.3.3節では, Quillenの最小Kanファイブレーションの理論を一般化した最小内ファイブレーションの理論を調べる. 
+特に, 最小$\infty$圏のクラスを定義し, 任意の$\infty$圏$\C$がある最小$\infty$圏$\C'$と同値であることを示す. 
+ここで, $\C'$は(自然ではない)同型を除いて一意に定まる. 
+
+2.3.4節では, この理論を応用し, $n$圏($n < \infty$)の理論を調べる. 
+
+\subsection{同一視}
+
+\begin{definition}[同一視]
+  $\C,\C'$を圏とする. 
+  このとき, 関手 
+  \begin{align*}
+    M : \C^\myop \times \C' \to \Set
+  \end{align*}
+  を$\C$から$\C'$への同一視(correspondence)という. 
+\end{definition}
+
+\begin{definition}
+  $M$を$\C$から$\C'$への同一視とする. 
+  このとき, 圏$\C \star^M \C'$を次のように定義する.
+  \begin{itemize}
+    \item $\C \star^M \C'$の対象は$\C$の対象と$\C'$の対象の直和
+    \item $\C \star^M \C'$の任意の対象$X,Y$に対して, $\Hom_{\C \star^M \C'}(X,Y)$は 
+    \begin{align*}
+      \Hom_{\C \star^M \C'}(X,Y) := 
+      \begin{cases}
+        \Hom_\C(X,Y)    & (X,Y \in \C) \\
+        \Hom_{\C'}(X,Y) & (X,Y \in \C') \\
+        M(X,Y)          & (X \in \C, ~ Y \in \C') \\
+        \emptyset       & (X \in \C', ~ Y \in \C)
+      \end{cases}
+    \end{align*}
+  \end{itemize}
+\end{definition}
+
+\begin{remark} \label{rem.2.3.1.1}
+  $M : \C^\myop \times \C' \to \Set$が1点$\ast$に値をとる定値関手のとき, 圏$\C \star^M \C'$は通常の圏のジョイン$\C \star \C'$に一致する. 
+\end{remark}
+
+同一視$M : \C^\myop \times \C' \to \Set$に対して, 関手$\C \star^M \C' \to [1]$が一意に存在する. 
+($F^{-1}\{0\}=\C, F^{-1}\{1\}=\C'$として一意に定義できる.)
+逆に, 圏$\M$と関手$ : \M \to [1]$に対して, $\C := F^{-1}\{0\}, \C' := F^{-1}\{1\}$と定義し, 同一視$M : \C^\myop \times \C' \to \Set$を$M(X,Y) := \Hom_\M(X,Y)$で定義することで, 同一視が定まる. 
+これは次のように定式化できる. 
+
+\begin{remark} \label{fact.2.3.1.2}
+  圏$\C,\C'$と$\C$から$\C'$への同一視を与えることは, 圏$\M$と関手$\M \to [1]$を与えることと同値である.
+\end{remark}
+
+この同値を用いて, $\infty$圏の枠組みにおける同一視を定義する. 
+
+\begin{definition}[同一視] \label{def.2.3.1.3}
+  $\C,\C'$を$\infty$圏とする. 
+  $\infty$圏$\M$, 単体的集合の射$F : \M \to \Delta^1$と$\C \cong F^{-1}\{0\}, \C' \cong F^{-1}\{1\}$という同一視
+  \footnote{
+    この同一視はcorrespondenceの意味ではなく, 単なるidentified withの意味である. 
+  }
+  の4つ組$(\M,F,\C,\C')$を$\C$から$\C'$への同一視(correspondence)という. 
+\end{definition}
+
+\cref{def.2.3.1.3}の意味を理解するために, いくつか準備をする. 
+
+\begin{proposition} \label{prop.2.3.1.5} % Proposition 4.1.1.10. kerodon
+  $\C$を通常の圏, $p : X \to \N(\C)$を単体的集合の射とする. 
+  $p$が内ファイブレーションであることと, $X$が$\infty$圏であることは同値である.
+\end{proposition}
+
+\begin{proof}
+  $p$を内ファイブレーションとする. 
+  $\N(\C)$は$\infty$圏のとき, $X$も$\infty$圏である.
+
+  逆に, $X$を$\infty$圏とする. 
+  このとき, 任意の$n \geq 0$と$0 < i < n$に対して, 次の図式はリフトを持つ. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXExhbWJkYV5uX2kiXSxbMCwxLCJcXERlbHRhXm4iXSxbMSwwLCJYIl0sWzEsMSwiXFxOKFxcQykiXSxbMCwxXSxbMCwyXSxbMiwzLCJxIl0sWzEsMiwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzEsM11d
+  \[\begin{tikzcd}
+    {\Lambda^n_i} & X \\
+    {\Delta^n} & {\N(\C)}
+    \arrow[from=1-1, to=2-1]
+    \arrow[from=1-1, to=1-2]
+    \arrow["p", from=1-2, to=2-2]
+    \arrow[dashed, from=2-1, to=1-2]
+    \arrow[from=2-1, to=2-2]
+  \end{tikzcd}\]
+  つまり, $p$は内ファイブレーションである.
+\end{proof}
+
+\begin{lemma} \label{rem.p_induce_fiber_infty_category}
+  $p : X \to S$を単体的集合の射とする.
+  $p$が内ファイブレーションであることと, $S$の任意の単体上の$p$のファイバーが$\infty$圏であることは同値である.
+\end{lemma}
+
+\begin{proof}
+  内ファイブレーションの定義と, 内ファイブレーションのクラスがプルバックで閉じることから従う. 
+\end{proof}
+
+内ファイブレーション$p : X \to S$は, $S$の点$s$に対して$\infty$圏$X_s$を, $S$の辺$f : s \to s'$に対して$X_s$から$X_{s'}$への同一視を与えるとみなせる. 
+% $S$の高次の単体に対しては, 同一視のcompatibleなchainを与えると考えられる.
+大雑把に言うと, 内ファイブレーション$p : X \to S$は, $S$から射が同一視であるような$\infty$圏のなす$\infty$圏への関手を定めるとみなせる.
+しかし, 同一視の合成は強結合的ではないので, この言い方は正確ではない. (途中)
+
+\subsection{内ファイブレーションの安定性}
+
+\subsection{最小ファイブレーション}
+
+\subsection{\texorpdfstring{$n$}{n}圏}
+
+\section{Cartesianファイブレーション (途中)}
+
+$p : X \to S$を単体的集合の内ファイブレーションとする.
+このとき, $S$の点$s$が定める$p$の各ファイバー$X_s$は$\infty$圏であり, $S$の辺$f : s \to s'$はファイバー$X_s$と$X_{s'}$の間の同一視を定める. 
+この節では, この同一視が関手$f^\ast : X_{s'} \to X_s$から定まることを見る. 
+大雑把に言うと, $f^\ast$は次のように構成される. 
+$X_{s'}$の任意の点$y$に対して, $f$のリフトである辺$\tilde{f} : x\to y$を選び, $f^\ast(y) := x$とする. 
+しかし, $\tilde{f}$の選択が一意ではないので, $x (=f^\ast(y))$は同値の違いを除いても一意に定まらない. 
+よって, よい$\tilde{f}$を選ぶ必要がある.
+より正確に言うと, $\tilde{f}$を$X$の$p$-Cartesian辺とすればよい. 
+
+2.4.1節では, $p$-Cartesian辺を定義し, 基本的な性質を調べる. 
+特に, $p$-Cartesian辺$\tilde{f}$が$y$と$S$における像によって, 同値の違いを除いて一意に定まることを見る. 
+よって, $X$の$p$-Cartesian辺をうまく選ぶ方法があれば, 関手$f^\ast : X_{s'} \to X_s$を定義することができる. 
+ここから, Cartesianファイブレーションが定義される. 
+これは2.4.2節で勉強する. 
+
+2.4.3節では, Cartesianファイブレーションのクラスの基本的な安定性について述べる. 
+(詳しくは印付き単体的集合の理論を勉強した後の3章で述べる.)
+2.4.4節では, $\infty$圏のCartesianファイブレーション$p : \C \to \D$が与えられたとき, $\C$の性質を調べる代わりに, $\D$と$p$のファイバーについて調べればよいことをみる. 
+このテクニックは非常に便利であり, 2.4.5節と2.4.6節で議論する.
+2.4.7節では, Cartesianファイブレーションの例を構成するときに便利な双ファイブレーションを定義する. 
+
+\subsection{Cartesian辺}
+
+$\C, \C'$を通常の圏, $M : \C^\myop \times \C' \to \Set$を$\C$から$\C'$への同一視とする.
+このとき, $M$がある関手$g : \C' \to \C$から定まる同一視であるか考える. (途中)
+
+\begin{definition}[$p$-Cartesian辺] \label{def.2.4.1.1}
+  $p : X \to S$を単体的集合の内ファイブレーション, $f : x \to y$を$X$の辺とする. 
+  誘導される射
+  \begin{align*}
+    X_{/f} \to X_{/y} \times_{S_{/p(y)}} S_{/p(f)}
+  \end{align*}
+  が自明なKanファイブレーションのとき, $f$は$p$-Cartesianであるという.
+\end{definition}
+
+% \begin{remark} \label{rem.2.4.1.2}
+%   $\C$を通常の圏とする. 
+%   $p : \N(\C) \to \Delta^1$を単体的集合の射とする. 
+%   このとき, $p$は内ファイブレーションである. 
+
+% \end{remark}
+
+Cartesian辺の持つ性質をいくつか述べる. 
+
+\begin{proposition} \label{prop.2.4.1.3}
+  \begin{enumerate}
+    \item $p : X \to S$を単体的集合の同型射とする. 
+    このとき, $X$の任意の辺は$p$-Cartesianである. 
+    \item 次のプルバックの図式を考える. 
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYJyJdLFswLDEsIlMnIl0sWzEsMSwiUyJdLFsxLDAsIlgiXSxbMCwxLCJwJyIsMl0sWzEsMl0sWzMsMiwicCJdLFswLDMsInEiXV0=
+    \[\begin{tikzcd}
+      {X'} & X \\
+      {S'} & S
+      \arrow["{p'}"', from=1-1, to=2-1]
+      \arrow[from=2-1, to=2-2]
+      \arrow["p", from=1-2, to=2-2]
+      \arrow["q", from=1-1, to=1-2]
+    \end{tikzcd}\]
+    $p$を内ファイブレーション, $f$を$X'$の辺とする. 
+    $q(f)$が$p$-Cartesianのとき, $f$は$p$-Cartesianである.
+    \item $p : X \to Y, q : Y \to Z$を内ファイブレーション, $f : x' \to x$を$X$の辺とする.
+    $p(f)$が$q$-Cartesianのとき, $f$が$p$-Cartesianであることと, $f$が$qp$-Cartesianであることは同値である.  
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  (1)と(2)は$p$-Cartesianの定義より従う. 
+
+  (3)を示す. 
+  $p(f)$が$q$-Cartesianかつ$f$が$p$-Cartesianのとき, $f$が$qp$-Cartesianであることは簡単にわかる.
+  $p(f)$が$q$-Cartesianかつ$f$が$qp$-Cartesianのとき, $f$が$p$-Cartesianであることを示す. 
+  (途中)
+\end{proof}
+
+Cartesian辺は図式のリフトを用いて定義することもできる. 
+
+\begin{remark} \label{rem.2.4.1.4}
+  $p : X \to S$を単体的集合の内ファイブレーション, $f : x \to y$を$X$の辺とする. 
+  $f$が$p$-Cartesianであることと, 任意の$n \geq 2$に対して, 次の図式が可換かつリフトを持つことは同値である. 
+  % https://q.uiver.app/#q=WzAsNSxbMCwxLCJcXExhbWJkYV5uX24iXSxbMCwyLCJcXERlbHRhXm4iXSxbMSwxLCJYIl0sWzEsMiwiUyJdLFswLDAsIlxcRGVsdGFee1xce24tMSxuXFx9fSJdLFswLDEsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMl0sWzIsMywicCJdLFsxLDIsIiIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsxLDNdLFs0LDAsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzQsMiwiZiJdXQ==
+  \[\begin{tikzcd}
+    {\Delta^{\{n-1,n\}}} \\
+    {\Lambda^n_n} & X \\
+    {\Delta^n} & S
+    \arrow[hook, from=2-1, to=3-1]
+    \arrow[from=2-1, to=2-2]
+    \arrow["p", from=2-2, to=3-2]
+    \arrow[dashed, from=3-1, to=2-2]
+    \arrow[from=3-1, to=3-2]
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow["f", from=1-1, to=2-2]
+  \end{tikzcd}\]
+\end{remark}
+
+\begin{proof}
+  $f$が$p$-Cartesianであるとする. 
+  つまり, $X_{/f} \to X_{/y} \times_{S_{/p(y)}} S_{/p(f)}$が自明なKanファイブレーションであるとする. 
+  このとき, 次の図式はリフトを持つ.
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHBhcnRpYWwgXFxEZWx0YV5uIl0sWzAsMSwiXFxEZWx0YV5uIl0sWzEsMCwiWF97L3N9Il0sWzEsMSwiWF97L3l9IFxcdGltZXNfe1Nfey9wKHkpfX0gU197L3AoZil9Il0sWzAsMSwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCwyXSxbMiwzXSxbMSwyLCIiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMSwzXV0=
+  \[\begin{tikzcd}
+    {\partial \Delta^n} & {X_{/s}} \\
+    {\Delta^n} & {X_{/y} \times_{S_{/p(y)}} S_{/p(f)}}
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=2-2]
+    \arrow[dashed, from=2-1, to=1-2]
+    \arrow[from=2-1, to=2-2]
+  \end{tikzcd}\]
+  随伴より, 次の図式がリフトを持つことと同値である. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHBhcnRpYWwgXFxEZWx0YV5uIFxcc3RhciBcXERlbHRhXjEgXFxjb3Byb2Rfe1xccGFydGlhbCBcXERlbHRhXm4gXFxzdGFyIFxcRGVsdGFeMH0gXFxEZWx0YV5uIFxcc3RhciBcXERlbHRhXjAiXSxbMCwxLCJcXERlbHRhXm4gXFxzdGFyIFxcRGVsdGFeMSJdLFsxLDAsIlgiXSxbMSwxLCJTIl0sWzAsMSwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCwyXSxbMiwzLCJwIl0sWzEsMiwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzEsM11d
+  \[\begin{tikzcd}
+    {\partial \Delta^n \star \Delta^1 \coprod_{\partial \Delta^n \star \Delta^0} \Delta^n \star \Delta^0} & X \\
+    {\Delta^n \star \Delta^1} & S
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow[from=1-1, to=1-2]
+    \arrow["p", from=1-2, to=2-2]
+    \arrow[dashed, from=2-1, to=1-2]
+    \arrow[from=2-1, to=2-2]
+  \end{tikzcd}\]
+  Joyalの定理より, 包含$\partial \Delta^n \star \Delta^1 \coprod_{\partial \Delta^n \star \Delta^0} \Delta^n \star \Delta^0 \hookrightarrow \Delta^n \star \Delta^1$は$\Lambda^{n+2}_{n+2} \hookrightarrow \Delta^n$と同一視できる. 
+  つまり, 次の図式は可換かつリフトを持つ. 
+  % https://q.uiver.app/#q=WzAsNSxbMCwyLCJcXERlbHRhXm4iXSxbMSwxLCJYIl0sWzEsMiwiUyJdLFswLDEsIlxcTGFtYmRhXntuKzJ9X3tuKzJ9Il0sWzAsMCwiXFxEZWx0YV57XFx7bisxLG4rMlxcfX0iXSxbMSwyLCJwIl0sWzAsMSwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzAsMl0sWzMsMCwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMywxXSxbNCwzLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFs0LDEsImYiXV0=
+  \[\begin{tikzcd}
+    {\Delta^{\{n+1,n+2\}}} \\
+    {\Lambda^{n+2}_{n+2}} & X \\
+    {\Delta^n} & S
+    \arrow["p", from=2-2, to=3-2]
+    \arrow[dashed, from=3-1, to=2-2]
+    \arrow[from=3-1, to=3-2]
+    \arrow[hook, from=2-1, to=3-1]
+    \arrow[from=2-1, to=2-2]
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow["f", from=1-1, to=2-2]
+  \end{tikzcd}\]
+  逆も同様に従う. 
+\end{proof}
+
+Cartesian辺を用いると, \cref{prop.1.2.4.3}は次のように言い換えることができる.  
+
+\begin{remark} \label{rem.restated_prop.1.2.4.3}
+  $\C$を$\infty$圏, $\phi$を$\C$の射, $p : \C \to \Delta^0$を1点への射影とする. 
+  $\phi$が$p$-Cartesianであることと, $\phi$が同値であることは同値である. 
+\end{remark}
+
+実際には, \cref{rem.restated_prop.1.2.4.3}より強い主張が成立する. 
+ 
+\begin{proposition} \label{prop.2.4.1.5}
+  $p : \C \to \D$を$\infty$圏の内ファイブレーション, $f : C \to C'$を$\C$の射とする. 
+  このとき, 次は同値である. 
+  \begin{enumerate}
+    \item $f$は$\C$における同値である. 
+    \item $f$は$p$-Cartesianかつ$p(f)$は$\D$における同値である. 
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  (1)から(2)を示す. 
+  (2)から(1)も同様に示すことができる.
+  $f$が$\C$における同値のとき, $p(f)$は$\D$における同値である. 
+  \cref{prop.2.4.1.3}の(3)において$Z=\Delta^0$とすると, $qp(f)$は$\Delta^0$における同値であり, \cref{rem.restated_prop.1.2.4.3}よりは$qp$-Cartesianである. 
+  よって, $f$は$\C$における同値である.
+\end{proof}
+
+\cref{prop.2.4.1.5}において, $\D$がKan複体のときを考える.  
+
+\begin{corollary}
+  $\D$をKan複体, $p : \C \to \D$を$\infty$圏の内ファイブレーション, $f : C \to C'$を$\C$の射とする. 
+  このとき, 次は同値である. 
+  \begin{enumerate}
+    \item $f$は$\C$における同値である. 
+    \item $f$は$p$-Cartesianである. 
+  \end{enumerate}
+\end{corollary}
+
+\begin{corollary} \label{cor.2.4.1.6}
+  $p : \C \to \D$を$\infty$圏の内ファイブレーションとする. 
+  $\C$の任意の恒等射(つまり, $\C$の任意の退化する辺)は$p$-Cartesianである. 
+\end{corollary}
+
+合成によるCartesian辺のふるまいを見る. 
+
+\begin{proposition} \label{prop.2.4.1.7}
+  $p : \C \to \D$を$\infty$圏の内ファイブレーションとする. 
+  $\sigma : \Delta^2 \to \C$を次のように表される$\C$の$2$単体とする. 
+  % https://q.uiver.app/#q=WzAsMyxbMCwxLCJDXzAiXSxbMiwxLCJDXzIiXSxbMSwwLCJDXzEiXSxbMCwxLCJoIiwyXSxbMCwyLCJmIl0sWzIsMSwiZyJdXQ==
+  \[\begin{tikzcd}
+    & {C_1} \\
+    {C_0} && {C_2}
+    \arrow["h"', from=2-1, to=2-3]
+    \arrow["f", from=2-1, to=1-2]
+    \arrow["g", from=1-2, to=2-3]
+  \end{tikzcd}\]
+  $g$が$p$-Cartesianのとき, $f$が$p$-Cartesianであることと, $h$が$p$-Cartesianであることは同値である. 
+\end{proposition}
+
+\begin{proof}
+  次の2つの射
+  \begin{align*}
+    & i_0 : \C_{/h} \to \C_{/ C_2} \times_{\D_{/p(C_2)}} \D_{p(h)} \\
+    & i_1 : \C_{/f} \to \C_{/ C_1} \times_{\D_{/p(C_1)}} \D_{p(f)}
+  \end{align*}
+  が自明なKanファイブレーションであることが同値であることを示せばよい. 
+  \cref{prop.2.1.2.1}の双対命題より, $i_0$と$i_1$はともに右ファイブレーションである.
+  \cref{lem.2.1.3.4}の双対命題より, $i_0$の任意のファイバーが可縮であることと, $i_1$の任意のファイバーが可縮であることが同値であることを示せばよい.
+  (途中)
+\end{proof}
+
+次の目標はCartesian辺の概念を扱いやすいように書き換えることである. 
+後で使いやすいように, Cartesian辺の双対概念であるcoCartesian辺を用いて議論を進める. 
+
+\begin{definition}[$p$-coCartesian辺]
+  $p : X \to S$を単体的集合の射, $f$を$X$の辺とする. 
+  $f$が$p^\myop$-Cartesianのとき, $f$は$p$-coCartesianであるという.
+\end{definition}
+
+Cartesian辺と同様に, coCartesian辺も図式のリフトを用いて表すことができる.
+
+\begin{proposition} \label{prop.2.4.1.8}
+  $p : Y \to S$を内ファイブレーション, $e : \Delta^1 \to Y$を$Y$の辺とする.
+  このとき, $e$が$p$-coCartesianであることと, 任意の$n \geq 1$において次の図式が可換かつリフトを持つことは同値である.
+  % https://q.uiver.app/#q=WzAsNSxbMCwxLCJcXERlbHRhXm4gXFx0aW1lcyBcXHswXFx9IFxcY29wcm9kX3tcXHBhcnRpYWwgXFxEZWx0YV5uIFxcdGltZXMgXFx7MFxcfX0gXFxwYXJ0aWFsIFxcRGVsdGFebiBcXHRpbWVzIFxcRGVsdGFeMSJdLFswLDIsIlxcRGVsdGFebiBcXHRpbWVzIFxcRGVsdGFeMSJdLFsxLDIsIlMiXSxbMSwxLCJZIl0sWzAsMCwiXFxEZWx0YV4xIFxcdGltZXMgXFx7MFxcfSJdLFswLDEsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzEsMiwiZyIsMl0sWzMsMiwicCJdLFswLDMsImYiXSxbMSwzLCJoIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzQsMCwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNCwzLCJlIiwwLHsiY3VydmUiOi0yfV1d
+  \[\begin{tikzcd}
+    {\Delta^1 \times \{0\}} \\
+    {\Delta^n \times \{0\} \coprod_{\partial \Delta^n \times \{0\}} \partial \Delta^n \times \Delta^1} & Y \\
+    {\Delta^n \times \Delta^1} & S
+    \arrow[hook, from=2-1, to=3-1]
+    \arrow["g"', from=3-1, to=3-2]
+    \arrow["p", from=2-2, to=3-2]
+    \arrow["f", from=2-1, to=2-2]
+    \arrow["h"', dashed, from=3-1, to=2-2]
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow["e", curve={height=-12pt}, from=1-1, to=2-2]
+  \end{tikzcd}\] 
+\end{proposition}
+
+\begin{remark} \label{rem.2.4.1.9}
+  $p : Y \to S$を内ファイブレーション, $x$を$X$の点, $\overline{f} : \overline{x'} \to p(x)$を$S$の辺とする. 
+  このとき, $p(f)=\overline{f}$を満たす$p$-Cartesian辺$f : x' \to x$が複数存在する可能性がある. 
+  しかし, 同じdomainを持つこれらの辺は互いに同値であることが分かる.
+  つまり, $\overline{f}$をリフトする$p$-Cartesian辺$f$は$\infty$圏$X_{/x} \times_{S_{/ p(x)}} \{\overline{f}\}$における終対象であり, $\overline{f}$と$x$によりホモトピーの違いを除いて一意に定まる. 
+\end{remark}
+
+単体的圏におけるCartesian辺の意味を考える. 
+
+\begin{proposition} \label{prop.2.4.1.10}
+  
+\end{proposition}
+
+Cartesian辺より広いクラスについて議論した方がいい場合がある. 
+それが局所Cartesian辺である.
+
+\begin{definition}[局所$p$-Cartesian辺] \label{def.2.4.1.11}
+  $p : X \to S$を単体的集合の射, $e : \Delta^1 \to X$を$X$の辺とする.
+  次のプルバックの図式を考える. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYIFxcdGltZXNfUyBcXERlbHRhXjEiXSxbMCwxLCJcXERlbHRhXjEiXSxbMSwxLCJTIl0sWzEsMCwiWCJdLFswLDEsInAnIiwyXSxbMSwyLCJwKGUpIiwyXSxbMCwzXSxbMywyLCJwIl0sWzAsMiwiIiwwLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
+  \[\begin{tikzcd}
+    {X \times_S \Delta^1} & X \\
+    {\Delta^1} & S
+    \arrow["{p'}"', from=1-1, to=2-1]
+    \arrow["{p(e)}"', from=2-1, to=2-2]
+    \arrow[from=1-1, to=1-2]
+    \arrow["p", from=1-2, to=2-2]
+    \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+  \end{tikzcd}\]
+  $e$がファイバー$X \times_S \Delta^1$の$p'$-Cartesian辺のとき, $e$は局所$p$-Cartesian(locally $p$-Cartesian)であるという.
+\end{definition}
+
+\begin{remark} \label{rem.2.4.1.12}
+  次の単体的集合のプルバックの図式を考える.
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYJyJdLFswLDEsIlMnIl0sWzEsMSwiUyJdLFsxLDAsIlgiXSxbMCwxLCJwJyIsMl0sWzEsMl0sWzAsMywiZiJdLFszLDIsInAiXSxbMCwyLCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
+  \[\begin{tikzcd}
+    {X'} & X \\
+    {S'} & S
+    \arrow["{p'}"', from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+    \arrow["f", from=1-1, to=1-2]
+    \arrow["p", from=1-2, to=2-2]
+    \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+  \end{tikzcd}\]
+  $p$を内ファイブレーションとする. (このとき, $p'$も内ファイブレーションである.)
+  このとき, $X'$の辺$e$が局所$p'$-Cartesianであることと, $f(e)$が$p$-Cartesianであることは同値である.
+\end{remark}
+
+合成による局所Cartesian辺のふるまいを見る. 
+
+\begin{proposition} 
+  $p : \C \to \D$を$\infty$圏の内ファイブレーションとする. 
+  $\sigma : \Delta^2 \to \C$を次のように表される$\C$の$2$単体とする. 
+  % https://q.uiver.app/#q=WzAsMyxbMCwxLCJDXzAiXSxbMiwxLCJDXzIiXSxbMSwwLCJDXzEiXSxbMCwxLCJoIiwyXSxbMCwyLCJmIl0sWzIsMSwiZyJdXQ==
+  \[\begin{tikzcd}
+    & {C_1} \\
+    {C_0} && {C_2}
+    \arrow["h"', from=2-1, to=2-3]
+    \arrow["f", from=2-1, to=1-2]
+    \arrow["g", from=1-2, to=2-3]
+  \end{tikzcd}\]
+  $g$が局所$p$-Cartesianのとき, $f$が局所$p$-Cartesianであることと, $h$が局所$p$-Cartesianであることは同値である. 
+\end{proposition}
+
+次の命題は局所Cartesian辺のリフトの一意性を示している. 
+
+\begin{remark} % kerodon 5.1.3.8
+  $p : X \to S$を内ファイブレーションとする. 
+  $g : y \to z$を$X$の局所$p$-Cartesian辺, $h : x \to z$を$p(h)=p(g)$を満たす$X$の辺とする.
+  $s=p(x)=p(y)$とする. 
+  $g$は局所$p$-Cartesianなので, 次を満たす$X$の2単体が存在する. 
+  \begin{align*}
+    d^2_0(\sigma)=g, d^2_1(\sigma)=h, p(\sigma)=s_0(p(g))
+  \end{align*}
+  $\infty$圏$X_s$における射$f=d^2_2(\sigma)$を用いると, $2$単体$\sigma$は次のように表せる.
+  % https://q.uiver.app/#q=WzAsMyxbMCwxLCJ4Il0sWzIsMSwieiJdLFsxLDAsInkiXSxbMCwxLCJoIiwyXSxbMCwyLCJmIl0sWzIsMSwiZyJdXQ==
+  \[\begin{tikzcd}
+    & y \\
+    x && z
+    \arrow["h"', from=2-1, to=2-3]
+    \arrow["f", from=2-1, to=1-2]
+    \arrow["g", from=1-2, to=2-3]
+  \end{tikzcd}\]
+  このとき, 次は同値である. 
+  \begin{enumerate}
+    \item $f$は$X_s$における同値である. 
+    \item $f$は局所$p$-Cartesian辺である.
+  \end{enumerate}
+\end{remark}
+
+\begin{corollary}
+  $q : X \to S$を内ファイブレーションとする. 
+  $z$を$X$の点, $e : s \to p(z)$を$S$の辺とする. 
+  $X$の$p$-Cartesian辺$g : y \to z$が存在して, $p(g)=e$を満たすとする. 
+  このとき, $p(h)=e$を満たす任意の局所$p$-Cartesian辺$h : x \to z$は$p$-Cartesianである. 
+\end{corollary}
+
+\subsection{Cartesianファイブレーション}
+
+この節では, 単体的集合のCartesianファイブレーションを勉強する. 
+Cartesianファイブレーションの理論は右ファイブレーションの理論の一般化である.
+% $f : X \to S$が右ファイブレーションのとき, $S$の任意の点$s$に対して, ファイバー$X_s$はKan複体であった.
+
+\begin{definition}[Cartesianファイブレーション] \label{def.2.4.2.1}
+  $p : X \to S$を単体的集合の射とする.
+  $p$が次の条件を満たすとき, $p$をCartesianファイブレーション(Cartesian fibration)という.
+  \begin{enumerate}
+    \item $p$は内ファイブレーションである. 
+    \item $S$の任意の辺$f : x \to y$と$p(\tilde{y})=y$を満たす$X$の点$\tilde{y}$に対して, ある$p$-Cartesina辺$\tilde{f} : \tilde{x} \to \tilde{y}$が存在して, $p(\tilde{f})=f$である.
+  \end{enumerate}
+\end{definition}
+
+\begin{remark} \label{rem.2.4.2.2}
+  $F : \C \to \C'$を通常の関手とする, 
+  誘導される射$\N(F) : \N(\C) \to \N(\D)$は自動的に内ファイブレーションである. 
+  このとき, $\N(F)$がCartesianファイブレーションであることと, $F$が通常のCartesianファイブレーションであることは同値である. 
+\end{remark}
+
+次の命題はCartesianファイブレーションの定義から従う. 
+
+\begin{proposition} \label{prop.2.4.2.3}
+  \begin{enumerate}
+    \item 単体的集合の任意の同型射はCartesianファイブレーションである.
+    \item Cartesianファイブレーションのクラスは基底の取り換えで閉じている. 
+    \item Cartesianファイブレーションのクラスは合成で閉じる. 
+  \end{enumerate}
+\end{proposition}
+
+$\infty$圏$\C$がKan複体であることと, $\C$の任意の射が同値であることは同値である. 
+この主張をファイブレーションの言葉で一般化する. 
+
+\begin{proposition} \label{prop.2.4.2.4}
+  $p : \C \to \D$を内ファイブレーションとする. 
+  このとき, 次は全て同値である. 
+  \begin{enumerate}
+    \item $p$はCartesianファイブレーションかつ, $X$の任意の辺は$p$-Cartesianである.
+    \item $p$は右ファイブレーションである. 
+    \item $p$はCartesianファイブレーションかつ, $S$の任意の点$s$に対して, ファイバー$X_secnumdepth$はKan複体である.
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  (1)と(2)の同値性を示す. 
+  \cref{rem.2.4.1.4}より, $X$の辺が$p$-Cartesianであることと, $p$が任意の$n \geq 2$において$\Lambda^n_n \hookrightarrow \Delta^n$に対してRLPを持つことは同値である. 
+  $p$がCartesianファイブレーションのとき, Cartesianファイブレーションの定義(2)より, $p$は$\Lambda^1_1 \hookrightarrow \Delta^1$に対してRLPを持つ. 
+  つまり, $p$は右ファイブレーションである. 
+
+  (2)から(3)を示す. 
+  (2)から(1)はすでに示したので, $p$はCartesianファイブレーションである. 
+  2.1.1節で, 右ファイブレーションのファイバーがKan複体になることはすでに見たので, (3)は成立する. 
+
+  (3)から(1)を示す. 
+  $f : x \to y$を$X$の辺とする. 
+  $p$はCartesianファイブレーションなので, Cartesianファイブレーションの条件(2)において$f$を$p(f) : p(x) \to p(y)$とすると, ある$p$-Cartesian辺$f' : x' \to y$が存在して, $p(f')=p(f)$である. 
+  $f'$は$p$-Cartesinanなので, ある$2$単体$\sigma : \Delta^2 \to X$が存在して, 
+  \begin{align*}
+    d^2_0(\sigma) = g, d^2_1(\sigma) = h, p(\sigma) = s_0(p(f))
+  \end{align*}
+  を満たし, 次のように表される. 
+  % https://q.uiver.app/#q=WzAsMyxbMCwxLCJ4Il0sWzIsMSwieSJdLFsxLDAsIngnIl0sWzAsMSwiZiIsMl0sWzAsMiwiZyJdLFsyLDEsImYnIl1d
+  \[\begin{tikzcd}
+    & {x'} \\
+    x && y
+    \arrow["f"', from=2-1, to=2-3]
+    \arrow["g", from=2-1, to=1-2]
+    \arrow["{f'}", from=1-2, to=2-3]
+  \end{tikzcd}\]
+  $g$はファイバー$X_{p(x)}$の射である. 
+  (3)の仮定より, $X_{p(x)}$はKan複体なので, $g$は同値である. 
+  よって, $g$は$p$-Cartesianであり, $f$も$p$-Cartesianである. % kerodon prop.5.1.4.14
+\end{proof}
+
+\subsection{Cartesianファイブレーションの安定性}
+
+\subsection{射空間とCartesianファイブレーション}
+
+\subsection{応用 : アンダー圏の不変量}
+
+\subsection{応用 : 1点上の圏的ファイブレーション}
+
+\subsection{双ファイブレーション}
+
+\newpage
+
+\chapter{\texorpdfstring{$\infty$}{infty}圏のなす\texorpdfstring{$\infty$}{infty}圏}
+
+2つの$\infty$圏$\C,\D$は単体的集合として同型ではなく, それらが圏同値であるときに「同じである」とみなされる.
+つまり, ($\sSet$の充満部分圏としての) $\infty$圏のなす通常の圏ではなく, 次で定義されるような$\infty$圏の枠組みで考えるべきである. 
+
+\begin{definition}[(小)$\infty$圏のなす$\infty$圏]
+  単体的圏$\Cat^\Delta_\infty$を次のように定義する. 
+  \begin{itemize}
+    \item $\Cat^\Delta_\infty$の対象は(小)$\infty$圏 
+    \item $\Cat^\Delta_\infty$の任意の対象$\C,\D$に対して, $\Map_{\Cat^\Delta_\infty}(\C,\D)$は$\infty$圏$\Fun(\C,\D)$を含む最大のKan複体
+  \end{itemize}
+  単体的圏$\Cat^\Delta_\infty$の単体的脈体$\mathfrak{N}(\Cat^\Delta_\infty)$を(小)$\infty$圏のなす$\infty$圏($\infty$-category of (small) $\infty$-categories)といい, $\Cat_\infty$と表す. 
+\end{definition}
+
+\begin{remark}
+  $\Cat_\infty$における合成は強結合的である. 
+  $\Cat_\infty$における関手は単体的集合の射なので, 合成は簡単に計算することができる. 
+  これは高次圏論を$\infty$圏の枠組みで考えることの大きなメリットである.
+\end{remark}
+
+\begin{remark}
+  $\Cat^\Delta_\infty$における射空間はKan複体である. 
+  \cref{prop.1.1.5.10}より, $\Cat_\infty$は$\infty$圏である.
+\end{remark}
+
+\begin{remark}
+  $\Cat_\infty$の対象は$\infty$圏であり, $1$射は関手, $2$射は関手の間のホモトピーで与えられる. 
+  つまり, $\Cat_\infty$は関手の間の可逆でない自然変換の情報をすべて捨てている. 
+\end{remark}
+
+この章の目標は$\infty$圏$\Cat_\infty$を調べることである. 
+例えば, $\Cat_\infty$は任意の極限と余極限を持つ. 
+この主張へのアプローチ方法は2種類ある. 
+まずは, 極限と余極限の具体的な構成を与えることである. (3.3.3節と3.3.4節を見よ.)
+他には, $\Cat_\infty$を(単体的)モデル圏$\bfA$の$\infty$圏として与え, $\Cat_\infty$における極限と余極限を$\bfA$におけるホモトピー極限とホモトピー余極限の存在から示すことができることを見る (系4.2.4.8).
+$\Cat_\infty$における対象は$\sSet$上のJoyalモデル構造における両ファイブラント対象と同一視できる. 
+しかし, Joyalモデル構造は通常の単体的構造と整合しないので, \cite{HTT} Corollary.4.2.4.8をそのまま用いることはできない. 
+この問題に対処するために, 印付き単体的集合のなす圏$\sSet^+$を新しく定義する. 
+$\sSet^+$上が単体的モデル圏となるようなモデル構造を定義し, 単体的圏の圏同値$\Cat^\Delta_\infty \cong (\sSet^+)^\circ$が成立することを見る. 
+これにより, $\Cat_\infty$を$\sSet^+$における$\infty$圏とみなすことができ, \cite{HTT} Corollary.4.2.4.8を考えることができる. 
+
+3.1節では, 印付き単体的集合を定義する. 
+特に, $\sSet^+$上のモデル構造だけでなく, 単体的集合$S$上の印付き単体的集合のなす圏$(\sSet^+)_{/ S}$上のモデル構造も定義する. 
+$(\sSet^+)_{/ S}$におけるファイブラント対象はCartesianファイブレーション$X \to S$と同一視でき, これは関手$S^\myop \to \Cat_\infty$と同一視できる. 
+3.2節では, straightening関手とunstraightening関手を定義する. 
+これらの関手により, $S$上のCartesianファイブレーションと関手$S^\myop \to \Cat_\infty$を行き来することができる. 
+この対応により, Cartesianファイブレーションと$\infty$圏$\Cat_\infty$の両方を調べることができる. 
+3.3節でこの応用を紹介する. 
+
+\section{印付き単体的集合}
+
+$\sSet$上のJoyalモデル構造は$\infty$圏の理論を調べるために非常に役立つ. 
+しかし, この相対版はいくつかの点で不便である.
+簡単に言うと, 圏的ファイブレーション$p : X \to S$は$S$の点$s$でパラメタ付けられた$\infty$圏$X_s$の族を定める. 
+しかし, より一般に$X_s$が$s$の関手としてみなせる場合に興味があることが多い.
+2.4.2節で見たように, これは$p$が(co)Cartesianファイブレーションを用いて表される.  
+\cite{HTT} Proposition.3.3.1.7から, 任意のCartesianファイブレーションが圏的ファイブレーションであることが従う. 
+しかし, 逆は一般には成立しない. 
+よって, $(\sSet)_{/S}$上に反変モデル構造とは異なる, ファイブラント対象がちょうど$S$上のCartesianファイブレーションであるようなモデル圏を定義する必要がある. 
+
+しかしながら, これはあまり意味がないことが分かる. 
+モデル圏を定義するためにはファイブラント置換を考える必要がある. 
+つまり, 単体的集合の任意の射$p : X \to S$が$p$により定まるCartesianファイブレーション$q$を用いて次のように分解される必要がある.
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJYIl0sWzIsMCwiWSJdLFsxLDEsIlMiXSxbMCwxLCJcXHBoaSJdLFswLDIsInAiLDJdLFsxLDIsInEiXV0=
+\[\begin{tikzcd}
+	X && Y \\
+	& S
+	\arrow["\phi", from=1-1, to=1-3]
+	\arrow["p"', from=1-1, to=2-2]
+	\arrow["q", from=1-3, to=2-2]
+\end{tikzcd}\]
+ここで, $X$の辺$f$に対して, $\phi(f)$は$Y$の$q$-Cartesian辺にある必要があるかという疑問が生じる. 
+この情報は$Y$の構成に必要である. 
+よって, $X$の特定の辺を区別してデータとして持つような定式化を考える必要がある.
+
+\begin{definition}[印付き単体的集合]
+  $X$を単体的集合, $\E$を任意の退化する辺を含む$X$の辺の集合とする. 
+  このとき, 組$(X,\E)$を印付き単体的集合(marked simplicial set)という. 
+  $\E$に属する$X$の辺を印付き辺(marked edge)という. 
+\end{definition}
+
+印付き単体的集合の印付き辺を保つような射を定義する. 
+
+\begin{definition}[印付き単体的集合の射]
+  $(X,\E), (Y,\E')$を印付き単体的集合, $f : X \to Y$を単体的集合の射とする. 
+  $f(\E) \subset \E'$を満たすとき, $f : (X,\E) \to (Y,\E')$を印付き単体的集合の射(morphism)という. 
+\end{definition}
+
+\begin{notation}
+  印付き単体的集合と印付き単体的集合の射の圏を$\sSet^+$と表す. 
+\end{notation}
+
+任意の単体的集合は次の極端な方法で印付き単体的集合とみなせる. 
+
+\begin{example}
+  $S$を単体的集合とする. 
+  \begin{itemize}
+    \item $S_1$を$S$の全ての辺の集合とすると, $S^\sharp := (S,S_1)$は印付き単体的集合である. 
+    \item $s_0(S_0)$を$S$の退化する辺の集合とすると, $S^\flat := (S,s_0(S_0))$は印付き単体的集合である. 
+  \end{itemize}
+\end{example}
+
+\begin{notation}
+  $S$を単体的集合とする. 
+  $S$上の印付き単体的集合のなす圏を$(\sSet^+)_{/ S^\sharp}$や単に$(\sSet^+)_{/ S}$と表す. 
+\end{notation}
+
+3章の目的は印付き単体的集合の理論を学ぶことである. 
+特に, 反変モデル構造とは異なる$(\sSet^+)_{/ S}$上のモデル構造を勉強する. 
+3.1.1節では, $(\sSet^+)_{/ S}$における印付き緩射の概念を導入する.
+3.1.2節では, 印付き緩射のクラスの基本的な性質を調べる. 
+3.1.3節では, 任意の単体的集合$S$に対する$(\sSet^+)_{/ S}$上のCartesianモデル構造を定義する. 
+3.1.4節では, このモデル構造について調べる. 
+特に, ファイブラント対象がちょうど$S$上のCartesianファイブレーション$X \to S$であるような単体的モデル構造であることを示す. 
+3.1.5節では, $(\sSet^+)_{/ S}$上のCartesianモデル構造, Joyalモデル構造, 反変モデル構造の関係を調べる. 
+
+\subsection{印付き緩射}
+
+この節では, $(\sSet^+)_{/ S}$における印付き緩射の概念を導入する.
+印付き緩射に対してRLPを持つ単体的集合の射はCartesianファイブレーションと深い関係がある.
+印付き緩射の理論は3.1.3節で定義するCartesianモデル構造を調べるときに非常に役に立つ. 
+例えば, 任意の印付き緩射はCartesianモデル構造におけるtrivial cofibrationである. 
+(逆は成立しない.)
+このように, $(\sSet^+)_{/ S}$における印付き緩射は$\sSet$における内緩射と似ている. 
+
+\begin{definition}[印付き緩射] \label{def.3.1.1.1}
+  次の条件を満たす印付き単体的集合のなす射の最小の弱飽和類に属する射を印付き緩射(marked anodyne morphism)
+  \footnote{
+    \cite{Land01}に従うと, marked right anodyneと呼ぶべきものである. 
+    \cite{Land01}では, 双対的なmarked left anodyneを定義し, 議論を進めている. 
+  }
+  という.
+  \begin{enumerate}
+    \item 任意の$0<i<n$に対して, 包含$(\Lambda^n_i)^\flat \hookrightarrow (\Delta^n)^\flat$. 
+    \item 任意の$n > 0$に対して, 包含$(\Lambda^n_n, \E \cap (\Lambda^n_n)_1) \hookrightarrow (\Delta^n,\E)$. 
+    ここで, $\E$は$\Delta^n$の全ての退化する辺の集合と$\Delta^{\{n-1,n\}}$の和集合である. 
+    \item 包含$(\Lambda^2_1)^\sharp \coprod_{(\Lambda^2_1)^\flat} (\Delta^2)^\flat \hookrightarrow (\Delta^2)^\sharp$.
+    \item 任意のKan複体$K$に対して, 射$K^\flat \to K^\sharp$.
+  \end{enumerate}
+\end{definition}
+
+\begin{remark}
+  印付き緩射の定義における条件(1)は次のように書き変えてもよい. 
+  \begin{itemize}
+    \item 単体的集合の任意の内緩射$A \to B$に対して, 誘導される射$A^\flat \to B^\flat$
+  \end{itemize}
+\end{remark}
+
+印付き緩射は次のように特徴づけることができる. 
+
+\begin{proposition} \label{prop.3.1.1.6}
+  $p : X \to S$を印付き単体的集合の射とする. 
+  $p$が任意の印付き緩射に対してRLPを持つことと, 次の全ての条件を満たすことは同値である. 
+  \begin{description}
+    \item[(A)] $p$は内ファイブレーションである. 
+    \item[(B)] $X$の辺$e$が印付きであることと, $p(e)$が印付きかつ$e$が$p$-Cartesianであることは同値である. 
+    \item[(C)] $X$の任意の対象$y$と$S$の印付き射$\overline{e} : \overline{x} \to p(y)$に対して, $X$のある印付き射$e : x \to y$が存在して, $p(e) = \overline{e}$である. 
+  \end{description}
+\end{proposition}
+
+\begin{proof}
+  $p : X \to S$が任意の印付き緩射に対してRLPを持つとする. 
+  \cref{def.3.1.1.1}の条件(1)より, 条件(A)は従う. 
+  \cref{def.3.1.1.1}の条件(2)において$n=1$とすると, 次の図式はリフトを持つので条件(C)は従う.  
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCIoMSxcXHsxXFx9KSJdLFswLDEsIigwIFxcdG8gMSwgXFx7MCwxXFx9KSJdLFsxLDAsIlgiXSxbMSwxLCJTIl0sWzAsMSwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCwyXSxbMiwzLCJwIl0sWzEsM10sWzEsMiwiIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+  \[\begin{tikzcd}
+    {(1,\{1\})} & X \\
+    {(0 \to 1, \{0,1\})} & S
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow[from=1-1, to=1-2]
+    \arrow["p", from=1-2, to=2-2]
+    \arrow[from=2-1, to=2-2]
+    \arrow[dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+  条件(B)を示す. 
+  まず, $X$の辺$e : (\Delta^1)^\sharp \to X$が印付きであるとする. 
+  \cref{rem.2.4.1.4}より, $e$が$p$-Cartesianであることを示すためには, 次の図式が可換かつリフトを持つことを示せばよい. 
+  % https://q.uiver.app/#q=WzAsNSxbMCwxLCJcXExhbWJkYV5uX24iXSxbMCwyLCJcXERlbHRhXm4iXSxbMSwxLCJYIl0sWzEsMiwiUyJdLFswLDAsIlxcRGVsdGFee1xce24tMSxuXFx9fSJdLFswLDEsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMl0sWzIsMywicCJdLFsxLDIsIiIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsxLDNdLFs0LDAsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzQsMiwiZiJdXQ==
+  \[\begin{tikzcd}
+    {\Delta^{\{n-1,n\}}} \\
+    {\Lambda^n_n} & X \\
+    {\Delta^n} & S
+    \arrow[hook, from=2-1, to=3-1]
+    \arrow[from=2-1, to=2-2]
+    \arrow["p", from=2-2, to=3-2]
+    \arrow[dashed, from=3-1, to=2-2]
+    \arrow[from=3-1, to=3-2]
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow["e", from=1-1, to=2-2]
+  \end{tikzcd}\]
+  \cref{def.3.1.1.1}の条件(3)より, 次の図式はリフトをもつ. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCIoXFxMYW1iZGFebl9uLCBcXEUgXFxjYXAgKFxcTGFtYmRhXm5fbilfMSkgIl0sWzAsMSwiKFxcRGVsdGFebixcXEUpIl0sWzEsMCwiWCJdLFsxLDEsIlMiXSxbMCwxLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDJdLFsyLDMsInAiXSxbMSwzXSxbMSwyLCIiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+  \[\begin{tikzcd}
+    {(\Lambda^n_n, \E \cap (\Lambda^n_n)_1) } & X \\
+    {(\Delta^n,\E)} & S
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow[from=1-1, to=1-2]
+    \arrow["p", from=1-2, to=2-2]
+    \arrow[from=2-1, to=2-2]
+    \arrow[dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+  よって, 求める図式はリフトを持つ.
+
+  逆に, $p(e)$が印付きかつ$e$が$p$-Cartesianであるとする. 
+  \cref{def.3.1.1.1}の条件(2)において$n=1$とすると, 次の図式はリフトを持つ.
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHswXFx9Il0sWzAsMSwiKFxcRGVsdGFeMSleXFxzaGFycCJdLFsxLDAsIlgiXSxbMSwxLCJTIl0sWzAsMSwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCwyLCJ4Il0sWzIsMywicCJdLFsxLDMsInAoZikiLDJdLFsxLDIsImciLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+  \[\begin{tikzcd}
+    {\{1\}} & X \\
+    {(\Delta^1)^\sharp} & S
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow["y", from=1-1, to=1-2]
+    \arrow["p", from=1-2, to=2-2]
+    \arrow["{p(f)}"', from=2-1, to=2-2]
+    \arrow["g"', dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+  条件(C)より, $g$は印付きかつ$p$-Cartesianである.
+  \cref{def.3.1.1.1}の条件(2)において$n=2$とすると, 次の図式はリフトを持つ.
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCIoXFxMYW1iZGFeMl8yLCBcXEUgXFxjYXAgKFxcTGFtYmRhXjJfMilfMSkgIl0sWzAsMSwiKFxcRGVsdGFeMixcXEUpIl0sWzEsMCwiWCJdLFsxLDEsIlMiXSxbMCwxLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDIsIihnLGYpIl0sWzIsMywicCJdLFsxLDNdLFsxLDIsIlxcc2lnbWEiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+  \[\begin{tikzcd}
+    {(\Lambda^2_2, \E \cap (\Lambda^2_2)_1) } & X \\
+    {(\Delta^2,\E)} & S
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow["{(g,f)}", from=1-1, to=1-2]
+    \arrow["p", from=1-2, to=2-2]
+    \arrow[from=2-1, to=2-2]
+    \arrow["\sigma"', dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+  ここで, 上の水平な射は次のように表せる. 
+  % https://q.uiver.app/#q=WzAsMyxbMCwxLCIwIl0sWzIsMSwiMiJdLFsxLDAsIjEiXSxbMCwxLCJmIiwyXSxbMCwyLCIiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMiwxLCJnIl1d
+  \[\begin{tikzcd}
+    & 1 \\
+    0 && 2
+    \arrow["f"', from=2-1, to=2-3]
+    \arrow[dashed, from=2-1, to=1-2]
+    \arrow["g", from=1-2, to=2-3]
+  \end{tikzcd}\]
+  また, 下の水平な射は次のように表せる$pf(=pg)$の退化な面である. 
+  % https://q.uiver.app/#q=WzAsMyxbMCwxLCJwKDApIl0sWzIsMSwicCgyKSJdLFsxLDAsInAoMSkiXSxbMCwxLCJwKGYpIiwyXSxbMCwyLCJcXGlkIiwwLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMiwxLCJwKGcpIl1d
+  \[\begin{tikzcd}
+    & {p(1)} \\
+    {p(0)} && {p(2)}
+    \arrow["{p(f)}"', from=2-1, to=2-3]
+    \arrow["\id", Rightarrow, no head, from=2-1, to=1-2]
+    \arrow["{p(g)}", from=1-2, to=2-3]
+  \end{tikzcd}\]
+  $f$と$g$は$p$-Cartesianなので, \cref{prop.2.4.1.7}より$d_2(\sigma)$も$p$-Cartesianである. 
+  $p(d_2(\sigma))=\id_{p(y)}$なので, \cref{prop.2.4.1.5}より$d_2(\sigma)$は$\infty$圏$X_{p(x)}$における同値である. 
+  $X_{p(x)}$に含まれる最大Kan複体を$K$と表す. 
+  \cref{def.3.1.1.1}の条件(4)より, 次の図式はリフトをもつ.
+  % https://q.uiver.app/#q=WzAsNSxbMCwwLCJLXlxcZmxhdCJdLFswLDEsIkteXFxzaGFycCJdLFsxLDAsIlhfe3AoeCl9Il0sWzIsMCwiWCJdLFsyLDEsIlMiXSxbMCwxXSxbMCwyLCIiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFsyLDNdLFszLDQsInAiXSxbMSw0XSxbMSwzLCIiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+  \[\begin{tikzcd}
+    {K^\flat} & {X_{p(x)}} & X \\
+    {K^\sharp} && S
+    \arrow[from=1-1, to=2-1]
+    \arrow[hook, from=1-1, to=1-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow["p", from=1-3, to=2-3]
+    \arrow[from=2-1, to=2-3]
+    \arrow[dashed, from=2-1, to=1-3]
+  \end{tikzcd}\]
+  よって, $d_2(\sigma)$は印付きである. 
+  $g$と$h$は印付きなので, \cref{def.3.1.1.1}の条件(3)より$f=d_1(\sigma)$も印付きである. 
+
+  次に, 条件(A)から(C)を満たしているとする. 
+  条件(A)より, \cref{def.3.1.1.1}の条件(1)は従う. 
+  条件(C)と条件(B)の任意の印付き辺が$p$-Cartesianであることより, \cref{def.3.1.1.1}の条件(2)は従う.
+  単体的集合の射$p : X \to S$が$(\Lambda^2_1)^\sharp \coprod_{(\Lambda^2_1)^\flat} (\Delta^2)^\flat \hookrightarrow (\Delta^2)^\sharp$に対してRLPを持つことを示す. 
+
+\end{proof}
+
+\begin{corollary} \label{cor.3.1.1.7}
+  次の包含$(\Lambda^2_2)^\sharp \coprod_{(\Lambda^2_2)^\flat} (\Delta^2)^\flat \hookrightarrow (\Delta^2)^\sharp$は印付き緩射である. 
+\end{corollary}
+
+\begin{proof}
+  \cref{prop.3.1.1.6}の条件にある任意の射$p : X \to S$に対して, $i$がLLPを持つことを示せばよい. 
+  $(\Lambda^2_2)^\sharp \coprod_{(\Lambda^2_2)^\flat} (\Delta^2)^\flat = (\Delta^2, \Delta^{\{0,1\}} \cup  \Delta^{\{0,2\}})$と同一視できる. 
+  $i$がLLPを持つことは\cref{prop.3.1.1.6}の証明と\cref{prop.2.4.1.7}から従う. 
+\end{proof}
+
+\begin{definition} \label{def.3.1.1.8}
+  $p : X \to S$を単体的集合のCartesianファイブレーションとする. 
+  $\E$を$X$の$p$-Cartesianファイブレーションの集合とすると, $X^\natural := (X,\E)$は印付き単体的集合である. 
+\end{definition}
+
+\begin{remark} \label{rem.3.1.1.10}
+  \cref{prop.3.1.1.6}より, 印付き単体的集合の射$(Y,\E) \to S^\natural$が任意の印付き緩射に対してRLPを持つことと, 単体的集合の射$Y \to S$がCartesianファイブレーションかつ$(Y,\E)=Y^\natural$であることは同値である. 
+\end{remark}
+
+\subsection{印付き緩射の安定性}
+
+この節の目標は次の安定性を示すことである. 
+
+\begin{proposition}
+  $p : X \to S$を単体的集合のCartesianファイブレーション, $K$を単体的集合とする. 
+  このとき, 次が成立する. 
+  \begin{enumerate}
+    \item 誘導される射$p^K : X^K \to S^K$はCartesianファイブレーションである.
+    \item 辺$\Delta^1 \to X^K$が$p^K$-Cartesianであることと, $K$の任意の点$k$に対して辺$\Delta^1 \to X$が$p$-Cartesianであることは同値である. 
+  \end{enumerate}
+\end{proposition}
+
+2.4.3節の結果を用いるとad.hocに証明することができるが, ここでは印付き単体的集合の言葉を用いて証明する. 
+
+\begin{definition}[コファイブレーション]
+  $f : (X,\E) \to (X',\E')$を印付き単体的集合の射とする. 
+  単体的集合の射$X \to X'$が通常のコファイブレーションのとき, $f$をコファイブレーション(cofibration)という. 
+\end{definition}
+
+\subsection{Cartesianモデル構造}
+
+$S$を単体的集合とする. 
+この節の目標は, $S$上の印付き単体的集合の圏$(\sSet^+)_{/S}$上のCartesianモデル構造を定義することである. 
+最終的には, $(\sSet^+)_{/S}$上のCartesianモデル構造におけるファイブラント対象がちょうどCartesianファイブレーション$p : X \to S$と一致し, $S^\myop$から$\infty$圏$\Cat_\infty$への関手を定めることをみる.
+
+\begin{definition}[印付き単体的集合の積]
+  $(X,\E), (Y,\E')$を印付き単体的集合とする. 
+  $X \times Y$を単体的集合の通常の積とする. 
+  $\E$と$\E'$の通常の直積を$\E \times \E'$と表す. 
+  このとき, $(X \times Y, \E \times \E')$は印付き単体的集合である. 
+\end{definition}
+
+\begin{definition}[印付き単体的集合の内部ホム]
+  $(X,\E), (Y,\E')$を印付き単体的集合とする. 
+  $Y^X$を単体的集合の通常の内部ホムとする. 
+  制限写像$\Hom_{\sSet}(\Delta^1, Y^X) \to \Hom_{\sSet}(\Delta^1, Y^{\E})$の像に含まれる$Y^X$の辺$\Delta^1 \to Y^X$を$Y^X$の印付き辺とする. 
+  $Y^X$の印付き辺の集まりを$\E'^{\E}$と表す. 
+  このとき, $(Y^X, \E'^{\E})$は印付き単体的集合である. 
+\end{definition}
+
+\begin{remark}
+  $\sSet^+$はCartesian閉である.
+\end{remark}
+
+\begin{notation}
+  $X,Y$を印付き単体的集合とする. 
+  \begin{itemize}
+    \item 内部ホム$Y^X$の内在単体的集合を$\Map^\flat(X,Y)$と表す. 
+    \item $Y^X$の印付き辺である$\Map^\flat(X,Y)$の単体のなす$\Map^\flat(X,Y)$の単体的部分集合を$\Map^\sharp(X,Y)$と表す. 
+  \end{itemize}
+\end{notation}
+
+\begin{remark}
+  $K$を単体的集合, $X,Y$を印付き単体的集合とする. 
+  このとき, 次の同型が成立する. 
+  \begin{align*}
+    &\Hom_{\sSet}(K,\Map^\flat(X,Y))  \cong \Hom_{\sSet^+}(K^\flat, Y^X)  \cong \Hom_{\sSet^+}(K^\flat \times X, Y) \\
+    &\Hom_{\sSet}(K,\Map^\sharp(X,Y)) \cong \Hom_{\sSet^+}(K^\sharp, Y^X) \cong \Hom_{\sSet^+}(K^\sharp \times X, Y)
+  \end{align*}
+  特に, 任意の$n \geq 0$に対して, $\Map^\flat(X,Y)$と$\Map^\sharp(X,Y)$の$n$単体は次のように表せる. 
+  \begin{align*}
+    \Map^\flat(X,Y)_n  &= \Hom_{\sSet^+}(X \times (\Delta^n)^\flat, Y) \\
+    \Map^\sharp(X,Y)_n &= \Hom_{\sSet^+}(X \times (\Delta^n)^\sharp, Y)
+  \end{align*}
+\end{remark}
+
+\begin{notation}
+  $S$を単体的集合とする. 
+  印付き単体的集合$X,Y$を$(\sSet^+)_{/S}$の対象とみなす. 
+  このとき, $\Map^\flat(X,Y), \Map^\sharp(X,Y)$の単体的部分集合をそれぞれ$\Map^\flat_S(X,Y), \Map^\sharp_S(X,Y)$と表す. 
+\end{notation}
+
+\begin{remark} \label{rem.3.1.3.1}
+  $X$を$(\sSet^+)_{/S}$, $p : Y \to S$をCartesianファイブレーションとする. 
+  このとき, 次の2つが成立する. 
+  \begin{enumerate}
+    \item $\Map^\flat_S(X,Y^\natural)$は$\infty$圏である. 
+    \item $\Map^\sharp_S(X,Y^\natural)$は$\Map^\flat_S(X,Y^\natural)$に含まれる最大のKan複体である. 
+  \end{enumerate}
+\end{remark}
+
+% \begin{proof}
+%   任意の$n \geq 0$に対して, $\Map^\flat_S(X,Y^\natural)$の$n$単体の元は$S$上の$X \times (\Delta^n)^\flat \to Y^\natural$である. 
+
+% \end{proof}
+
+\begin{lemma} \label{lem.3.1.3.2}
+  $f : \C \to \D$を$\infty$圏の関手とする. 
+  このとき, 次は全て同値である. 
+  \begin{enumerate}
+    \item $f$は圏同値である.
+    \item 任意の単体的集合$K$に対して, 誘導される関手$\Fun(K,C) \to \Fun(K,\D)$は圏同値である.
+    \item 任意の単体的集合$K$に対して, 関手$\Fun(K,C) \to \Fun(K,\D)$は$\Fun(K,\C)$に含まれる最大Kan複体から$\Fun(K,\D)$に含まれる最大Kan複体へのホモトピー同値を定める. 
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  (1)から(2)は\cref{prop.1.2.7.3}の(2)より従う. 
+  (2)から(3)も最大Kan複体の定義より従う. 
+  (3)から(1)は(3)において$K=\D$とすると$f$のホモトピー逆射が見つけられる. 
+\end{proof}
+
+\begin{proposition} \label{prop.3.1.3.3}
+  $S$を単体的集合, $p : X \to Y$を$(\sSet^+)_{/S}$の射とする. 
+  このとき, 次は同値である.
+  \begin{enumerate}
+    \item 任意のCartesianファイブレーション$Z \to S$に対して, 誘導される射$\Map^\flat_S(Y,Z^\natural) \to \Map^\flat_S(X,Z^\natural)$は$\infty$圏の同値である. 
+  \end{enumerate}
+\end{proposition}
+
+
+\newpage
+\appendix
+
+\chapter{}
+
+\section{圏論の基礎}
+
+\section{モデル圏}
+
+高次圏論の研究へのアプローチとして最も成功しているものの1つにQuillenによるモデル圏の理論がある. 
+特に, \cite{HTT}では次の2点で重要である. 
+
+\begin{enumerate}
+  \item \cite{HTT}で定義される高次圏の構造はモデル圏の言葉でまとめられる. 
+  例えば, $\infty$圏は単体的集合の圏上のJoyalモデル構造におけるファイブラント対象である. 
+  モデル圏の理論は高次圏の異なるモデルを比較するときに便利である. 
+  \item モデル圏の理論自体が高次圏のアプローチとしてみなせる. 
+  $\bfA$が単体的モデル圏のとき, ファイブラント-コファイブラント対象のなす部分圏$\bfA^\circ (\subset \bfA)$はファイブラント単体圏をなす. 
+  \cref{prop.1.1.5.10}より, 単体的脈体$\N(\bfA^\circ)$は$\infty$圏である.
+  この$\N(\bfA^\circ)$を$\A$の内在$\infty$圏という. 
+  しかし, 任意の$\infty$圏が(圏同値の違いを除いても)このように表せるわけではない. 
+  例えば, $\bfA$におけるホモトピー極限とホモトピー余極限の存在から$\N(\bfA^\circ)$における様々な極限や余極限の存在を示すことができる. 
+  このような前述の問題点はあるが, モデル圏の理論を用いて, この構成を通じて生じる$\infty$圏の状況に落とし込んで, 一般の$\infty$圏についての命題を証明することができる. 
+  例えば, 任意の$\infty$圏は適切な単体的モデル圏$\bfA$を選ぶことで$\N(\bfA^\circ)$に忠実充満に埋め込むことができる. 
+  実際, $\infty$圏論におけるYonedaの補題はこの手法を用いて証明する. 
+\end{enumerate}
+
+この節の目標は, 上で述べたことを意識しながらモデル圏の理論の復習することである. 
+
+\subsection{モデル圏の公理}
+
+\begin{definition}[モデル圏] \label{def.a.2.1.1}
+  $\C$をcofibration, fibration, weak equivalenceと呼ばれる3つの射のクラスをもつ圏とする. 
+  $\C$と3つのクラスが次の条件を満たすとき, $\C$をモデル圏(model category)という.
+  \begin{enumerate}
+    \item $\C$は(有限)極限と(有限)余極限を持つ. 
+    \item weak equivalenceのクラスは2-out-of-3を満たす. 
+    \item weak equivalence, fibration, cofibrationのクラスはレトラクトで閉じる. 
+    \item cofibtaionはweak equivalenceかつfibrationに対してLLPを持つ. 
+    weak equivalenceかつcofibrationはfibrationに対してLLPを持つ. 
+    \item weak equivalenceとcofibrationかつfibrationと, cofibrationとweak equivalenceかつfibrationは$\C$の分解系である.
+  \end{enumerate}
+\end{definition}
+
+\begin{notation}
+  $\C$をモデル圏, $X$を$\C$の対象, $f$を$\C$の射とする. 
+  $f$がweak equivalenceかつcofibrationのとき, $f$をtrivial cofibrationという.
+  $f$がweak equivalenceかつfibrationのとき, $f$をtrivial fibrationという. 
+\end{notation}
+
+\begin{definition}[fibrantとcofibrant]
+  \cref{def.a.2.1.1}の公理(1)より, $\C$は始対象$\emptyset$と終対象$\ast$を持つ. 
+  一意な射$\emptyset \to X$がcofibrationのとき, $X$はcofibrantであるという. 
+  一意な射$X \to \ast$がfibrationのとき, $X$はfibrantであるという. 
+\end{definition}
+
+\subsection{モデル圏のホモトピー圏}
+
+\begin{definition}[シリンダ対象とパス対象] 
+  $\C$をモデル圏, $X$と$C$を$\C$の対象とする. 
+  $j : X \coprod X \to C$をcofibration, $i : C \to X$をweak equivalence, $ij : X \coprod X \to X$をfold mapとする. 
+  このとき, 図式$X \coprod X \xrightarrow{j} X \xrightarrow{i} X$と対象$C$を$X$のシリンダ対象(cylinder object)という. 
+  単に, $j : X \coprod X \to C$を$X$のシリンダ対象ということもある. 
+
+  $Y$と$P$を$\C$の対象とする. 
+  $q : Y \to P$をweak equivalence, $p : P \to Y \times Y$をfibration, $pq : Y \to Y \times Y$をdiagonal mapとする. 
+  このとき, 図式$Y \xrightarrow{q} P \xrightarrow{p} Y \times Y$と対象$P$を$Y$のパス対象(path object)という. 
+  単に, $p : P \to Y \times Y$を$Y$のパス対象ということもある. 
+\end{definition}
+
+\begin{remark}
+  \cref{def.a.2.1.1}の公理(5)より, シリンダ対象とパス対象は常に存在する. 
+\end{remark}
+
+\begin{proposition}
+  $\C$をモデル圏, $X$を$\C$のcofibrant対象, $Y$を$\C$のfibrant対象, $f,g : X \to Y$を$\C$の射とする. 
+  このとき, 次は全て同値である.
+  \begin{enumerate}
+    \item $X$の任意のシリンダ対象$j : X \coprod X \to C$に対して, 次の図式は可換である. 
+    \item $Y$の任意のパス対象$p : P \to Y \times Y$に対して, 次の図式は可換である. 
+  \end{enumerate}
+\end{proposition}
+
+\subsection{リフト命題}
+
+次は本稿で何度も用いる非常に有用な命題である. 
+
+\begin{proposition} \label{prop.a.2.3.1}
+  $\C$をモデル圏, $A,B$を$\C$のcofibrant対象, $X$を$\C$のfibrant対象とする.
+  $i : A \to B$をcofibration, $f : A \to X$をfibrationとする. 
+  次の図式が$\h\C$において可換のとき, 
+  % https://q.uiver.app/#q=WzAsMyxbMCwwLCJBIl0sWzAsMiwiQiJdLFsxLDEsIlgiXSxbMCwxLCJbaV0iLDJdLFswLDIsIltmXSJdLFsxLDIsIlxcb3ZlcmxpbmV7Z30iLDJdXQ==
+  \[\begin{tikzcd}
+    A \\
+    & X \\
+    B
+    \arrow["{[i]}"', from=1-1, to=3-1]
+    \arrow["{[f]}", from=1-1, to=2-2]
+    \arrow["{\overline{g}}"', from=3-1, to=2-2]
+  \end{tikzcd}\]
+  $\C$において次の可換図式が存在して, $[g]=\overline{g}$を満たす. 
+  % https://q.uiver.app/#q=WzAsMyxbMCwwLCJBIl0sWzAsMiwiQiJdLFsxLDEsIlgiXSxbMCwxLCJpIiwyXSxbMCwyLCJmIl0sWzEsMiwiZyIsMl1d
+  \[\begin{tikzcd}
+    A \\
+    & X \\
+    B
+    \arrow["i"', from=1-1, to=3-1]
+    \arrow["f", from=1-1, to=2-2]
+    \arrow["g"', from=3-1, to=2-2]
+  \end{tikzcd}\]
+\end{proposition}
+
+\begin{proof}
+  $g' : B \to X$をホモトピー類が$\overline{g}$となる$\C$の射とする. 
+  $A$のシリンダ対象を$C(A)$とする. 
+  \begin{align*}
+    &A \coprod A \to C(A) \to A \\
+    &B \coprod B \to C(B) \to B
+  \end{align*}
+  $k$をcofibration, $l$をtrivial fibrationとして, 次の分解をとる. 
+  \begin{align*}
+    C(A) \coprod_{A \coprod A} (B \coprod B) \xrightarrow{k} C(B) \xrightarrow{l} B
+  \end{align*}
+  $g'$の定義より$g'i$は$f$とホモトピックなので, 
+\end{proof}
+
+\subsection{リフト性質とホモトピープッシュアウト図式}
+
+\begin{definition}[左固有] \label{def.a.2.4.1}
+  $\C$をモデル圏とする. 
+  $i : A \to B$をcofibration, $j : A \to A'$をweak equivalenceとする. 
+  次の任意のプッシュアウト図式において, $j' : B \to B'$もweak equivalenceのとき, $\C$は左固有(left proper)であるという. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJBIl0sWzAsMSwiQSciXSxbMSwwLCJCIl0sWzEsMSwiQiciXSxbMCwxLCJqIiwyXSxbMCwyLCJpIl0sWzIsMywiaiciXSxbMSwzXSxbMywwLCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
+  \[\begin{tikzcd}
+    A & B \\
+    {A'} & {B'}
+    \arrow["j"', from=1-1, to=2-1]
+    \arrow["i", from=1-1, to=1-2]
+    \arrow["{j'}", from=1-2, to=2-2]
+    \arrow[from=2-1, to=2-2]
+    \arrow["\lrcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
+  \end{tikzcd}\]
+\end{definition}
+
+本稿で扱う多くのモデル圏は左固有である. 
+次の命題は左固有性を判定するのに役立つ. 
+
+\begin{proposition} \label{prop.a.2.4.2}
+  $\C$をモデル圏とする. 
+  $\C$の任意の対象がcofibrantのとき, $\C$は左固有である. 
+\end{proposition}
+
+\cref{prop.a.2.4.2}は次の命題の系として得られる. 
+
+\begin{lemma} \label{lem.a.2.4.2}
+  $\C$をモデル圏とする. 
+  $A,A'$をcofibrant, $i : A \to B$をcofibration, $j : A \to A'$をweak equivalenceとする. 
+  次のプッシュアウト図式において, $j'$はweak equivalenceである. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJBIl0sWzAsMSwiQSciXSxbMSwwLCJCIl0sWzEsMSwiQiciXSxbMCwxLCJqIiwyXSxbMCwyLCJpIl0sWzIsMywiaiciXSxbMSwzXSxbMywwLCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
+  \[\begin{tikzcd}
+    A & B \\
+    {A'} & {B'}
+    \arrow["j"', from=1-1, to=2-1]
+    \arrow["i", from=1-1, to=1-2]
+    \arrow["{j'}", from=1-2, to=2-2]
+    \arrow[from=2-1, to=2-2]
+    \arrow["\lrcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
+  \end{tikzcd}\]
+\end{lemma}
+
+\subsection{Quillen随伴とQuillen同値}
+
+\begin{lemma} \label{prop.quillen_adj}
+  $\C,\D$をモデル圏, $F : \C \rightleftarrows \D : G$を随伴とする. 
+  このとき, 次は全て同値である.
+  \begin{enumerate}
+    \item $F$はcofibrationとtrivial cofibrationを保つ. 
+    \item $G$はfibrationとtrivial fibrationを保つ. 
+    \item $F$はcofibrationを保ち, $G$はfibrationを保つ. 
+    \item $F$はtrivial cofibrationを保ち, $G$はtrivial fibrationを保つ. 
+  \end{enumerate}
+\end{lemma}
+
+\begin{definition}[Quillen随伴]
+  $\C,\D$をモデル圏, $F : \C \rightleftarrows \D : G$を随伴とする. 
+  \cref{prop.quillen_adj}の同値の条件を満たす時, 随伴$(F,G)$を$\C$と$\D$の間のQuillen随伴(Quillen adjunction)という. 
+  このとき, $F$を左Quillen関手(left Quillen functor), $G$を右Quillen関手(right Quillen functor)という.
+\end{definition}
+
+\begin{remark}
+  $\C,\D$をモデル圏, $F : \C \rightleftarrows \D : G$をQuillen随伴とする.
+  このとき, $F$はcofibrant対象のweak equivalenceを保ち, $G$はfibrant対象のweak equivalenceを保つ.  
+\end{remark}
+
+\subsection{組み合わせ論的モデル圏}
+
+この節では, Jeff Smithによる組み合わせ論的モデル圏の理論を復習する. 
+主目的は\cite{HTT} Proposition.A.2.6.13を示すことである. 
+
+\begin{definition}[組み合わせ論的モデル圏]
+  $\bfA$をモデル圏とする. 
+  $\bfA$が次の条件を満たすとき, $\bfA$は組み合わせ論的(combinatorial)であるという.
+  \begin{enumerate}
+    \item $\bfA$は表現可能である. 
+    \item generating cofibrationと呼ばれる射の集合$I$が存在して, $\bfA$における任意のcofibrationの集まりは$I$を含む最小の射の弱飽和クラスである. 
+    \item generating trivial cofibrationと呼ばれる射の集合$J$が存在して, $\bfA$における任意のtrivial cofibrationの集まりは$J$を含む最小の射の弱飽和クラスである. 
+  \end{enumerate} 
+\end{definition}
+
+$\bfA$が組み合わせ論的モデル圏のとき, このモデル構造はgenerating cofibrationとgenerating trivial cofibrationにより一意に定まる. 
+しかし, このような生成系を見つけることは難しいことが多い. 
+この節の目標はこの定義を$\bfA$におけるweak equivalenceの集まりに重きを置く形で書きなおすことである. 
+経験則的に, generating trivial cofibrationのクラスよりもweak equivalenceのクラスを記述するほうが簡単なことが多い. 
+
+\begin{definition}
+  $\C$を表現可能圏, $\kappa$を正則基数とする. 
+  $\C$の充満部分圏$\C_0$が次の条件を満たすとき, $\C_0$を$\C$の$\kappa$到達可能部分圏($\kappa$-accessible subcategory)という. 
+  \begin{enumerate}
+    \item $\C_0$は$\kappa$フィルター余極限で閉じている. 
+    \item $\C_0$の対象の集合$\C_0'$が存在して, $\C_0$の任意の対象は$\C_0'$の$\kappa$フィルター余極限で表される.
+  \end{enumerate}
+\end{definition}
+
+\begin{corollary}[Smith]
+  $\bfA$を組み合わせ論的モデル圏とする. 
+  $\bfA^{[1]}$を$\bfA$の射の圏, $W$をweak equivalenceの貼る$\bfA^{[1]}$の充満部分圏, $F$をfibrationの貼る$\bfA^{[1]}$の充満部分圏とする. 
+  このとき, $F,W, F \cap W$は$\bfA^{[1]}$の到達可能部分圏である. 
+\end{corollary}
+
+\subsection{単体的集合の圏上のKanモデル構造}
+
+\subsection{図式圏とホモトピー(余)極限}
+
+$\bfA$を組み合わせ論的モデル圏, $\C$を小圏, $\Fun(\C,\bfA)$を関手圏とする.
+この節では, $\Fun(\C,\bfA)$が組み合わせ論的モデル構造を持つことを示す.
+更に, $\C$におけるこの構成の関手性を考えると, ホモトピー極限とホモトピー余極限の理論を得る. 
+
+\begin{definition}
+  $\C$を小圏, $\bfA$をモデル圏とする. 
+  $\Fun(\C,\bfA)$において, 自然変換$\alpha : F \to G$が 
+  \begin{itemize}
+    \item $\C$の任意の対象$C$に対して, 誘導される射$F(C) \to G(C)$が$\bfA$におけるcofibrationのとき, $\alpha$をinjective cofibrationという. 
+    \item $\C$の任意の対象$C$に対して, 誘導される射$F(C) \to G(C)$が$\bfA$におけるfibrationのとき, $\alpha$をprojective fibrationという. 
+    \item $\C$の任意の対象$C$に対して, 誘導される射$F(C) \to G(C)$が$\bfA$におけるweak equivalenceのとき, $\alpha$をweak equivalenceという. 
+    \item $\Fun(\C,\bfA)$における任意のinjective cofibrationとweak equivalenceに対してRLPを持つ射をinjective fibrationという. 
+    \item $\Fun(\C,\bfA)$における任意のprojective fibrationとweak equivalenceに対してLLPを持つ射をprojective cofibrationという. 
+  \end{itemize}
+\end{definition}
+
+\begin{proposition} \label{prop.a.2.8.2}
+  $\C$を小圏, $\bfA$を組み合わせ論的モデル圏とする. 
+  このとき, $\Fun(\C,\bfA)$上に次の組み合わせ論的モデル構造が存在する. 
+  \begin{itemize}
+    \item projective cofibration, weak equivalence, projective fibrationにより定まる射影モデル構造
+    \item injective cofibration, weak equivalence, injective fibrationにより定まる入射モデル構造
+  \end{itemize}
+\end{proposition}
+
+\begin{proof}
+  
+\end{proof}
+
+次の命題は\cref{prop.a.2.8.2}を証明するときに役立つ. 
+
+\subsection{Reedyモデル構造}
+
+\section{単体的圏}
+
+\subsection{豊穣モデル圏とモノイダルモデル圏}
+
+多くのモデル圏は単体的集合の圏で豊穣された構造を持つ. 
+この節の目標は, 何かの圏で豊穣されたモデル圏の理論を学ぶことである. 
+
+\begin{definition}[左Quillen双関手]
+  $\bfA,\bfB,\bfC$をモデル圏とする. 
+  関手$F : \bfA \times \bfB \to \bfC$が次の条件を満たすとき, $F$を左Quillen双関手(left Quillen bifunctor)という. 
+  \begin{description}
+    \item[(a)] $i : A \to A', j : B \to B'$をそれぞれ$\bfA,\bfB$のcofibrationとする. 
+    このとき, 誘導される射 
+    \begin{align*}
+      i \land j : F(A',B) \coprod_{F(A,B)} F(A,B') \to F(A',B')
+    \end{align*}
+    は$\bfC$のcofibrationである. 
+    $i$か$j$がtrivial cofibrationのとき, $i \land j$もtrivial cofibrationである. 
+    \item[(b)] $F$は各変数ごとに有限余極限を保つ. 
+  \end{description}
+\end{definition}
+
+\begin{definition}[モノイダルモデル圏]
+  次の条件を満たすモデル構造を持つモノイダル圏$\bfS$をモノイダルモデル圏(monoidal model category)という. 
+  \begin{enumerate}
+    \item テンソル積関手$\otimes : \bfS \times \bfS \to \bfS$は左Quillen双関手である. 
+    \item $\bfS$の単位対象$1$はコファイブラントである. 
+    \item $\bfS$上のモノイダル構造は閉である. 
+  \end{enumerate}
+\end{definition}
+
+\begin{example} \label{ex.a.3.1.4}
+  単体的集合の圏$\sSet$はKanモデル構造とCartesian積によりモノイダルモデル圏である. 
+\end{example}
+
+\begin{definition}[$\S$豊穣モデル圏] \label{def.a.3.1.5}
+  $\bfS$をモノイダルモデル圏とする. 
+  次の条件を満たす$\bfS$豊穣圏$\bfA$を$\bfS$豊穣モデル圏($\bfS$-enriched model category)という. 
+  \begin{enumerate}
+    \item $\bfA$は$\bfS$上でテンソルかつコテンソル付けられている. 
+    \item テンソル積$\otimes : \bfA \times \bfS \to \bfA$は左Quillen双関手である.
+  \end{enumerate}
+\end{definition}
+
+\begin{remark}[単体的モデル圏]
+  \cref{def.a.3.1.5}において, $\bfS$が$\sSet$ (を\cref{ex.a.3.1.4}によりモノイダルモデル圏とみなした)のとき, $\bfA$を単体的モデル圏(simplicial model category)という.
+\end{remark}
+
+\cref{def.a.3.1.5}の条件(2)はそれぞれ次のように書き変えることができる.
+
+\begin{remark} \label{rem.a.3.1.6}
+  \cref{def.a.3.1.5}の条件(2)は次の全てと同値である.
+
+\end{remark}
+
+\begin{definition}[単体的モデル圏]
+  単体的集合の圏$\sSet$を\cref{ex.a.3.1.4}によりモノイダルモデル圏とみなす. 
+  このとき, $\sSet$豊穣モデル圏を単体的モデル圏(simplicial model category)という. 
+\end{definition}
+
+$\C$を単体的モデル圏とする. 
+このとき, 内在モデル圏のホモトピー論と単体的集合$\Map_\C(-,?)$のホモトピー論には強い関係がある. 
+
+\begin{remark}
+  $\C$を単体的モデル圏, $X$を$\C$のコファイブラント対象, $Y$を$\C$のファイブラント対象とする. 
+  \cref{rem.a.3.1.6}において$i : \emptyset \to X, j : Y \to \ast$を考えると, 単体的集合$K=\Map_\C(X,Y)$はKan複体であることが分かる. 
+  更に, 次の自然な全単射が存在する. 
+  \begin{align*}
+    \pi_0(K) \cong \Hom_{\h\C}(X,Y)
+  \end{align*}
+\end{remark}
+
+\begin{remark}
+  $\S$をモノイダルモデル圏, $\C,\D$を$\S$豊穣モデル圏とする. 
+  次の内在モデル圏のQuillen随伴において, $G$を$\S$豊穣関手とする. 
+  \begin{align*}
+    F : \C \rightleftarrows \D :G
+  \end{align*}
+  任意の対象$X \in \C, Y \in \D, S \in \S$の3つ組に対して, 次の自然な同型が存在する. 
+  \begin{align*}
+    \Hom_\C(S \times X, GY)
+    & \cong \Hom_\S(S,\Map_\C(X,GY)) \\
+    & \to \Hom_\S(S,\Map_\D(FX,FGY)) \\
+    & \cong \Hom_\D(S \times FX, FGY) \\
+    & \to \Hom_\D(S \times FX, Y)
+  \end{align*}
+  この射に随伴の単位射を用いると, 射$\beta_{X,S} : S \otimes FX \to F(S \times X)$を得る. 
+  $\beta_{X,S}$は$G$の$\S$豊穣関手の情報をすべて持っている. 
+  $\beta_{X,S}$が同型射のとき, $F$もまた$\S$豊穣関手であり, 随伴$(F,G)$は$\S$豊穣圏の随伴となる. 
+\end{remark}
+
+この状況において, $\beta_{X,S}$がweak equivalenceの場合を考える. 
+
+\subsection{\texorpdfstring{$\S$}{S}豊穣圏上のモデル構造}
+
+\begin{definition}[$\S$豊穣関手のweak equivalences]
+  $\S$をモノイダルモデル圏, $F : \C \to \C'$を$\S$豊穣関手とする. 
+  誘導される関手$\h F : \h\C \to \h\C'$が$\h S$豊穣圏の同値のとき, $F$をweak equivalenceという. 
+\end{definition}
+
+\begin{remark}
+  $\S$がKanモデル構造による$\sSet$のとき, この定義は1.1.4節における単体的圏の同値に一致する. 
+\end{remark}
+
+\begin{notation}
+  $\S$をモノイダルモデル圏, $A$を$\S$の対象とする. 
+  このとき, $\S$豊穣圏$[1]_A$を次のように定義する. 
+  \begin{itemize}
+    \item $[1]_A$の対象は2点$X,Y$
+    \item $[1]_A$の射空間は 
+    \begin{align*}
+      \Map_{[1]_A}(Z,Z') := 
+      \begin{cases}
+        \id_\S & (Z=Z'=X) \\
+        \id_\S & (Z=Z'=Y) \\
+        A      & (Z=X,Z'=Y) \\
+        \emptyset & (Z=Y,Z'=X)
+      \end{cases}
+    \end{align*}
+  \end{itemize}
+\end{notation}
+
+\newpage
+\bibliography{cf_htt}
+\bibliographystyle{amsalpha}
+
+\end{document}

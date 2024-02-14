@@ -18,7 +18,7 @@
   行間は適宜補うようにするが, 和訳と特に見分けのつかないように書く. 
   Variantは定義や注意などに表記を変えている. 
 
-  \cite{kerodon}のChapter1の和訳は\url{https://yonoha.github.io/quasi_category/kerodon/kerodon.pdf}を参照. 
+  \cite{kerodon}のChapter1の和訳は\url{https://yonoha.github.io/infty_cat/kerodon/kerodon.pdf}を参照. 
   2章に関する例などは(筆者が勉強できていないので)詳しくは書いていない.
 
   特に断らない限り, $n$を$0$より大きい整数とする. 
@@ -99,7 +99,7 @@ Kan複体でない単体的集合に対しては, 弱ホモトピー同値(weak 
 	\arrow[hook, from=1-1, to=2-1]
 	\arrow["\sigma"', dashed, from=2-1, to=1-2]
 \end{tikzcd}\]
-このKan複体の定義を単体的集合の射においても考えることは非常に有用である.
+このKan複体の定義を単体的集合の射においても考えることは非常に有用である.2
 
 \begin{definition}[Kanファイブレーション]
   $f : X \to S$を単体的集合の射とする.
@@ -1312,10 +1312,105 @@ Kan複体でない単体的集合$X$を調べるとき, $X$を同じホモトピ
   はフィルター付き余極限と交換する.
 \end{proposition}
 
+この命題はQuillenの小対象論法(small object argument)の系である. 
+
 \begin{proof}
   $f : X \to Y$を単体的集合の射とする.
   単体的集合の列$\{X(m)\}_{m \geq 0}$と単体的集合の射$f(m) : X(m) \to Y$を帰納的に定義する. 
-  まず, $X(0) := f, f(0) := f$とする. 
+  まず, $X(0) := X, f(0) := f$とする. 
+  定義された単体的集合の射$f(m) : X(m) \to Y$に対して, $S(m)$を次の可換図式$\sigma$の集まりとする. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXExhbWJkYV5uX2kiXSxbMCwxLCJcXERlbHRhXm4iXSxbMSwwLCJYKG0pIl0sWzEsMSwiWSJdLFswLDEsIiIsMSx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMl0sWzIsMywiZihtKSJdLFsxLDMsInVfXFxzaWdtYSIsMl1d
+  \[\begin{tikzcd}
+    {\Lambda^n_i} & {X(m)} \\
+    {\Delta^n} & Y
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow[from=1-1, to=1-2]
+    \arrow["{f(m)}", from=1-2, to=2-2]
+    \arrow["{u_\sigma}"', from=2-1, to=2-2]
+  \end{tikzcd}\]
+  ここで, $0 \leq i \leq n, n > 0$とする. 
+  図式$\sigma \in S(m)$に対して, $X(m+1)$を次のpushoutで定義する. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXGNvcHJvZF97XFxzaWdtYSBcXGluIFMobSl9IFxcTGFtYmRhXm5faSJdLFswLDEsIlxcY29wcm9kX3tcXHNpZ21hIFxcaW4gUyhtKX0gXFxEZWx0YV5uIl0sWzEsMCwiWChtKSJdLFsxLDEsIlgobSsxKSJdLFswLDEsIiIsMSx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMl0sWzIsM10sWzEsM10sWzMsMCwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
+  \[\begin{tikzcd}
+    {\coprod_{\sigma \in S(m)} \Lambda^n_i} & {X(m)} \\
+    {\coprod_{\sigma \in S(m)} \Delta^n} & {X(m+1)}
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=2-2]
+    \arrow[from=2-1, to=2-2]
+    \arrow["\lrcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
+  \end{tikzcd}\]
+  また, $f(m+1) : X(m+1) \to Y$を$X(m)$への制限が$f(m)$に等しく, 各$\Delta^n$への制限が$u_\sigma$に等しい一意な射とする. 
+  $X(m)$の定義より, 次の緩射の列が存在する.
+  \begin{align*}
+    X=X(0) \hookrightarrow X(1) \hookrightarrow X(2) \hookrightarrow \cdots
+  \end{align*}
+  ここで, $Q(f) := \colim_{m} X(m)$とする. 
+  緩射の集まりは超限合成で閉じるので, 自然な射$f' : X \to Q(f)$も緩射である. 
+  また, ある射$f'' : Q(f) \to Y$が一意に存在して, 次の図式を可換にする. 
+  % https://q.uiver.app/#q=WzAsNSxbMCwwLCJYPVgoMCkiXSxbMSwwLCJYKDEpIl0sWzIsMCwiXFxjZG90cyJdLFszLDAsIlEoZik9IFxcY29saW1fbSBYKG0pIl0sWzIsMSwiWSJdLFswLDEsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzEsMl0sWzIsM10sWzAsNCwiZiIsMl0sWzMsNCwiZicnIl0sWzAsMywiZiciLDAseyJjdXJ2ZSI6LTJ9XV0=
+  \[\begin{tikzcd}
+    {X=X(0)} & {X(1)} & \cdots & {Q(f)= \colim_m X(m)} \\
+    && Y
+    \arrow[hook, from=1-1, to=1-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow[from=1-3, to=1-4]
+    \arrow["f"', from=1-1, to=2-3]
+    \arrow["{f''}", from=1-4, to=2-3]
+    \arrow["{f'}", curve={height=-12pt}, from=1-1, to=1-4]
+  \end{tikzcd}\]
+  構成より, $f \mapsto Q(f)$は関手的であり, フィルター付き余極限と交換する. 
+  後は, $f'' : Q(f) \to Y$がKanファイブレーションであることを示せばよい. 
+  つまり, 次の図式が解決を持つことを示せばよい. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXExhbWJkYV5uX2kiXSxbMSwwLCJRKGYpIl0sWzEsMSwiWSJdLFswLDEsIlxcRGVsdGFebiJdLFswLDEsInYiXSxbMSwyLCJmJyciXSxbMCwzLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFszLDJdLFszLDEsIiIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+  \[\begin{tikzcd}
+    {\Lambda^n_i} & {Q(f)} \\
+    {\Delta^n} & Y
+    \arrow["v", from=1-1, to=1-2]
+    \arrow["{f''}", from=1-2, to=2-2]
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+    \arrow[dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+  $\Lambda^n_i$は有限単体的集合なので, $v$の像は十分大きな$m \gg 0$に対して, $X(m)$の像に含まれる. 
+  つまり, 次の図式は可換である. 
+  % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXExhbWJkYV5uX2kiXSxbMiwwLCJRKGYpIl0sWzEsMSwiWChtKSJdLFswLDEsInYiXSxbMCwyLCJ2JyIsMl0sWzIsMV1d
+  \[\begin{tikzcd}
+    {\Lambda^n_i} && {Q(f)} \\
+    & {X(m)}
+    \arrow["v", from=1-1, to=1-3]
+    \arrow["{v'}"', from=1-1, to=2-2]
+    \arrow[from=2-2, to=1-3]
+  \end{tikzcd}\]
+  次の図式は$S(m)$の元である. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXExhbWJkYV5uX2kiXSxbMSwwLCJYKG0rMSkiXSxbMSwxLCJZIl0sWzAsMSwiXFxEZWx0YV5uIl0sWzAsMSwidiJdLFsxLDIsImYobSsxKSJdLFswLDMsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzMsMl0sWzMsMSwiIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+  \[\begin{tikzcd}
+    {\Lambda^n_i} & {X(m)} \\
+    {\Delta^n} & Y
+    \arrow["{v'}", from=1-1, to=1-2]
+    \arrow["{f(m)}", from=1-2, to=2-2]
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+    \arrow[dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+  よって, 次の図式は可換である. 
+  % https://q.uiver.app/#q=WzAsNyxbMCwwLCJcXExhbWJkYV5uX2kiXSxbMSwwLCJcXGNvcHJvZF97XFxzaWdtYSBcXGluIFMobSl9IFxcTGFtYmRhXm5faSJdLFswLDIsIlxcRGVsdGFebiJdLFsyLDAsIlgobSkiXSxbMywwLCJYKG0rMSkiXSxbMiwxLCJcXGNvcHJvZF97XFxzaWdtYSBcXGluIFMobSl9IFxcRGVsdGFebiJdLFszLDIsIlkiXSxbMCwxLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDIsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzEsM10sWzMsNF0sWzIsNSwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNSw0XSxbNCw2LCJmKG0rMSkiXSxbMiw2XSxbMSw1XV0=
+  \[\begin{tikzcd}
+    {\Lambda^n_i} & {\coprod_{\sigma \in S(m)} \Lambda^n_i} & {X(m)} & {X(m+1)} \\
+    && {\coprod_{\sigma \in S(m)} \Delta^n} \\
+    {\Delta^n} &&& Y
+    \arrow[hook, from=1-1, to=1-2]
+    \arrow[hook, from=1-1, to=3-1]
+    \arrow[from=1-2, to=1-3]
+    \arrow[from=1-3, to=1-4]
+    \arrow[hook, from=3-1, to=2-3]
+    \arrow[from=2-3, to=1-4]
+    \arrow["{f(m+1)}", from=1-4, to=3-4]
+    \arrow[from=3-1, to=3-4]
+    \arrow[from=1-2, to=2-3]
+  \end{tikzcd}\]
+  pushoutの普遍性より, この図式は可換であり, 解決を持つことが分かる. 
+  よって, 元の図式も解決を持つ. 
 \end{proof}
 
 $Y = \Delta^0$とすると, 次の系を得る. 
@@ -1324,9 +1419,12 @@ $Y = \Delta^0$とすると, 次の系を得る.
   $X$を単体的集合とする. 
   このとき, あるKan複体$Q$と緩射$f : X \to Q$が存在する.
 \end{corollary}
-
-\begin{remark}
   
+\begin{remark}
+  系3.1.7.2において, Kan複体$Q$と緩射$f'$は関手性による. (命題3.1.7.1の証明から分かる.)
+  この命題はほかの方法で示すこともできる. 
+  例えば, $Q$を構成3.3.6.1で得られる$\Ex^\infty(X)$や特異単体的集合$\Sing(|X|)$とすることができる. (命題3.3.6.9と定理3.5.4.1)
+  この構成は関手$X \mapsto \Ex(X), X \mapsto \Sing(|X|)$を定め, ともに有限極限と交換する. 
 \end{remark}
 
 \begin{corollary}
@@ -1464,7 +1562,7 @@ $Y = \Delta^0$とすると, 次の系を得る.
     \arrow["{u_X}"', from=1-1, to=2-1]
     \arrow["{Q(f)}"', from=2-1, to=2-2]
   \end{tikzcd}\]
-  ここで, 垂直な射は緩射である. 
+ で, 垂直な射は緩射である. 
   命題3.1.6.14より, これは弱ホモトピー同値である. 
   $f$が弱ホモトピー同値のとき, 注意3.1.6.16より, $Q(f)$も弱ホモトピー同値である. 
   $Q(X), Q(Y)$はKan複体なので, 命題3.1.6.13より, $Q(f)$はホモトピー同値である. 
@@ -1473,6 +1571,710 @@ $Y = \Delta^0$とすると, 次の系を得る.
   $\theta$が制限$\E \to \E$のホモトピー逆関手であることを示せばよい. 
   (途中)
 \end{proof}
+
+\begin{remark}
+  系3.1.7.7と系3.1.7.8は次のように表すことができる.
+  \begin{itemize}
+    \item Kan複体のホモトピー圏$\hkan$はKan複体の圏$\kan$に形式的にホモトピー同値を逆射として付け加えることでできる.
+    \item Kan複体のホモトピー圏$\hkan$は単体的集合の圏$\sset$に形式的に弱ホモトピー同値を逆射として付け加えることでできる.
+  \end{itemize}
+  これらは$\hkan$と圏同値の違いを除いて特徴づける.
+  実際, 系3.1.7.7は$\hkan$と圏同型の違いを除いて特徴づけている. 
+\end{remark}
+
+命題3.1.7.1の別証明を与える. 
+
+\begin{example}
+  $f : X \to Y$をKan複体の射とする. 
+  ファイバー積$X \times_{\Fun(\{0\},Y)} \Fun(\Delta^1,Y)$を$P(f)$と表す. 
+  このとき, $f$は$X \xrightarrow{f'} P(f) \xrightarrow{f''} Y$と分解する.
+  ここで, $f'$は$\id_X : X \to X$と合成$X \xrightarrow{f} Y \xrightarrow{\delta} \Fun(X,Y)$の組である.
+  また, $f''$は$\{1\} \subset \Delta^1$での評価射で与えられる. 
+  更に, 次が成立する. (途中)
+\end{example}
+
+\section{ホモトピー群}
+
+この章の目的は次の疑問に答えることである. 
+
+\begin{question}
+  $f : X \to Y$をKan複体の射とする. 
+  $f$はいつホモトピー逆射$g : Y \to X$を持つだろうか.
+\end{question}
+
+まず, 部分的に疑問3.2.0.1に答えることができる. 
+任意のKan複体$X$に対して, $X$の基本亜群を$\pi_{\leq 1}(X)$と表す. (定義1.3.6.12)
+任意の点$x \in X$に対して, 自己同型群$\Aut_{\pi_{\leq 1}(X)}(x) = \Hom_{\pi_{\leq 1}(X)}(x,x)$を$\pi_1(X,x)$と表し, $X$の(点$x$に対する)基本群(fundamental group)という.
+任意のKan複体の射$f : X \to Y$は関手$\pi_{\leq 1}(f) : \pi_{\leq 1}(X) \to \pi_{\leq 1}(Y)$を定める. 
+更に, $f$がホモトピー同値のとき, $\pi_{\leq 1}(f)$は圏同値である. (注意3.1.6.5)
+つまり, 任意のホモトピー同値$f : X \to Y$に対して, 次が成立する. 
+(途中)
+
+
+\subsection{基点付きKan複体}
+
+3.1.5でKan複体の集まりから, Kan複体のホモトピー圏$\hkan$を構成した. (構成3.1.5.10)
+$\hkan$の射はKan複体の射のホモトピー類である.
+この節では, 基点付きKan複体に対して同様の概念を考える. 
+
+\begin{definition}[基点付き単体的集合]
+  $X$を単体的集合, $x$を$X$の点とする. 
+  $X$と$x$の組$(X,x)$を基点付き単体的集合(pointed simplicial set)という. 
+  $X$がKan複体のとき, 組$(X,x)$を基点付きKan複体(pointed Kan complex)という. 
+  $(X,x), (Y,y)$を基点付き単体的集合とする. 
+  単体的集合の射$f : X \to Y$が$f(x) = y$を満たすとき, $f : (X,x) \to (Y,y)$を基点付き射(pointed map)という. 
+  基点付きKan複体を対象, 基点付き射を射とする圏を$\kan_\ast$と表す.
+\end{definition}
+
+\begin{remark}
+  基点付き単体的集合$(X,x)$に対して, $X$を基点付き単体的集合, $x$を基点(base point)ということもある. 
+\end{remark}
+
+\begin{definition}[基点付きホモトピック]
+  $(X,x), (Y,y)$を基点付き単体的集合とする.
+  基点付き射$f,g : X \to Y$を単体的集合$\Fun(X,Y) \times_{\Fun(\{x\},Y)} \{y\}$の点とみなす. 
+  $f$と$g$が$\Fun(X,Y) \times_{\Fun(\{x\},Y)} \{y\}$の同じ連結成分に属するとき, $f$と$g$は基点付きホモトピック(pointed homotopic)であるという. 
+\end{definition}
+
+\begin{definition}
+  $(X,x), (Y,y)$を基点付き単体的集合, $f,g : X \to Y$を基点付き射とする. 
+  単体的集合の射$h : \Delta^1 \times X \to Y$が$f = h|_{\{0\} \times X}, g = h|_{\{1\} \times Y}$かつ, $h|_{\Delta^1 \times \{x\}}$が$y$の退化する辺であるとする.
+  このとき, $h$を$f$から$g$への基点付きホモトピー(pointed homotopy)という. 
+\end{definition}
+
+\begin{proposition}
+  $(X,x), (Y,y)$を基点付き単体的集合, $f,g : X \to Y$を基点付き射とする. 
+  このとき, 次が成立する. 
+  \begin{enumerate}
+    \item $f$と$g$がホモトピックであることと, 基点付き射の列$(f=f_0,f_1,\cdots,f_n=g)$が存在して, 任意の$1 \leq i \leq n$に対して, $f_{i-1}$から$f_i$への基点付きホモトピーか$f_i$から$f_{i-1}$への基点付きホモトピーが存在する. 
+    \item $Y$をKan複体とする. 
+    $f$と$g$が基点付きホモトピックであることと, $f$から$g$への基点付きホモトピーが存在することは同値である.
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  (1)は注意1.1.6.23において, $\Fun(X,Y) \times_{\Fun(\{x\},Y)} \{y\}$を考えればよい.
+  (2)を示す. 
+  $Y$をKan複体とする. 
+  系3.1.3.3より, 評価射$\Fun(X,Y) \to \Fun(\{x\},Y)$はKanファイブレーションである. 
+  注意3.1.1.9より, $\Fun(X,Y) \times_{\Fun(\{x\},Y)} \{y\}$はKan複体である. 
+  よって, 命題1.1.9.10において, $\Fun(X,Y) \times_{\Fun(\{x\},Y)} \{y\}$を考えればよい. 
+\end{proof}
+
+\begin{example}
+  $(X,x)$を基点付き単体的集合, $(Y,y)$を基点付き位相空間, $f_0,f_1 : |X| \to Y$を$x$を$y$にうつす連続写像とする. 
+  $f_0',f_1' : X \to \Sing(Y)$を随伴で対応する基点付き射とする. 
+  $h : [0,1] \times X \to Y$を$f_0$から$f_1$への基点を保つホモトピーとする. 
+  このとき, 合成
+  \begin{align*}
+    |\Delta^1 \times X| \xrightarrow{\theta} |\Delta^1| \times |X| \cong [0,1] \times |X| \to Y
+  \end{align*}
+  は随伴性から$f_0'$から$f_1'$への(定義3.2.1.4の意味の)基点付きホモトピー$h' : \Delta^1 \times X \to \Sing(Y)$を定める. 
+  系3.5.2.2より, $\theta$は同相写像なので, 任意の$f_0$から$f_1$への基点を保つホモトピーは$f_0'$から$f_1'$への基点付きホモトピーを定める.
+\end{example}
+
+
+\section{$\Ex^\infty$関手}
+
+
+\section{ホモトピープルバックとホモトピープッシュアウト}
+
+単体的集合の圏は任意の極限と余極限を持つ. (注意1.1.1.13)
+特に, 単体的集合の図式$X_0 \to X \gets X_1$に対して, ファイバー積$X_0 \times_X X_1$が得られる. 
+しかし, この構成は弱ホモトピー同値によって保たれない. 
+
+\begin{remark}
+  次の単体的集合の可換図式を考える. 
+  % https://q.uiver.app/#q=WzAsNixbMCwwLCJYXzAiXSxbMSwwLCJYIl0sWzIsMCwiWF8xIl0sWzEsMSwiWSJdLFswLDEsIllfMCJdLFsyLDEsIllfMSJdLFswLDFdLFsyLDFdLFsxLDMsIlxcc2ltIl0sWzAsNCwiXFxzaW0iXSxbNCwzXSxbNSwzXSxbMiw1LCJcXHNpbSJdXQ==
+  \[\begin{tikzcd}
+    {X_0} & X & {X_1} \\
+    {Y_0} & Y & {Y_1}
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-3, to=1-2]
+    \arrow["\sim", from=1-2, to=2-2]
+    \arrow["\sim", from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+    \arrow[from=2-3, to=2-2]
+    \arrow["\sim", from=1-3, to=2-3]
+  \end{tikzcd}\]
+  ここで, 垂直な射は弱同値とする. 
+  このとき, ファイバー積の間の射
+  \begin{align*}
+    X_0 \times_X X_1 \to Y_0 \times_Y Y_1
+  \end{align*}
+  が弱ホモトピー同値とは限らない. 
+  例えば, 次の単体的集合の可換図式を考える. 
+  % https://q.uiver.app/#q=WzAsNixbMCwwLCJcXHswXFx9Il0sWzEsMCwiXFxEZWx0YV4xIl0sWzIsMCwiXFx7MVxcfSJdLFsxLDEsIlxcRGVsdGFeMCJdLFswLDEsIlxcezBcXH0iXSxbMiwxLCJcXHsxXFx9Il0sWzAsMV0sWzIsMV0sWzEsMywiXFxzaW0iXSxbMCw0LCIiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs0LDMsIlxcY29uZyIsMl0sWzUsMywiXFxjb25nIl0sWzIsNSwiIiwwLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XV0=
+  \[\begin{tikzcd}
+    {\{0\}} & {\Delta^1} & {\{1\}} \\
+    {\{0\}} & {\Delta^0} & {\{1\}}
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-3, to=1-2]
+    \arrow["\sim", from=1-2, to=2-2]
+    \arrow[Rightarrow, no head, from=1-1, to=2-1]
+    \arrow["\cong"', from=2-1, to=2-2]
+    \arrow["\cong", from=2-3, to=2-2]
+    \arrow[Rightarrow, no head, from=1-3, to=2-3]
+  \end{tikzcd}\]
+  上の図式のファイバー積は空集合だが, 下の図式のファイバー積は$\Delta^0$と同型である. 
+  空集合と$\Delta^0$は弱ホモトピー同値でない. 
+\end{remark}
+
+条件を緩めることで, 注意3.4.0.2を回避することができる. 
+
+\begin{proposition}
+  次の単体的集合の可換図式を考える. 
+  % https://q.uiver.app/#q=WzAsNixbMCwwLCJYXzAiXSxbMSwwLCJYIl0sWzIsMCwiWF8xIl0sWzEsMSwiWSJdLFswLDEsIllfMCJdLFsyLDEsIllfMSJdLFswLDEsImYiXSxbMiwxXSxbMSwzLCJcXHNpbSJdLFswLDQsIlxcc2ltIl0sWzQsMywiZiciLDJdLFs1LDNdLFsyLDUsIlxcc2ltIl1d
+  \[\begin{tikzcd}
+    {X_0} & X & {X_1} \\
+    {Y_0} & Y & {Y_1}
+    \arrow["f", from=1-1, to=1-2]
+    \arrow[from=1-3, to=1-2]
+    \arrow["\sim", from=1-2, to=2-2]
+    \arrow["\sim", from=1-1, to=2-1]
+    \arrow["{f'}"', from=2-1, to=2-2]
+    \arrow[from=2-3, to=2-2]
+    \arrow["\sim", from=1-3, to=2-3]
+  \end{tikzcd}\]
+  ここで, 垂直な射は弱同値とする.
+  $f,f'$がKanファイブレーションのとき, 誘導される射$X_0 \times_X X_1 \to Y_0 \times_Y Y_1$は弱ホモトピー同値である. 
+\end{proposition}
+
+\begin{proof}
+  Kanファイブレーションはプルバックで閉じるので, 次の図式において, 垂直な射はKanファイブレーションである. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYXzAgXFx0aW1lc19YIFhfMSJdLFsxLDAsIllfMCBcXHRpbWVzX1kgWV8xIl0sWzEsMSwiWV8xIl0sWzAsMSwiWF8xIl0sWzAsMV0sWzEsMl0sWzAsM10sWzMsMl1d
+  \[\begin{tikzcd}
+    {X_0 \times_X X_1} & {Y_0 \times_Y Y_1} \\
+    {X_1} & {Y_1}
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=2-2]
+    \arrow[from=1-1, to=2-1]
+    \arrow["\sim", from=2-1, to=2-2]
+  \end{tikzcd}\]
+  命題3.3.7.1より, 任意の$X$の点$x$に対して, ファイバー積の間の誘導される射
+  \begin{align*}
+    X_0 \times_X \{x\} \to Y_0 \times_Y \{y\}
+  \end{align*}
+  がKan複体のホモトピー同値であることを示せばよい. 
+  次の図式において, 命題3.3.7.1より, $X_0 \times_X \{x\} \to Y_0 \times_Y \{y\}$はホモトピー同値である. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYXzAiXSxbMSwwLCJZXzAiXSxbMSwxLCJZIl0sWzAsMSwiWCJdLFswLDEsIlxcc2ltIl0sWzEsMiwiZiciXSxbMCwzLCJmIiwyXSxbMywyLCJcXHNpbSIsMl1d
+  \[\begin{tikzcd}
+    {X_0} & {Y_0} \\
+    X & Y
+    \arrow["\sim", from=1-1, to=1-2]
+    \arrow["{f'}", from=1-2, to=2-2]
+    \arrow["f"', from=1-1, to=2-1]
+    \arrow["\sim"', from=2-1, to=2-2]
+  \end{tikzcd}\]
+\end{proof}
+
+疑問3.4.0.1をより一般的に考えるために, ファイバー積をホモトピーによって保たれる対象に変えることを考える. 
+
+\begin{construction}[ホモトピーファイバー積]
+  $X$をKan複体, $f_0 : X_0 \to X, f_1 : X_1 \to X$を単体的集合の射とする. 
+  単体的集合 
+  \begin{align*}
+    X_0 \times_X^h X_1 
+    := X_0 \times_{\Fun(\{0\},X)} \Fun(\Delta^1,X) \times_{\Fun(\{1\},X)} X_1
+  \end{align*}
+  を$X$上の$X_0$と$X_1$のホモトピーファイバー積(homotopy fiber product)という.
+\end{construction}
+
+\begin{remark}
+  単体的集合の図式$X_0 \to X \gets X_1$に対して, 単体的集合$X_0 \times_{\Fun(\{0\},X)} \Fun(\Delta^1,X) \times_{\Fun\{1\},X} X_1$はwell-definedである. 
+  しかし, $X$がKan複体のときのみ, これを$X_0 \times_X^h X_1$と表し, ホモトピーファイバー積という. 
+  $X$が一般の単体的集合のとき, これを$X_0 \tilde{\times}_X X_1$と表し, 向き付きファイバー積という. (定義4.6.4.1)
+  $X$が$\infty$圏のとき, ホモトピーファイバー積の定義はわずかに異なる. (構成4.5.2.1)
+\end{remark}
+
+\begin{example}
+  $f_0 : X_0 \to X, f_1 : X_1 \to X$を位相空間の連続写像とする. 
+  $x_0$を$X_0$の点, $x_1$を$X_1$の点, $p : [0,1] \to X$を$p(0)=f_0(x_0)$と$p(1)=f_1(x_1)$を満たす連続写像とする. 
+  この3つ組$(x_0,x_1,p)$を$X_0 \times_X^h X_1$と表し, 位相空間の$X$上の$X_0$と$X_1$のホモトピーファイバー積(homotopy fiber product)という. 
+  特異単体$\Sing$は右随伴であり, 極限と交換するので,
+  \begin{align*}
+    \Sing(X_0 \times_X^h X_1) \cong \Sing(X_0) \times_{\Sing(X)}^h \Sing(X_1)
+  \end{align*}
+  となり, 右辺は構成3.4.0.3の意味のKan複体のホモトピーファイバー積である.
+\end{example}
+
+\begin{remark}
+  $f : X \to Y$をKan複体の射とする. 
+  このとき, $f$がホモトピー同値であることと, 任意の$y \in Y$に対してホモトピーファイバー積$X \times_X^h \{y\}$が可縮なKan複体であることは同値である.
+  実際, 例3.1.7.10より, $f$は次のように分解できる. ($f_0=f : X \to Y, f1=\id_Y : Y \to Y$とすればよい.)
+  \begin{align*}
+    X \xrightarrow{\delta} X \times_Y^h \xrightarrow{\pi} Y 
+  \end{align*}
+  ここで, $\delta$はホモトピー同値, $\pi$はKanファイブレーションである. 
+  2-out-of-3より, $f$がホモトピー同値であることと, $\pi$がホモトピー同値であることは同値である. 
+  命題3.3.7.4より, これは各ファイバー積$\pi^{-1}\{y\}=X \times_X^h Y$が可縮なKan複体であることは同値である. 
+\end{remark}
+
+構成3.4.0.3において, ホモトピーファイバー積の定義より, 包含
+\begin{align*}
+  X \hookrightarrow \Fun(\Delta^1,X) : x \mapsto \id_x
+\end{align*}
+は通常のファイバー積$X_0 \times_X X_1$からホモトピーファイバー積$X_0 \times_X^h X_1$へのmono射を定める. 
+
+\begin{proposition}
+  $f_0 : X_0 \to X, f_1 : X_1 \to X$を単体的集合の射とする.
+  $X$をKan複体, $f_0$か$f_1$のいずれかがKanファイブレーションであるとする. 
+  このとき, $X_0 \times_X X_1 \to X_0 \times_X^h X_1$は弱ホモトピー同値である.
+\end{proposition}
+
+\begin{proof}
+  $f_0$がKanファイブレーションであるとする. 
+  系3.1.3.6より, 評価射$\ev_0 : \Fun(\Delta^1,X) \to \Fun(\{1\},X)$は自明なKanファイブレーションである. 
+  自明なKanファイブレーションはpullbackで閉じるので, $q : \Fun(\Delta^1,X) \times_{\Fun(\{1\},X)} X_1 \to X_1$も自明なKanファイブレーションである.
+  対角射$\delta : X \hookrightarrow \Fun(\Delta^1,X)$は$q$の切断$s : X_1 \to \Fun(\Delta^1,X) \times_{\Fun(\{1\},X)} X_1$を定める. 
+  弱ホモトピー同値は切断で閉じるので, $s$も弱ホモトピー同値である. 
+  次の図式において, 命題3.4.0.2を用いると, $X_0 \times_X X_1 \to X_0 \times_X^h X_1$は弱ホモトピー同値であることが分かる.
+  % https://q.uiver.app/#q=WzAsNixbMCwwLCJYXzAiXSxbMSwwLCJYIl0sWzEsMSwiWCJdLFswLDEsIlhfMCJdLFsyLDAsIlhfMSJdLFsyLDEsIlxcRnVuKFxcRGVsdGFeMSxYKSBcXHRpbWVzX3tcXEZ1bihcXHsxXFx9LFgpfSBYXzEiXSxbMCwxLCJmXzAiXSxbMSwyLCIiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFswLDMsIiIsMix7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzMsMiwiZl8wIiwyXSxbNCwxXSxbNCw1LCJzIl0sWzUsMl1d
+  \[\begin{tikzcd}
+    {X_0} & X & {X_1} \\
+    {X_0} & X & {\Fun(\Delta^1,X) \times_{\Fun(\{1\},X)} X_1}
+    \arrow["{f_0}", from=1-1, to=1-2]
+    \arrow[Rightarrow, no head, from=1-2, to=2-2]
+    \arrow[Rightarrow, no head, from=1-1, to=2-1]
+    \arrow["{f_0}"', from=2-1, to=2-2]
+    \arrow[from=1-3, to=1-2]
+    \arrow["s", from=1-3, to=2-3]
+    \arrow[from=2-3, to=2-2]
+  \end{tikzcd}\]
+\end{proof}
+
+\begin{remark}
+  命題3.4.0.7において, $f_0$か$f_1$のいずれかがKanファイブレーションであるという仮定は必要である. 
+  例えば, 次のような反例がある. 
+  $x,y$を$X$を点とする. 
+  $x \neq y$のとき, ファイバー積$\{x\} \times_X \{y\}$は空集合である. 
+  一方, ホモトピーファイバー積$\{x\} \times_X^h \{y\}$は空であるとは限らない. 
+  $\{x\} \times_X^h \{y\}$の点として, domainが$x$, codomainが$y$である$\Fun(\Delta^1,X)$辺$p : x \to y$がある. 
+\end{remark}
+
+一般に, mono射$X_0 \times_X X_1 \hookrightarrow X_0 \times_X^h X_1$が弱同値とならないのは, ホモトピーファイバー積のデメリットではなく, 特徴と考えるべきである. 
+ホモトピー論の視点からすると, ホモトピーファイバー積は通常のファイバー積より良いふるまいをする. 
+
+\begin{proposition}
+  $X,Y$をKan複体とする. 
+  次の単体的集合の可換図式を考える. 
+  % https://q.uiver.app/#q=WzAsNixbMCwwLCJYXzAiXSxbMSwwLCJYIl0sWzIsMCwiWF8xIl0sWzEsMSwiWSJdLFswLDEsIllfMCJdLFsyLDEsIllfMSJdLFswLDEsImYiXSxbMiwxXSxbMSwzLCJcXHNpbSJdLFswLDQsIlxcc2ltIl0sWzQsMywiZiciLDJdLFs1LDNdLFsyLDUsIlxcc2ltIl1d
+  \[\begin{tikzcd}
+    {X_0} & X & {X_1} \\
+    {Y_0} & Y & {Y_1}
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-3, to=1-2]
+    \arrow["\sim", from=1-2, to=2-2]
+    \arrow["\sim", from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+    \arrow[from=2-3, to=2-2]
+    \arrow["\sim", from=1-3, to=2-3]
+  \end{tikzcd}\]
+  ここで, 垂直な射は弱同値とする.
+  このとき, 誘導される射$X_0 \times^h_X X_1 \to Y_0 \times^h_Y Y_1$は弱ホモトピー同値である. 
+\end{proposition}
+
+\begin{proof}
+  次の図式を考える. 
+  % https://q.uiver.app/#q=WzAsNixbMCwwLCJcXEZ1bihcXERlbHRhXjEsWCkiXSxbMSwwLCJcXEZ1bihcXHBhcnRpYWwgXFxEZWx0YV4xLFgpIl0sWzIsMCwiWF8wIFxcdGltZXMgWF8xIl0sWzEsMSwiXFxGdW4oXFxwYXJ0aWFsIFxcRGVsdGFeMSxZKSJdLFswLDEsIlxcRnVuKFxcRGVsdGFeMSxZKSJdLFsyLDEsIllfMCBcXHRpbWVzIFlfMSJdLFswLDFdLFsyLDFdLFsxLDMsIlxcc2ltIl0sWzAsNCwiXFxzaW0iXSxbNCwzXSxbNSwzXSxbMiw1LCJcXHNpbSJdXQ==
+  \[\begin{tikzcd}
+    {\Fun(\Delta^1,X)} & {\Fun(\partial \Delta^1,X)} & {X_0 \times X_1} \\
+    {\Fun(\Delta^1,Y)} & {\Fun(\partial \Delta^1,Y)} & {Y_0 \times Y_1}
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-3, to=1-2]
+    \arrow["\sim", from=1-2, to=2-2]
+    \arrow["\sim", from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+    \arrow[from=2-3, to=2-2]
+    \arrow["\sim", from=1-3, to=2-3]
+  \end{tikzcd}\]
+  系3.1.3.3より, 左の水平な射はKanファイブレーションである. 
+  垂直な射は弱同値なので, 命題3.4.0.2より, $X_0 \times^h_X X_1 \to Y_0 \times^h_Y Y_1$は弱ホモトピー同値である. 
+\end{proof}
+
+\begin{remark}
+  $X$をKan複体, $f_0 : X_0 \to X, f_1 : X_1 \to X$を単体的集合の射とする.
+  一般に, 2つのホモトピーファイバー積$X_0 \times^h_X X_1$と$X_1 \times^h_X X_0$は単体的集合として同型ではない. 
+  実際, 次の同型は存在する.
+  \begin{align*}
+    (X_1 \times^h_X X_0)^\myop
+    \cong X_0^\myop \times^h_{X_0^\myop} X_1^\myop
+  \end{align*}
+  しかし, $X_0 \times^h_X X_1$と$X_1 \times^h_X X_0$は同じホモトピー型を持たない. 
+  命題3.1,7,1より, $f_0$は弱同値$w : X_0 \to X_0'$とKanファイブレーション$f_0' : X_0' \to X$を用いて, $X_0 \xrightarrow{w} X_0' \xrightarrow{f_0'} X$のように分解できる. 
+  命題3.4.0.7より, 
+  \begin{align*}
+    X_0' \times_X X_1 \hookrightarrow X_0' \times^h_X X_1,~ X_1 \times_X X_0' \hookrightarrow X_1 \times^h_X X_0'
+  \end{align*}
+  は弱同値である. 
+  命題3.4.0.9より, 
+  \begin{align*}
+    X_0 \times_X X_1 \to  X_0' \times_X X_1,~ X_1 \times^h_X X_0 \to X_1 \times^h_X X_0'
+  \end{align*}
+  は弱同値である.
+  よって, 
+  \begin{align*}
+    X_0 \times_X X_1 \xrightarrow{\sim} X_0' \times_X X_1 \hookleftarrow X_0' \times_X X_1 \cong X_1 \times_X X_0' \hookrightarrow X_1 \times^h_X X_0' \xleftarrow{\sim} X_1 \times^h_X X_0
+  \end{align*} 
+  は弱同値である. 
+  つまり, $X_0 \times^h_X X_1 \to X_1 \times^h_X X_0$は弱同値である. 
+\end{remark}
+
+ホモトピーファイバー積は単体的集合として定義されたが, 図式の持つ性質として定義した方が都合がよい. 
+
+\subsection{ホモトピープルバック図式}
+
+一般の単体的集合に対して, ホモトピープルバック図式を定義する. 
+命題3.1.7.1の分解を特に明記せずに用いる. 
+
+\begin{definition}[ホモトピープルバック図式]
+  次の単体的集合の可換図式を考える. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYX3swMX0iXSxbMSwwLCJYXzAiXSxbMSwxLCJYIl0sWzAsMSwiWF8xIl0sWzAsMV0sWzEsMl0sWzAsM10sWzMsMl1d
+  \[\begin{tikzcd}
+    {X_{01}} & {X_0} \\
+    {X_1} & X
+    \arrow[from=1-1, to=1-2]
+    \arrow["q"', from=1-2, to=2-2]
+    \arrow[from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+  \end{tikzcd}\]
+  $q$を弱同値$w : X_0 \to X_0'$とKanファイブレーション$q' : X_0' \to X$を用いて$q=q'w$と分解する. 
+  誘導される射$X_{0,1} \to X_0' \times_X X_1$が弱ホモトピー同値のとき, 上の図式をホモトピープルバック図式(homotopy pullback square)という.
+  % https://q.uiver.app/#q=WzAsNixbMCwwLCJYX3swMX0iXSxbMiwxLCJYXzAiXSxbMywyLCJYIl0sWzEsMiwiWF8xIl0sWzEsMSwiWF8wJyBcXHRpbWVzX1ggWF8xIl0sWzMsMSwiWF8wJyJdLFswLDEsIiIsMCx7ImN1cnZlIjotMn1dLFswLDMsIiIsMCx7ImN1cnZlIjoyfV0sWzMsMl0sWzEsMiwicSIsMl0sWzQsMV0sWzEsNSwidyJdLFs1LDIsInEnIl0sWzQsM10sWzAsNF0sWzQsMiwiIiwwLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
+  \[\begin{tikzcd}
+    {X_{01}} \\
+    & {X_0' \times_X X_1} & {X_0} & {X_0'} \\
+    & {X_1} && X
+    \arrow[curve={height=-12pt}, from=1-1, to=2-3]
+    \arrow[curve={height=12pt}, from=1-1, to=3-2]
+    \arrow[from=3-2, to=3-4]
+    \arrow["q"', from=2-3, to=3-4]
+    \arrow[from=2-2, to=2-3]
+    \arrow["w", from=2-3, to=2-4]
+    \arrow["{q'}", from=2-4, to=3-4]
+    \arrow[from=2-2, to=3-2]
+    \arrow[from=1-1, to=2-2]
+    \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=2-2, to=3-4]
+  \end{tikzcd}\]
+\end{definition}
+
+定義3.4.0.1の条件を確かめるためには, 1つの分解$q=q'w$についてのみ考えればよい. 
+
+\begin{proposition}
+  定義3.4.0.1において, 弱同値$w' : X_0 \to X_0'$を用いて, $q=q'w'$と分解されるとする. 
+  このとき, 定義3.4.0.1の図式がホモトピープルバック図式であることと, 誘導される射$\rho' : X_{0,1} \to X_0' \times_X X_1$が弱ホモトピー同値であることは同値である. 
+\end{proposition}
+
+\begin{proof}
+  $q$が弱同値$w'' : X_0 \to X_0''$とKanファイブレーション$q'' : X_0'' \to X$を用いて$q=q''w''$と分解されるとする. 
+  $\rho'$が弱同値であることと, 誘導される射$\rho'' : X_{01} \to X_0'' \times_X X_1$が弱同値であることが同値であることを示せばよい. 
+  命題3.1.7.1より, $w'$は緩射である. 
+  注意3.1.2.7より, 次のリフト問題は解決$u : X_0' \to X_0''$を持つ. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYXzAiXSxbMSwwLCJYXzAnJyJdLFsxLDEsIlgiXSxbMCwxLCJYXzAnIl0sWzAsMSwidycnIl0sWzEsMiwicScnIl0sWzAsMywidyciLDJdLFszLDIsInEnIiwyXSxbMywxLCJ1IiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+  \[\begin{tikzcd}
+    {X_0} & {X_0''} \\
+    {X_0'} & X
+    \arrow["{w''}", from=1-1, to=1-2]
+    \arrow["{q''}", from=1-2, to=2-2]
+    \arrow["{w'}"', from=1-1, to=2-1]
+    \arrow["{q'}"', from=2-1, to=2-2]
+    \arrow["u"', dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+  $w',w''$は弱同値なので, 2-out-of-3より, $u$も弱同値である. 
+  次の図式を考えると, 命題3.4.0.2より, $X_0' \times_X X_1 \to X_0'' \times_X X_1$は弱ホモトピー同値である. 
+  % https://q.uiver.app/#q=WzAsNixbMCwwLCJYXzAnIl0sWzEsMCwiWCJdLFsyLDAsIlhfMSJdLFsxLDEsIlgiXSxbMiwxLCJYXzEiXSxbMCwxLCJYXzAnJyJdLFswLDEsInEnIl0sWzIsMV0sWzEsMywiIiwwLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNCwzXSxbNSwzLCJxJyciLDJdLFsyLDQsIiIsMix7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzAsNSwiXFxzaW0iXV0=
+  \[\begin{tikzcd}
+    {X_0'} & X & {X_1} \\
+    {X_0''} & X & {X_1}
+    \arrow["{q'}", from=1-1, to=1-2]
+    \arrow[from=1-3, to=1-2]
+    \arrow[Rightarrow, no head, from=1-2, to=2-2]
+    \arrow[from=2-3, to=2-2]
+    \arrow["{q''}"', from=2-1, to=2-2]
+    \arrow[Rightarrow, no head, from=1-3, to=2-3]
+    \arrow["\sim", from=1-1, to=2-1]
+  \end{tikzcd}\]
+  2-out-of-3より, $\rho'$が弱同値であることと, $\rho''$が弱同値であることは同値である.
+\end{proof}
+
+\begin{example}
+  次の単体的集合の可換図式を考える.
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYX3swMX0iXSxbMSwwLCJYXzAiXSxbMSwxLCJYIl0sWzAsMSwiWF8xIl0sWzAsMV0sWzEsMl0sWzAsM10sWzMsMl1d
+  \[\begin{tikzcd}
+    {X_{01}} & {X_0} \\
+    {X_1} & X
+    \arrow[from=1-1, to=1-2]
+    \arrow["q"', from=1-2, to=2-2]
+    \arrow[from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+  \end{tikzcd}\]
+  $q$をKanファイブレーションとする. 
+  命題3.4.1.2において, $q$の分解を$q=q\id_{X_0}$とおく. 
+  この図式がホモトピープルバック図式であることと, 誘導される射$X_{01} \to X_0' \times X_1$が弱ホモトピー同値であることは同値である.
+  よって, この図式がプルバック図式のとき, ホモトピープルバック図式である.  
+  これは$q$がKanファイブレーションでないときには成立しない. 
+\end{example}
+
+\begin{example}
+  次の単体的集合の可換図式を考える.
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYJyJdLFsxLDAsIlgiXSxbMSwxLCJTIl0sWzAsMSwiUyciXSxbMCwxXSxbMSwyLCJxIl0sWzAsMywicSciXSxbMywyXV0=
+  \[\begin{tikzcd}
+    {X'} & X \\
+    {S'} & S
+    \arrow[from=1-1, to=1-2]
+    \arrow["q", from=1-2, to=2-2]
+    \arrow["{q'}", from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+  \end{tikzcd}\]
+  $q,q'$をKanファイブレーションとする. 
+  命題3.3.7.1より, この図式がホモトピープルバック図式であることと, 任意の$S'$の点$s'$に対して$S$の点$s$が像として存在し, ファイバー積の間の誘導される射$X_{s'}' \to X_s$がKan複体のホモトピー同値であることは同値である. 
+\end{example}
+
+\begin{corollary}
+  次の単体的集合の可換図式を考える.
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYX3swMX0iXSxbMSwwLCJYXzAiXSxbMSwxLCJYIl0sWzAsMSwiWF8xIl0sWzAsMV0sWzEsMiwicSJdLFswLDMsInEnIl0sWzMsMl1d
+  \[\begin{tikzcd}
+    {X_{01}} & {X_0} \\
+    {X_1} & X
+    \arrow[from=1-1, to=1-2]
+    \arrow["q", from=1-2, to=2-2]
+    \arrow["{q'}", from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+  \end{tikzcd}\]
+  $q$を弱ホモトピー同値とする. 
+  このとき, この図式がホモトピープルバック図式であることと, $q'$が弱ホモトピー同値であることは同値である. 
+\end{corollary}
+
+\begin{proof}
+  $q$の分解として, $q = \id_X q$を考えればよい. 
+  % https://q.uiver.app/#q=WzAsNixbMCwwLCJYX3swMX0iXSxbMiwxLCJYXzAiXSxbMywyLCJYIl0sWzEsMiwiWF8xIl0sWzEsMSwiWCBcXHRpbWVzX1ggWF8xIl0sWzMsMSwiWCJdLFswLDEsIiIsMCx7ImN1cnZlIjotMn1dLFswLDMsIiIsMCx7ImN1cnZlIjoyfV0sWzMsMl0sWzEsMiwicSIsMl0sWzQsMV0sWzEsNSwicSJdLFs1LDIsIlxcaWRfWCJdLFs0LDMsIiIsMCx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzAsNF0sWzQsMiwiIiwwLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
+  \[\begin{tikzcd}
+    {X_{01}} \\
+    & {X \times_X X_1} & {X_0} & X \\
+    & {X_1} && X
+    \arrow[curve={height=-12pt}, from=1-1, to=2-3]
+    \arrow[curve={height=12pt}, from=1-1, to=3-2]
+    \arrow[from=3-2, to=3-4]
+    \arrow["q"', from=2-3, to=3-4]
+    \arrow[from=2-2, to=2-3]
+    \arrow["q", from=2-3, to=2-4]
+    \arrow["{\id_X}", from=2-4, to=3-4]
+    \arrow[Rightarrow, no head, from=2-2, to=3-2]
+    \arrow[from=1-1, to=2-2]
+    \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=2-2, to=3-4]
+  \end{tikzcd}\]
+\end{proof}
+
+\begin{corollary}
+  次の単体的集合の可換図式を考える.
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYX3swMX0iXSxbMSwwLCJYXzAiXSxbMSwxLCJYIl0sWzAsMSwiWF8xIl0sWzAsMV0sWzEsMiwicSJdLFswLDMsInEnIl0sWzMsMl1d
+  \[\begin{tikzcd}
+    {X_{01}} & {X_0} \\
+    {X_1} & X
+    \arrow[from=1-1, to=1-2]
+    \arrow["q", from=1-2, to=2-2]
+    \arrow["{q'}", from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+  \end{tikzcd}\]
+  $X$をKan複体とする. 
+  この図式がホモトピープルバック図式であることと, 誘導される射 
+  \begin{align*}
+    \theta : X_{01} \to X_0 \times_X X_1 \hookrightarrow X_0 \times^h_X X_1
+  \end{align*}
+  が弱ホモトピー同値であることは同値である. 
+\end{corollary}
+
+\begin{proof}
+  弱同値$w : X_0 \to X_0'$とKanファイブレーション$q' : X_0' \to X$を用いて$q=q'w$と分解する. 
+  次の図式を考える. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYX3swMX0iXSxbMCwxLCJYXzAnIFxcdGltZXNfWCBYXzEiXSxbMSwxLCJYXzAnIFxcdGltZXNeaF9YIFhfMSJdLFsxLDAsIlhfMCBcXHRpbWVzXmhfWCBYXzEiXSxbMCwxLCJcXHJobyIsMl0sWzEsMiwiXFxzaW0iLDJdLFswLDMsIlxcdGhldGEiXSxbMywyLCJcXHNpbSJdXQ==
+  \[\begin{tikzcd}
+    {X_{01}} & {X_0 \times^h_X X_1} \\
+    {X_0' \times_X X_1} & {X_0' \times^h_X X_1}
+    \arrow["\rho"', from=1-1, to=2-1]
+    \arrow["\sim"', from=2-1, to=2-2]
+    \arrow["\theta", from=1-1, to=1-2]
+    \arrow["\sim", from=1-2, to=2-2]
+  \end{tikzcd}\]
+  命題3.4.0.7より, 下の水平な射は弱同値である. 
+  命題3.4.0.9より, 右の垂直な射は弱同値である. 
+  2-out-of-3より, $\theta$が弱同値であることと, $\rho$が弱同値であることは同値である. 
+  命題3.4.1.2より, 求める図式がホモトピープルバック図式であることは同値である.
+\end{proof}
+
+\begin{remark}
+  次の単体的集合の可換図式を考える.
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYX3swMX0iXSxbMSwwLCJYXzAiXSxbMSwxLCJYIl0sWzAsMSwiWF8xIl0sWzAsMV0sWzEsMiwicSJdLFswLDMsInEnIl0sWzMsMl1d
+  \[\begin{tikzcd}
+    {X_{01}} & {X_0} \\
+    {X_1} & X
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=2-2]
+    \arrow[from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+  \end{tikzcd}\]
+  がホモトピープルバック図式であることと, 次の図式
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYX3swMX1eXFxteW9wIl0sWzEsMCwiWF8wXlxcbXlvcCJdLFsxLDEsIlheXFxteW9wIl0sWzAsMSwiWF8xXlxcbXlvcCJdLFswLDFdLFsxLDJdLFswLDNdLFszLDJdXQ==
+  \[\begin{tikzcd}
+    {X_{01}^\myop} & {X_0^\myop} \\
+    {X_1^\myop} & {X^\myop}
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=2-2]
+    \arrow[from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+  \end{tikzcd}\]
+  がホモトピープルバック図式であることは同値である. 
+\end{remark}
+
+\begin{remark}
+  $f_0 : X_0 \to X, f_1 : X_1 \to X$を単体的集合の射とする.
+  任意の単体的集合に対して, ホモトピープルバック図式が存在するとは限らない. 
+  例えば, $f_0 : \{0\} \hookrightarrow \Delta^1, f_1 : \{1\} \hookrightarrow \Delta^1$とする. 
+  次の可換図式が存在するとき, 単体的集合$X_{01}$は空である. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYX3swMX0iXSxbMSwwLCJcXHswXFx9Il0sWzEsMSwiXFxEZWx0YV4xIl0sWzAsMSwiXFx7MVxcfSJdLFswLDFdLFsxLDIsImZfMCIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsM10sWzMsMiwiZl8xIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XV0=
+  \[\begin{tikzcd}
+    {X_{01}} & {\{0\}} \\
+    {\{1\}} & {\Delta^1}
+    \arrow[from=1-1, to=1-2]
+    \arrow["{f_0}", hook, from=1-2, to=2-2]
+    \arrow[from=1-1, to=2-1]
+    \arrow["{f_1}"', hook, from=2-1, to=2-2]
+  \end{tikzcd}\]
+\end{remark}
+
+定義3.4.1.1は非対称的である. 
+$f_0 : X_0 \to X$をKanファイブレーションに置き換えたとき, $f_1 : X_1 \to X$は何も変えていない. 
+しかし, 次の命題から, これは関係ないことがわかる. 
+
+\begin{proposition}[対称性]
+  次の単体的集合の可換図式
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYX3swMX0iXSxbMSwwLCJYXzAiXSxbMSwxLCJYIl0sWzAsMSwiWF8xIl0sWzAsMV0sWzEsMiwiZl8wIl0sWzAsM10sWzMsMiwiZl8xIiwyXV0=
+  \[\begin{tikzcd}
+    {X_{01}} & {X_0} \\
+    {X_1} & X
+    \arrow[from=1-1, to=1-2]
+    \arrow["{f_0}", from=1-2, to=2-2]
+    \arrow[from=1-1, to=2-1]
+    \arrow["{f_1}"', from=2-1, to=2-2]
+  \end{tikzcd}\]
+  がホモトピープルバック図式であることと, 次の単体的集合の可換図式
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYX3swMX0iXSxbMSwwLCJYXzEiXSxbMSwxLCJYIl0sWzAsMSwiWF8wIl0sWzAsMV0sWzEsMiwiZl8xIl0sWzAsM10sWzMsMiwiZl8wIiwyXV0=
+  \[\begin{tikzcd}
+    {X_{01}} & {X_1} \\
+    {X_0} & X
+    \arrow[from=1-1, to=1-2]
+    \arrow["{f_1}", from=1-2, to=2-2]
+    \arrow[from=1-1, to=2-1]
+    \arrow["{f_0}"', from=2-1, to=2-2]
+  \end{tikzcd}\]
+  がホモトピープルバック図式であることは同値である. 
+\end{proposition}
+
+\begin{proof}
+  弱同値$w_0,w_1$とKanファイブレーション$f_0',f_1'$を用いて$f_0=f_0'w_0, f_1=f_1'w_1$と分解されるとする. 
+  \begin{align*}
+    X_0 \xrightarrow{w_0} X_0' \xrightarrow{f_0'} X,~ X_1 \xrightarrow{w_1} X_1' \xrightarrow{f_1'} X
+  \end{align*}
+  次の可換図式が存在する.
+  % https://q.uiver.app/#q=WzAsOSxbMCwwLCJYX3swMX0iXSxbMSwwLCJYXzAgXFx0aW1lc19YIFhfMSciXSxbMSwxLCJYXzAnIFxcdGltZXNfWCBYXzEnIl0sWzAsMSwiWF8wJyBcXHRpbWVzX1ggWF8xIl0sWzIsMCwiWF8wIl0sWzAsMiwiWF8xIl0sWzEsMiwiWF8xJyJdLFsyLDEsIlhfMCciXSxbMiwyLCJYIl0sWzAsMSwidSJdLFsxLDIsInYnIl0sWzAsMywidiJdLFszLDIsInUnIiwyXSxbMSw0XSxbMyw1XSxbNSw2LCJ3XzEiLDJdLFsyLDZdLFs0LDcsIndfMCJdLFsyLDddLFs3LDgsImZfMCciXSxbNiw4LCJmXzEnIiwyXV0=
+  \[\begin{tikzcd}
+    {X_{01}} & {X_0 \times_X X_1'} & {X_0} \\
+    {X_0' \times_X X_1} & {X_0' \times_X X_1'} & {X_0'} \\
+    {X_1} & {X_1'} & X
+    \arrow["u", from=1-1, to=1-2]
+    \arrow["{v'}", from=1-2, to=2-2]
+    \arrow["v", from=1-1, to=2-1]
+    \arrow["{u'}"', from=2-1, to=2-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow[from=2-1, to=3-1]
+    \arrow["{w_1}"', from=3-1, to=3-2]
+    \arrow[from=2-2, to=3-2]
+    \arrow["{w_0}", from=1-3, to=2-3]
+    \arrow[from=2-2, to=2-3]
+    \arrow["{f_0'}", from=2-3, to=3-3]
+    \arrow["{f_1'}"', from=3-2, to=3-3]
+  \end{tikzcd}\]
+  系3.3.7.2より, $u'$と$v'$は弱同値である. 
+  2-out-of-3より, $u$が弱同値であることと, $v$が弱同値であることは同値である.
+  これは2つのホモトピープルバック図式の同値性を示している. 
+\end{proof}
+
+\begin{remark}
+  
+\end{remark}
+
+\begin{proposition}[推移律]
+  次の単体的集合の可換図式を考える.
+  % https://q.uiver.app/#q=WzAsNixbMCwwLCJaIl0sWzEsMCwiWSJdLFsyLDAsIlgiXSxbMiwxLCJTIl0sWzEsMSwiVCJdLFswLDEsIlUiXSxbMCwxXSxbMSwyXSxbMiwzLCJmIl0sWzEsNCwiZyJdLFswLDUsImgiXSxbNSw0XSxbNCwzXV0=
+  \[\begin{tikzcd}
+    Z & Y & X \\
+    U & T & S
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow["f", from=1-3, to=2-3]
+    \arrow["g", from=1-2, to=2-2]
+    \arrow["h", from=1-1, to=2-1]
+    \arrow[from=2-1, to=2-2]
+    \arrow[from=2-2, to=2-3]
+  \end{tikzcd}\]
+  右の四角がホモトピープルバック図式であるとする. 
+  このとき, 左の四角がホモトピープルバック図式であることと, 外の四角がホモトピープルバック図式であることは同値である.
+\end{proposition}
+
+\begin{proof}
+  
+\end{proof}
+
+ホモトピープルバック図式は弱同値で保たれる. 
+
+\begin{corollary}[ホモトピー不変性]
+  次の単体的集合の可換図式を考える.
+  % https://q.uiver.app/#q=WzAsOCxbMCwyLCJYXzEiXSxbMSwzLCJZIl0sWzIsMiwiWCJdLFszLDMsIlkiXSxbMSwxLCJZX3swMX0iXSxbMywxLCJZXzAiXSxbMCwwLCJYX3swMX0iXSxbMiwwLCJYXzAiXSxbMCwxLCJ3XzEiXSxbMCwyXSxbMiwzLCJ3Il0sWzMsMV0sWzQsMV0sWzQsNV0sWzUsM10sWzYsMF0sWzYsNCwid197MDF9Il0sWzYsN10sWzcsNSwid18wIl0sWzcsMl1d
+  \[\begin{tikzcd}
+    {X_{01}} && {X_0} \\
+    & {Y_{01}} && {Y_0} \\
+    {X_1} && X \\
+    & Y && Y
+    \arrow["{w_1}", from=3-1, to=4-2]
+    \arrow[from=3-1, to=3-3]
+    \arrow["w", from=3-3, to=4-4]
+    \arrow[from=4-4, to=4-2]
+    \arrow[from=2-2, to=4-2]
+    \arrow[from=2-2, to=2-4]
+    \arrow[from=2-4, to=4-4]
+    \arrow[from=1-1, to=3-1]
+    \arrow["{w_{01}}", from=1-1, to=2-2]
+    \arrow[from=1-1, to=1-3]
+    \arrow["{w_0}", from=1-3, to=2-4]
+    \arrow[from=1-3, to=3-3]
+  \end{tikzcd}\]
+  $w_0,w_1,w$は弱同値とする. 
+  次の3つのうち2つが成立するとき, 残りの1つも成立する. 
+  \begin{enumerate}
+    \item 奥の四角はホモトピープルバック図式である.
+    \item 手前の四角はホモトピープルバック図式である.
+    \item $w_{01} : X_{01} \to Y_{01}$は弱同値である. 
+  \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+  
+\end{proof}
+
+
+
+
+
+\subsection{ホモトピープッシュアウト図式}
+
+定義3.4.1.1の双対を考える. 
+
+
+
+
+
+
+
 
 \newpage
 \bibliographystyle{alpha}

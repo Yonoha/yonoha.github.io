@@ -1,49 +1,72 @@
-@charset "UTF-8";
-
-@media (prefers-color-scheme: dark) {
-    body {
-      background-color: #000;
-      color: #fff;
-    }
-}
-@media (prefers-reduced-motion) {
-    .animation {
-      animation-name: simpleAnimation;
-    }
-}
-
 body {
-    margin: 25px; /*上下左右の一括指定*/
-    background-image: url("background/back_lightblue.gif"); /*背景*/
-    font-family: "Yu Gothic"; /*フォント*/
-}
-h1 {
-    color: #364e96; /*文字色*/
-    font-family: "Times New Roman", "sans-serif"; 
-}
-h2 {
-    font-family: "Times New Roman", "sans-serif"; 
-}
-p {
-    margin-left: 20px;  
-}
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1, h2{
+    color: #007bff;
+    text-align: center;
+    font-family: "Times New Roman", sans-serif;
+  }
+  
+  h3 {
+    margin-top: 20px;
+    text-align: center;
+    font-family: "Times New Roman", sans-serif;
+  }
 
-/* 目次のスタイル */
-.tabbed-toc {
-    display: flex;
-    flex-direction: row;
+  p {
+    margin-left: 20px;
+    padding-left: 0.1em; /* 1文字分（1em）のマージンを追加 */
+  }
+
+  a { /* リンクのスタイルを指定 */
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  a:hover { /* マウスをリンクに重ねたときのスタイルを指定 */
+    text-decoration: underline;
+  }
+  
+  ul { /* 箇条書きリストのスタイルを指定 */
     list-style-type: none;
     padding: 0;
-}
-.tabbed-toc li {
-    margin-right: 15px;
-}
-.tabbed-toc a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-}  
+  }
 
-.italic {
-    font-style: italic;
-}
+  ul li {
+    margin-bottom: 20px;
+  }
+  
+  ul li a {
+    /* display: block; */
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+  }
+  
+  ul li a:hover {
+    background-color: #e9e9e9;
+  } 
+
+  .tabbed-toc { /* タブ形式の目次のスタイルを指定 */
+    display: flex; /*  Flexboxを使って水平方向に並べる */
+    justify-content: space-around;
+    background-color: #f4f4f4;
+    padding: 10px; /* 内側の余白を追加 */
+  }
+  
+  .tabbed-toc li {
+    margin: 0;
+  }
+  
+  .tabbed-toc a {
+    padding: 5px 10px;
+  }
+  
+  .tabbed-toc a:hover {
+    background-color: #ddd;
+    border-radius: 5px;
+  }

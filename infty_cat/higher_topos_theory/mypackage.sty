@@ -24,6 +24,7 @@
 \usepackage{relsize}
 \usepackage[bbgreekl]{mathbbol}
 \usepackage{amsfonts}
+\usepackage{eucal}
 % \usepackage{mycommand}
 
 % change colors
@@ -71,6 +72,7 @@
 \crefname{theorem}   {定理}{定理}
 \crefname{lemma}     {補題}{補題}
 \crefname{corollary} {系}  {系}
+\crefname{proposition}{命題}{命題}
 \crefname{definition}{定義}{定義}
 \crefname{remark}    {注意}{注意}
 \crefname{notation}  {記法}{記法}
@@ -100,109 +102,58 @@
 \newcommand{\csim}{{\mathlarger{\mathbbl{\Delta}}}}
 
 % mathcal
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
 \newcommand{\C}{\mathcal{C}}
 \newcommand{\D}{\mathcal{D}}
 \newcommand{\E}{\mathcal{E}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\J}{\mathcal{J}}
 \renewcommand{\H}{\mathcal{H}}
+\newcommand{\M}{\mathcal{M}}
+\renewcommand{\S}{\mathcal{S}}
+
+% mathbf
+\newcommand{\bfA}{\mathbf{A}}
+\newcommand{\bfB}{\mathbf{B}}
+\newcommand{\bfC}{\mathbf{C}}
+\newcommand{\bfS}{\mathbf{S}}
 
 % mathrm
-\newcommand{\myop}{\mathrm{op}}
+\newcommand{\Ob}{\mathrm{Ob}}
+\newcommand{\Mor}{\mathrm{Mor}}
 \newcommand{\Hom}{\mathrm{Hom}}
-
+\newcommand{\Map}{\mathrm{Map}}
+\newcommand{\Nat}{\mathrm{Nat}}
+\newcommand{\myop}{\mathrm{op}}
 \newcommand{\inc}{\mathrm{inc}}
 \newcommand{\id}{\mathrm{id}}
-\newcommand{\myim}{\mathrm{im}}
-\newcommand{\spine}{\mathrm{Spine}}
+\newcommand{\Id}{\mathrm{Id}}
 \newcommand{\colim}{\mathrm{colim}}
 
-% mathbf for category
-\newcommand{\sset}{\mathbf{Set}_\csim}
-\newcommand{\kan}{\mathbf{Kan}}
-\newcommand{\hkan}{\mathbf{hKan}}
-
-\newcommand{\sS}{\mathbf{sS}}
-\newcommand{\sSet}{\mathbf{sSet}}
-\newcommand{\sspace}{\mathbf{sSpace}}
-\newcommand{\set}{\mathbf{Set}}
-
 \newcommand{\Fun}{\mathrm{Fun}}
-\newcommand{\Ex}{\mathrm{Ex}}
-\newcommand{\Aut}{\mathrm{Aut}}
 \newcommand{\Sing}{\mathrm{Sing}}
-\renewcommand{\ev}{\mathrm{ev}}
+\newcommand{\cov}{\mathrm{cov}}
+\newcommand{\contra}{\mathrm{cotra}}
+\newcommand{\proj}{\mathrm{proj}}
+\newcommand{\St}{\mathrm{St}}
+\newcommand{\Un}{\mathrm{Un}}
+\newcommand{\h}{\mathrm{h}}
+\newcommand{\N}{\mathrm{N}}
+\renewcommand{\L}{\mathrm{L}}
+\newcommand{\R}{\mathrm{R}}
+\newcommand{\RFib}{\mathrm{RFib}}
 
-% \newcommand{\cset}{\mathbf{Set}}
-% \newcommand{\Top}{\mathbf{Top}}
-% \newcommand{\fun}{\mathbf{Fun}}
-% \newcommand{\gra}{\mathbf{Graph}}
-% \newcommand{\cat}{\mathbf{Cat}}
-% \newcommand{\cend}{\mathbf{End}}
+\newcommand{\KQ}{\mathrm{KQ}}
+\newcommand{\Quillen}{\mathrm{Quillen}}
+\newcommand{\Joyal}{\mathrm{Joyal}}
+\newcommand{\Berg}{\mathrm{Berg}}
 
-% \newcommand{\csim}{{\mathlarger{\mathbbl{\Delta}}}}
-% \newcommand{\insim}{{\mathlarger{\mathbbl{\Delta}}}_\mathrm{inj}}
-% \newcommand{\insimop}{{\mathlarger{\mathbbl{\Delta}}}^\OP_\mathrm{inj}}
-% \newcommand{\hsim}{\hat{\csim}}
-% \newcommand{\simop}{{\csim}^\OP}
-% \newcommand{\h}{\mathrm{h}}
-% \newcommand{\hkan}{\mathrm{Kan}}
-% \newcommand{\N}{\mathrm{N}_{\bullet}}
-
-% \newcommand{\gr}{\mathrm{Gr}}
-% \newcommand{\snd}{S_{k}^{\mathrm{nd}}}
-% \newcommand{\sk}{\mathrm{sk}}
-% \newcommand{\spine}{\mathrm{Spine}}
-% \renewcommand{\Vert}{\mathrm{Vert}}
-% \newcommand{\Edge}{\mathrm{Edge}}
-
-% \newcommand{\A}{A_\bullet}
-% \newcommand{\B}{B_\bullet}
-% \renewcommand{\S}{S_\bullet}
-% \newcommand{\T}{T_\bullet}
-% \newcommand{\U}{U_\bullet}
-% \newcommand{\X}{X_\bullet}
-% \newcommand{\Y}{Y_\bullet}
-
-% \newcommand{\Z}{\mathbb{Z}}
-% \newcommand{\R}{\mathbb{R}}
-% \newcommand{\C}{\mathbb{C}}
-
-% \newcommand{\calC}{\mathcal{C}}
-% \newcommand{\calD}{\mathcal{D}}
-% \newcommand{\calI}{\mathcal{I}}
-% \newcommand{\calJ}{\mathcal{J}}
-% \newcommand{\calS}{\mathcal{S}}
-% \newcommand{\calU}{\mathcal{U}}
-
-% \newcommand{\Ob}{\mathrm{Ob}}
-% \newcommand{\Mor}{\mathrm{Mor}}
-% \newcommand{\Hom}{\mathrm{Hom}}
-% \newcommand{\Map}{\mathrm{Map}}
-% \newcommand{\OP}{\mathrm{op}}
-% \newcommand{\Op}{\mathrm{Op}}
-% \newcommand{\Lin}{\mathrm{Lin}}
-% \newcommand{\dom}{\mathrm{dom}}
-% \newcommand{\cod}{\mathrm{cod}}
-% \newcommand{\id}{\mathrm{id}}
-% \newcommand{\Id}{\mathrm{Id}}
-% \newcommand{\eva}{\mathrm{ev}}
-% \newcommand{\coev}{\mathrm{coev}}
-
-% \newcommand{\xr}[1]{\xrightarrow{#1}}
-% \newcommand{\xl}[1]{\xleftarrow{#1}}
-% \newcommand{\ra}{\Rightarrow}
-% \newcommand{\lar}{\Leftarrow}
-% \newcommand{\hr}{\hookrightarrow}
-% \newcommand{\mt}{\mapsto}
-% \newcommand{\ci}{\circ}
-% \newcommand{\ti}{\times}
-% \newcommand{\del}{\partial}
-% \newcommand{\da}{\dagger}
-% \newcommand{\dav}{\dashv}
-
-% \newcommand{\al}{\alpha}
-% \newcommand{\la}{\lambda}
-% \newcommand{\si}{\sigma}
-% \newcommand{\osi}{\overline{\si}}
-% \newcommand{\Si}{\Sigma}
-% \newcommand{\vp}{\varphi} 
-% \newcommand{\ve}{\varepsilon}
+% mathcal for category
+\newcommand{\Set}{\mathcal{S}\mathrm{et}}
+\newcommand{\Gpd}{\mathcal{G}\mathrm{pd}}
+\newcommand{\sSet}{\mathcal{S}\mathrm{et}_{\Delta}}
+\newcommand{\Cat}{\mathcal{C}\mathrm{at}}
+\newcommand{\CatTop}{\mathcal{C}\mathrm{at}_{\mathcal{T}\mathrm{op}}}
+\newcommand{\CGWH}{\mathcal{CG}}
+\newcommand{\Kan}{\mathcal{K}\mathrm{an}}
