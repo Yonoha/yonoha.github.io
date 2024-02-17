@@ -97,8 +97,8 @@ BarwickとKan \cite{BK11}は2010年代始めにweak equivalenceを持つ圏を�
 
 本稿で示すQuillen随伴とQuillen同値をまとめておく. (随時更新予定)
 \footnote{
-  同じモデル圏の複数のQuillen随伴については, 特徴的もののみ図にまとめている. 
-  例えば, Bousfield局所化で得られるQuillen随伴はこの図には載せていない. 
+  同じモデル圏の複数のQuillen随伴については, 特徴的ものを図にまとめている. 
+  例えば, Bousfield局所化で得られるQuillen随伴はこの図に載せていない. 
 }
 % https://q.uiver.app/#q=WzAsOSxbMywxLCJcXFByZVNlQ2F0X2MiXSxbMywwLCJcXHNTcGFjZUNTUyJdLFsyLDAsIlxcc1NldEpveWFsIl0sWzIsMSwiXFxzU2V0Q2F0QmVyZyJdLFs0LDAsIlxcUmVsQ2F0QmFyIl0sWzMsMiwiXFxQcmVTZUNhdF9mIl0sWzEsMCwiXFxzU2V0S2FuIl0sWzAsMCwiXFxUb3BRdWlsbGVuIl0sWzAsMSwiXFxUb3BTdHJvbSJdLFswLDEsIihJIFxcZGFzaHYgUikiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJhcnJvd2hlYWQifX19XSxbMSwyLCIoaSBcXGRhc2h2IFxcZXZfMCkiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJhcnJvd2hlYWQifX19XSxbMCwzLCIoRiBcXGRhc2h2IFIpIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiYXJyb3doZWFkIn19fV0sWzMsMiwiKFxcbWF0aGZyYWt7Q30gXFxkYXNodiBcXGhhdHtOfSkiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJhcnJvd2hlYWQifX19XSxbMSw0LCIoS19cXHhpIFxcZGFzaHYgTl9cXHhpKSIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6ImFycm93aGVhZCJ9fX1dLFswLDUsIihcXElkIFxcZGFzaHYgXFxJZCkiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJhcnJvd2hlYWQifX19XSxbMiw2LCJrXiEiLDAseyJvZmZzZXQiOi0xfV0sWzYsMiwia18hIiwwLHsib2Zmc2V0IjotMX1dLFs3LDYsInwtfCIsMCx7Im9mZnNldCI6LTF9XSxbNiw3LCJcXFNpbmciLDAseyJvZmZzZXQiOi0xfV0sWzgsNywiXFxJZCIsMCx7Im9mZnNldCI6LTF9XSxbNyw4LCJcXElkIiwwLHsib2Zmc2V0IjotMX1dLFszLDUsIihGIFxcZGFzaHYgUikiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJhcnJvd2hlYWQifX19XV0=
 \[\begin{tikzcd}
@@ -624,13 +624,13 @@ Reedy構造は双対的である.
   $X : \R \to \M$を関手, $r$を$\R$の対象とする. 
   このとき, スライス圏$R_+/r$の$\id_r$を含まない部分圏における余極限
   \begin{align*}
-    L_r(X) := \colim_{s \xrightarrow{+} r} X(s)
+    L_r(X) := \colim X(s)
   \end{align*}
   を$r$における$X$のlatching objectという.
 
   双対的に, コスライス圏$r/R_-$の$\id_r$を含まない部分圏における余極限
   \begin{align*}
-    M_r(X) := \lim_{s \xrightarrow{-} r} X(s)
+    M_r(X) := \lim X(s)
   \end{align*}
   を$r$における$X$のmatching objectという.
 \end{definition} 
@@ -915,7 +915,7 @@ Quillenの小対象論法(small object argument)の系として得られるが, 
     \arrow[from=2-1, to=2-2]
     \arrow[dashed, from=2-1, to=1-2]
   \end{tikzcd}\]
-  は$S(m)$なので, 次の図式は可換かつリフトを持つ. 
+  は$S(m)$に属するので, 次の図式は可換かつリフトを持つ. 
   % https://q.uiver.app/#q=WzAsNyxbMCwwLCJcXExhbWJkYV5uX2kiXSxbMSwwLCJcXGNvcHJvZF97XFxzaWdtYSBcXGluIFMobSl9IFxcTGFtYmRhXm5faSJdLFswLDIsIlxcRGVsdGFebiJdLFsyLDAsIlgobSkiXSxbMywwLCJYKG0rMSkiXSxbMiwxLCJcXGNvcHJvZF97XFxzaWdtYSBcXGluIFMobSl9IFxcRGVsdGFebiJdLFszLDIsIlkiXSxbMCwxLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDIsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzEsMywiXFxjb3Byb2QgdiciXSxbMyw0LCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFsyLDUsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzUsNF0sWzQsNiwiZihtKzEpIl0sWzIsNl0sWzEsNSwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XV0=
   \[\begin{tikzcd}
     {\Lambda^n_i} & {\coprod_{\sigma \in S(m)} \Lambda^n_i} & {X(m)} & {X(m+1)} \\
@@ -1066,7 +1066,7 @@ Joyalモデル構造は, ファイブラントが擬圏(quasi-category)であり
 \end{proof}
 
 \begin{theorem}
-  $\sSetKan$は組み合わせ論的モデル圏である. 
+  $\sSetJoyal$は組み合わせ論的モデル圏である. 
 \end{theorem}
 
 \begin{proof}
@@ -1079,10 +1079,10 @@ Joyalモデル構造は, ファイブラントが擬圏(quasi-category)であり
   $\sSetJoyal$はCartesianモデル圏である. 
 \end{theorem}
 
-$\sSet$上にJoyalモデル構造が存在することを示すために, いくつか準備をする.
-% 証明は\cite{Joy08} section 6.2に従う. 
+% $\sSet$上にJoyalモデル構造が存在することを示すために, いくつか準備をする.
+% % 証明は\cite{Joy08} section 6.2に従う. 
 
-まず, $\sSetJoyal$がリフト性質を満たすことを示す. (途中)
+% まず, $\sSetJoyal$がリフト性質を満たすことを示す. (途中)
 
 % \begin{lemma}
   
@@ -1110,15 +1110,6 @@ $\sSet$上にJoyalモデル構造が存在することを示すために, いく
 %   次に, $u$がweak equivalenceであることを示す. 
 
 % \end{proof}
-
-% \begin{remark}
-%   $\sSetJoyal$は左properかつCartesianな組み合わせ論的モデル圏である.
-% \end{remark}
-
-% \begin{remark}
-%   $\sSetJoyal$は右properではない. 
-%   また, $\sSetJoyal$は単体的モデル圏ではない. 
-% \end{remark}
 
 \subsection{$\sSetJoyal$と$\sSetKan$のQuillen随伴1}
 
@@ -1157,8 +1148,8 @@ $\sSet$上のKan-Quillenモデル構造とJoyal構造におけるweak equivalenc
   \cref{prop:Joyal_weq_is_Kan_weq}より, $\sSetJoyal$におけるweak equivalenceは$\sSetKan$におけるweak equivalenceである. 
 \end{proof}
 
-\begin{corollary}
-  任意のJoyal fibraionはKan fibraionである. 
+\begin{corollary} \label{prop.kan_fib_is_joyal_fib}
+  任意のKan fibraionはJoyal fibraionである. 
 \end{corollary}
 
 \begin{corollary} \label{prop:quillen_adj_sSetJoyal_sSetKan}
@@ -1285,7 +1276,7 @@ $\sSet$上のKan-Quillenモデル構造とJoyal構造におけるweak equivalenc
 よって, weak equivalenceとfibrationがlevelwiseで定義されるモデル構造と, weak equivalenceとcofibrationがlevelswiseで定義されるモデル構造が考えられる.
 前者を射影的モデル構造, 後者を入射的モデル構造という. (射影的/入射的モデル構造はより一般に定義される.)
 
-Reedyモモデル構造の一般論から, 単体的集合の圏上のKan-Quillenモデル構造, Joyalモデル構造から定まるReedyモデル構造がそれぞれ存在する. 
+Reedyモデル構造の一般論から, 単体的集合の圏上のKan-Quillenモデル構造, Joyalモデル構造から定まるReedyモデル構造がそれぞれ存在する. 
 つまり, 前者は各列がKan weak equivalenceであるような単体的空間上のモデル構造である. 
 後者は各行がJoyal weak equivalenceであるような単体的空間上のモデル構造である. 
 
@@ -1389,12 +1380,12 @@ Reedyモモデル構造の一般論から, 単体的集合の圏上のKan-Quille
 
 \subsection{垂直Reedyモデル構造}
 
-weak equivalenceがKan weak equivalenceであるような垂直Reedyモデル構造が存在する. 
+weak equivalenceが各列でKan weak equivalenceであるような垂直Reedyモデル構造が存在する. 
 つまり, 単体的空間の圏上の垂直Reedyモデル構造は単体的集合の圏上のKan-Quillenモデル構造から誘導されるようなモデル構造である. 
 
 \begin{definition}[各列Kan weak equivalence]
   $f : X \to Y$を単体的空間の射とする.
-  任意の$m \geq 0$に対して, $\Delta[m] \backslash f = f_m : X_{m,-} \to Y_{m,-}$がweak homotopy equivalenceのとき, $f$を各列Kan weak equivalence(column-wise weak homotopy equivalence)という.
+  任意の$m \geq 0$に対して, $\Delta[m] \backslash f = f_m : X_{m,-} \to Y_{m,-}$がKan weak equivalenceのとき, $f$を各列Kan weak equivalence (column-wise weak homotopy equivalence)という.
 \end{definition}
 
 \begin{definition}[垂直ファイブレーション]
@@ -1433,7 +1424,7 @@ weak equivalenceが各行でJoyal weak equivalenceであるような水平Reedy�
 
 \begin{definition}[各行Joyal weak equivalence]
   $f : X \to Y$を単体的空間の射とする. 
-  任意の$n \geq 0$に対して, $\Delta[n] \backslash f = f_n : X_{-,n} \to Y_{-,n}$がJoyal weak equivalenceのとき, $f$を各行Joyal weak equivalence(row-wise Joyal weak equivalence)という. 
+  任意の$n \geq 0$に対して, $\Delta[n] \backslash f = f_n : X_{-,n} \to Y_{-,n}$がJoyal weak equivalenceのとき, $f$を各行Joyal weak equivalence (row-wise Joyal weak equivalence)という. 
 \end{definition}
 
 \begin{definition}[水平ファイブレーション]
@@ -1582,7 +1573,7 @@ $\sSpace_v$は$\sSetJoyal$から定まるReedyモデル構造である.
 % \end{theorem}
 
 % \begin{notation}
-%   $\sSpace$上のReedyモデル構造におけるweak equivalence, fibration, cofibrationをそれぞれReedy weak equivalence, Reedy fibration, Reedy cofibrationと呼ぶこともある. 
+%   $\sSpace$上のReedyモデル構造におけるweak equivalence, fibration, cofibrationをそれぞれvertical weak equivalence, Reedy fibration, Reedy cofibrationと呼ぶこともある. 
 % \end{notation}
 
 \subsection{Segal空間モデル構造}
@@ -1927,7 +1918,7 @@ Rezkモデル構造はSegal空間構造モデル構造のBousfield局所化に�
   $\RelCat$には次のモデル構造が存在する. 
   これを$\RelCat$上のBarwickモデル構造といい, $\RelCatBar$と表す. 
   \begin{itemize}
-    \item weak equivalenceは$N_\xi$での像がReedy weak equivalenceである相対関手
+    \item weak equivalenceは$N_\xi$での像がvertical weak equivalenceである相対関手
     \item fibrationは$N_\xi$での像がReedy fibrationである相対関手
     \item cofibrationはDwyer射
   \end{itemize}
@@ -2028,32 +2019,39 @@ $\sSpace$上の垂直Reedyモデル構造と$\sSet$上のJoyalモデル構造は
 
   次に, 右随伴がfibrationを保つことを示す. 
   つまり, Joyal fibration $f : X \to Y$に対して, $t^!(f) : t^!(X) \to t^!(Y)$が垂直ファイブレーション($\sSpace_v$におけるfibration)であることを示す. 
-  \cref{prop:v-fibration}より, 任意の単体的集合のmono射$u$に対して, $\angle{u \backslash t^!(X)}$がKan fibrationであることを示せばよい. 
+  \cref{prop:v-fibration}より, 任意の単体的集合のmono射$u$に対して, $\angle{u \backslash t^!(f)}$がKan fibrationであることを示せばよい. 
   \cref{prop:k_and_t_and_box}より, 次の図式
-  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJCIFxcYmFja3NsYXNoIHReIShYKSJdLFswLDEsIkIgXFxiYWNrc2xhc2ggdF4hKFkpIl0sWzEsMCwiQSBcXGJhY2tzbGFzaCB0XiEoWCkiXSxbMSwxLCJBIFxcYmFja3NsYXNoIHReIShZKSJdLFswLDFdLFswLDIsIlxcYW5nbGV7dSBcXGJhY2tzbGFzaCB0XiEoWCl9Il0sWzIsM10sWzEsM11d
+  % https://q.uiver.app/#q=WzAsNSxbMCwwLCJCIFxcYmFja3NsYXNoIHReIShYKSJdLFsxLDIsIkIgXFxiYWNrc2xhc2ggdF4hKFkpIl0sWzIsMSwiQSBcXGJhY2tzbGFzaCB0XiEoWCkiXSxbMiwyLCJBIFxcYmFja3NsYXNoIHReIShZKSJdLFsxLDEsIkEgXFxiYWNrc2xhc2ggdF4hKFgpIFxcdGltZXNfe0EgXFxiYWNrc2xhc2ggdF4hKFkpfSBCIFxcYmFja3NsYXNoIHReIShZKSJdLFsyLDNdLFsxLDNdLFs0LDFdLFs0LDJdLFswLDQsIlxcYW5nbGV7dSBcXGJhY2tzbGFzaCB0XiEoZil9Il0sWzQsMywiIiwwLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
   \[\begin{tikzcd}
-    {B \backslash t^!(X)} & {A \backslash t^!(X)} \\
-    {B \backslash t^!(Y)} & {A \backslash t^!(Y)}
-    \arrow[from=1-1, to=2-1]
-    \arrow["{\angle{u \backslash t^!(X)}}", from=1-1, to=1-2]
-    \arrow[from=1-2, to=2-2]
-    \arrow[from=2-1, to=2-2]
+    {B \backslash t^!(X)} \\
+    & {A \backslash t^!(X) \times_{A \backslash t^!(Y)} B \backslash t^!(Y)} & {A \backslash t^!(X)} \\
+    & {B \backslash t^!(Y)} & {A \backslash t^!(Y)}
+    \arrow[from=2-3, to=3-3]
+    \arrow[from=3-2, to=3-3]
+    \arrow[from=2-2, to=3-2]
+    \arrow[from=2-2, to=2-3]
+    \arrow["{\angle{u \backslash t^!(f)}}", from=1-1, to=2-2]
+    \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=2-2, to=3-3]
   \end{tikzcd}\]
   は次の図式
-  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJrXiEoWF5CKSJdLFswLDEsImteIShZXkIpIl0sWzEsMCwia14hKFheQSkiXSxbMSwxLCJrXiEoWV5BKSJdLFswLDFdLFswLDIsImteIShcXGFuZ2xle3UsZn0pIl0sWzIsM10sWzEsM11d
+  % https://q.uiver.app/#q=WzAsNSxbMCwwLCJrXiEoWF5CKSJdLFsxLDIsImteIShZXkIpIl0sWzIsMSwia14hKFheQSkiXSxbMiwyLCJrXiEoWV5BKSJdLFsxLDEsImteIShYXkEpIFxcdGltZXNfe2teIShZXkEpfSBrXiEoWV5CKSJdLFsyLDNdLFsxLDNdLFs0LDFdLFs0LDJdLFswLDQsImteIShcXGFuZ2xle3UsZn0pIl0sWzQsMywiIiwwLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
   \[\begin{tikzcd}
-    {k^!(X^B)} & {k^!(X^A)} \\
-    {k^!(Y^B)} & {k^!(Y^A)}
-    \arrow[from=1-1, to=2-1]
-    \arrow["{k^!(\angle{u,f})}", from=1-1, to=1-2]
-    \arrow[from=1-2, to=2-2]
-    \arrow[from=2-1, to=2-2]
+    {k^!(X^B)} \\
+    & {k^!(X^A) \times_{k^!(Y^A)} k^!(Y^B)} & {k^!(X^A)} \\
+    & {k^!(Y^B)} & {k^!(Y^A)}
+    \arrow[from=2-3, to=3-3]
+    \arrow[from=3-2, to=3-3]
+    \arrow[from=2-2, to=3-2]
+    \arrow[from=2-2, to=2-3]
+    \arrow["{k^!(\angle{u,f})}", from=1-1, to=2-2]
+    \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=2-2, to=3-3]
   \end{tikzcd}\]
   と同一視できる. 
-  よって, 射$\angle{u \backslash t^!(X)}$は射$k^!(\angle{u,f})$と同一視できる. 
+  よって, 射$\angle{u \backslash t^!(f)}$は射$k^!(\angle{u,f})$と同一視できる. 
   Joyalモデル構造はCartesianモデル圏なので, $\angle{u,f}$はJoyal fibrationである.
   \cref{prop:quillen_adj_sSetKan_sSetJoyal}より$k^!$はfibrationを保つので, $k^!(\angle{u,f})$はKan fibrationである. 
-  つまり,  $\angle{u \backslash t^!(X)}$もKan fibrationである(ことまでしか言えない気がする).
+  つまり,  $\angle{u \backslash t^!(f)}$もKan fibrationである.
+  \cref{prop.kan_fib_is_joyal_fib}より,  $\angle{u \backslash t^!(f)}$はJoyal fibrationである. 
   以上より, $t^!$はfibrationを保つ. 
 \end{proof}
 
@@ -2078,32 +2076,38 @@ $\sSpace$上の水平Reedyモデル構造と$\sSet$上のJoyalモデル構造は
 
   右随伴がfibrationを保つことを示す. 
   つまり, Joyal fibration $f : X \to Y$に対して, $t^!(f) : t^!(X) \to t^!(Y)$が水平ファイブレーション($\sSpace_h$におけるfibration)であることを示す. 
-  任意の単体的集合のmono射$u$に対して, $\angle{t^!(X) / u}$がJoyal fibrationであることを示せばよい. 
+  任意の単体的集合のmono射$u$に対して, $\angle{t^!(f) / u}$がJoyal fibrationであることを示せばよい. 
   \cref{prop:k_and_t_and_box}より, 次の図式
-  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJ0XiEoWCkgLyBCIl0sWzAsMSwidF4hKFkpIC8gQiJdLFsxLDAsInReIShYKSAvIEEiXSxbMSwxLCJ0XiEoWSkgLyBBIl0sWzAsMV0sWzAsMiwiXFxhbmdsZXt0XiEoWCkgLyB1fSJdLFsxLDNdLFsyLDNdXQ==
+  % https://q.uiver.app/#q=WzAsNSxbMCwwLCJ0XiEoWCkgLyBCIl0sWzEsMiwidF4hKFkpIC8gQiJdLFsyLDEsInReIShYKSAvIEEiXSxbMiwyLCJ0XiEoWSkgLyBBIl0sWzEsMSwidF4hKFgpIC8gQSBcXHRpbWVzX3t0XiEoWSkgLyBBfSB0XiEoWSkgLyBCIl0sWzEsM10sWzIsM10sWzQsMV0sWzQsMl0sWzQsMywiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzAsNCwiXFxhbmdsZXt0XiEoZikgLyB1fSJdXQ==
   \[\begin{tikzcd}
-    {t^!(X) / B} & {t^!(X) / A} \\
-    {t^!(Y) / B} & {t^!(Y) / A}
-    \arrow[from=1-1, to=2-1]
-    \arrow["{\angle{t^!(X) / u}}", from=1-1, to=1-2]
-    \arrow[from=2-1, to=2-2]
-    \arrow[from=1-2, to=2-2]
+    {t^!(X) / B} \\
+    & {t^!(X) / A \times_{t^!(Y) / A} t^!(Y) / B} & {t^!(X) / A} \\
+    & {t^!(Y) / B} & {t^!(Y) / A}
+    \arrow[from=3-2, to=3-3]
+    \arrow[from=2-3, to=3-3]
+    \arrow[from=2-2, to=3-2]
+    \arrow[from=2-2, to=2-3]
+    \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=2-2, to=3-3]
+    \arrow["{\angle{t^!(f) / u}}", from=1-1, to=2-2]
   \end{tikzcd}\]
   は次の図式 
-  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYXntrXyEoQil9Il0sWzAsMSwiWV57a18hKEIpfSJdLFsxLDAsIlhee2tfIShBKX0iXSxbMSwxLCJZXntrXyEoQSl9Il0sWzAsMV0sWzAsMiwiXFxhbmdsZXtrXiEodSksZn0iXSxbMiwzXSxbMSwzXV0=
+  % https://q.uiver.app/#q=WzAsNSxbMCwwLCJYXntrXyEoQil9Il0sWzEsMiwiWV57a18hKEIpfSJdLFsyLDEsIlhee2tfIShBKX0iXSxbMiwyLCJZXntrXyEoQSl9Il0sWzEsMSwiWF57a18hKEEpfSBcXHRpbWVzX3tZXntrXyEoQSl9fSBZXntrXyEoQil9Il0sWzIsM10sWzEsM10sWzQsMV0sWzQsMl0sWzAsNCwiXFxhbmdsZXtrXiEodSksZn0iXSxbNCwzLCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
   \[\begin{tikzcd}
-    {X^{k_!(B)}} & {X^{k_!(A)}} \\
-    {Y^{k_!(B)}} & {Y^{k_!(A)}}
-    \arrow[from=1-1, to=2-1]
-    \arrow["{\angle{k^!(u),f}}", from=1-1, to=1-2]
-    \arrow[from=1-2, to=2-2]
-    \arrow[from=2-1, to=2-2]
+    {X^{k_!(B)}} \\
+    & {X^{k_!(A)} \times_{Y^{k_!(A)}} Y^{k_!(B)}} & {X^{k_!(A)}} \\
+    & {Y^{k_!(B)}} & {Y^{k_!(A)}}
+    \arrow[from=2-3, to=3-3]
+    \arrow[from=3-2, to=3-3]
+    \arrow[from=2-2, to=3-2]
+    \arrow[from=2-2, to=2-3]
+    \arrow["{\angle{k^!(u),f}}", from=1-1, to=2-2]
+    \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=2-2, to=3-3]
   \end{tikzcd}\]
   と同一視できる. 
-  よって, 射$\angle{t^!(X) / u}$は射$\angle{k^!(u),f}$と同一視できる. 
+  よって, 射$\angle{t^!(u) / u}$は射$\angle{k_!(u),f}$と同一視できる. 
   \cref{prop:quillen_adj_sSetKan_sSetJoyal}より$k_!$はcofibrationを保つので, $k_!(u)$は単体的集合のmono射である.
-  Joyalモデル構造はCartesianモデル圏なので, $\angle{k_!(f),X}$もJoyal fibrationである. 
-  つまり, $\angle{t^!(X) / u}$もJoyal fibrationである. 
+  Joyalモデル構造はCartesianモデル圏なので, $\angle{k_!(u),f}$はJoyal fibrationである. 
+  つまり, $\angle{t^!(f) / u}$もJoyal fibrationである. 
 \end{proof}
 
 $\sSpace$上のSegal空間モデル構造と$\sSet$上のJoyalモデル構造はQuillen随伴である. 
@@ -2129,17 +2133,17 @@ $\sSpace$上のSegal空間モデル構造と$\sSet$上のJoyalモデル構造は
   よって, この$t^!(X)$がSegal空間($\sSpaceSegal$におけるファイブラント)であることを示す. 
   つまり, 任意の$n \geq 0$に対して, 
   \begin{align*}
-    i_n \backslash t^!(X) : \Delta[n] \backslash t^!(X) \to I_n \backslash t^!(X)
+    \varphi_n \backslash t^!(X) : \Delta[n] \backslash t^!(X) \to I_n \backslash t^!(X)
   \end{align*}
   がKan weak equivalenceであることを示せばよい. 
-  \cref{prop:k_and_t_and_box}より, $i_n \backslash t^!(X)$は$k^!(X^{i_n})$と同一視できる. 
-  $i_n : I_n \hookrightarrow \Delta[n]$は内緩射なので, $i_n$はJoyal weak equivalenceである. 
-  $i_n$は単体的集合のmono射なので, \cref{prop:cofibration_induce_fibraion_in_simplicial_model_cat}より$X^{i_n}$はJoyal fibrationである. 
-  以上より, $X^{i_n}$はJoyal trivial fibrationである. 
+  \cref{prop:k_and_t_and_box}より, $\varphi_n \backslash t^!(X)$は$k^!(X^{\varphi_n})$と同一視できる. 
+  $\varphi_n : I_n \hookrightarrow \Delta[n]$は内緩射なので, $\varphi_n$はJoyal weak equivalenceである. 
+  $\varphi_n$は単体的集合のmono射かつ, $\sSetJoyal$はCartesian閉であることから, $X^{\varphi_n}$はJoyal fibrationである. 
+  以上より, $X^{\varphi_n}$はJoyal trivial fibrationである. 
   \cref{prop:quillen_adj_sSetKan_sSetJoyal}より, $k^!$は右Quillen随伴である. 
-  よって, $k^!(X^{i_n})$はKan trivial fibrationである. 
-  従って, $i_n \backslash t^!(X)$はKan trivial fibrationである. 
-  特に$i_n \backslash t^!(X)$はKan weak equivalenceなので, $t^!(X)$はSegal空間である. 
+  よって, $k^!(X^{\varphi_n})$はKan trivial fibrationである. 
+  従って, $\varphi_n \backslash t^!(X)$もKan trivial fibrationである. 
+  特に$\varphi_n \backslash t^!(X)$はKan weak equivalenceなので, $t^!(X)$はSegal空間である. 
 \end{proof}
 
 \subsection{$\sSpaceCSS$と$\sSetJoyal$のQuillen同値}
@@ -2167,7 +2171,7 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
   \cref{prop:complete_is}より, $u_0 \backslash X : J \backslash X \to \{0\} \backslash X$がKan trivial fibrationであることを示せばよい. 
   \cref{prop:k_and_t_and_box}より, 射$u_0 \backslash X$は射$k^!(X^{u_0})$と同一視できる. 
   $u_0 : \{0\} \to J$は通常の圏同値なので, $u_0$はJoyal weak equivalenceである. 
-  また, $u_0$はmono射なので, $X^{u_0}$はJoyal trivial fibrationである.
+  また, $u_0$は単体的空間のmono射なので, $X^{u_0}$はJoyal trivial fibrationである.
   \cref{prop:quillen_adj_sSetKan_sSetJoyal}より$k^!$はtrivial fibrationを保つので,  $k^!(X^{u_0})$はKan trivial fibrationである. 
   よって, $u_0 \backslash X$もKan trivial fibrationである. 
 
@@ -2215,25 +2219,31 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
   を定める. 
 \end{lemma}
 
-\begin{proof}
-  $\sSet$上のKan-Quillenモデル構造と$\sSet$上のJoyal構造におけるcofibrationはともに単体的集合のmono射である. 
-  また, $\sSpace$上のRezkモデル構造におけるcofibrationも各次数で単体的集合のmono射となるような単体的空間の射である. 
+% \begin{proof}
+%   $\sSet$上のKan-Quillenモデル構造と$\sSet$上のJoyal構造におけるcofibrationはともに単体的集合のmono射である. 
+%   また, $\sSpace$上のRezkモデル構造におけるcofibrationも各次数で単体的集合のmono射となるような単体的空間の射である. 
 
-  $u : A \to B, v : S \to T$を単体的集合のmono射とする. 
-  このとき, $u \Box' v$は単体的空間のmono射である. 
-
-\end{proof}
+%   $u : A \to B, v : S \to T$を単体的集合のmono射とする. 
+%   このとき, $u \Box' v$は単体的空間のmono射である. 
+%   (途中)
+% \end{proof}
 
 \begin{remark} \label{prop:adj_p1_i1}
   第一射影
   \begin{align*}
     p_1 : \Delta \times \Delta \to \Delta : ([m],[n]) \mapsto [m]
   \end{align*}
-  は第一入射
+  と第一入射
   \begin{align*}
-    i_1 : \Delta \to \Delta \times \Delta : [m] \mapsto ([0],[m])
+    i_1 : \Delta \to \Delta \times \Delta : [m] \mapsto ([m],[0])
   \end{align*}
-  の左随伴である. 
+  は次の随伴を定める.
+  % https://q.uiver.app/#q=WzAsMixbMCwwLCJcXERlbHRhIFxcdGltZXMgXFxEZWx0YSJdLFsyLDAsIlxcRGVsdGEiXSxbMCwxLCJwXzEiLDAseyJvZmZzZXQiOi0xLCJjdXJ2ZSI6LTF9XSxbMSwwLCJpXzEiLDAseyJvZmZzZXQiOi0xLCJjdXJ2ZSI6LTF9XV0=
+  \[\begin{tikzcd}
+    {\Delta \times \Delta} && \Delta
+    \arrow["{p_1}", shift left, curve={height=-6pt}, from=1-1, to=1-3]
+    \arrow["{i_1}", shift left, curve={height=-6pt}, from=1-3, to=1-1]
+  \end{tikzcd}\] 
 \end{remark}
 
 \begin{proof}{(\cref{quillen_equiv_sSetJoyal_sSpaceCSS})}
@@ -2791,7 +2801,7 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
 これは\cite{BK11}で証明された. 
 
 \begin{proposition} \label{prop:quillen_equiv_sSpaceCSS_and_RelCatBar}
-  細分化相対化関手$K_\xi : \sSpaceReedy \to \RelCat$と細分化分類図式$N_\xi : \RelCat \to \sSpaceReedy$は, $\sSpaceCSS$と$\RelCatBar$のQuillen同値を定める.  
+  細分化相対化関手$K_\xi : \sSpaceCSS \to \RelCat$と細分化分類図式$N_\xi : \RelCat \to \sSpaceCSS$は, $\sSpaceCSS$と$\RelCatBar$のQuillen同値を定める.  
   % \begin{align*}
   %   K_\xi : \sSpaceCSS \rightleftarrows \RelCatBar : N_\xi
   % \end{align*}
@@ -2807,13 +2817,13 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
 この命題は次の命題の系として得られる. 
 
 \begin{proposition} \label{prop:quillen_equiv_sSpaceReedy_and_RelCatBar}
-  細分化相対化関手$K_\xi : \sSpaceReedy \to \RelCat$と細分化分類図式$N_\xi : \RelCat \to \sSpaceReedy$は, $\sSpaceReedy$と$\RelCatBar$のQuillen同値を定める.  
+  細分化相対化関手$K_\xi : \sSpace_n \to \RelCat$と細分化分類図式$N_\xi : \RelCat \to \sSpace_n$は, $\sSpaceReedy$と$\RelCatBar$のQuillen同値を定める.  
   % \begin{align*}
   %   K_\xi : \sSpaceReedy \rightleftarrows \RelCatBar : N_\xi
   % \end{align*}
   % https://q.uiver.app/#q=WzAsMixbMCwwLCJcXHNTcGFjZVJlZWR5Il0sWzIsMCwiXFxzU2V0Sm95YWwiXSxbMCwxLCJLX1xceGkiLDAseyJvZmZzZXQiOi0xLCJjdXJ2ZSI6LTF9XSxbMSwwLCJOX1xceGkiLDAseyJvZmZzZXQiOi0xLCJjdXJ2ZSI6LTF9XSxbMiwzLCIiLDIseyJsZXZlbCI6MSwic3R5bGUiOnsibmFtZSI6ImFkanVuY3Rpb24ifX1dXQ==
   \[\begin{tikzcd}
-    \sSpaceReedy && \sSetJoyal
+    \sSpace_n && \sSetJoyal
     \arrow[""{name=0, anchor=center, inner sep=0}, "{K_\xi}", shift left, curve={height=-6pt}, from=1-1, to=1-3]
     \arrow[""{name=1, anchor=center, inner sep=0}, "{N_\xi}", shift left, curve={height=-6pt}, from=1-3, to=1-1]
     \arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=0, to=1]
@@ -2855,8 +2865,6 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
   この関手$N$も分類図式(classification diagram)という. 
 \end{remark}
 
-普遍随伴の一般論より, 分類図式の左随伴が存在する. 
-
 \begin{definition}[相対化関手]
   普遍随伴の一般論より, 分類図式$N$は左随伴$K : \sSpace \to \RelCat$を持つ. 
   この関手$K$を相対化関手(relativization functor)
@@ -2870,23 +2878,13 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
 相対化関手を具体的に書き下すと次のようになる. 
 
 \begin{remark}
-  任意の$m,n \geq 0$において, $\Delta[n]^t \times \Delta[m]$に対して, 
+  任意の$m,n \geq 0$において, $\Delta[n]^t \times \Delta[m]$に対して次が成立する. 
   \begin{align*}
-    K(\Delta[n]^t \times \Delta[m]) := [n]_\min \times [m]_\max
+    K(\Delta[n]^t \times \Delta[m]) = [n]_\min \times [m]_\max
   \end{align*}
 \end{remark}
 
-\begin{remark}
-  関手$K : \sSpace \to \RelCat$を次のように定義する. 
-  \begin{itemize}
-    \item 任意の$m,n \geq 0$において, $\Delta[n]^t \times \Delta[m] \in \sSpace$に対して, 
-    \begin{align*}
-      K(\Delta[n]^t \times \Delta[m]) := [n]_\min \times [m]_\max
-    \end{align*}
-  \end{itemize}
-\end{remark}
-
-細分化関手との合成をとることで, 細分化分類図式と細分化相対関手が定まる. 
+細分化関手との合成をとることで, 細分化分類図式と細分化相対化関手が定まる. 
 
 \begin{definition}[細分化分類図式]
   $\C$を相対圏とする. 
@@ -2896,7 +2894,7 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
   \end{align*}
 \end{definition}
 
-\begin{definition}[細分化相対関手]
+\begin{definition}[細分化相対化関手]
   普遍随伴の一般論より, 細分化分類図式$N_\xi$は左随伴$K_\xi : \sSpace \to \RelCat$を持つ.
   この関手$K_\xi$を細分化相対化関手(subdivision relativization functor)という. 
 \end{definition}
@@ -2920,7 +2918,7 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
 \end{remark}
 
 \begin{lemma} \label{prop:N_to_Nxi_is_Reedy_weak_equivalence}
-  自然変換$\pi : \xi \to \Id$から定まる自然変換$\pi^\ast : N \to N_\xi$はReedy weak equivalenceである. 
+  自然変換$\pi : \xi \to \Id$から定まる自然変換$\pi^\ast : N \to N_\xi$はvertical weak equivalenceである. 
 \end{lemma}
 
 \begin{proof}
@@ -2928,7 +2926,7 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
   \begin{align*}
     \pi^\ast_n : (N\C)_n \to (N_\xi\C)_n
   \end{align*}
-  がweak equivalenceであることを示せばよい. 
+  がKan weak equivalenceであることを示せばよい. 
   定義より, 
   \begin{align*}
     (N\C)_{n,m} &:= \Hom_\RelCat([n]_\min \times [m]_\max, \C) \\
@@ -2940,7 +2938,7 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
     (F_n\C)_{m,p} &:= \Hom_\RelCat([n]_\min \times [m]_\max, \C^{[p]_\max}) \\
     (\overline{F}_n\C)_{m,p} &:= \Hom_\RelCat([n]_\min \times [m]_\max, \C^{[0]_\max}) 
   \end{align*}
-  包含$[0]_\max \hookrightarrow [p]_\max$は
+  包含$[0]_\max \hookrightarrow [p]_\max$は単体的空間の射
   \begin{align*}
     \overline{F}_n\C \to F_n\C
   \end{align*}
@@ -2950,12 +2948,12 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
     (G_n\C)_{m,p} &:= \Hom_\RelCat(\xi([n]_\min \times [m]_\max), \C^{[p]_\max}) \\
     (\overline{G}_n\C)_{m,p} &:= \Hom_\RelCat(\xi([n]_\min \times [m]_\max), \C^{[0]_\max}) 
   \end{align*}
-  同様に, 包含$[0]_\max \hookrightarrow [p]_\max$は
+  同様に, 包含$[0]_\max \hookrightarrow [p]_\max$は単体的空間の射
   \begin{align*}
     \overline{F}_n\C \to F_n\C
   \end{align*}
   を定める. 
-  積とべきの随伴性と$\pi : \xi([n]_\min \times [m]_\max) \to [n]_\min \times [m]_\max$から, 次の射が定まる. 
+  積とべきの随伴性と自然変換の成分$\xi([n]_\min \times [m]_\max) \to [n]_\min \times [m]_\max$から, 次の射が定まる. 
   \begin{align*}
     (F_n\C)_{m,p} 
     &= \Hom_\RelCat([n]_\min \times [m]_\max, \C^{[p]_\max}) 
@@ -2966,7 +2964,7 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
   \end{align*}
   \cref{prop:all_maps_is_homotopy_equivalence_in_RelCat}より, $\xi([n]_\min \times [m]_\max) \to [n]_\min \times [m]_\max$は強ホモトピックである. 
   \cref{prop:homotopic_compatible_power_in_RelCat}より, $\C^{[n]_\min \times [m]_\max} \to \C^{\xi([n]_\min \times [m]_\max)}$は強ホモトピックである. 
-  よって, $m$を固定して$p$を動かすと, $(F_n\C)_{m,p} \to (G_n\C)_{m,p}$は単体的集合のweak equivalenceである. 
+  よって, $m$を固定して$p$を動かすと, $(F_n\C)_{m} \to (G_n\C)_{m}$はKan weak equivalenceである. 
   また, 単体的集合の同型
   \begin{align*}
     (N\C)_n \cong \diag (\overline{F}_n\C), ~  (N_\xi\C)_n \cong \diag (\overline{G}_n\C)
@@ -2975,10 +2973,10 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
   よって, $(N\C)_n \to (N_\xi\C)_n$は単体的集合のweak equivalenceである. 
 \end{proof}
 
-右随伴$N_\xi$はcofibrationを保つ. (Quillen同値の条件は左随伴がcofibrationを保つことであることに注意.)
+右随伴$N_\xi$がcofibrationを保つことを示す.
 
 \begin{lemma}
-  細分化分類図式$N_\xi : \RelCat \to \sSpace$はDwyer射をReedy cofibrationにうつす. 
+  細分化分類図式$N_\xi : \RelCat \to \sSpace$はDwyer射を単体的空間のmono射にうつす. 
 \end{lemma}
 
 \begin{proof}
@@ -3001,7 +2999,7 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
 \end{proposition}
 
 \begin{proof}
-  $F,G : \C \to \D$を相対関手, $H \C \times [1]_\max \to \D$を$F$から$G$への強ホモトピーとする. 
+  $F,G : \C \to \D$を相対関手, $H :  \C \times [1]_\max \to \D$を$F$から$G$への強ホモトピーとする. 
   $H$に$N_\xi$を作用させると, 単体的空間の射
   \begin{align*}
     N_\xi(\C \times [1]_\max) \to N_\xi(\D)
@@ -3011,7 +3009,7 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
   \begin{align*}
     N_\xi(\C) \times N_\xi[1]_\max \cong N_\xi(\C \times [1]_\max)
   \end{align*}
-  また, 自然な単体的空間の射$\Delta[n]^t \to N_\xi[1]_\max$は単体的空間の射
+  また, 自然な単体的空間の射$\Delta[1]^t \to N_\xi[1]_\max$は単体的空間の射
   \begin{align*}
     N_\xi(\C) \times \Delta[1]^t \to N_\xi(\C) \times N_\xi[1]_\max
   \end{align*}
@@ -3023,10 +3021,10 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
   は$N_\xi(\C)$から$N_\xi(\D)$へのホモトピーである.
 \end{proof}  
 
-単体的空間のホモトピー同値がReedy weak equivalenceであることと合わせると, 次の系を得る. 
+単体的空間のホモトピー同値がvertical weak equivalenceであることと合わせると, 次の系を得る. 
 
 \begin{corollary}
-  細分化分類図式$N_\xi : \RelCat \to \sSpace$は$\RelCat$のホモトピー同値を$\sSpace$のReedy weak equivalenceにうつす. 
+  細分化分類図式$N_\xi : \RelCat \to \sSpace$は$\RelCat$のホモトピー同値を$\sSpace$のvertical weak equivalenceにうつす. 
 \end{corollary}
 
 \subsection{細分化相対化関手について}
@@ -3051,7 +3049,7 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
     K_{\xi_i}(\Delta[n,m]) := \xi_i([n]_\min \times [m]_\max)
   \end{align*}
   この関手も同様に右随伴を持つので, $K_{\xi_i}$は余極限を保つ. 
-  また, 次が成立する. 
+  また, 定義より次が成立する. 
   \begin{align*}
     \xi_t K_{\xi_i}(\Delta[n,m]) 
     = \xi_t \xi_i([n]_\min \times [m]_\max) 
@@ -3060,18 +3058,17 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
   \end{align*}
 
   次に, 相対関手$K_{\xi_i}(\partial \Delta[n,m]) \to K_{\xi_i}(\Delta[n,m])$が\cref{prop:sieve_induce_dwyer_map}の仮定を満たすことを示す. 
-  仮定を満たすとき, 
+  この仮定を満たすとき, 
   \begin{align*}
     \xi_t K_{\xi_i}(\partial \Delta[n,m]) \to \xi_t K_{\xi_i}(\Delta[n,m]) = K_\xi(\Delta[n,m])
   \end{align*}
   はDwyer射である. 
   まず, 相対半順序集合$[n]_\min \times [m]_\max$の部分相対半順序集合$\P$を次のように定義する. 
   \begin{itemize}
-    \item $\P$の対象は$[a]_\min \subset [n]_\min$と$[b]_\max \subset [m]_\max$を満たす$[a]_\min$と$[b]_\max$の組$[a]_\min \times [b]_\max$
-    \item $\P$の任意の対象$[a_1]_\min \times [b_1]_\max, [a_2]_\min \times [b_2]_\max$に対して, 射は包含の組$[a_1]_\min \times [b_1]_\max \to [a_2]_\min \times [b_2]_\max$
+    \item $\P$の対象は$[a]_\min \subset [n]_\min$と$[b]_\max \subset [m]_\max$を満たす$[a]_\min$と$[b]_\max$の直積$[a]_\min \times [b]_\max$
+    \item $\P$の任意の対象$[a_1]_\min \times [b_1]_\max, [a_2]_\min \times [b_2]_\max$に対して, 射はそれぞれの包含が定める射$[a_1]_\min \times [b_1]_\max \to [a_2]_\min \times [b_2]_\max$
   \end{itemize}
-  $\P$の対象$[a_1]_\min \times [b_1]_\max, [a_2]_\min \times [b_2]_\max$が$[a_1]_\min \cap [a_2]_\min \neq \emptyset$かつ$[b_1]_\max \cap [b_2]_\max \neq \emptyset$を満たすとする. 
-  このとき, 
+  $\P$の対象$[a_1]_\min \times [b_1]_\max, [a_2]_\min \times [b_2]_\max$が$[a_1]_\min \cap [a_2]_\min \neq \emptyset$かつ$[b_1]_\max \cap [b_2]_\max \neq \emptyset$を満たすとき, 
   \begin{align*}
     ([a_1]_\min \times [b_1]_\max) \cap ([a_2]_\min \times [b_2]_\max)
     = ([a_1]_\min \cap [a_2]_\min) \cap ([b_1]_\max \cap [b_2]_\max)
@@ -3100,11 +3097,11 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
 左随伴がcofibrationを保つことを示す. 
 
 \begin{proposition} \label{prop:K_xi_preserve_cofibration}
-  $K_\xi : \sSpace \to \RelCat$はReedy cofibrationを相対半順序集合のDwyer射にうつす.
+  $K_\xi : \sSpace \to \RelCat$は単体的空間のmono射を相対半順序集合のDwyer射にうつす.
 \end{proposition}
 
 \begin{proof}
-  $X \hookrightarrow Y$を単体的空間のReedy cofibration, つまりmono射とする. 
+  $X \hookrightarrow Y$を単体的空間のmono射とする. 
   単体的空間$Y$に対して, $i+j \leq n$を満たす非退化な$(i,j)$両単体のなす単体的空間を$Y_n (\subset Y)$と表す. 
   このとき, $X \hookrightarrow Y$はmono射なので
   \begin{align*}
@@ -3115,11 +3112,11 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
 \end{proof}
 
 \begin{proposition} \label{prop:X_to_NKX_is_Reedy_weak_equivalence}
-  随伴$(K_\xi \dashv N_\xi)$の単位射$\eta_\xi : \Id \to N_\xi K_\xi$はReedy weak equivalenceである.
+  随伴$(K_\xi \dashv N_\xi)$の単位射$\eta_\xi : \Id \to N_\xi K_\xi$はvertical weak equivalenceである.
 \end{proposition}
 
 \begin{proof}
-  任意の単体的空間$X$に対して, $\eta_\xi : X \to  N_\xi K_\xi(X)$がReedy weak equivalenceであることを示せばよい. 
+  任意の単体的空間$X$に対して, $\eta_\xi : X \to  N_\xi K_\xi(X)$がvertical weak equivalenceであることを示せばよい. 
   まず, $X = \Delta[n,m]$のときを示す. 
   次の図式を考える. 
   % https://q.uiver.app/#q=WzAsNixbMCwwLCJcXERlbHRhW24sbV0iXSxbMSwwLCJOX1xceGkgS19cXHhpKFxcRGVsdGFbbixtXSkiXSxbMSwxLCJOX1xceGkgSyhcXERlbHRhW24sbV0pIl0sWzAsMSwiTksoXFxEZWx0YVtuLG1dKSJdLFsyLDAsIk5fXFx4aSBcXHhpKFtuXV9cXG1pbiB0aW1lcyBbbV1fXFxtYXgpIl0sWzIsMSwiTl9cXHhpKFtuXV9cXG1pbiB0aW1lcyBbbV1fXFxtYXgpIl0sWzAsMSwiXFxldGFfXFx4aSJdLFsxLDJdLFszLDIsIlxccGleXFxhc3QiLDJdLFswLDMsIlxcZXRhIiwyXSxbMSw0LCIiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsyLDUsIiIsMCx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzQsNSwiXFxwaV9cXGFzdCJdXQ==
@@ -3139,11 +3136,11 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
   \begin{align*}
     NK(\Delta[n,m]) = N([n]_\min \times [m]_\max) \cong N([n]_\min) \times N([m]_\max)
   \end{align*}
-  であり, $\Delta[n,m]$と$NK(\Delta[n,m])$はReedy weak equivalenceである(らしい). 
-  \cref{prop:N_to_Nxi_is_Reedy_weak_equivalence}より, $\pi^\ast : NK(\Delta[n,m]) \to N_\xi K(\Delta[n,m])$はReedy weak equivalenceである.
+  であり, $\Delta[n,m]$と$NK(\Delta[n,m])$はvertical weak equivalenceである(らしい). 
+  \cref{prop:N_to_Nxi_is_Reedy_weak_equivalence}より, $\pi^\ast : NK(\Delta[n,m]) \to N_\xi K(\Delta[n,m])$はvertical weak equivalenceである.
   \cref{prop:all_maps_is_homotopy_equivalence_in_RelCat}より, $\xi([n]_\min \times [m]_\max) \to [n]_\min \times [m]_\max$はweak equivalenceである. 
-  $\RelCatBar$におけるweak equivalenceの定義より, $\pi_\ast : N_\xi \xi([n]_\min \times [m]_\max) \to N_\xi([n]_\min \times [m]_\max)$はReedy weak equivalenceである. 
-  2-out-of-3より, $\eta_\xi : \Delta[n,m] \to N_\xi K_\xi (\Delta[n,m])$はReedy weak equivalenceである.
+  $\RelCatBar$におけるweak equivalenceの定義より, $\pi_\ast : N_\xi \xi([n]_\min \times [m]_\max) \to N_\xi([n]_\min \times [m]_\max)$はvertical weak equivalenceである. 
+  2-out-of-3より, $\eta_\xi : \Delta[n,m] \to N_\xi K_\xi (\Delta[n,m])$はvertical weak equivalenceである.
 
   次に, 一般の単体的空間$X$に対して示す. 
   \cref{prop:K_xi_preserve_cofibration}の証明で用いた記号を用いる. 
@@ -3156,7 +3153,7 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
 \end{proof}
 
 \begin{corollary}
-  単体的空間の射$f$がReedy weak equivalenceであることと, $N_\xi K_\xi f$がReedy weak equivalenceであることは同値である. 
+  単体的空間の射$f$がvertical weak equivalenceであることと, $N_\xi K_\xi f$がvertical weak equivalenceであることは同値である. 
 \end{corollary}
 
 \subsection{\cref{prop:quillen_equiv_sSpaceReedy_and_RelCatBar}の証明}
@@ -3172,7 +3169,7 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
 
   最後に, $(K_\xi,N_\xi)$がQuillen同値であることを示す.
   任意の単体的空間$X$と相対圏$Y$に対して, $K_\xi(X) \to Y$が$\RelCatBar$におけるweak equivalenceであることと, $X \to N_\xi(Y)$は$\sSpaceReedy$におけるweak equivalenceであることが同値であることを示せばよい. 
-  $\RelCatBar$におけるweak equivalenceの定義より, $N_\xi K_\xi(X) \to N_\xi(Y)$がReedy weak equivalenceであることと, $X \to N_\xi(Y)$がReedy weak equivalenceであることが同値であることを示せばよい. 
+  $\RelCatBar$におけるweak equivalenceの定義より, $N_\xi K_\xi(X) \to N_\xi(Y)$がvertical weak equivalenceであることと, $X \to N_\xi(Y)$がvertical weak equivalenceであることが同値であることを示せばよい. 
   \cref{prop:X_to_NKX_is_Reedy_weak_equivalence}より, 次の図式を考えるとこの同値性は明らかである. 
   % https://q.uiver.app/#q=WzAsMyxbMCwxLCJOX1xceGkgS19cXHhpKFgpIl0sWzIsMSwiWCJdLFsxLDAsIk5fXFx4aShZKSJdLFsxLDAsIlxcZXRhX1xceGkiXSxbMCwyXSxbMSwyXV0=
   \[\begin{tikzcd}
@@ -3188,11 +3185,11 @@ Quillen同値であることは次のように示すこともできる.
 
 \begin{remark}
   $\sSpaceReedy$において, 任意の対象(単体的空間)はコファイブラントである. 
-  よって, 任意の単体的空間$X$に対して, 単体的空間の射$X \to N_\xi (K_\xi(X))^f$がReedy weak equivalenceであることを示す.
-  \cref{prop:X_to_NKX_is_Reedy_weak_equivalence}より, $X \to N_\xi K_\xi(X)$はReedy weak equivalenceである.
+  よって, 任意の単体的空間$X$に対して, 単体的空間の射$X \to N_\xi (K_\xi(X))^f$がvertical weak equivalenceであることを示す.
+  \cref{prop:X_to_NKX_is_Reedy_weak_equivalence}より, $X \to N_\xi K_\xi(X)$はvertical weak equivalenceである.
   $\RelCatBar$におけるファイブラント置換$K_\xi(X) \to  (K_\xi(X))^f$はtrivial fibrationである. 
-  $\RelCatBar$におけるweak equivalenceの定義より, $N_\xi K_\xi(X) \to  N_\xi(K_\xi(X))^f$はReedy weak equivalenceである.
-  weak equivalenceは合成で閉じるので, $X \to N_\xi (K_\xi(X))^f$はReedy weak equivalenceである.
+  $\RelCatBar$におけるweak equivalenceの定義より, $N_\xi K_\xi(X) \to  N_\xi(K_\xi(X))^f$はvertical weak equivalenceである.
+  weak equivalenceは合成で閉じるので, $X \to N_\xi (K_\xi(X))^f$はvertical weak equivalenceである.
 
   もう一方も, \cref{prop:X_to_NKX_is_Reedy_weak_equivalence}を用いて示すことができる. 
 \end{remark}
@@ -4633,7 +4630,7 @@ $\sSet$はCartesian閉であり, ホモトピー圏の対象の同型類をと�
 
 \subsection{ボックス積}
 
-記法などは\cite{JT07}のchapter 2に従う. 
+記法は\cite{JT07}のchapter 2に従う. 
 
 \begin{definition}[ボックス積]
   $A,B$を単体的集合とする. 
@@ -4648,9 +4645,9 @@ $\sSet$はCartesian閉であり, ホモトピー圏の対象の同型類をと�
   特に, 任意の$m,n \geq 0$に対して次が成立する. 
   \begin{align*}
     \Delta[m] \Box \Delta[n] 
-    &= \Hom_\sSet(\Delta[-],\Delta[m]) \times \Hom_\sSet(\Delta[-],\Delta[m]) \\
-    &\cong \Hom_\sSet(\Delta[-],\Delta[m] \times \Delta[n]) \\
-    &\cong \Hom_{\Delta \times \Delta}(-, [m] \times [n])
+    &= \Hom_\sSet(\Delta[-],\Delta[m]) \times \Hom_\sSet(\Delta[?],\Delta[m]) \\
+    &\cong \Hom_{\sSet \times \sSet}(\Delta[-] \times \Delta[?],\Delta[m] \times \Delta[n]) \\
+    &\cong \Hom_{\Delta \times \Delta}(- \times ?, m \times n)
   \end{align*}
 \end{remark}
 
@@ -4679,7 +4676,7 @@ $\sSet$はCartesian閉であり, ホモトピー圏の対象の同型類をと�
     \Delta[m] \backslash X = \Hom_\sSpace(\Delta[m] \Box \Delta[-],X) \cong X_{m,-}
   \end{align*}
 
-  同様に, 構成$(X.B) \mapsto X/B$は双関手$? / - : \sSpace \times \sSet^\myop \to \sSet$を定める. 
+  同様に, 構成$(X,B) \mapsto X/B$は双関手$? / - : \sSpace \times \sSet^\myop \to \sSet$を定める. 
   特に, 任意の$n \geq 0$に対して次が成立する.
   \begin{align*}
     X / \Delta[n] = \Hom_\sSpace(\Delta[-] \Box \Delta[n], X) \cong X_{-,n} 
@@ -4694,7 +4691,7 @@ $\sSet$はCartesian閉であり, ホモトピー圏の対象の同型類をと�
   \end{align*}
   つまり, 次の随伴が存在する. 
   \begin{align*}
-    (- \Box ?) \dashv (- \backslash ?), ~~ (? \Box -) \dashv (- / ?)
+    (- \Box ?) \dashv (- \backslash ?), ~~ (- \Box ?) \dashv (- / ?)
   \end{align*}
 \end{remark}
 
@@ -4778,15 +4775,15 @@ $\sSet$はCartesian閉であり, ホモトピー圏の対象の同型類をと�
 
 \begin{remark}
   構成$(u,f) \mapsto \angle{u \backslash f}$は双関手$(\sSet^\myop)^I \times \sSpace^I \to \sSet^I$を定める. 
-  特に, 単体的集合$A$に対して, 次が成立する.
+  特に, 任意の単体的集合$A$に対して, 次が成立する.
   \begin{align*}
-    \angle{(\emptyset \to K) \backslash f} \cong K \backslash f
+    \angle{(\emptyset \to A) \backslash f} \cong A \backslash f
   \end{align*}
 \end{remark}
 
 \begin{remark}
   構成$(f,v) \mapsto \angle{f/v}$は双関手$\sSpace^I \times (\sSet^\myop)^I \to \sSet^I$を定める. 
-  特に, 単体的空間$X$に対して, 次が成立する. 
+  特に, 任意の単体的空間$X$に対して, 次が成立する. 
   \begin{align*}
     \angle{(X \to 1)/v} \cong X/v
   \end{align*}
@@ -4796,7 +4793,7 @@ $\sSet$はCartesian閉であり, ホモトピー圏の対象の同型類をと�
   % $u : A \to B , v : S \to T$を単体的集合の射, $f : X \to Y$を単体的空間の射とする. 
   次の随伴が存在する. 
   \begin{align*}
-    - \Box' ? \dashv \angle{- \backslash ?}, ~~ ? \Box' - \dashv \angle{?/-}
+    (- \Box' ?) \dashv \angle{- \backslash ?}, ~~ (- \Box' ?) \dashv \angle{-/?}
   \end{align*}
 \end{remark}
 
@@ -4804,23 +4801,25 @@ $\sSet$はCartesian閉であり, ホモトピー圏の対象の同型類をと�
 
 \begin{notation}
   任意の$n \geq 0$に対して, 単体的集合の包含$\partial \Delta[n] \hookrightarrow \Delta[n]$を$\delta_n$と表す. 
+
+  任意の$n \geq 0$に対して, 包含$\Lambda[n,k] \hookrightarrow \Delta[n]$を$h^k_n$と表す. 
 \end{notation}
 
 \begin{proposition} \label{prop:mono_in_sSpace}
   $\sSpace$におけるmono射は次の射の集合の飽和クラスである.
   \begin{align*}
-    {\delta_m \Box' \delta_n : (\partial \Delta[m]  \Box \Delta[m]') \cup (\Delta[n] \Box' \partial \Delta[n]) \hookrightarrow \Delta[m] \cup \Delta[n] ~|~ m,n \geq 0}
+    \{\delta_m \Box' \delta_n : (\partial \Delta[m]  \Box \Delta[n]) \cup (\Delta[m] \Box \partial \Delta[n]) \hookrightarrow \Delta[m] \cup \Delta[n] ~|~ m,n \geq 0\}
   \end{align*} 
 \end{proposition}
 
 \begin{definition}[自明なファイブレーション]
-  任意の$m,n \geq 0$において, $\delta_m \Box' \delta_n$に対してRLPを持つ射を単体的空間の自明なファイブレーション(trivial fibration)という.
+  任意の$m,n \geq 0$において, $\delta_m \Box' \delta_n$に対してRLPを持つ射を単体的空間の自明な垂直ファイブレーション(trivial vertical fibration)という.
 \end{definition}
 
 \begin{proposition} \label{prop:trivial_fibration}
   単体的空間の射$f : X \to Y$に対して, 次は全て同値である. 
   \begin{enumerate}
-    \item $f$は単体的空間の自明なファイブレーションである.
+    \item $f$は単体的空間の自明な垂直ファイブレーションである.
     \item 任意の$m \geq 0$に対して, $\angle{\delta_m \backslash f}$はKan trivial fibraionである. 
     \item 任意の単体的集合のmono射$u$に対して, $\angle{u \backslash f}$はKan trivial fibraionである. 
     \item 任意の$n \geq 0$に対して, $\angle{f/\delta_n}$はKan trivial fibraionである. 
@@ -4832,7 +4831,7 @@ $\sSpace$上の垂直Reedyモデル構造におけるweak equivalenceを定義�
 
 \begin{definition}[各列Kan weak equivalence]
   $f : X \to Y$を単体的空間の射とする.
-  任意の$m \geq 0$に対して, $\Delta[m] \backslash f = f_m : X_{m,-} \to Y_{m,-}$がKan weak equivalenceのとき, $f$を各列Kan weak equivalence(column-wise Kan weak equivalence)という.
+  任意の$m \geq 0$に対して, $\Delta[m] \backslash f = f_{m,-} : X_{m,-} \to Y_{m,-}$がKan weak equivalenceのとき, $f$を各列Kan weak equivalence(column-wise Kan weak equivalence)という.
 \end{definition}
 
 $\sSpace$上の垂直Reedyモデル構造におけるfibrationを定義する. 
@@ -4841,17 +4840,6 @@ $\sSpace$上の垂直Reedyモデル構造におけるfibrationを定義する.
   $f : X \to Y$を単体的空間の射とする.
   任意の$m \geq 0$に対して, $\angle{\delta_m \backslash f}$がKan fibraionのとき, $f$を垂直ファイブレーション(vertical fibration)という. 
 \end{definition}
-
-\begin{definition}[垂直ファイブラント]
-  $X$を単体的空間とする. 
-  単体的空間の射$X \to \Delta[0]^t$が垂直ファイブレーションのとき, $X$を垂直ファイブラント(vertical fibrant)という. 
-\end{definition}
-
-\begin{notation}
-  任意の$n \geq 0$に対して, 包含$\Lambda[n,k] \hookrightarrow \Delta[n]$を$h^k_n$と表す. 
-\end{notation}
-
-\cref{prop:trivial_fibration}と同様に, 垂直ファイブレーションを特徴づけることができる. 
 
 \begin{proposition} \label{prop:v-fibration}
   単体的空間の射$f : X \to Y$に対して, 次は全て同値である. 
@@ -4864,10 +4852,17 @@ $\sSpace$上の垂直Reedyモデル構造におけるfibrationを定義する.
   \end{enumerate}
 \end{proposition}
 
-\begin{lemma} \label{prop:vfib_is_angle_Kanfib} % Rie08のThorem 4.2が参考になりそう.
-  $f$を単体的空間の射とする.
-  $f$が垂直ファイブレーションのとき, 任意の単体的集合のmono射$u$に対して, $\angle{u \backslash f}$はKan fibraionである.
-\end{lemma}
+\begin{definition}[垂直ファイブラント]
+  $X$を単体的空間とする. 
+  単体的空間の射$X \to \Delta[0]^t$が垂直ファイブレーションのとき, $X$を垂直ファイブラント(vertical fibrant)という. 
+\end{definition}
+
+\cref{prop:trivial_fibration}と同様に, 垂直ファイブレーションを特徴づけることができる. 
+
+% \begin{lemma} \label{prop:vfib_is_angle_Kanfib} % Rie08のThorem 4.2が参考になりそう.
+%   $f$を単体的空間の射とする.
+%   $f$が垂直ファイブレーションのとき, 任意の単体的集合のmono射$u$に対して, $\angle{u \backslash f}$はKan fibraionである.
+% \end{lemma}
 
 \subsection{$\sSpace$上の水平Reedyモデル構造}
 
@@ -4896,7 +4891,7 @@ $\sSpace$上の水平Reedyモデル構造におけるweak equivalenceを定義�
 
 \begin{definition}[各行Joyal weak equivalence]
   $f : X \to Y$を単体的空間の射とする. 
-  任意の$n \geq 0$に対して, $\Delta[n] \backslash f = f_n : X_{-,n} \to Y_{-,n}$がJoyal weak equivalenceのとき, $f$を各行Joyal weak equivalence(row-wise Joyal weak equivalence)という. 
+  任意の$n \geq 0$に対して, $\Delta[n] \backslash f = f_{-,n} : X_{-,n} \to Y_{-,n}$がJoyal weak equivalenceのとき, $f$を各行Joyal weak equivalence(row-wise Joyal weak equivalence)という. 
 \end{definition}
 
 $\sSpace$上の水平Reedyモデル構造におけるfibrationを定義する. 
