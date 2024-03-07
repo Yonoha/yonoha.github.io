@@ -15,7 +15,7 @@
 \begin{abstract}
   本稿は, 筆者が\cite{HTT}を勉強するときに記したノートである. 
   構成は\cite{HTT}に従うが和訳ではないので, 命題の番号などは\cite{HTT}と異なる. 
-  \cite{HTT}のほかに\cite{kerodon}や\cite{Land01}を参考にしている. 
+  \cite{HTT}のほかに\cite{kerodon}や\cite{Land21}を参考にしている. 
 \end{abstract}
 
 \setcounter{tocdepth}{2}
@@ -836,7 +836,7 @@ $\infty$圏における同値は外部角体の拡張条件で表せる.
 次の命題は$\infty$圏の枠組みにおける同値を特徴づける定理である. 
 証明は2.1.2節で行う. 
 
-\begin{proposition}[Joyalの拡張定理] \label{prop.1.2.4.3}
+\begin{proposition}[Joyal] \label{prop.1.2.4.3}
   $\C$を$\infty$圏, $\phi : \Delta^1 \to \C$を$\C$の射とする. 
   このとき, 次は同値である.
   \begin{enumerate}
@@ -3160,13 +3160,42 @@ $\sSet$上のJoyalモデル構造が持つ性質をいくつか述べる.
 \end{proof}
 
 \begin{proposition} \label{prop.2.2.5.7}
-  $\C$を$\infty$圏, $K$を単体的集合とする. 
-  射$f,g : K \to \C$がホモトピックであることと, $f,g$が(モデル圏の意味の)左ホモトピックであることは同値である.
+  $\C$を$\infty$圏, $K$を単体的集合, $f,g : K \to \C$を単体的集合の射とする. 
+  このとき, $f$と$g$が(単体的集合の)ホモトピックであることと, (モデル圏の)左ホモトピックであることは同値である.
 \end{proposition}
+
+\begin{proof}
+  $S$を可縮なKan複体, $x$と$y$を$S$の点とする. 
+  このとき, 包含
+  \begin{align*}
+    K \coprod K \cong K \times \{x,y\} \hookrightarrow K \times S 
+  \end{align*}
+  は$K$のシリンダ対象を定める. 
+  よって, $f$と$g$が左ホモトピックであることは, 次の図式のリフト性と同値である.
+  % https://q.uiver.app/#q=WzAsMyxbMCwwLCIgSyBcXHRpbWVzIFxce3gseVxcfSJdLFsxLDAsIlxcQyJdLFswLDEsIksgXFx0aW1lcyBTIl0sWzAsMSwiZiBcXGNvcHJvZCBnIl0sWzIsMSwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzAsMiwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XV0=
+  \[\begin{tikzcd}
+    { K \times \{x,y\}} & \C \\
+    {K \times S}
+    \arrow["{f \coprod g}", from=1-1, to=1-2]
+    \arrow[dashed, from=2-1, to=1-2]
+    \arrow[hook, from=1-1, to=2-1]
+  \end{tikzcd}\]
+  積とべきの随伴より, 次の図式のリフト性と同値である. 
+  % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXHt4LHlcXH0iXSxbMSwwLCJcXEZ1bihLLFxcQykiXSxbMCwxLCJTIl0sWzAsMSwiZixnIl0sWzIsMSwiaCIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFswLDIsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV1d
+  \[\begin{tikzcd}
+    {\{x,y\}} & {\Fun(K,\C)} \\
+    S
+    \arrow["{f,g}", from=1-1, to=1-2]
+    \arrow["h"', dashed, from=2-1, to=1-2]
+    \arrow[hook, from=1-1, to=2-1]
+  \end{tikzcd}\]
+  このような$h$が存在することと, $f$と$g$が$\Fun(K,\C)$に含まれる最大Kan複体の同じ連結成分に含まれることは同値である. 
+  つまり, $f$と$g$が$\Fun(K,\C)$の対象としてホモトピックであることと同値である. 
+\end{proof}
 
 \cref{prop.1.2.7.3}を示す. 
 
-\begin{proposition}
+\begin{proposition} \label{re_prop.1.2.7.3}
   $K$を単体的集合とする. 
   このとき, 次が成立する. 
   \begin{enumerate}
@@ -3182,9 +3211,9 @@ $\sSet$上のJoyalモデル構造が持つ性質をいくつか述べる.
   (1)を示す. 
   任意の包含$A \hookrightarrow B$に対して, $\Fun(K,\C) \to \Delta^0$がRLPを持つことを示す. 
   随伴より, 包含$A \times K \hookrightarrow B \times K$に対してRLPを持つことを示せばよい.
-  $\C$は$\infty$圏であり, \cref{cor.2.3.2.4}よりこの射は内緩射なので, これは従う.
+  $\C$は$\infty$圏であり, \cref{cor.2.3.2.4}より$A \times K \hookrightarrow B \times K$は内緩射なので, これは従う.
 
-  (2)を示す. (途中)
+  (2)と(3)を示す. (途中) 
 \end{proof}
 
 Joyalモデル構造におけるweak equivalenceには他の定義が用いられることも多い.
@@ -3213,11 +3242,11 @@ Joyalモデル構造におけるweak equivalenceには他の定義が用いら�
   $f$を弱圏同値とする.
   $f$がJoyalモデル構造を備えた$\sSet$のホモトピー圏$\h\sSet$における同型を定めることを示す. 
   つまり, 任意のファイブラント対象$\C$に対して, $f$が全単射$[B,\C] \to [A,\C]$を定めることを示せばよい. 
-  \cref{prop.2.2.5.7}より, $[X,\C]$は$\h\Fun(X,\C)$における対象の同型類の集合と同一視できる. 
+  \cref{prop.2.2.5.7}より, $[X,\C]$は$\h\Fun(X,\C)$における対象の同型類の集合とみなせる. 
   よって, $f$は圏同値である.
 \end{proof}
 
-\section{内ファイブレーション (途中)}
+\section{内ファイブレーション}
 
 この節では, 単体的集合の内ファイブレーションの理論を勉強する. 
 左ファイブレーションは古典的な圏論におけるGrothendieck構成の一般化であったが, 内ファイブレーションに対応する古典的な圏論における概念は存在しない. 
@@ -3227,7 +3256,7 @@ $S$が1点のとき, 単体的集合の射$p : X \to S$が内ファイブレー�
 また, 内ファイブレーションのクラスはプルバックで閉じる. 
 内ファイブレーション$p : X \to S$と$S$の任意の点$s$に対して, ファイバー$X_s=X \times_S \{s\}$は$\infty$圏である.
 よって, $p$は$S$でパラメタ付けられた$\infty$圏の族を表しているとみなせる. 
-$p$は関手$S$から$\infty$圏のなす$\infty$圏への関手を定めると考えられるが, ファイバー$X_s$は弱い意味でしか$s$に対して関手的ではない.
+$p$は$S$から$\infty$圏のなす$\infty$圏への関手を定めると考えられるが, ファイバー$X_s$は弱い意味でしか$s$に対して関手的ではない.
 
 \begin{example}
   $F : \C \to \C'$を通常の関手, $C,D$を$\C'$の任意の対象とする. 
@@ -3235,8 +3264,8 @@ $p$は関手$S$から$\infty$圏のなす$\infty$圏への関手を定めると�
   しかし, ファイバー$\N(\C)_C = \N(\C \times_{\C'} \{C\})$と$\N(\C)_D = \N(\C \times_{\C'} \{D\})$は$C$と$D$が同型であっても, 2つが同型であるとは限らない. 
 \end{example}
 
-内ファイブレーションの異なるファイバーがどのように関係しているかを理解するために, $\infty$圏の同一視の概念を定義する. 
-2.3.1節で, 古典的な圏論における同一視の理論を復習し, どのように$\infty$圏の枠組みに一般化するかをみる. 
+内ファイブレーションの異なるファイバーがどのように関係しているかを理解するために, $\infty$圏の対応の概念を定義する. 
+2.3.1節で, 古典的な圏論における対応の理論を復習し, どのように$\infty$圏の枠組みに一般化するかをみる. 
 
 2.3.2節では, 内緩射のクラスが任意のコファイブレーションとのスマッシュ積をとる対応で閉じていることを示す. 
 ここから, 内ファイブレーションのクラスが射空間をとる対応で閉じていることが分かる. 
@@ -3247,19 +3276,19 @@ $p$は関手$S$から$\infty$圏のなす$\infty$圏への関手を定めると�
 
 2.3.4節では, この理論を応用し, $n$圏($n < \infty$)の理論を調べる. 
 
-\subsection{同一視}
+\subsection{\texorpdfstring{$\infty$}{infty}圏の対応}
 
-\begin{definition}[同一視]
+\begin{definition}[圏の対応]
   $\C,\C'$を圏とする. 
-  このとき, 関手 
+  このとき, 関手
   \begin{align*}
     M : \C^\myop \times \C' \to \Set
   \end{align*}
-  を$\C$から$\C'$への同一視(correspondence)という. 
+  を$\C$から$\C'$への対応(correspondence)という. 
 \end{definition}
 
 \begin{definition}
-  $M$を$\C$から$\C'$への同一視とする. 
+  $M$を$\C$から$\C'$への対応とする. 
   このとき, 圏$\C \star^M \C'$を次のように定義する.
   \begin{itemize}
     \item $\C \star^M \C'$の対象は$\C$の対象と$\C'$の対象の直和
@@ -3277,27 +3306,21 @@ $p$は関手$S$から$\infty$圏のなす$\infty$圏への関手を定めると�
 \end{definition}
 
 \begin{remark} \label{rem.2.3.1.1}
-  $M : \C^\myop \times \C' \to \Set$が1点$\ast$に値をとる定値関手のとき, 圏$\C \star^M \C'$は通常の圏のジョイン$\C \star \C'$に一致する. 
+  $M : \C^\myop \times \C' \to \Set$が1点に値をとる定値関手のとき, 圏$\C \star^M \C'$は通常の圏のジョイン$\C \star \C'$と一致する. 
 \end{remark}
 
-同一視$M : \C^\myop \times \C' \to \Set$に対して, 関手$\C \star^M \C' \to [1]$が一意に存在する. 
-($F^{-1}\{0\}=\C, F^{-1}\{1\}=\C'$として一意に定義できる.)
-逆に, 圏$\M$と関手$ : \M \to [1]$に対して, $\C := F^{-1}\{0\}, \C' := F^{-1}\{1\}$と定義し, 同一視$M : \C^\myop \times \C' \to \Set$を$M(X,Y) := \Hom_\M(X,Y)$で定義することで, 同一視が定まる. 
-これは次のように定式化できる. 
+対応$M : \C^\myop \times \C' \to \Set$に対して, $F^{-1}\{0\}:=\C, F^{-1}\{1\}:=\C'$と定義することで, 圏$\C \star^M \C'$と関手$F : \C \star^M \C' \to [1]$が定まる. 
+逆に, 圏$\M$と関手$F : \M \to [1]$に対して, $\C := F^{-1}\{0\}, \C' := F^{-1}\{1\}$, 対応$M : \C^\myop \times \C' \to \Set$を$M(X,Y) := \Hom_\M(X,Y)$と定義することで, 対応が定まる. 
 
 \begin{remark} \label{fact.2.3.1.2}
-  圏$\C,\C'$と$\C$から$\C'$への同一視を与えることは, 圏$\M$と関手$\M \to [1]$を与えることと同値である.
+  圏$\C,\C'$と$\C$から$\C'$への対応$\C^\myop \times \C' \to \Set$を定めることは, 圏$\M$と関手$\M \to [1]$を定めることと同値である.
 \end{remark}
 
-この同値を用いて, $\infty$圏の枠組みにおける同一視を定義する. 
+この同値を用いて, $\infty$圏の枠組みにおける対応を定義する. 
 
-\begin{definition}[同一視] \label{def.2.3.1.3}
+\begin{definition}[$\infty$圏の対応] \label{def.2.3.1.3}
   $\C,\C'$を$\infty$圏とする. 
-  $\infty$圏$\M$, 単体的集合の射$F : \M \to \Delta^1$と$\C \cong F^{-1}\{0\}, \C' \cong F^{-1}\{1\}$という同一視
-  \footnote{
-    この同一視はcorrespondenceの意味ではなく, 単なるidentified withの意味である. 
-  }
-  の4つ組$(\M,F,\C,\C')$を$\C$から$\C'$への同一視(correspondence)という. 
+  $\infty$圏$\M$, 単体的集合の射$F : \M \to \Delta^1$, 同型$\C \cong F^{-1}\{0\}, \C' \cong F^{-1}\{1\}$の4つ組$(\M,F,\C,\C')$を$\C$から$\C'$への対応(correspondence)という. 
 \end{definition}
 
 \cref{def.2.3.1.3}の意味を理解するために, いくつか準備をする. 
@@ -3309,10 +3332,11 @@ $p$は関手$S$から$\infty$圏のなす$\infty$圏への関手を定めると�
 
 \begin{proof}
   $p$を内ファイブレーションとする. 
-  $\N(\C)$は$\infty$圏のとき, $X$も$\infty$圏である.
+  $\N(\C)$が$\infty$圏のとき, $X$も$\infty$圏である.
 
-  逆に, $X$を$\infty$圏とする. 
-  このとき, 任意の$n \geq 0$と$0 < i < n$に対して, 次の図式はリフトを持つ. 
+  逆を示す.  
+  $X$を$\infty$圏とする. 
+  このとき, 任意の$n \geq 0$と$0 < i < n$に対して次の図式はリフトを持つので, $p$は内ファイブレーションである. 
   % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXExhbWJkYV5uX2kiXSxbMCwxLCJcXERlbHRhXm4iXSxbMSwwLCJYIl0sWzEsMSwiXFxOKFxcQykiXSxbMCwxXSxbMCwyXSxbMiwzLCJxIl0sWzEsMiwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzEsM11d
   \[\begin{tikzcd}
     {\Lambda^n_i} & X \\
@@ -3323,7 +3347,6 @@ $p$は関手$S$から$\infty$圏のなす$\infty$圏への関手を定めると�
     \arrow[dashed, from=2-1, to=1-2]
     \arrow[from=2-1, to=2-2]
   \end{tikzcd}\]
-  つまり, $p$は内ファイブレーションである.
 \end{proof}
 
 \begin{lemma} \label{rem.p_induce_fiber_infty_category}
@@ -3335,33 +3358,101 @@ $p$は関手$S$から$\infty$圏のなす$\infty$圏への関手を定めると�
   内ファイブレーションの定義と, 内ファイブレーションのクラスがプルバックで閉じることから従う. 
 \end{proof}
 
-内ファイブレーション$p : X \to S$は, $S$の点$s$に対して$\infty$圏$X_s$を, $S$の辺$f : s \to s'$に対して$X_s$から$X_{s'}$への同一視を与えるとみなせる. 
-% $S$の高次の単体に対しては, 同一視のcompatibleなchainを与えると考えられる.
-大雑把に言うと, 内ファイブレーション$p : X \to S$は, $S$から射が同一視であるような$\infty$圏のなす$\infty$圏への関手を定めるとみなせる.
-しかし, 同一視の合成は強結合的ではないので, この言い方は正確ではない. (途中)
+内ファイブレーション$p : X \to S$は, $S$の点$s$に対して$\infty$圏$X_s$を, $S$の辺$f : s \to s'$に対して$X_s$から$X_{s'}$への対応を与えるとみなせる. 
+% $S$の高次の単体に対しては, 対応のcompatibleなchainを与えると考えられる.
+大雑把に言うと, 内ファイブレーション$p : X \to S$は, $S$から(射が対応であるような)$\infty$圏のなす$\infty$圏への関手を定めるとみなせる.
+しかし, 対応の合成は強結合的ではないので, この言い方は正確ではない. (途中)
 
 \subsection{内ファイブレーションの安定性}
 
-\subsection{最小ファイブレーション}
+$\C$を$\infty$圏, $K$を単体的集合とする. 
+\cref{prop.1.2.7.3}より, $\Fun(K,\C)$は$\infty$圏である. 
+\cref{re_prop.1.2.7.3}の証明中で, 内緩射のクラスにおける安定性を用いた. 
+この節の目標は, 内緩射のクラスの安定性を示すことである. 
+この節の主定理は次の命題である.
 
-\subsection{\texorpdfstring{$n$}{n}圏}
+\begin{proposition}[Joyal] \label{prop.2.3.2.1}
+  次の射のクラスは$\sSet$において同じ射のクラスを生成する.
+  \begin{enumerate}
+    \item 任意の$n \geq 1$と$0<i<n$に対して, 包含$\Lambda^n_i \hookrightarrow \Delta^n$のなすクラス$A_1$
+    \item 任意の$m \geq 1$に対して, 包含$(\Delta^m \times \Lambda^2_1) \coprod_{\partial \Delta^m \times \Lambda^2_1} (\partial \Delta^m \times \Delta^2) \hookrightarrow \Delta^m \times \Delta^2$のなすクラス$A_2$
+    \item 任意のコファイブレーション$S \hookrightarrow S'$に対して, 包含$(S' \times \Lambda^2_1) \coprod_{S \times \Lambda^2_1} (S \times \Delta^2) \hookrightarrow S' \times \Delta^2$のなすクラス$A_3$
+  \end{enumerate}
+\end{proposition}
+
+\begin{corollary}[Joyal] \label{cor.2.3.2.2}
+  $\C$を単体的集合とする. 
+  このとき, 次は同値である. 
+  \begin{enumerate}
+    \item $\C$は$\infty$圏である.
+    \item 包含$\Lambda^2_1 \hookrightarrow \Delta^2$が定める制限
+    \begin{align*}
+      \Fun(\Delta^2, \C) \to \Fun(\Lambda^2_1,\C)
+    \end{align*}
+    は自明なKanファイブレーションである. 
+  \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+  (2)は次の図式のリフト性と同値である. 
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHBhcnRpYWwgXFxEZWx0YV5tIl0sWzAsMSwiXFxEZWx0YV5tIl0sWzEsMCwiXFxGdW4oXFxEZWx0YV4yLFxcQykiXSxbMSwxLCJcXEZ1bihcXExhbWJkYV4yXzEsXFxDKSJdLFswLDEsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMl0sWzIsM10sWzEsM10sWzEsMiwiIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+  \[\begin{tikzcd}
+    {\partial \Delta^m} & {\Fun(\Delta^2,\C)} \\
+    {\Delta^m} & {\Fun(\Lambda^2_1,\C)}
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=2-2]
+    \arrow[from=2-1, to=2-2]
+    \arrow[dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+  積とべきの随伴より, 次の図式のリフト性と同値である.
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCIoXFxEZWx0YV5tIFxcdGltZXMgXFxMYW1iZGFeMl8xKSBcXGNvcHJvZF97XFxwYXJ0aWFsIFxcRGVsdGFebSBcXHRpbWVzIFxcTGFtYmRhXjJfMX0gKFxccGFydGlhbCBcXERlbHRhXm0gXFx0aW1lcyBcXERlbHRhXjIpIFxcaG9va3JpZ2h0YXJyb3cgXFxEZWx0YV5tIFxcdGltZXMgXFxEZWx0YV4yIl0sWzAsMSwiXFxEZWx0YV5tIFxcdGltZXMgXFxEZWx0YV4yIl0sWzEsMCwiXFxDIl0sWzEsMSwiXFxEZWx0YV4wIl0sWzAsMSwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCwyXSxbMiwzXSxbMSwzXSxbMSwyLCIiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+  \[\begin{tikzcd}
+    {(\Delta^m \times \Lambda^2_1) \coprod_{\partial \Delta^m \times \Lambda^2_1} (\partial \Delta^m \times \Delta^2) \hookrightarrow \Delta^m \times \Delta^2} & \C \\
+    {\Delta^m \times \Delta^2} & {\Delta^0}
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=2-2]
+    \arrow[from=2-1, to=2-2]
+    \arrow[dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+  \cref{prop.2.3.2.1}より, $\C \to \Delta^0$が内ファイブレーションであることと, $A_2$に属する射に対してRLPを持つことは同値である. 
+  よって, 上の図式はリフトを持つ. 
+\end{proof}
+
+\begin{remark} \label{rem.2.3.2.3}
+  1.1.2節で, 単体的集合$\C$における$\infty$圏の定義(弱Kan条件)は$\C$の辺の合成が定義されるような条件であることを見た. 
+  \cref{cor.2.3.2.2}は, この辺の合成が可縮な空間の違いを除いて一意に定まることを表している. 
+\end{remark}
+
+\begin{corollary}[Joyal]
+  $i : A \to A'$を内緩射, $j : B \to B'$をコファイブレーションとする. 
+  このとき, 次の誘導される射は内緩射である.
+  \begin{align*}
+    (A \times B') \coprod_{A \times B} (A' \times B) \to A' \times B'
+  \end{align*}
+\end{corollary}
+
+\subsection{最小ファイブレーション (省略)}
+
+\subsection{\texorpdfstring{$n$}{n}圏 (省略)}
 
 \section{Cartesianファイブレーション (途中)}
 
 $p : X \to S$を単体的集合の内ファイブレーションとする.
-このとき, $S$の点$s$が定める$p$の各ファイバー$X_s$は$\infty$圏であり, $S$の辺$f : s \to s'$はファイバー$X_s$と$X_{s'}$の間の同一視を定める. 
-この節では, この同一視が関手$f^\ast : X_{s'} \to X_s$から定まることを見る. 
+このとき, $S$の点$s$が定める$p$の各ファイバー$X_s$は$\infty$圏であり, $S$の辺$f : s \to s'$はファイバー$X_s$と$X_{s'}$の間の対応を定める. 
+この節では, この対応が関手$f^\ast : X_{s'} \to X_s$から定まることを見る. 
 大雑把に言うと, $f^\ast$は次のように構成される. 
-$X_{s'}$の任意の点$y$に対して, $f$のリフトである辺$\tilde{f} : x\to y$を選び, $f^\ast(y) := x$とする. 
+$X_{s'}$の任意の点$y$に対して, $f$のリフト$\tilde{f} : x\to y$を選び, $f^\ast(y) := x$とする. 
 しかし, $\tilde{f}$の選択が一意ではないので, $x (=f^\ast(y))$は同値の違いを除いても一意に定まらない. 
 よって, よい$\tilde{f}$を選ぶ必要がある.
-より正確に言うと, $\tilde{f}$を$X$の$p$-Cartesian辺とすればよい. 
+これは$\tilde{f}$を$X$の$p$-Cartesian辺とすればよいことが分かる. 
 
 2.4.1節では, $p$-Cartesian辺を定義し, 基本的な性質を調べる. 
 特に, $p$-Cartesian辺$\tilde{f}$が$y$と$S$における像によって, 同値の違いを除いて一意に定まることを見る. 
 よって, $X$の$p$-Cartesian辺をうまく選ぶ方法があれば, 関手$f^\ast : X_{s'} \to X_s$を定義することができる. 
 ここから, Cartesianファイブレーションが定義される. 
-これは2.4.2節で勉強する. 
+これは2.4.2節で調べる. 
 
 2.4.3節では, Cartesianファイブレーションのクラスの基本的な安定性について述べる. 
 (詳しくは印付き単体的集合の理論を勉強した後の3章で述べる.)
@@ -3371,8 +3462,16 @@ $X_{s'}$の任意の点$y$に対して, $f$のリフトである辺$\tilde{f} : 
 
 \subsection{Cartesian辺}
 
-$\C, \C'$を通常の圏, $M : \C^\myop \times \C' \to \Set$を$\C$から$\C'$への同一視とする.
-このとき, $M$がある関手$g : \C' \to \C$から定まる同一視であるか考える. (途中)
+$\C, \C'$を通常の圏, $M : \C^\myop \times \C' \to \Set$を$\C$から$\C'$への対応とする.
+このとき, $M$がある関手$g : \C' \to \C$から定まる対応であるか考える. 
+この条件は, $\C'$の任意の対象$C'$に対して, $\C$のある対象$C$と点$\eta : M(C,C')$が存在して, $\eta$の合成から定まる射
+\begin{align*}
+  \psi : \Hom_\C(D,C) \to \Hom_{\C'}(D,C')
+\end{align*}
+が$\C$の任意の対象$D$に対して全単射であることと同値である. 
+$\eta$は圏$\C \star^M \C'$における射とみなせる. 
+$\C$の任意の対象$D$に対して$\psi$が全単射のとき, $\eta$をCartesian辺という. 
+この節の目標は, このCartesian辺の概念を$\infty$圏の枠組みに一般化することである.
 
 \begin{definition}[$p$-Cartesian辺] \label{def.2.4.1.1}
   $p : X \to S$を単体的集合の内ファイブレーション, $f : x \to y$を$X$の辺とする. 
@@ -3380,15 +3479,15 @@ $\C, \C'$を通常の圏, $M : \C^\myop \times \C' \to \Set$を$\C$から$\C'$�
   \begin{align*}
     X_{/f} \to X_{/y} \times_{S_{/p(y)}} S_{/p(f)}
   \end{align*}
-  が自明なKanファイブレーションのとき, $f$は$p$-Cartesianであるという.
+  が自明なKanファイブレーションのとき, $f$を$p$-Cartesian辺($p$-Cartesian edge)という.
 \end{definition}
 
-% \begin{remark} \label{rem.2.4.1.2}
-%   $\C$を通常の圏とする. 
-%   $p : \N(\C) \to \Delta^1$を単体的集合の射とする. 
-%   このとき, $p$は内ファイブレーションである. 
-
-% \end{remark}
+\begin{remark} \label{rem.2.4.1.2}
+  $\M$を通常の圏, $p : \N(\M) \to \Delta^1$を単体的集合の射とする. 
+  このとき, $p$は内ファイブレーションである. 
+  $f : x \to y$を$p(f)$が$\Delta^1$において同型であるような$\M$の射とする. 
+  このとき, $\N(f)$が\cref{def.2.4.1.1}の$p$-Cartesianであることと, $f$が通常のCartesian辺であることは同値である. 
+\end{remark}
 
 Cartesian辺の持つ性質をいくつか述べる. 
 
@@ -3396,7 +3495,7 @@ Cartesian辺の持つ性質をいくつか述べる.
   \begin{enumerate}
     \item $p : X \to S$を単体的集合の同型射とする. 
     このとき, $X$の任意の辺は$p$-Cartesianである. 
-    \item 次のプルバックの図式を考える. 
+    \item 次のプルバックの図式
     % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYJyJdLFswLDEsIlMnIl0sWzEsMSwiUyJdLFsxLDAsIlgiXSxbMCwxLCJwJyIsMl0sWzEsMl0sWzMsMiwicCJdLFswLDMsInEiXV0=
     \[\begin{tikzcd}
       {X'} & X \\
@@ -3406,7 +3505,7 @@ Cartesian辺の持つ性質をいくつか述べる.
       \arrow["p", from=1-2, to=2-2]
       \arrow["q", from=1-1, to=1-2]
     \end{tikzcd}\]
-    $p$を内ファイブレーション, $f$を$X'$の辺とする. 
+    において, $p$を内ファイブレーション, $f$を$X'$の辺とする. 
     $q(f)$が$p$-Cartesianのとき, $f$は$p$-Cartesianである.
     \item $p : X \to Y, q : Y \to Z$を内ファイブレーション, $f : x' \to x$を$X$の辺とする.
     $p(f)$が$q$-Cartesianのとき, $f$が$p$-Cartesianであることと, $f$が$qp$-Cartesianであることは同値である.  
@@ -3414,7 +3513,7 @@ Cartesian辺の持つ性質をいくつか述べる.
 \end{proposition}
 
 \begin{proof}
-  (1)と(2)は$p$-Cartesianの定義より従う. 
+  (1)と(2)は$p$-Cartesianの定義より従う. (\cref{rem.2.4.1.4}を参照.)
 
   (3)を示す. 
   $p(f)$が$q$-Cartesianかつ$f$が$p$-Cartesianのとき, $f$が$qp$-Cartesianであることは簡単にわかる.
@@ -3467,7 +3566,7 @@ Cartesian辺は図式のリフトを用いて定義することもできる.
     \arrow[dashed, from=2-1, to=1-2]
     \arrow[from=2-1, to=2-2]
   \end{tikzcd}\]
-  Joyalの定理より, 包含$\partial \Delta^n \star \Delta^1 \coprod_{\partial \Delta^n \star \Delta^0} \Delta^n \star \Delta^0 \hookrightarrow \Delta^n \star \Delta^1$は$\Lambda^{n+2}_{n+2} \hookrightarrow \Delta^n$と同一視できる. 
+  Joyalの定理より, 包含$\partial \Delta^n \star \Delta^1 \coprod_{\partial \Delta^n \star \Delta^0} \Delta^n \star \Delta^0 \hookrightarrow \Delta^n \star \Delta^1$は$\Lambda^{n+2}_{n+2} \hookrightarrow \Delta^{n+2}$と同一視できる. 
   つまり, 次の図式は可換かつリフトを持つ. 
   % https://q.uiver.app/#q=WzAsNSxbMCwyLCJcXERlbHRhXm4iXSxbMSwxLCJYIl0sWzEsMiwiUyJdLFswLDEsIlxcTGFtYmRhXntuKzJ9X3tuKzJ9Il0sWzAsMCwiXFxEZWx0YV57XFx7bisxLG4rMlxcfX0iXSxbMSwyLCJwIl0sWzAsMSwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzAsMl0sWzMsMCwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMywxXSxbNCwzLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFs0LDEsImYiXV0=
   \[\begin{tikzcd}
@@ -3488,8 +3587,8 @@ Cartesian辺は図式のリフトを用いて定義することもできる.
 Cartesian辺を用いると, \cref{prop.1.2.4.3}は次のように言い換えることができる.  
 
 \begin{remark} \label{rem.restated_prop.1.2.4.3}
-  $\C$を$\infty$圏, $\phi$を$\C$の射, $p : \C \to \Delta^0$を1点への射影とする. 
-  $\phi$が$p$-Cartesianであることと, $\phi$が同値であることは同値である. 
+  $\C$を$\infty$圏, $\phi$を$\C$の射, $p : \C \to \Delta^0$を自然な射影とする. 
+  このとき, $\phi$が$p$-Cartesianであることと, $\phi$が同値であることは同値である. 
 \end{remark}
 
 実際には, \cref{rem.restated_prop.1.2.4.3}より強い主張が成立する. 
@@ -3505,13 +3604,14 @@ Cartesian辺を用いると, \cref{prop.1.2.4.3}は次のように言い換え�
 
 \begin{proof}
   (1)から(2)を示す. 
-  (2)から(1)も同様に示すことができる.
   $f$が$\C$における同値のとき, $p(f)$は$\D$における同値である. 
   \cref{prop.2.4.1.3}の(3)において$Z=\Delta^0$とすると, $qp(f)$は$\Delta^0$における同値であり, \cref{rem.restated_prop.1.2.4.3}よりは$qp$-Cartesianである. 
   よって, $f$は$\C$における同値である.
+
+  (2)から(1)も同様に示すことができる.
 \end{proof}
 
-\cref{prop.2.4.1.5}において, $\D$がKan複体のときを考える.  
+% \cref{prop.2.4.1.5}において, $\D$がKan複体のときを考える.  
 
 \begin{corollary}
   $\D$をKan複体, $p : \C \to \D$を$\infty$圏の内ファイブレーション, $f : C \to C'$を$\C$の射とする. 
@@ -3560,7 +3660,7 @@ Cartesian辺を用いると, \cref{prop.1.2.4.3}は次のように言い換え�
 
 \begin{definition}[$p$-coCartesian辺]
   $p : X \to S$を単体的集合の射, $f$を$X$の辺とする. 
-  $f$が$p^\myop$-Cartesianのとき, $f$は$p$-coCartesianであるという.
+  $f$が$p^\myop$-Cartesianのとき, $f$を$p$-coCartesian辺($p$-coCartesina edge)という.
 \end{definition}
 
 Cartesian辺と同様に, coCartesian辺も図式のリフトを用いて表すことができる.
@@ -3570,7 +3670,7 @@ Cartesian辺と同様に, coCartesian辺も図式のリフトを用いて表す�
   このとき, $e$が$p$-coCartesianであることと, 任意の$n \geq 1$において次の図式が可換かつリフトを持つことは同値である.
   % https://q.uiver.app/#q=WzAsNSxbMCwxLCJcXERlbHRhXm4gXFx0aW1lcyBcXHswXFx9IFxcY29wcm9kX3tcXHBhcnRpYWwgXFxEZWx0YV5uIFxcdGltZXMgXFx7MFxcfX0gXFxwYXJ0aWFsIFxcRGVsdGFebiBcXHRpbWVzIFxcRGVsdGFeMSJdLFswLDIsIlxcRGVsdGFebiBcXHRpbWVzIFxcRGVsdGFeMSJdLFsxLDIsIlMiXSxbMSwxLCJZIl0sWzAsMCwiXFxEZWx0YV4xIFxcdGltZXMgXFx7MFxcfSJdLFswLDEsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzEsMiwiZyIsMl0sWzMsMiwicCJdLFswLDMsImYiXSxbMSwzLCJoIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzQsMCwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNCwzLCJlIiwwLHsiY3VydmUiOi0yfV1d
   \[\begin{tikzcd}
-    {\Delta^1 \times \{0\}} \\
+    {\Delta^1} \\
     {\Delta^n \times \{0\} \coprod_{\partial \Delta^n \times \{0\}} \partial \Delta^n \times \Delta^1} & Y \\
     {\Delta^n \times \Delta^1} & S
     \arrow[hook, from=2-1, to=3-1]
@@ -3593,14 +3693,32 @@ Cartesian辺と同様に, coCartesian辺も図式のリフトを用いて表す�
 単体的圏におけるCartesian辺の意味を考える. 
 
 \begin{proposition} \label{prop.2.4.1.10}
-  
+  $F : \C \to \D$を単体的圏の関手とする. 
+  $\C$と$\D$がファイブラントかつ, $\C$の任意の対象$C,C'$に対して
+  \begin{align*}
+    \Map_\C(C,C') \to \Map_\D(F(C),F(C'))
+  \end{align*}
+  がKanファイブレーションのとき, 次が成立する. 
+  \begin{enumerate}
+    \item 誘導される射$q: \N(\C) \to \N(\D)$は$\infty$圏の内ファイブレーションである. 
+    \item $\C$の射$f : C' \to C''$が$q$-Cartesianであることと, $\C$の任意の対象$C$に対して, 次の図式がホモトピーCartesianであることは同値である. 
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXE1hcF9cXEMoQyxDJykiXSxbMSwwLCJcXE1hcF9cXEMoQyxDJycpIl0sWzEsMSwiXFxNYXBfXFxEKEYoQyksRihDJycpKSJdLFswLDEsIlxcTWFwX1xcRChGKEMpLEYoQycpKSJdLFswLDFdLFsxLDJdLFswLDNdLFszLDJdXQ==
+    \[\begin{tikzcd}
+      {\Map_\C(C,C')} & {\Map_\C(C,C'')} \\
+      {\Map_\D(F(C),F(C'))} & {\Map_\D(F(C),F(C''))}
+      \arrow[from=1-1, to=1-2]
+      \arrow[from=1-2, to=2-2]
+      \arrow[from=1-1, to=2-1]
+      \arrow[from=2-1, to=2-2]
+    \end{tikzcd}\]
+  \end{enumerate}
 \end{proposition}
 
-Cartesian辺より広いクラスについて議論した方がいい場合がある. 
-それが局所Cartesian辺である.
+% Cartesian辺より広いクラスについて議論した方がいい場合がある. 
+% それが局所Cartesian辺である.
 
 \begin{definition}[局所$p$-Cartesian辺] \label{def.2.4.1.11}
-  $p : X \to S$を単体的集合の射, $e : \Delta^1 \to X$を$X$の辺とする.
+  $p : X \to S$を内ファイブレーション, $e : \Delta^1 \to X$を$X$の辺とする.
   次のプルバックの図式を考える. 
   % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYIFxcdGltZXNfUyBcXERlbHRhXjEiXSxbMCwxLCJcXERlbHRhXjEiXSxbMSwxLCJTIl0sWzEsMCwiWCJdLFswLDEsInAnIiwyXSxbMSwyLCJwKGUpIiwyXSxbMCwzXSxbMywyLCJwIl0sWzAsMiwiIiwwLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
   \[\begin{tikzcd}
@@ -3612,11 +3730,11 @@ Cartesian辺より広いクラスについて議論した方がいい場合が�
     \arrow["p", from=1-2, to=2-2]
     \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
   \end{tikzcd}\]
-  $e$がファイバー$X \times_S \Delta^1$の$p'$-Cartesian辺のとき, $e$は局所$p$-Cartesian(locally $p$-Cartesian)であるという.
+  $e$が$X \times_S \Delta^1$の$p'$-Cartesian辺のとき, $e$を局所$p$-Cartesian辺(locally $p$-Cartesian edge)という.
 \end{definition}
 
 \begin{remark} \label{rem.2.4.1.12}
-  次の単体的集合のプルバックの図式を考える.
+  次の単体的集合のプルバックの図式.
   % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYJyJdLFswLDEsIlMnIl0sWzEsMSwiUyJdLFsxLDAsIlgiXSxbMCwxLCJwJyIsMl0sWzEsMl0sWzAsMywiZiJdLFszLDIsInAiXSxbMCwyLCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
   \[\begin{tikzcd}
     {X'} & X \\
@@ -3627,8 +3745,8 @@ Cartesian辺より広いクラスについて議論した方がいい場合が�
     \arrow["p", from=1-2, to=2-2]
     \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
   \end{tikzcd}\]
-  $p$を内ファイブレーションとする. (このとき, $p'$も内ファイブレーションである.)
-  このとき, $X'$の辺$e$が局所$p'$-Cartesianであることと, $f(e)$が$p$-Cartesianであることは同値である.
+  において, $p$を内ファイブレーションとする. (このとき, $p'$も内ファイブレーションである.)
+  このとき, $X'$の辺$e$が局所$p'$-Cartesianであることと, $f(e)$が局所$p$-Cartesianであることは同値である.
 \end{remark}
 
 合成による局所Cartesian辺のふるまいを見る. 
@@ -3683,8 +3801,11 @@ Cartesian辺より広いクラスについて議論した方がいい場合が�
 \subsection{Cartesianファイブレーション}
 
 この節では, 単体的集合のCartesianファイブレーションを勉強する. 
-Cartesianファイブレーションの理論は右ファイブレーションの理論の一般化である.
-% $f : X \to S$が右ファイブレーションのとき, $S$の任意の点$s$に対して, ファイバー$X_s$はKan複体であった.
+Cartesianファイブレーションの理論は2.1節で学んだ右ファイブレーションの理論の一般化である.
+$f : X \to S$が右ファイブレーションのとき, ファイバーの族$\{X_s\}_{s \in S}$はKan複体の集まりであった.
+この構成は$S$の点$s$の選択により関手的であった. 
+$f$がCartesianファイブレーションのときも同様である. 
+$X_s$が$s$の選択により関手的に定まることを見るが, ここでは$X_s$はKan複体ではなく$\infty$圏であることだけを課す.
 
 \begin{definition}[Cartesianファイブレーション] \label{def.2.4.2.1}
   $p : X \to S$を単体的集合の射とする.
@@ -3695,9 +3816,18 @@ Cartesianファイブレーションの理論は右ファイブレーション�
   \end{enumerate}
 \end{definition}
 
+\begin{definition}[coCartesianファイブレーション]
+  $p : X \to S$を単体的集合の射とする.
+  $p^\myop : X^\myop \to S^\myop$がCartesianファイブレーションのとき, $p$をcoCartesianファイブレーション(coCartesian fibration)という. 
+\end{definition}
+
+内ファイブレーション$p : X \to S$が$S$の点$s$に対して$\infty$圏$X_s$を, $S$の辺$s \to s'$に対して$X_s$から$X_{s'}$への対応を定めるとき, この対応が自然な関手$X_{s'} \to X_s$から定まる場合, $p$はCartesianファイブレーションである. 
+つまり, $S$上のCartesianファイブレーションは$S$から$\infty$圏のなす$\infty$圏への反変関手を定めるということができそうである. 
+3章の目標は, この主張を正確に定式化し証明することである. 
+
 \begin{remark} \label{rem.2.4.2.2}
   $F : \C \to \C'$を通常の関手とする, 
-  誘導される射$\N(F) : \N(\C) \to \N(\D)$は自動的に内ファイブレーションである. 
+  誘導される射$\N(F) : \N(\C) \to \N(\D)$は内ファイブレーションである. 
   このとき, $\N(F)$がCartesianファイブレーションであることと, $F$が通常のCartesianファイブレーションであることは同値である. 
 \end{remark}
 
@@ -4182,7 +4312,7 @@ $S$を単体的集合とする.
 
 \chapter{}
 
-\section{圏論の基礎}
+\section{圏論の基礎 (省略)}
 
 \section{モデル圏}
 

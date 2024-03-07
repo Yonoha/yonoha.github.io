@@ -1,0 +1,231 @@
+\RequirePackage{plautopatch}
+\documentclass[uplatex, a4paper, 14Q, dvipdfmx]{jsarticle}
+\usepackage{docmute}
+\usepackage{../new_mypackage2}
+
+\title{$\Top$上のQuillenモデル構造とStr{\o}mモデル構造}
+\author{よの}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  位相空間の圏にモデル構造を入れるとき, weak equivalenceとして弱ホモトピー同値(weak homotopy equivalence)とホモトピー同値(homotopy equivalence)の2つが考えられる.
+  実際, 弱ホモトピー同値をweak equivalenceとするモデル構造としてQuillenモデル構造が, ホモトピー同値をweak equivalenceとするモデル構造としてStr{\o}mモデル構造がある. 
+  Quillenモデル構造は\cite{Qui67}で, Str{\o}mモデル構造は\cite{Str72}でそれぞれ証明された. 
+\end{abstract}
+
+\tableofcontents
+
+\section{Quillenモデル構造} \label{subsec:quillen_model_stru_on_Top}
+
+\begin{definition}[Quillenモデル構造]
+  $\Top$には次のモデル構造が存在する. 
+  これを$\Top$上のQuillenモデル構造
+  \footnote{
+    古典的(classical)モデル構造やQuillen-Serreモデル構造, qモデル構造と呼ばれることもある. 
+  }
+  といい, $\TopQuillen$と表す. 
+  \begin{itemize}
+    \item weak equivalenceは位相空間の弱ホモトピー同値
+    \item fibrationはSerreファイブレーション
+    \item cofibrationはrelative cell complexのレトラクト
+  \end{itemize}
+\end{definition}
+
+\begin{remark}
+  $\TopQuillen$において, 任意の対象(位相空間)はファイブラントであり, 任意のCW複体のレトラクトはコファイブラントである. 
+\end{remark}
+
+\begin{remark}
+  $\TopQuillen$は 
+  \begin{align*}
+    I &:= \{S^{n-1} \hookrightarrow D^n ~|~ n \geq 0\}, \\
+    J &:= \{D^n \times \{0\} \hookrightarrow D^n \times I ~|~ n \geq 0\}
+  \end{align*}
+  をそれぞれgenerating cofibration, generating trivial cofibrationの集合とするコファイブラント生成なモデル圏である. 
+\end{remark}
+
+\section{Str{\o}mモデル構造}
+
+$\Top$上のQuillenモデル構造におけるweak equivalenceは弱ホモトピー同値であるが, Str{\o}mモデル構造はホモトピー同値をweak equivalenceとするようなモデル構造である. 
+
+\begin{definition}[Str{\o}mモデル構造]
+  $\Top$には次のモデル構造が存在する. 
+  これを$\Top$上のStr{\o}mモデル構造
+  \footnote{
+    Hurewiczモデル構造やhモデル構造と呼ばれることもある.
+  }
+  といい, $\TopStrom$と表す. 
+  \begin{itemize}
+    \item weak equivalenceは位相空間のホモトピー同値
+    \item fibrationはHurewiczファイブレーション
+    \item cofibrationは閉Hurewiczコファイブレーション
+  \end{itemize}
+\end{definition}
+
+\begin{remark}
+  $\TopStrom$において, 任意の対象(位相空間)はファイブラントかつコファイブラントである.
+\end{remark}
+
+\begin{remark}
+  $\TopStrom$はコファイブラント生成なモデル圏ではない. 
+\end{remark}
+
+\section{$\TopQuillen$と$\TopStrom$のQuillen随伴}
+
+恒等関手による$\TopQuillen$と$\TopStrom$のQuillen随伴が定まる. 
+
+\begin{proposition} \label{prop:quillen_adj_TopQuillen_TopStrom}
+  恒等関手$\Id : \TopQuillen \to \TopStrom$と恒等関手$\Id : \TopStrom \to \TopQuillen$は, $\TopQuillen$と$\TopStrom$のQuillen随伴を定める. 
+  \begin{align*}
+    \Id : \TopQuillen \rightleftarrows \TopStrom : \Id
+  \end{align*}
+\end{proposition}
+
+\begin{proof}
+  右随伴がweak equivalenceとfibrationを保つことを示す. 
+
+  まず, 任意のホモトピー同値($\TopStrom$におけるweak equivalence)は弱ホモトピー同値($\TopQuillen$におけるweak equivalence)である. 
+
+  次に, 任意のHurewiczファイブレーション($\TopStrom$におけるfibration)はSerreファイブレーション($\TopQuillen$におけるfibration)である.
+\end{proof}
+
+\begin{remark}
+  \cref{prop:quillen_adj_TopQuillen_TopStrom}のQuillen随伴$\Id : \TopQuillen \rightleftarrows \TopStrom : \Id$はQuillen同値ではない. 
+\end{remark}
+
+\begin{proof}
+  \cref{prop:quillen_adj_TopQuillen_TopStrom}のQuillen随伴がQuillen同値であると仮定する.
+
+  このとき, 任意のCW複体のレトラクト($\TopQuillen$におけるコファイブラント) $X$と位相空間($\TopStrom$におけるファイブラント) $Y$に対して, $X \to Y$が弱ホモトピー同値($\TopQuillen$におけるweak equivalence)であることと, ホモトピー同値($\TopStrom$におけるweak equivalence)であることは同値である. 
+  しかし, CW複体とホモトピー同値であるが弱ホモトピー同値ではない位相空間は存在するので矛盾する.
+\end{proof}
+
+\section{$\sSetKan$と$\TopQuillen$のQuillen同値} \label{sec:quillen_equiv_sSetKan_and_TopQuillen}
+
+モデル圏$\TopQuillen$のホモトピー圏はCW複体上の古典的なホモトピー圏と一致するので, $\TopQuillen$はCW複体のホモトピー論を表していると思える. 
+$\TopQuillen$と$\sSetKan$の間の特異単体と幾何学的実現はQuillen同値を定める. (\cref{prop:quillen_equiv_sSetKan_and_TopQuillen})
+これはKan複体のホモトピー仮説(homotopy hypothesis)の主張(の一部)である. 
+これは, $(\infty,1)$圏論において$\TopQuillen$と$\sSetKan$が$(\infty,0)$圏のなす$(\infty,1)$圏のモデルとみなせることを意味している. 
+
+\cref{sec:quillen_equiv_sSetKan_and_TopQuillen}の目標は次の\cref{prop:quillen_equiv_sSetKan_and_TopQuillen}を証明することである. 
+
+\begin{proposition} \label{prop:quillen_equiv_sSetKan_and_TopQuillen}
+  幾何学的実現$|-| : \sSet \to \Top$と特異単体$\Sing : \Top \to \sSet$は, $\sSetKan$と$\TopQuillen$のQuillen同値 
+  \begin{align*}
+    |-| : \sSetKan \rightleftarrows \TopQuillen : \Sing
+  \end{align*}
+  を定める. 
+\end{proposition}
+
+証明のために, いくつか準備をする. 
+$\sSetKan$はコファイブラント生成なモデル圏なので, generating (trivial) cofibrationについて考えればよいが, より広いクラスに対して成立する命題についてはそれを証明する.  
+
+まず, 右随伴がfibrationを保つことを示す. 
+
+\begin{lemma}[\href{https://kerodon.net/tag/021V}{Tag 021V kerodon}] \label{prop:Serre_fib_is_Kan_fib}
+  特異単体はSerreファイブレーションをKanファイブレーションにうつす. 
+\end{lemma}
+
+% \begin{proof}
+%   $f : X \to Y$をSerreファイブレーションとする. 
+%   このとき, 単体的集合の射$\Sing(f) : \Sing(X) \to \Sing(Y)$がKanファイブレーションであることを示す.
+%   $\Sing(f) : \Sing(X) \to \Sing(Y)$が任意の$n > 0$と$0 \geq i \geq n$において, $\Lambda[n,i] \hookrightarrow \Delta[n]$に対してRLPを持つことを示せばよい. 
+%   随伴性より, $f : X \to Y$が$i : |\Lambda[n,i]| \hookrightarrow |\Delta[n]|$に対してRLPを持つことを示せばよい.
+%   連続写像$c : |\Delta[n]| \to [0,1]$を
+%   \begin{align*}
+%     c(t_0,\cdots,t_n) := \min\{t_0,\cdots,t_{i-1},t_{i+1},\cdots,t_n\}
+%   \end{align*}
+%   で定める. 
+%   次に, $h : [0,1] \times |\Delta[n]| \to |\Delta[n]|$を 
+%   \begin{align*}
+%     h(s, (t_0,\cdots,t_n)) &:= (t_0-\lambda, \cdots, t_{i-1}-\lambda,t_i+n\lambda,t_{i+1}-\lambda,\cdots,t_n-\lambda) \\
+%     \lambda &:= \max\{0,c(t_0,\cdots,t_n)-s\}
+%   \end{align*}
+%   で定める. 
+%   構成より, 合成
+%   \begin{align*}
+%     |\Delta^n| \xrightarrow{(c,\id)}  [0,1] \times |\Delta[n]| \xrightarrow{h} |\Delta[n]|
+%   \end{align*}
+%   は恒等射$\id : |\Delta^n| \to |\Delta^n|$に一致する. 
+%   また, $|\Lambda[n,i]| \subset |\Delta[n]|$に対して, (途中)
+% \end{proof}
+
+より強く, 次のことが言える. 
+
+\begin{lemma} 
+  位相空間の連続写像$f : X \to Y$がSerreファイブレーションであることと, 単体的集合の射$\Sing(f) : \Sing(X) \to \Sing(Y)$がKanファイブレーションであることは同値である.
+\end{lemma}
+
+\begin{proof}
+  \cref{prop:Serre_fib_is_Kan_fib}の逆を示す. 
+  $\Sing(f) : \Sing(X) \to \Sing(Y)$をKanファイブレーションとする. 
+  任意の$n \geq 0$に対して, $\Sing(f)$は緩射
+  \begin{align*}
+    \{0\} \times \Delta[n] \hookrightarrow \Delta[1] \times \Delta[n]
+  \end{align*}
+  に対してRLPを持つ. 
+  よって, 位相空間の連続写像$f : X \to Y$は
+  \begin{align*}
+    |\{0\} \times \Delta[n]| \hookrightarrow |\Delta[1] \times \Delta[n]|
+  \end{align*}
+  に対してRLPを持つ. 
+  幾何学的実現は有限直積と交換し, $|\partial \Delta[n]| \cong S^{n-1}$かつ$|\Delta[n]| \cong D^n$である. 
+  よって, この射は$\Top$における射
+  \begin{align*}
+    \{0\} \times D^n \hookrightarrow [0,1] \times D^n
+  \end{align*}
+  と同一視できる. 
+  よって, $f$はSerreファイブレーションである.  
+\end{proof}
+
+右随伴がgenerating cofibrationを保つことを示す. 
+
+\begin{lemma} \label{prop:geometric_realization_of_simplicial_set_is_CW_complex}
+  幾何学的実現は$\sSetKan$におけるgenerating cofibrationを$\TopQuillen$におけるgenerating cofibrationにうつす. 
+\end{lemma}
+
+\begin{proof}
+  $i : \partial \Delta[n] \hookrightarrow \Delta[n]$を$\sSetKan$におけるgenerating cofibrationとする. 
+  $i$の幾何学的実現をとる. 
+  $|\partial \Delta[n]| \cong S^{n-1}$かつ$|\Delta[n]| \cong D^n$である. 
+  このとき, $|i| : S^{n-1} \hookrightarrow D^n$は$\TopQuillen$におけるgenerating cofibrationである.
+\end{proof}
+
+最後に, Quillen同値を示すために必要な命題を示す. 
+
+\begin{lemma} \label{prop:X_to_Sing|X|}
+  $X$を単体的集合とする. 
+  このとき, 随伴$(|-| \dashv \Sing)$の単位射
+  \begin{align*}
+    \eta_X : X \to \Sing(|X|)
+  \end{align*}
+  は単体的集合の弱ホモトピー同値である. 
+\end{lemma}
+
+\begin{corollary} \label{prop:|SingX|_to_X}
+  $X$を位相空間とする. 
+  このとき, 随伴$(|-| \dashv \Sing)$の余単位射
+  \begin{align*}
+    \mu_X : |\Sing(X)| \to X 
+  \end{align*}
+  は位相空間の弱ホモトピー同値である. 
+\end{corollary}
+
+% 最後に, \cref{prop:quillen_equiv_sSetKan_and_TopQuillen}を示す. % Daniel-Robert Prop2.34
+
+\begin{proof}[\cref{prop:quillen_equiv_sSetKan_and_TopQuillen}の証明]
+  %  まず, $|-| : \sSetKan \rightleftarrows \TopQuillen : \Sing$がQuillen随伴であることを示す. 
+  %  つまり, $\Sing$がSerreファイブレーションをKanファイブレーションにうつし, $|-|$が単体的集合のmono射をrelative cell complexのレトラクトにうつすことを見ればよい. 
+  %  前者は\cref{prop:Serre_fib_is_Kan_fib}, 後者は\cref{prop:geometric_realization_of_simplicial_set_is_CW_complex}から従う. 
+  Quillen随伴であることは, \cref{prop:Serre_fib_is_Kan_fib}と\cref{prop:geometric_realization_of_simplicial_set_is_CW_complex}から従う.
+  Quillen同値であることは, \cref{prop:X_to_Sing|X|}と\cref{prop:|SingX|_to_X}から従う. 
+\end{proof}
+
+\bibliographystyle{alpha}
+\bibliography{../model_reference}
+
+\end{document}

@@ -1044,7 +1044,7 @@ Joyalモデル構造は, ファイブラントが擬圏(quasi-category)であり
 \end{definition}
 
 \begin{remark}
-  $\sSetJoyal$において, 任意の擬圏はファイブラントであり, 任意の対象(単体的集合)はコファイブラントである.
+  $\sSetJoyal$において, ファイブラント対象はちょうど擬圏であり, 任意の対象(単体的集合)はコファイブラントである.
 \end{remark}
 
 \begin{remark} \label{rem:sSetJoyal_is_cof_gen}
@@ -1643,7 +1643,7 @@ Segal空間構造モデル構造のBousfield局所化により, Rezkモデル構
 \end{definition}
 
 \begin{remark}
-  $\sSpaceCSS$において, 任意の完備Segal空間はファイブラントであり, 任意の対象(単体的空間)はコファイブラントである. 
+  $\sSpaceCSS$において, ファイブラント対象はちょうど完備Segal空間であり, 任意の対象(単体的空間)はコファイブラントである. 
 \end{remark}
 
 \begin{remark}
@@ -5613,493 +5613,489 @@ underlying categoryが半順序集合(poset)である相対圏を相対半順序
   このとき, 誘導される$\xi_t : \xi_t\P \hookrightarrow \xi_t\Q$はDwyer射である. 
 \end{proposition}
 
-\newpage
+
+% \section{位相空間の圏に入るモデル構造} \label{sec:model_stru_in_Top}
+
+% 位相空間の圏にモデル構造を入れるとき, weak equivalenceとして弱ホモトピー同値(weak homotopy equivalence)とホモトピー同値(homotopy equivalence)の2つが考えられる.
+% 実際, 弱ホモトピー同値をweak equivalenceとするモデル構造としてQuillenモデル構造が, ホモトピー同値をweak equivalenceとするモデル構造としてStr{\o}mモデル構造がある. 
+% Quillenモデル構造は\cite{Qui67}で, Str{\o}mモデル構造は\cite{Str72}でそれぞれ証明された. 
+
+% \subsection{Quillenモデル構造} \label{subsec:quillen_model_stru_on_Top}
+
+% \begin{definition}[Quillenモデル構造]
+%   $\Top$には次のモデル構造が存在する. 
+%   これを$\Top$上のQuillenモデル構造
+%   \footnote{
+%     古典的(classical)モデル構造やQuillen-Serreモデル構造, qモデル構造と呼ばれることもある. 
+%   }
+%   といい, $\TopQuillen$と表す. 
+%   \begin{itemize}
+%     \item weak equivalenceは位相空間の弱ホモトピー同値
+%     \item fibrationはSerreファイブレーション
+%     \item cofibrationはrelative cell complexのレトラクト
+%   \end{itemize}
+% \end{definition}
+
+% \begin{remark}
+%   $\TopQuillen$において, 任意の対象(位相空間)はファイブラントであり, 任意のCW複体のレトラクトはコファイブラントである. 
+% \end{remark}
+
+% \begin{remark}
+%   $\TopQuillen$は 
+%   \begin{align*}
+%     I &:= \{S^{n-1} \hookrightarrow D^n ~|~ n \geq 0\}, \\
+%     J &:= \{D^n \times \{0\} \hookrightarrow D^n \times I ~|~ n \geq 0\}
+%   \end{align*}
+%   をそれぞれgenerating cofibration, generating trivial cofibrationの集合とするコファイブラント生成なモデル圏である. 
+% \end{remark}
+
+% \subsection{Str{\o}mモデル構造}
+
+% $\Top$上のQuillenモデル構造におけるweak equivalenceは弱ホモトピー同値であるが, Str{\o}mモデル構造はホモトピー同値をweak equivalenceとするようなモデル構造である. 
+
+% \begin{definition}[Str{\o}mモデル構造]
+%   $\Top$には次のモデル構造が存在する. 
+%   これを$\Top$上のStr{\o}mモデル構造
+%   \footnote{
+%     Hurewiczモデル構造やhモデル構造と呼ばれることもある.
+%   }
+%   といい, $\TopStrom$と表す. 
+%   \begin{itemize}
+%     \item weak equivalenceは位相空間のホモトピー同値
+%     \item fibrationはHurewiczファイブレーション
+%     \item cofibrationは閉Hurewiczコファイブレーション
+%   \end{itemize}
+% \end{definition}
+
+% \begin{remark}
+%   $\TopStrom$において, 任意の対象(位相空間)はファイブラントかつコファイブラントである.
+% \end{remark}
+
+% \begin{remark}
+%   $\TopStrom$はコファイブラント生成なモデル圏ではない. 
+% \end{remark}
+
+% \subsection{$\TopQuillen$と$\TopStrom$のQuillen随伴}
+
+% 恒等関手による$\TopQuillen$と$\TopStrom$のQuillen随伴が定まる. 
+
+% \begin{proposition} \label{prop:quillen_adj_TopQuillen_TopStrom}
+%   恒等関手$\Id : \TopQuillen \to \TopStrom$と恒等関手$\Id : \TopStrom \to \TopQuillen$は, $\TopQuillen$と$\TopStrom$のQuillen随伴を定める. 
+%   \begin{align*}
+%     \Id : \TopQuillen \rightleftarrows \TopStrom : \Id
+%   \end{align*}
+% \end{proposition}
+
+% \begin{proof}
+%   右随伴がweak equivalenceとfibrationを保つことを示す. 
+
+%   まず, 任意のホモトピー同値($\TopStrom$におけるweak equivalence)は弱ホモトピー同値($\TopQuillen$におけるweak equivalence)である. 
+
+%   次に, 任意のHurewiczファイブレーション($\TopStrom$におけるfibration)はSerreファイブレーション($\TopQuillen$におけるfibration)である.
+% \end{proof}
+
+% \begin{remark}
+%   \cref{prop:quillen_adj_TopQuillen_TopStrom}のQuillen随伴$\Id : \TopQuillen \rightleftarrows \TopStrom : \Id$はQuillen同値ではない. 
+% \end{remark}
+
+% \begin{proof}
+%   \cref{prop:quillen_adj_TopQuillen_TopStrom}のQuillen随伴がQuillen同値であると仮定する.
+
+%   このとき, 任意のCW複体のレトラクト($\TopQuillen$におけるコファイブラント) $X$と位相空間($\TopStrom$におけるファイブラント) $Y$に対して, $X \to Y$が弱ホモトピー同値($\TopQuillen$におけるweak equivalence)であることと, ホモトピー同値($\TopStrom$におけるweak equivalence)であることは同値である. 
+%   しかし, CW複体とホモトピー同値であるが弱ホモトピー同値ではない位相空間は存在するので矛盾する.
+% \end{proof}
+
+% \subsection{$\sSetKan$と$\TopQuillen$のQuillen同値} \label{sec:quillen_equiv_sSetKan_and_TopQuillen}
+
+% モデル圏$\TopQuillen$のホモトピー圏はCW複体上の古典的なホモトピー圏と一致するので, $\TopQuillen$はCW複体のホモトピー論を表していると思える. 
+% $\TopQuillen$と$\sSetKan$の間の特異単体と幾何学的実現はQuillen同値を定める. (\cref{prop:quillen_equiv_sSetKan_and_TopQuillen})
+% これはKan複体のホモトピー仮説(homotopy hypothesis)の主張(の一部)である. 
+% これは, $(\infty,1)$圏論において$\TopQuillen$と$\sSetKan$が$(\infty,0)$圏のなす$(\infty,1)$圏のモデルとみなせることを意味している. 
+
+% \cref{sec:quillen_equiv_sSetKan_and_TopQuillen}の目標は次の\cref{prop:quillen_equiv_sSetKan_and_TopQuillen}を証明することである. 
+
+% \begin{proposition} \label{prop:quillen_equiv_sSetKan_and_TopQuillen}
+%   幾何学的実現$|-| : \sSet \to \Top$と特異単体$\Sing : \Top \to \sSet$は, $\sSetKan$と$\TopQuillen$のQuillen同値 
+%   \begin{align*}
+%     |-| : \sSetKan \rightleftarrows \TopQuillen : \Sing
+%   \end{align*}
+%   を定める. 
+% \end{proposition}
+
+% 証明のために, いくつか準備をする. 
+% $\sSetKan$はコファイブラント生成なモデル圏なので, generating (trivial) cofibrationについて考えればよいが, より広いクラスに対して成立する命題についてはそれを証明する.  
+
+% まず, 右随伴がfibrationを保つことを示す. 
+
+% \begin{lemma}[\href{https://kerodon.net/tag/021V}{Tag 021V kerodon}] \label{prop:Serre_fib_is_Kan_fib}
+%   特異単体はSerreファイブレーションをKanファイブレーションにうつす. 
+% \end{lemma}
+
+% \begin{proof}
+%   $f : X \to Y$をSerreファイブレーションとする. 
+%   このとき, 単体的集合の射$\Sing(f) : \Sing(X) \to \Sing(Y)$がKanファイブレーションであることを示す.
+%   $\Sing(f) : \Sing(X) \to \Sing(Y)$が任意の$n > 0$と$0 \geq i \geq n$において, $\Lambda[n,i] \hookrightarrow \Delta[n]$に対してRLPを持つことを示せばよい. 
+%   随伴性より, $f : X \to Y$が$i : |\Lambda[n,i]| \hookrightarrow |\Delta[n]|$に対してRLPを持つことを示せばよい.
+%   連続写像$c : |\Delta[n]| \to [0,1]$を
+%   \begin{align*}
+%     c(t_0,\cdots,t_n) := \min\{t_0,\cdots,t_{i-1},t_{i+1},\cdots,t_n\}
+%   \end{align*}
+%   で定める. 
+%   次に, $h : [0,1] \times |\Delta[n]| \to |\Delta[n]|$を 
+%   \begin{align*}
+%     h(s, (t_0,\cdots,t_n)) &:= (t_0-\lambda, \cdots, t_{i-1}-\lambda,t_i+n\lambda,t_{i+1}-\lambda,\cdots,t_n-\lambda) \\
+%     \lambda &:= \max\{0,c(t_0,\cdots,t_n)-s\}
+%   \end{align*}
+%   で定める. 
+%   構成より, 合成
+%   \begin{align*}
+%     |\Delta^n| \xrightarrow{(c,\id)}  [0,1] \times |\Delta[n]| \xrightarrow{h} |\Delta[n]|
+%   \end{align*}
+%   は恒等射$\id : |\Delta^n| \to |\Delta^n|$に一致する. 
+%   また, $|\Lambda[n,i]| \subset |\Delta[n]|$に対して, (途中)
+% \end{proof}
+
+% より強く, 次のことが言える. 
+
+% \begin{lemma} 
+%   位相空間の連続写像$f : X \to Y$がSerreファイブレーションであることと, 単体的集合の射$\Sing(f) : \Sing(X) \to \Sing(Y)$がKanファイブレーションであることは同値である.
+% \end{lemma}
+
+% \begin{proof}
+%   \cref{prop:Serre_fib_is_Kan_fib}の逆を示す. 
+%   $\Sing(f) : \Sing(X) \to \Sing(Y)$をKanファイブレーションとする. 
+%   任意の$n \geq 0$に対して, $\Sing(f)$は緩射
+%   \begin{align*}
+%     \{0\} \times \Delta[n] \hookrightarrow \Delta[1] \times \Delta[n]
+%   \end{align*}
+%   に対してRLPを持つ. 
+%   よって, 位相空間の連続写像$f : X \to Y$は
+%   \begin{align*}
+%     |\{0\} \times \Delta[n]| \hookrightarrow |\Delta[1] \times \Delta[n]|
+%   \end{align*}
+%   に対してRLPを持つ. 
+%   幾何学的実現は有限直積と交換し, $|\partial \Delta[n]| \cong S^{n-1}$かつ$|\Delta[n]| \cong D^n$である. 
+%   よって, この射は$\Top$における射
+%   \begin{align*}
+%     \{0\} \times D^n \hookrightarrow [0,1] \times D^n
+%   \end{align*}
+%   と同一視できる. 
+%   よって, $f$はSerreファイブレーションである.  
+% \end{proof}
+
+% 右随伴がgenerating cofibrationを保つことを示す. 
+
+% \begin{lemma} \label{prop:geometric_realization_of_simplicial_set_is_CW_complex}
+%   幾何学的実現は$\sSetKan$におけるgenerating cofibrationを$\TopQuillen$におけるgenerating cofibrationにうつす. 
+% \end{lemma}
+
+% \begin{proof}
+%   $i : \partial \Delta[n] \hookrightarrow \Delta[n]$を$\sSetKan$におけるgenerating cofibrationとする. 
+%   $i$の幾何学的実現をとる. 
+%   $|\partial \Delta[n]| \cong S^{n-1}$かつ$|\Delta[n]| \cong D^n$である. 
+%   このとき, $|i| : S^{n-1} \hookrightarrow D^n$は$\TopQuillen$におけるgenerating cofibrationである.
+% \end{proof}
+
+% 最後に, Quillen同値を示すために必要な命題を示す. 
+
+% \begin{lemma} \label{prop:X_to_Sing|X|}
+%   $X$を単体的集合とする. 
+%   このとき, 随伴$(|-| \dashv \Sing)$の単位射
+%   \begin{align*}
+%     \eta_X : X \to \Sing(|X|)
+%   \end{align*}
+%   は単体的集合の弱ホモトピー同値である. 
+% \end{lemma}
+
+% \begin{corollary} \label{prop:|SingX|_to_X}
+%   $X$を位相空間とする. 
+%   このとき, 随伴$(|-| \dashv \Sing)$の余単位射
+%   \begin{align*}
+%     \mu_X : |\Sing(X)| \to X 
+%   \end{align*}
+%   は位相空間の弱ホモトピー同値である. 
+% \end{corollary}
+
+% 最後に, \cref{prop:quillen_equiv_sSetKan_and_TopQuillen}を示す. % Daniel-Robert Prop2.34
+
+% \begin{proof}[\cref{prop:quillen_equiv_sSetKan_and_TopQuillen}の証明]
+%   %  まず, $|-| : \sSetKan \rightleftarrows \TopQuillen : \Sing$がQuillen随伴であることを示す. 
+%   %  つまり, $\Sing$がSerreファイブレーションをKanファイブレーションにうつし, $|-|$が単体的集合のmono射をrelative cell complexのレトラクトにうつすことを見ればよい. 
+%   %  前者は\cref{prop:Serre_fib_is_Kan_fib}, 後者は\cref{prop:geometric_realization_of_simplicial_set_is_CW_complex}から従う. 
+%   Quillen随伴であることは, \cref{prop:Serre_fib_is_Kan_fib}と\cref{prop:geometric_realization_of_simplicial_set_is_CW_complex}から従う.
+%   Quillen同値であることは, \cref{prop:X_to_Sing|X|}と\cref{prop:|SingX|_to_X}から従う. 
+% \end{proof}
 
 
-\section{位相空間の圏に入るモデル構造} \label{sec:model_stru_in_Top}
+% \section{小圏の圏に入るモデル構造} \label{sec:model_stru_in_Cat}
 
-位相空間の圏にモデル構造を入れるとき, weak equivalenceとして弱ホモトピー同値(weak homotopy equivalence)とホモトピー同値(homotopy equivalence)の2つが考えられる.
-実際, 弱ホモトピー同値をweak equivalenceとするモデル構造としてQuillenモデル構造が, ホモトピー同値をweak equivalenceとするモデル構造としてStr{\o}mモデル構造がある. 
-Quillenモデル構造は\cite{Qui67}で, Str{\o}mモデル構造は\cite{Str72}でそれぞれ証明された. 
+% 小圏の圏にモデル構造を入れることにより, 圏論(の一部)をホモトピー論の枠組みで考えられるようになる. 
+% まず, 圏同値(categorical equivalence)をweak equivalenceとするようなモデル構造が存在する. 
+% 他にも, 圏の脈体の間の射がKan weak equivalenceであるようなThomasonモデル構造が存在する. 
+% 前者の存在は\cite{Rezk96}で, 後者の存在は\cite{Thom80}でそれぞれ証明された. 
 
-\subsection{Quillenモデル構造} \label{subsec:quillen_model_stru_on_Top}
+% \subsection{Naturalモデル構造}
 
-\begin{definition}[Quillenモデル構造]
-  $\Top$には次のモデル構造が存在する. 
-  これを$\Top$上のQuillenモデル構造
-  \footnote{
-    古典的(classical)モデル構造やQuillen-Serreモデル構造, qモデル構造と呼ばれることもある. 
-  }
-  といい, $\TopQuillen$と表す. 
-  \begin{itemize}
-    \item weak equivalenceは位相空間の弱ホモトピー同値
-    \item fibrationはSerreファイブレーション
-    \item cofibrationはrelative cell complexのレトラクト
-  \end{itemize}
-\end{definition}
+% 小圏の圏にモデル構造を入れるとき, まずweak equivalenceとして圏同値(categorical equivalence)が考えられる. 
+% 選択公理を仮定すると, weak equivalenceを圏同値とするような$\Cat$上のモデル構造は一意である. 
+% (Chris Schommer-Priesの\href{https://sbseminar.wordpress.com/2012/11/16/the-canonical-model-structure-on-cat/}{The canonical model structure on Cat}を参照)
 
-\begin{remark}
-  $\TopQuillen$において, 任意の対象(位相空間)はファイブラントであり, 任意のCW複体のレトラクトはコファイブラントである. 
-\end{remark}
+% \begin{definition}[擬ファイブレーション]
+%   $\C,\D$を圏, $F : \C \to \D$を関手とする. 
+%   任意の対象$c \in \Ob(\C)$とdomainが$F(c)$の同型射$g \in \D$に対して, domainが$c$のある同型射$f \in \C$が存在して, $F(f)=g$を満たすとき, $F$を擬ファイブレーション(quasi-fibration)という. 
+% \end{definition}
 
-\begin{remark}
-  $\TopQuillen$は 
-  \begin{align*}
-    I &:= \{S^{n-1} \hookrightarrow D^n ~|~ n \geq 0\}, \\
-    J &:= \{D^n \times \{0\} \hookrightarrow D^n \times I ~|~ n \geq 0\}
-  \end{align*}
-  をそれぞれgenerating cofibration, generating trivial cofibrationの集合とするコファイブラント生成なモデル圏である. 
-\end{remark}
+% 擬ファイブレーションはリフトを用いて特徴づけることができる. 
 
-\subsection{Str{\o}mモデル構造}
+% \begin{remark} \label{rem:quasi_fibration_has_RLP}
+%   $\C,\D$を圏, $F : \C \to \D$を関手とする. 
+%   このとき, $F$が擬ファイブレーションであることと, 次の四角がリフトを持つことは同値である. 
+%   % https://q.uiver.app/#q=WzAsNCxbMCwwLCIwIl0sWzEsMCwiXFxDIl0sWzEsMSwiXFxEIl0sWzAsMSwiSSJdLFsxLDIsIkYiXSxbMCwzXSxbMywyXSxbMCwxXSxbMywxLCIiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+%   \[\begin{tikzcd}
+%     {\{0\}} & \C \\
+%     I & \D
+%     \arrow["F", from=1-2, to=2-2]
+%     \arrow[from=1-1, to=2-1]
+%     \arrow[from=2-1, to=2-2]
+%     \arrow[from=1-1, to=1-2]
+%     \arrow[dashed, from=2-1, to=1-2]
+%   \end{tikzcd}\]
+%   ここで, $\{0\}$は1点圏, $I$は2点対象とその間の一意な同型射からなる圏とする. 
+% \end{remark}
 
-$\Top$上のQuillenモデル構造におけるweak equivalenceは弱ホモトピー同値であるが, Str{\o}mモデル構造はホモトピー同値をweak equivalenceとするようなモデル構造である. 
+% \begin{definition}[対象上のmono関手]
+%   $\C,\D$を圏, $F : \C \to \D$を関手とする. 
+%   $\Ob(F) : \Ob(\C) \to \Ob(\D)$がmono射のとき, $F$を対象上のmono関手(monic on objects)という. 
+% \end{definition}
 
-\begin{definition}[Str{\o}mモデル構造]
-  $\Top$には次のモデル構造が存在する. 
-  これを$\Top$上のStr{\o}mモデル構造
-  \footnote{
-    Hurewiczモデル構造やhモデル構造と呼ばれることもある.
-  }
-  といい, $\TopStrom$と表す. 
-  \begin{itemize}
-    \item weak equivalenceは位相空間のホモトピー同値
-    \item fibrationはHurewiczファイブレーション
-    \item cofibrationは閉Hurewiczコファイブレーション
-  \end{itemize}
-\end{definition}
+% \begin{definition}[naturalモデル構造]
+%   $\Cat$には次のモデル構造が存在する. 
+%   これを$\Cat$上のnaturalモデル構造
+%   \footnote{
+%     自明な(trivial)モデル構造や圏的(categorical)モデル構造と呼ばれることもある.
+%     このとき, $\Catnat$におけるfibrationをisofibraion, cofibrationをisocofibrationということもある. 
+%   }
+%   といい, $\Catnat$と表す. 
+%   \begin{itemize}
+%     \item weak equivalenceは通常の圏同値
+%     \item fibrationは擬ファイブレーション
+%     \item cofibrationは対象上のmono関手
+%   \end{itemize}
+% \end{definition}
 
-\begin{remark}
-  $\TopStrom$において, 任意の対象(位相空間)はファイブラントかつコファイブラントである.
-\end{remark}
+% \begin{remark}
+%   $\Catnat$において, 任意の対象(小圏)はファイブラントかつコファイブラントである. 
+% \end{remark}
 
-\begin{remark}
-  $\TopStrom$はコファイブラント生成なモデル圏ではない. 
-\end{remark}
+% \begin{remark}
+%   $\Catnat$は
+%   \begin{align*}
+%     I &:= \{\emptyset \to \{0\}, \{0\} \sqcup \{1\} \to \{0 \to 1\}, \{0 \rightrightarrows 1\} \to \{0 \to 1\}\} \\
+%     J &:= \{\{0\} \to \{0 \leftrightarrow 1\}\}
+%   \end{align*}
+%   をそれぞれgenerating cofibration, generating trivial cofibrationの集合とするコファイブラント生成なモデル圏である. 
+% \end{remark}
 
-\subsection{$\TopQuillen$と$\TopStrom$のQuillen随伴}
+% \begin{proof}
+%   まず, $I$に関して考える. 
+%   $u : \emptyset \to \{0\}, v : \{0\} \sqcup \{1\} \to \{0 \to 1\}, w : \{0 \rightrightarrows 1\} \to \{0 \to 1\}$とする. 
+%   まず, $u,v,w$がcofibrationであることは明らかである. 
+%   よって, trivial fibrationは$u,v,w$に対してRLPを持つ. 
 
-恒等関手による$\TopQuillen$と$\TopStrom$のQuillen随伴が定まる. 
-
-\begin{proposition} \label{prop:quillen_adj_TopQuillen_TopStrom}
-  恒等関手$\Id : \TopQuillen \to \TopStrom$と恒等関手$\Id : \TopStrom \to \TopQuillen$は, $\TopQuillen$と$\TopStrom$のQuillen随伴を定める. 
-  \begin{align*}
-    \Id : \TopQuillen \rightleftarrows \TopStrom : \Id
-  \end{align*}
-\end{proposition}
-
-\begin{proof}
-  右随伴がweak equivalenceとfibrationを保つことを示す. 
-
-  まず, 任意のホモトピー同値($\TopStrom$におけるweak equivalence)は弱ホモトピー同値($\TopQuillen$におけるweak equivalence)である. 
-
-  次に, 任意のHurewiczファイブレーション($\TopStrom$におけるfibration)はSerreファイブレーション($\TopQuillen$におけるfibration)である.
-\end{proof}
-
-\begin{remark}
-  \cref{prop:quillen_adj_TopQuillen_TopStrom}のQuillen随伴$\Id : \TopQuillen \rightleftarrows \TopStrom : \Id$はQuillen同値ではない. 
-\end{remark}
-
-\begin{proof}
-  \cref{prop:quillen_adj_TopQuillen_TopStrom}のQuillen随伴がQuillen同値であると仮定する.
-
-  このとき, 任意のCW複体のレトラクト($\TopQuillen$におけるコファイブラント) $X$と位相空間($\TopStrom$におけるファイブラント) $Y$に対して, $X \to Y$が弱ホモトピー同値($\TopQuillen$におけるweak equivalence)であることと, ホモトピー同値($\TopStrom$におけるweak equivalence)であることは同値である. 
-  しかし, CW複体とホモトピー同値であるが弱ホモトピー同値ではない位相空間は存在するので矛盾する.
-\end{proof}
-
-\subsection{$\sSetKan$と$\TopQuillen$のQuillen同値} \label{sec:quillen_equiv_sSetKan_and_TopQuillen}
-
-モデル圏$\TopQuillen$のホモトピー圏はCW複体上の古典的なホモトピー圏と一致するので, $\TopQuillen$はCW複体のホモトピー論を表していると思える. 
-$\TopQuillen$と$\sSetKan$の間の特異単体と幾何学的実現はQuillen同値を定める. (\cref{prop:quillen_equiv_sSetKan_and_TopQuillen})
-これはKan複体のホモトピー仮説(homotopy hypothesis)の主張(の一部)である. 
-これは, $(\infty,1)$圏論において$\TopQuillen$と$\sSetKan$が$(\infty,0)$圏のなす$(\infty,1)$圏のモデルとみなせることを意味している. 
-
-\cref{sec:quillen_equiv_sSetKan_and_TopQuillen}の目標は次の\cref{prop:quillen_equiv_sSetKan_and_TopQuillen}を証明することである. 
-
-\begin{proposition} \label{prop:quillen_equiv_sSetKan_and_TopQuillen}
-  幾何学的実現$|-| : \sSet \to \Top$と特異単体$\Sing : \Top \to \sSet$は, $\sSetKan$と$\TopQuillen$のQuillen同値 
-  \begin{align*}
-    |-| : \sSetKan \rightleftarrows \TopQuillen : \Sing
-  \end{align*}
-  を定める. 
-\end{proposition}
-
-証明のために, いくつか準備をする. 
-$\sSetKan$はコファイブラント生成なモデル圏なので, generating (trivial) cofibrationについて考えればよいが, より広いクラスに対して成立する命題についてはそれを証明する.  
-
-まず, 右随伴がfibrationを保つことを示す. 
-
-\begin{lemma}[\href{https://kerodon.net/tag/021V}{Tag 021V kerodon}] \label{prop:Serre_fib_is_Kan_fib}
-  特異単体はSerreファイブレーションをKanファイブレーションにうつす. 
-\end{lemma}
-
-\begin{proof}
-  $f : X \to Y$をSerreファイブレーションとする. 
-  このとき, 単体的集合の射$\Sing(f) : \Sing(X) \to \Sing(Y)$がKanファイブレーションであることを示す.
-  $\Sing(f) : \Sing(X) \to \Sing(Y)$が任意の$n > 0$と$0 \geq i \geq n$において, $\Lambda[n,i] \hookrightarrow \Delta[n]$に対してRLPを持つことを示せばよい. 
-  随伴性より, $f : X \to Y$が$i : |\Lambda[n,i]| \hookrightarrow |\Delta[n]|$に対してRLPを持つことを示せばよい.
-  連続写像$c : |\Delta[n]| \to [0,1]$を
-  \begin{align*}
-    c(t_0,\cdots,t_n) := \min\{t_0,\cdots,t_{i-1},t_{i+1},\cdots,t_n\}
-  \end{align*}
-  で定める. 
-  次に, $h : [0,1] \times |\Delta[n]| \to |\Delta[n]|$を 
-  \begin{align*}
-    h(s, (t_0,\cdots,t_n)) &:= (t_0-\lambda, \cdots, t_{i-1}-\lambda,t_i+n\lambda,t_{i+1}-\lambda,\cdots,t_n-\lambda) \\
-    \lambda &:= \max\{0,c(t_0,\cdots,t_n)-s\}
-  \end{align*}
-  で定める. 
-  構成より, 合成
-  \begin{align*}
-    |\Delta^n| \xrightarrow{(c,\id)}  [0,1] \times |\Delta[n]| \xrightarrow{h} |\Delta[n]|
-  \end{align*}
-  は恒等射$\id : |\Delta^n| \to |\Delta^n|$に一致する. 
-  また, $|\Lambda[n,i]| \subset |\Delta[n]|$に対して, (途中)
-\end{proof}
-
-より強く, 次のことが言える. 
-
-\begin{lemma} 
-  位相空間の連続写像$f : X \to Y$がSerreファイブレーションであることと, 単体的集合の射$\Sing(f) : \Sing(X) \to \Sing(Y)$がKanファイブレーションであることは同値である.
-\end{lemma}
-
-\begin{proof}
-  \cref{prop:Serre_fib_is_Kan_fib}の逆を示す. 
-  $\Sing(f) : \Sing(X) \to \Sing(Y)$をKanファイブレーションとする. 
-  任意の$n \geq 0$に対して, $\Sing(f)$は緩射
-  \begin{align*}
-    \{0\} \times \Delta[n] \hookrightarrow \Delta[1] \times \Delta[n]
-  \end{align*}
-  に対してRLPを持つ. 
-  よって, 位相空間の連続写像$f : X \to Y$は
-  \begin{align*}
-    |\{0\} \times \Delta[n]| \hookrightarrow |\Delta[1] \times \Delta[n]|
-  \end{align*}
-  に対してRLPを持つ. 
-  幾何学的実現は有限直積と交換し, $|\partial \Delta[n]| \cong S^{n-1}$かつ$|\Delta[n]| \cong D^n$である. 
-  よって, この射は$\Top$における射
-  \begin{align*}
-    \{0\} \times D^n \hookrightarrow [0,1] \times D^n
-  \end{align*}
-  と同一視できる. 
-  よって, $f$はSerreファイブレーションである.  
-\end{proof}
-
-右随伴がgenerating cofibrationを保つことを示す. 
-
-\begin{lemma} \label{prop:geometric_realization_of_simplicial_set_is_CW_complex}
-  幾何学的実現は$\sSetKan$におけるgenerating cofibrationを$\TopQuillen$におけるgenerating cofibrationにうつす. 
-\end{lemma}
-
-\begin{proof}
-  $i : \partial \Delta[n] \hookrightarrow \Delta[n]$を$\sSetKan$におけるgenerating cofibrationとする. 
-  $i$の幾何学的実現をとる. 
-  $|\partial \Delta[n]| \cong S^{n-1}$かつ$|\Delta[n]| \cong D^n$である. 
-  このとき, $|i| : S^{n-1} \hookrightarrow D^n$は$\TopQuillen$におけるgenerating cofibrationである.
-\end{proof}
-
-最後に, Quillen同値を示すために必要な命題を示す. 
-
-\begin{lemma} \label{prop:X_to_Sing|X|}
-  $X$を単体的集合とする. 
-  このとき, 随伴$(|-| \dashv \Sing)$の単位射
-  \begin{align*}
-    \eta_X : X \to \Sing(|X|)
-  \end{align*}
-  は単体的集合の弱ホモトピー同値である. 
-\end{lemma}
-
-\begin{corollary} \label{prop:|SingX|_to_X}
-  $X$を位相空間とする. 
-  このとき, 随伴$(|-| \dashv \Sing)$の余単位射
-  \begin{align*}
-    \mu_X : |\Sing(X)| \to X 
-  \end{align*}
-  は位相空間の弱ホモトピー同値である. 
-\end{corollary}
-
-最後に, \cref{prop:quillen_equiv_sSetKan_and_TopQuillen}を示す. % Daniel-Robert Prop2.34
-
-\begin{proof}[\cref{prop:quillen_equiv_sSetKan_and_TopQuillen}の証明]
-  %  まず, $|-| : \sSetKan \rightleftarrows \TopQuillen : \Sing$がQuillen随伴であることを示す. 
-  %  つまり, $\Sing$がSerreファイブレーションをKanファイブレーションにうつし, $|-|$が単体的集合のmono射をrelative cell complexのレトラクトにうつすことを見ればよい. 
-  %  前者は\cref{prop:Serre_fib_is_Kan_fib}, 後者は\cref{prop:geometric_realization_of_simplicial_set_is_CW_complex}から従う. 
-  Quillen随伴であることは, \cref{prop:Serre_fib_is_Kan_fib}と\cref{prop:geometric_realization_of_simplicial_set_is_CW_complex}から従う.
-  Quillen同値であることは, \cref{prop:X_to_Sing|X|}と\cref{prop:|SingX|_to_X}から従う. 
-\end{proof}
-
-\newpage
-
-
-\section{小圏の圏に入るモデル構造} \label{sec:model_stru_in_Cat}
-
-小圏の圏にモデル構造を入れることにより, 圏論(の一部)をホモトピー論の枠組みで考えられるようになる. 
-まず, 圏同値(categorical equivalence)をweak equivalenceとするようなモデル構造が存在する. 
-他にも, 圏の脈体の間の射がKan weak equivalenceであるようなThomasonモデル構造が存在する. 
-前者の存在は\cite{Rezk96}で, 後者の存在は\cite{Thom80}でそれぞれ証明された. 
-
-\subsection{Naturalモデル構造}
-
-小圏の圏にモデル構造を入れるとき, まずweak equivalenceとして圏同値(categorical equivalence)が考えられる. 
-選択公理を仮定すると, weak equivalenceを圏同値とするような$\Cat$上のモデル構造は一意である. 
-(Chris Schommer-Priesの\href{https://sbseminar.wordpress.com/2012/11/16/the-canonical-model-structure-on-cat/}{The canonical model structure on Cat}を参照)
-
-\begin{definition}[擬ファイブレーション]
-  $\C,\D$を圏, $F : \C \to \D$を関手とする. 
-  任意の対象$c \in \Ob(\C)$とdomainが$F(c)$の同型射$g \in \D$に対して, domainが$c$のある同型射$f \in \C$が存在して, $F(f)=g$を満たすとき, $F$を擬ファイブレーション(quasi-fibration)という. 
-\end{definition}
-
-擬ファイブレーションはリフトを用いて特徴づけることができる. 
-
-\begin{remark} \label{rem:quasi_fibration_has_RLP}
-  $\C,\D$を圏, $F : \C \to \D$を関手とする. 
-  このとき, $F$が擬ファイブレーションであることと, 次の四角がリフトを持つことは同値である. 
-  % https://q.uiver.app/#q=WzAsNCxbMCwwLCIwIl0sWzEsMCwiXFxDIl0sWzEsMSwiXFxEIl0sWzAsMSwiSSJdLFsxLDIsIkYiXSxbMCwzXSxbMywyXSxbMCwxXSxbMywxLCIiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
-  \[\begin{tikzcd}
-    {\{0\}} & \C \\
-    I & \D
-    \arrow["F", from=1-2, to=2-2]
-    \arrow[from=1-1, to=2-1]
-    \arrow[from=2-1, to=2-2]
-    \arrow[from=1-1, to=1-2]
-    \arrow[dashed, from=2-1, to=1-2]
-  \end{tikzcd}\]
-  ここで, $\{0\}$は1点圏, $I$は2点対象とその間の一意な同型射からなる圏とする. 
-\end{remark}
-
-\begin{definition}[対象上のmono関手]
-  $\C,\D$を圏, $F : \C \to \D$を関手とする. 
-  $\Ob(F) : \Ob(\C) \to \Ob(\D)$がmono射のとき, $F$を対象上のmono関手(monic on objects)という. 
-\end{definition}
-
-\begin{definition}[naturalモデル構造]
-  $\Cat$には次のモデル構造が存在する. 
-  これを$\Cat$上のnaturalモデル構造
-  \footnote{
-    自明な(trivial)モデル構造や圏的(categorical)モデル構造と呼ばれることもある.
-    このとき, $\Catnat$におけるfibrationをisofibraion, cofibrationをisocofibrationということもある. 
-  }
-  といい, $\Catnat$と表す. 
-  \begin{itemize}
-    \item weak equivalenceは通常の圏同値
-    \item fibrationは擬ファイブレーション
-    \item cofibrationは対象上のmono関手
-  \end{itemize}
-\end{definition}
-
-\begin{remark}
-  $\Catnat$において, 任意の対象(小圏)はファイブラントかつコファイブラントである. 
-\end{remark}
-
-\begin{remark}
-  $\Catnat$は
-  \begin{align*}
-    I &:= \{\emptyset \to \{0\}, \{0\} \sqcup \{1\} \to \{0 \to 1\}, \{0 \rightrightarrows 1\} \to \{0 \to 1\}\} \\
-    J &:= \{\{0\} \to \{0 \leftrightarrow 1\}\}
-  \end{align*}
-  をそれぞれgenerating cofibration, generating trivial cofibrationの集合とするコファイブラント生成なモデル圏である. 
-\end{remark}
-
-\begin{proof}
-  まず, $I$に関して考える. 
-  $u : \emptyset \to \{0\}, v : \{0\} \sqcup \{1\} \to \{0 \to 1\}, w : \{0 \rightrightarrows 1\} \to \{0 \to 1\}$とする. 
-  まず, $u,v,w$がcofibrationであることは明らかである. 
-  よって, trivial fibrationは$u,v,w$に対してRLPを持つ. 
-
-  逆に, 関手$F : \C \to \D$が$u,v,w$に対してRLPを持つとする. 
-  $u$に対してRLPを持つとき, $F$は対象上のepi射である. 
-  $v$に対してRLPを持つとき, $G$は充満である. 
-  $w$に対してRLPを持つとき, $G$は忠実である.
-  \cref{rem:trifib_is_in_Cat}より, $F$はtrivial fibrationである. 
+%   逆に, 関手$F : \C \to \D$が$u,v,w$に対してRLPを持つとする. 
+%   $u$に対してRLPを持つとき, $F$は対象上のepi射である. 
+%   $v$に対してRLPを持つとき, $G$は充満である. 
+%   $w$に対してRLPを持つとき, $G$は忠実である.
+%   \cref{rem:trifib_is_in_Cat}より, $F$はtrivial fibrationである. 
   
-  $J$に関しては\cref{rem:quasi_fibration_has_RLP}より従う. 
-\end{proof}
+%   $J$に関しては\cref{rem:quasi_fibration_has_RLP}より従う. 
+% \end{proof}
 
-$\Catnat$におけるtrivial fibrationとtrivial cofibrationは簡単に表すことができる.
+% $\Catnat$におけるtrivial fibrationとtrivial cofibrationは簡単に表すことができる.
 
-\begin{remark} \label{rem:trifib_is_in_Cat}
-  $\C,\D$を圏, $F : \C \to \D$を関手とする. 
-  このとき, $F$がtrivial fibrationであることと, $F$が圏同値かつ対象上のepi関手
-  \footnote{
-    対象上のepi関手は対象上のmono関手と同様に定義される. 
-    $\C,\D$を圏, $F : \C \to \D$を関手とする. 
-    $\Ob(\C) \to \Ob(\D)$がepi射のとき, $F$を対象上のepi関手(epic on objects)という. 
-  }
-  であることは同値である.
-\end{remark}
+% \begin{remark} \label{rem:trifib_is_in_Cat}
+%   $\C,\D$を圏, $F : \C \to \D$を関手とする. 
+%   このとき, $F$がtrivial fibrationであることと, $F$が圏同値かつ対象上のepi関手
+%   \footnote{
+%     対象上のepi関手は対象上のmono関手と同様に定義される. 
+%     $\C,\D$を圏, $F : \C \to \D$を関手とする. 
+%     $\Ob(\C) \to \Ob(\D)$がepi射のとき, $F$を対象上のepi関手(epic on objects)という. 
+%   }
+%   であることは同値である.
+% \end{remark}
 
-\begin{remark} \label{rem:tricof_is_in_Cat}
-  $\C,\D$を圏, $F : \C \to \D$を関手とする. 
-  このとき, $F$がtrivial cofibrationであることと, $\C$が$\D$と圏同値であるような$\D$の部分圏であることは同値である. 
-\end{remark}
+% \begin{remark} \label{rem:tricof_is_in_Cat}
+%   $\C,\D$を圏, $F : \C \to \D$を関手とする. 
+%   このとき, $F$がtrivial cofibrationであることと, $\C$が$\D$と圏同値であるような$\D$の部分圏であることは同値である. 
+% \end{remark}
 
-$\Cat$上にnaturalモデル構造が存在することを示すために, いくつか準備をする.
+% $\Cat$上にnaturalモデル構造が存在することを示すために, いくつか準備をする.
 
-まず, $\Catnat$がリフト性質を満たすことを示す. 
+% まず, $\Catnat$がリフト性質を満たすことを示す. 
 
-\begin{lemma} \label{prop:Cat_has_lift}
-  次の図式において, $F$を対象上のmono関手, $G$を擬ファイブレーションとする. 
-  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEMiXSxbMCwxLCJcXEQiXSxbMSwwLCJcXEUiXSxbMSwxLCJcXEYiXSxbMCwxLCJGIiwyXSxbMCwyLCJVIl0sWzIsMywiRyJdLFsxLDMsIlYiLDJdLFsxLDIsIkgiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
-  \[\begin{tikzcd}
-    \C & \E \\
-    \D & \F
-    \arrow["F"', from=1-1, to=2-1]
-    \arrow["U", from=1-1, to=1-2]
-    \arrow["G", from=1-2, to=2-2]
-    \arrow["V"', from=2-1, to=2-2]
-    \arrow["H"', dashed, from=2-1, to=1-2]
-  \end{tikzcd}\]
-  更に, $F$か$G$が圏同値のとき, この四角はリフト$H$を持つ. 
-\end{lemma}
+% \begin{lemma} \label{prop:Cat_has_lift}
+%   次の図式において, $F$を対象上のmono関手, $G$を擬ファイブレーションとする. 
+%   % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEMiXSxbMCwxLCJcXEQiXSxbMSwwLCJcXEUiXSxbMSwxLCJcXEYiXSxbMCwxLCJGIiwyXSxbMCwyLCJVIl0sWzIsMywiRyJdLFsxLDMsIlYiLDJdLFsxLDIsIkgiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+%   \[\begin{tikzcd}
+%     \C & \E \\
+%     \D & \F
+%     \arrow["F"', from=1-1, to=2-1]
+%     \arrow["U", from=1-1, to=1-2]
+%     \arrow["G", from=1-2, to=2-2]
+%     \arrow["V"', from=2-1, to=2-2]
+%     \arrow["H"', dashed, from=2-1, to=1-2]
+%   \end{tikzcd}\]
+%   更に, $F$か$G$が圏同値のとき, この四角はリフト$H$を持つ. 
+% \end{lemma}
 
-\begin{proof}
-  まず, $G$が圏同値のときを考える. 
-  このとき, $\Ob(F) : \Ob(\C) \to \Ob(\D)$はmono射, $\Ob(G) : \Ob(\E) \to \Ob(\F)$はepi射である. 
-  $\D$の対象$d$が$F(\C)$に属するとき, $d=F(c)$を満たす一意な$\C$の対象$c$を用いて, $H(d) := U(c)$とする. 
-  $d$が$F(\C)$に属さないとき, $V(d)=G(e)$を満たす$e \in \Ob(\E)$を用いて, $H(d):=e$とする.
-  \footnote{
-    ここで選択公理を用いている.
-    実は, $F$が圏同値のときも同様の議論で示すことができる. 
-    nlabの\href{https://ncatlab.org/nlab/show/canonical+model+structure+on+Cat}{Canonical model structure on Cat}のPropositin 1.2を参照. 
-    このとき, $\Ob(F)$はepi射なので, 選択公理は用いない. 
-    本文中の証明は\cite{Rezk96} Theorem 3.1を参考にした. 
-  }
-  $G$は圏同値かつ擬ファイブレーションなので, \cref{rem:trifib_is_in_Cat}より, 任意の$f : d \to d' \in \D$に対して, 
-  \begin{align*}
-    G : \Hom_\E(H(d),H(d')) \to  \Hom_\N(GH(d),GH(d')) = \Hom_\N(V(d),V(d'))
-  \end{align*}
-  は同型である. 
-  よって, 射の対応$H : \C \to \D$はこの同型を用いて定める. 
-  このとき, 求める四角の可換性はすぐに示すことができる. 
+% \begin{proof}
+%   まず, $G$が圏同値のときを考える. 
+%   このとき, $\Ob(F) : \Ob(\C) \to \Ob(\D)$はmono射, $\Ob(G) : \Ob(\E) \to \Ob(\F)$はepi射である. 
+%   $\D$の対象$d$が$F(\C)$に属するとき, $d=F(c)$を満たす一意な$\C$の対象$c$を用いて, $H(d) := U(c)$とする. 
+%   $d$が$F(\C)$に属さないとき, $V(d)=G(e)$を満たす$e \in \Ob(\E)$を用いて, $H(d):=e$とする.
+%   \footnote{
+%     ここで選択公理を用いている.
+%     実は, $F$が圏同値のときも同様の議論で示すことができる. 
+%     nlabの\href{https://ncatlab.org/nlab/show/canonical+model+structure+on+Cat}{Canonical model structure on Cat}のPropositin 1.2を参照. 
+%     このとき, $\Ob(F)$はepi射なので, 選択公理は用いない. 
+%     本文中の証明は\cite{Rezk96} Theorem 3.1を参考にした. 
+%   }
+%   $G$は圏同値かつ擬ファイブレーションなので, \cref{rem:trifib_is_in_Cat}より, 任意の$f : d \to d' \in \D$に対して, 
+%   \begin{align*}
+%     G : \Hom_\E(H(d),H(d')) \to  \Hom_\N(GH(d),GH(d')) = \Hom_\N(V(d),V(d'))
+%   \end{align*}
+%   は同型である. 
+%   よって, 射の対応$H : \C \to \D$はこの同型を用いて定める. 
+%   このとき, 求める四角の可換性はすぐに示すことができる. 
 
-  次に, $F$が圏同値のときを考える. 
-  \cref{rem:tricof_is_in_Cat}より, ある関手$F' : \D \to \C$が存在して, $F'F=\Id_\C$かつ$\alpha : FF' \to \Id_\D$は自然同型である. 
-  更に, $\alpha$を$F$の像に制限すると, $\alpha|_{F(\C)} = \Id_{F(\C)}$である. 
-  まず, 対象の対応$\Ob(H) : \Ob(\C) \to \Ob(\D)$を次のように定義する.
-  $G$は擬ファイブレーションなので, $UF'(d) \in \Ob(\E)$とdomainが$GUF'(d) = VFF'(d)$である同型射$V(\alpha_d) : VFF'(d) \to V(d)$に対して, ある同型射$\beta_d : UF'(d) \to x$が存在して, $G(\beta_d) = V(\alpha_d)$かつ$G(x) = V(d)$となる. 
-  よって, 任意の$d \in \Ob(D)$に対して, $\Ob(H)(d) := x$とする. 
-  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJVRicoZCkiXSxbMCwxLCJcXE9iKEgpKGQpIDo9eCJdLFsyLDAsIlZGRicoZCk9R1VGJyhkKSJdLFsyLDEsIlYoZCkiXSxbMCwxLCJcXGJldGFfZCIsMl0sWzIsMywiVihcXGFscGhhX2QpIl0sWzQsNSwiRyIsMCx7InNob3J0ZW4iOnsic291cmNlIjoyMCwidGFyZ2V0IjoyMH0sImxldmVsIjoxLCJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV1d
-  \[\begin{tikzcd}
-    {UF'(d)} && {VFF'(d)=GUF'(d)} \\
-    {\Ob(H)(d) :=x} && {V(d)}
-    \arrow[""{name=0, anchor=center, inner sep=0}, "{\beta_d}"', from=1-1, to=2-1]
-    \arrow[""{name=1, anchor=center, inner sep=0}, "{V(\alpha_d)}", from=1-3, to=2-3]
-    \arrow["G", shorten <=22pt, shorten >=22pt, maps to, from=0, to=1]
-  \end{tikzcd}\]
-  次に, 射の対応$H : \C \to \D$を次のように定める. 
-  任意の$\D$の射$f : d \to d'$に対して, 
-  \begin{align*}
-    H(f) := \beta_{d'} \cdot UF'(f) \cdot \beta_d^{-1} : H(d) \xrightarrow{\beta_d^{-1}} UF'(d) \xrightarrow{UF'(f)} UF'(d') \xrightarrow{\beta_{d'}} H(d')
-  \end{align*}
-  とする. 
-  また, $d \in \Ob(\D)$が$F(\C)$に属する, つまりある対象$c \in \Ob(\C)$が一意に存在して$d=F(c)$と表せるときを考える. 
-  $\alpha|_{F(c)} = \Id_{F(c)}$なので, $HF(c) = U(c)$かつ$\beta_{F(c)} = \id_{U(c)}$である. 
-  これらのことから, 求める四角の可換性はすぐに示すことができる. 
-\end{proof}
+%   次に, $F$が圏同値のときを考える. 
+%   \cref{rem:tricof_is_in_Cat}より, ある関手$F' : \D \to \C$が存在して, $F'F=\Id_\C$かつ$\alpha : FF' \to \Id_\D$は自然同型である. 
+%   更に, $\alpha$を$F$の像に制限すると, $\alpha|_{F(\C)} = \Id_{F(\C)}$である. 
+%   まず, 対象の対応$\Ob(H) : \Ob(\C) \to \Ob(\D)$を次のように定義する.
+%   $G$は擬ファイブレーションなので, $UF'(d) \in \Ob(\E)$とdomainが$GUF'(d) = VFF'(d)$である同型射$V(\alpha_d) : VFF'(d) \to V(d)$に対して, ある同型射$\beta_d : UF'(d) \to x$が存在して, $G(\beta_d) = V(\alpha_d)$かつ$G(x) = V(d)$となる. 
+%   よって, 任意の$d \in \Ob(D)$に対して, $\Ob(H)(d) := x$とする. 
+%   % https://q.uiver.app/#q=WzAsNCxbMCwwLCJVRicoZCkiXSxbMCwxLCJcXE9iKEgpKGQpIDo9eCJdLFsyLDAsIlZGRicoZCk9R1VGJyhkKSJdLFsyLDEsIlYoZCkiXSxbMCwxLCJcXGJldGFfZCIsMl0sWzIsMywiVihcXGFscGhhX2QpIl0sWzQsNSwiRyIsMCx7InNob3J0ZW4iOnsic291cmNlIjoyMCwidGFyZ2V0IjoyMH0sImxldmVsIjoxLCJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV1d
+%   \[\begin{tikzcd}
+%     {UF'(d)} && {VFF'(d)=GUF'(d)} \\
+%     {\Ob(H)(d) :=x} && {V(d)}
+%     \arrow[""{name=0, anchor=center, inner sep=0}, "{\beta_d}"', from=1-1, to=2-1]
+%     \arrow[""{name=1, anchor=center, inner sep=0}, "{V(\alpha_d)}", from=1-3, to=2-3]
+%     \arrow["G", shorten <=22pt, shorten >=22pt, maps to, from=0, to=1]
+%   \end{tikzcd}\]
+%   次に, 射の対応$H : \C \to \D$を次のように定める. 
+%   任意の$\D$の射$f : d \to d'$に対して, 
+%   \begin{align*}
+%     H(f) := \beta_{d'} \cdot UF'(f) \cdot \beta_d^{-1} : H(d) \xrightarrow{\beta_d^{-1}} UF'(d) \xrightarrow{UF'(f)} UF'(d') \xrightarrow{\beta_{d'}} H(d')
+%   \end{align*}
+%   とする. 
+%   また, $d \in \Ob(\D)$が$F(\C)$に属する, つまりある対象$c \in \Ob(\C)$が一意に存在して$d=F(c)$と表せるときを考える. 
+%   $\alpha|_{F(c)} = \Id_{F(c)}$なので, $HF(c) = U(c)$かつ$\beta_{F(c)} = \id_{U(c)}$である. 
+%   これらのことから, 求める四角の可換性はすぐに示すことができる. 
+% \end{proof}
 
-$\Catnat$が分解系を持つことを示す. 
+% $\Catnat$が分解系を持つことを示す. 
 
-\begin{lemma} \label{prop:Cat_has_fs}
-  任意の関手$F : \C \to \D$は圏同値かつ対象上のmono射$U : \C \to \C'$と擬ファイブレーション$V : \C' \to \D$を用いて$F=VU$と分解できる. 
-  また, 任意の関手$F : \C \to \D$は対象上のmono射$U : \C \to \D'$と圏同値かつ擬ファイブレーション$V : \D' \to \D$を用いて$F=VU$と分解できる. 
-\end{lemma}
+% \begin{lemma} \label{prop:Cat_has_fs}
+%   任意の関手$F : \C \to \D$は圏同値かつ対象上のmono射$U : \C \to \C'$と擬ファイブレーション$V : \C' \to \D$を用いて$F=VU$と分解できる. 
+%   また, 任意の関手$F : \C \to \D$は対象上のmono射$U : \C \to \D'$と圏同値かつ擬ファイブレーション$V : \D' \to \D$を用いて$F=VU$と分解できる. 
+% \end{lemma}
 
-\begin{proof}
-  まず, 任意の関手$F : \C \to \D$が圏同値かつ対象上のmono射$U : \C \to \C'$と擬ファイブレーション$V : \C' \to \D$を用いて$F=VU$と分解できることを示す. 
-  圏$\C'$を次のように定義する. 
-  まず, $\C'$の対象は 
-  \begin{align*}
-    \Ob(\C') := \{(c,d,\alpha) ~|~ c \in \Ob(\C), d \in \Ob(\D), \alpha : F(c) \cong d \in \D\}
-  \end{align*}
-  $\C'$の任意の対象$(c,d,\alpha), (c',d',\alpha')$に対して, 
-  \begin{align*}
-    \Hom_{\C'}((c,d,\alpha), (c',d',\alpha')) 
-    := \Hom_\C(c,c')
-  \end{align*}
-  このとき, 関手$U : \C \to \C'$を任意の$c \in \Ob(\C)$と$f : c \to c' \in \C$に対して
-  \begin{align*}
-    U(c) := (c,F(c),\id_{F(c)}) ,~ U(f) := f
-  \end{align*}
-  とする. 
-  関手$V : \C' \to \C$を任意の$(c,d,\alpha) \in \Ob(\C')$と$f : (c,d,\alpha) \to (c',d',\alpha') \in \C'$に対して
-  \begin{align*}
-    V((c,d,\alpha)) := d ,~ V(f) := \alpha^{-1} \cdot F(f) \cdot \alpha'
-  \end{align*}
-  とする. 
-  このとき, $U$は圏同値かつ対象上のmono射, $V$は擬ファイブレーションである.
+% \begin{proof}
+%   まず, 任意の関手$F : \C \to \D$が圏同値かつ対象上のmono射$U : \C \to \C'$と擬ファイブレーション$V : \C' \to \D$を用いて$F=VU$と分解できることを示す. 
+%   圏$\C'$を次のように定義する. 
+%   まず, $\C'$の対象は 
+%   \begin{align*}
+%     \Ob(\C') := \{(c,d,\alpha) ~|~ c \in \Ob(\C), d \in \Ob(\D), \alpha : F(c) \cong d \in \D\}
+%   \end{align*}
+%   $\C'$の任意の対象$(c,d,\alpha), (c',d',\alpha')$に対して, 
+%   \begin{align*}
+%     \Hom_{\C'}((c,d,\alpha), (c',d',\alpha')) 
+%     := \Hom_\C(c,c')
+%   \end{align*}
+%   このとき, 関手$U : \C \to \C'$を任意の$c \in \Ob(\C)$と$f : c \to c' \in \C$に対して
+%   \begin{align*}
+%     U(c) := (c,F(c),\id_{F(c)}) ,~ U(f) := f
+%   \end{align*}
+%   とする. 
+%   関手$V : \C' \to \C$を任意の$(c,d,\alpha) \in \Ob(\C')$と$f : (c,d,\alpha) \to (c',d',\alpha') \in \C'$に対して
+%   \begin{align*}
+%     V((c,d,\alpha)) := d ,~ V(f) := \alpha^{-1} \cdot F(f) \cdot \alpha'
+%   \end{align*}
+%   とする. 
+%   このとき, $U$は圏同値かつ対象上のmono射, $V$は擬ファイブレーションである.
 
-  次に, 任意の関手$F : \C \to \D$が対象上のmono射$U : \C \to \D'$と圏同値かつ擬ファイブレーション$V : \D' \to \D$を用いて$F=VU$と分解できることを示す. 
-  圏$\D'$を$D' = \C \sqcup \D$で定義する. 
-  このとき, 関手$U : \C \to \D'$を任意の$c \in \Ob(\C)$と$f : c \to c' \in \C$に対して
-  \begin{align*}
-    U(c) := c, ~ U(f) := F(f)
-  \end{align*}
-  とする. 
-  関手$V : \D' \to \D$を任意の$(c,d) \in \Ob(\C \sqcup \D)$に対して, 
-  \begin{align*}
-    V((c,d)) := (F(c),d)
-  \end{align*}
-  とする. 
-  このとき, $U$は対象上のmono射, $V$は圏同値かつ擬ファイブレーションである. 
-\end{proof}
+%   次に, 任意の関手$F : \C \to \D$が対象上のmono射$U : \C \to \D'$と圏同値かつ擬ファイブレーション$V : \D' \to \D$を用いて$F=VU$と分解できることを示す. 
+%   圏$\D'$を$D' = \C \sqcup \D$で定義する. 
+%   このとき, 関手$U : \C \to \D'$を任意の$c \in \Ob(\C)$と$f : c \to c' \in \C$に対して
+%   \begin{align*}
+%     U(c) := c, ~ U(f) := F(f)
+%   \end{align*}
+%   とする. 
+%   関手$V : \D' \to \D$を任意の$(c,d) \in \Ob(\C \sqcup \D)$に対して, 
+%   \begin{align*}
+%     V((c,d)) := (F(c),d)
+%   \end{align*}
+%   とする. 
+%   このとき, $U$は対象上のmono射, $V$は圏同値かつ擬ファイブレーションである. 
+% \end{proof}
 
-$\Cat$上にnaturalモデル構造が存在することを示す.
+% $\Cat$上にnaturalモデル構造が存在することを示す.
 
-\begin{proof}
-  まず, $\Cat$は任意の(有限)極限と(有限)余極限を持つ. 
+% \begin{proof}
+%   まず, $\Cat$は任意の(有限)極限と(有限)余極限を持つ. 
 
-  次に, weak equivalenceが2-out-of-3を満たすことは明らかである. 
+%   次に, weak equivalenceが2-out-of-3を満たすことは明らかである. 
 
-  また, weak equivalenceとcofibrationがretractで閉じることは簡単に示すことができる.
-  fibrationがretractで閉じることは\cref{rem:quasi_fibration_has_RLP}より, リフトの一般論から示すことができる. 
+%   また, weak equivalenceとcofibrationがretractで閉じることは簡単に示すことができる.
+%   fibrationがretractで閉じることは\cref{rem:quasi_fibration_has_RLP}より, リフトの一般論から示すことができる. 
 
-  リフト性質を満たすことは\cref{prop:Cat_has_lift}で, 分解系を持つことは\cref{prop:Cat_has_fs}で既に示した. 
-\end{proof}
+%   リフト性質を満たすことは\cref{prop:Cat_has_lift}で, 分解系を持つことは\cref{prop:Cat_has_fs}で既に示した. 
+% \end{proof}
 
-\subsection{Thomasonモデル構造}
+% \subsection{Thomasonモデル構造}
 
-\subsection{$\sSetJoyal$と$\Catnat$のQuillen随伴} \label{sec:quillen_adj_sSetJoyal_Catnat}
+% \subsection{$\sSetJoyal$と$\Catnat$のQuillen随伴} \label{sec:quillen_adj_sSetJoyal_Catnat}
 
-\cref{sec:quillen_adj_sSetJoyal_Catnat}の目標は次の\cref{prop:quillen_adj_sSetJoyal_Catnat}を示すことである. 
+% \cref{sec:quillen_adj_sSetJoyal_Catnat}の目標は次の\cref{prop:quillen_adj_sSetJoyal_Catnat}を示すことである. 
 
-\begin{proposition}[\cite{Joy08} Proposition 6.14] \label{prop:quillen_adj_sSetJoyal_Catnat}
-  基本圏をとる関手$\tau_1 : \sSetJoyal \to \Catnat$と脈体$N : \Catnat \to \sSetJoyal$は, $\sSetJoyal$と$\Catnat$のQuillen随伴を定める.
-  \begin{align*}
-    \tau_1 : \sSetJoyal \rightleftarrows \Catnat : N
-  \end{align*}
-\end{proposition}
+% \begin{proposition}[\cite{Joy08} Proposition 6.14] \label{prop:quillen_adj_sSetJoyal_Catnat}
+%   基本圏をとる関手$\tau_1 : \sSetJoyal \to \Catnat$と脈体$N : \Catnat \to \sSetJoyal$は, $\sSetJoyal$と$\Catnat$のQuillen随伴を定める.
+%   \begin{align*}
+%     \tau_1 : \sSetJoyal \rightleftarrows \Catnat : N
+%   \end{align*}
+% \end{proposition}
 
-\begin{proof}
-  まず, 左随伴がcofibrationを保つことを示す.
-  任意の単体的集合$X$に対して, $\Ob(\tau_1(X))=X_0$である.
-  また, 単体的集合の射$f : X \to Y$がmono射($\sSetJoyal$におけるcofibration)のとき, 特に$f_0 : X_0 \to Y_0$は対象上のmono射($\Catnat$におけるcofibration)である. 
-  よって, 左随伴はcofibrationを保つ.
+% \begin{proof}
+%   まず, 左随伴がcofibrationを保つことを示す.
+%   任意の単体的集合$X$に対して, $\Ob(\tau_1(X))=X_0$である.
+%   また, 単体的集合の射$f : X \to Y$がmono射($\sSetJoyal$におけるcofibration)のとき, 特に$f_0 : X_0 \to Y_0$は対象上のmono射($\Catnat$におけるcofibration)である. 
+%   よって, 左随伴はcofibrationを保つ.
 
-  次に, 左随伴がweak equivalenceを保つことを示す.
-  $X$を単体的集合, $\C$を圏とする.
-  \cite{Joy08} B.0.16より, 
-  \begin{align*}
-    \Fun(X,N(\C)) = \Fun(\tau_1(X),N(\C))
-  \end{align*}
-  である. 
-  $\sSet^{\tau_0}$の定義より, 
-  \begin{align*}
-    \tau_0(X,N(\C))=\tau_0(\tau_1(X),N(\C))
-  \end{align*}
-  である. 
-  従って, 任意の単体的集合の射$f : X \to Y$に対して, 
-  \begin{align*}
-    \tau_0(f,N(\C))=\tau_0(\tau_1(f),N(\C))
-  \end{align*}
-  である. 
-  任意の圏$\C$に対して$N(\C)$は擬圏である. 
-  よって, $f$が弱圏同値($\sSetJoyal$におけるweak equivalence)のとき, $\tau_0(f,N(\C))$は同型である. 
-  つまり, $\tau_0(\tau_1(f),N(\C))$も同型である. 
-  Yonedaの補題より, $\tau_1(f)$は$\Cat^{\tau_0}$における同型射である. 
-  つまり, $\tau_1(f)$は圏同値($\Catnat$におけるweak equivalence)である. 
-\end{proof}
+%   次に, 左随伴がweak equivalenceを保つことを示す.
+%   $X$を単体的集合, $\C$を圏とする.
+%   \cite{Joy08} B.0.16より, 
+%   \begin{align*}
+%     \Fun(X,N(\C)) = \Fun(\tau_1(X),N(\C))
+%   \end{align*}
+%   である. 
+%   $\sSet^{\tau_0}$の定義より, 
+%   \begin{align*}
+%     \tau_0(X,N(\C))=\tau_0(\tau_1(X),N(\C))
+%   \end{align*}
+%   である. 
+%   従って, 任意の単体的集合の射$f : X \to Y$に対して, 
+%   \begin{align*}
+%     \tau_0(f,N(\C))=\tau_0(\tau_1(f),N(\C))
+%   \end{align*}
+%   である. 
+%   任意の圏$\C$に対して$N(\C)$は擬圏である. 
+%   よって, $f$が弱圏同値($\sSetJoyal$におけるweak equivalence)のとき, $\tau_0(f,N(\C))$は同型である. 
+%   つまり, $\tau_0(\tau_1(f),N(\C))$も同型である. 
+%   Yonedaの補題より, $\tau_1(f)$は$\Cat^{\tau_0}$における同型射である. 
+%   つまり, $\tau_1(f)$は圏同値($\Catnat$におけるweak equivalence)である. 
+% \end{proof}
 
-\subsection{$\sSetKan$と$\CatThom$のQuillen同値}
+% \subsection{$\sSetKan$と$\CatThom$のQuillen同値}
 
 
 \newpage
