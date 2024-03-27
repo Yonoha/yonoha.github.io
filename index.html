@@ -35,29 +35,32 @@
     <ul class="tabbed-toc">
       <li><a href="#sec:infinity_one_category">$(\infty,1)$圏論</a></li>
       <li><a href="#sec:A_infinity_category">$A_\infty$圏論</a></li>
-      <!-- <li><a href="#sec:stable_infinity_category">安定無限圏論</a></li> -->
-      <li><a href="#sec:triangulated_category">三角圏論</a></li>
       <li><a href="#sec:homologial_mirror_symmetry">ホモロジカルミラー対称性</a></li>
       <li><a href="#sec:model_category">モデル圏論</a></li>
+      <!-- <li><a href="#sec:stable_infinity_category">安定無限圏論</a></li> -->
+      <li><a href="#sec:triangulated_category">三角圏論</a></li>
     </ul>
 
     <h2 id="sec:infinity_one_category">$(\infty,1)$圏論</h2>
     <ul>
-      <li><a href="infty_cat/kerodon/kerodon.pdf">無限圏の世界</a> <br> 
-        <p>高次圏論を解説している<a href="https://kerodon.net/">kerodon</a>1章の和訳 (未完成)</p>
+      <li><a href="model_cat/tudoi5/slide_tudoi5.pdf">$(\infty,1)$圏の理論のモデル (slide)</a> <br> 
+        <p>単体的圏・位相的圏・擬圏・完備Segal空間・相対圏が$(\infty,1)$圏の理論のモデルであることを見る. (<a href="https://tsudoionline.netlify.app/past-events/05/">第5回すうがく徒の集い</a>) </p>
       </li>
       <li><a href="infty_cat/higher_topos_theory/higher_topos_theory.pdf">Higher Topos Theory 覚書</a>
-        <p>J.Lurie "<i>Higher Topos Theory</i>"の学習ノート (随時更新)</p>
-      </li>
-      <li><a href="model_cat/compare_model/compare_model.pdf">$(\infty,1)$圏のモデルの比較</a>
-        <p>擬圏, 完備Segal空間, 相対圏の3つが$(\infty,1)$圏のモデルとして等価であることを示す. </p>
-      </li>
-      <!-- <li><a href="infty_cat/kan_complex/kan_complex.pdf">Kan複体について</a> <br> 
-        <p>高次圏論を解説している<a href="https://kerodon.net/">kerodon</a>の3章1節の和訳</p>
+        <p>J.Lurie "<i>Higher Topos Theory</i>"の学習ノート (1,2章)</p>
       </li>
       <li><a href="infty_cat/segal_space/segal_space.pdf">完備Segal空間について</a> <br>
-        <p>$(\infty,1)$圏のモデルの1つである完備Segal空間について説明する. 
-      </li> </p> -->
+        <p>$(\infty,1)$圏のモデルとして, 完備Segal空間を定義する. 
+      </li> 
+      <li><a href="infty_cat/relative_cat/relative_cat.pdf">相対圏論</a> <br> 
+        <p>相対圏が$(\infty,1)$圏のモデルであることを見て, sSpace上のRezkモデル構造とQuillen同値であるようなRelCat上のBarwick-Kanモデル構造を定義する. </p>
+      </li>
+      <!-- <li><a href="infty_cat/kerodon/kerodon.pdf">無限圏の世界</a> <br> 
+        <p>高次圏論を解説している<a href="https://kerodon.net/">kerodon</a>1章の和訳 (未完成)</p>
+      </li> -->
+      <!-- <li><a href="infty_cat/kan_complex/kan_complex.pdf">Kan複体について</a> <br> 
+        <p>高次圏論を解説している<a href="https://kerodon.net/">kerodon</a>の3章1節の和訳</p>
+      </li> -->
     </ul>
 
     <h2 id="sec:A_infinity_category">$A_\infty$圏論</h2>
@@ -88,6 +91,26 @@
       </li>
     </ul>
 
+    <h2 id="sec:homologial_mirror_symmetry">ホモロジカルミラー対称性</h2>
+    <ul>
+      <li><a href="mirror_symmetry/tudoi4/slide.pdf">ホモロジカルミラー対称性について (slide)</a> <br> 
+        <p>$A_\infty$増強としてのホモロジカルミラー対称性を紹介する. (<a href="https://tsudoionline.netlify.app/past-events/04/">第4回すうがく徒の集い</a>) </p>
+      </li>
+    </ul>
+
+    <h2 id="sec:model_category">モデル圏論</h2>
+    <ul>
+      <li><a href="model_cat/compare_model/compare_model.pdf">$(\infty,1)$圏のモデルの比較</a>
+        <p>擬圏と完備Segal空間が$(\infty,1)$圏の理論として等価であることを示す. </p>
+      </li>
+      <!-- <li><a href="model_cat/Quillen_Strom_on_Top/Quillen_Strom_on_Top.pdf">位相空間の圏上のQuillenモデル構造とStr&oslashmモデル構造</a> <br> 
+        <p>Top上のQuillenモデル構造とStr&oslashmモデル構造を定義し, 2つがQuillen随伴であることを示す. </p>
+      </li> -->
+      <li><a href="model_cat/natural_on_Cat/natural_on_Cat.pdf">小圏の圏上のnaturalモデル構造</a> <br> 
+        <p>Cat上にweak equivalenceが圏同値であるようなnaturalモデル構造を定義し, sSet上のJoyalモデル構造とQuillen随伴であることを示す. </p>
+      </li>
+    </ul>
+
     <!-- <h2 id="sec:stable_infinity_category">安定無限圏論</h2>
     <ul>
       Coming soon...
@@ -96,34 +119,17 @@
     <h2 id="sec:triangulated_category">三角圏論</h2>
     <ul>
       <li><a href="triangulated/triangulated_basic/triangulated_basic.pdf">三角圏と三角関手</a> <br>
-        <p>三角圏論の基本的な事柄を説明する. </p>
+        <p>三角圏論の基礎を説明する. </p>
       </li>
       <!-- <li><a href="triangulated/mutation/mutation.pdf">許容的部分圏とSerre関手</a> <br> 
         <p>許容的・飽和的三角圏を定義し, それらが半直交分解やSerre関手と関わっていることを示す. </p>
       </li> -->
-      <li><a href="https://mathlog.info/articles/pIQqdHfIPDaKj2Nwm0gb">三角圏の増強 (survey)</a> <br>
+      <li><a href="https://mathlog.info/articles/pIQqdHfIPDaKj2Nwm0gb">三角圏の増強 (Mathlog)</a> <br>
         <p>三角圏の増強および関連するホモトピー論について文献をまとめる. </p>
       </li>
       <!-- <li><a href="triangulated/stability/stability.pdf">Bridgeland安定性条件</a> <br> 
         <p>三角圏からAbel圏を自然に構成する$t$構造と, その一般化であるBridgeland安定性条件について書く. </p>
       </li>   -->
-    </ul>
-
-    <h2 id="sec:homologial_mirror_symmetry">ホモロジカルミラー対称性</h2>
-    <ul>
-      <li><a href="mirror_symmetry/tudoi4/slide.pdf">ホモロジカルミラー対称性について</a> <br> 
-        <p>$A_\infty$増強としてのホモロジカルミラー対称性を紹介する. (<a href="https://tsudoionline.netlify.app/past-events/04/">第4回数学徒の集い</a>の発表スライド) </p>
-      </li>
-    </ul>
-
-    <h2 id="sec:model_category">モデル圏論</h2>
-    <ul>
-      <li><a href="model_cat/Quillen_Strom_on_Top/Quillen_Strom_on_Top.pdf">位相空間の圏上のQuillenモデル構造とStr&oslashmモデル構造</a> <br> 
-        <p>位相空間の圏上のQuillenモデル構造とStr&oslashmモデル構造を定義し, 2つがQuillen随伴であることを示す. </p>
-      </li>
-      <li><a href="model_cat/natural_on_Cat/natural_on_Cat.pdf">小圏の圏上のnaturalモデル構造</a> <br> 
-        <p>小圏の圏上にweak equivalenceが圏同値であるようなnaturalモデル構造を定義し, 単体的集合の圏上のJoyalモデル構造とQuillen随伴であることを示す. </p>
-      </li>
     </ul>
 
   </body>

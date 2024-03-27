@@ -14,7 +14,7 @@
 \begin{abstract}
   任意の$n > 1$に対して$n$射が可逆であるような$(\infty,1)$圏の異なるモデルを比較する.
   ホモトピー論の視点から見ると, $(\infty,1)$圏はホモトピー論のホモトピー論のモデルであると考えられる. 
-  本稿では, $(\infty,1)$圏のモデルとして考えられる擬圏, 完備Segal空間, 相対圏の3つが$(\infty,1)$圏のモデルとして同値であることを見る. 
+  本稿では, $(\infty,1)$圏のモデルとして考えられる擬圏と完備Segal空間が$(\infty,1)$圏のモデルとして同値であることを見る. 
 \end{abstract}
 
 \tableofcontents
@@ -1906,35 +1906,35 @@ Rezkモデル構造はSegal空間構造モデル構造のBousfield局所化に�
 % \newpage
 
 
-\section{相対圏の圏に入るモデル構造} \label{sec:model_stru_in_RelCat}
+% \section{相対圏の圏に入るモデル構造} \label{sec:model_stru_in_RelCat}
 
-相対圏にfibrationやcofibrationの情報はない. 
-\cite{BK11}では, 相対圏の圏上のモデル構造は単体的空間の圏上のReedyモデル構造とQuillen同値になるようにして定められた. 
-このことは\cref{sec:quillen_equiv_sSpaceReedy_and_RelCatBar}で証明しているが, ほかの章と体裁を合わせるために, 相対圏の圏上のBarwickモデル構造を定義する. 
+% 相対圏にfibrationやcofibrationの情報はない. 
+% \cite{BK11}では, 相対圏の圏上のモデル構造は単体的空間の圏上のReedyモデル構造とQuillen同値になるようにして定められた. 
+% このことは\cref{sec:quillen_equiv_sSpaceReedy_and_RelCatBar}で証明しているが, ほかの章と体裁を合わせるために, 相対圏の圏上のBarwickモデル構造を定義する. 
 
-\subsection{Barwickモデル構造}
+% \subsection{Barwickモデル構造}
 
-\begin{definition}[Barwickモデル構造]
-  $\RelCat$には次のモデル構造が存在する. 
-  これを$\RelCat$上のBarwickモデル構造といい, $\RelCatBar$と表す. 
-  \begin{itemize}
-    \item weak equivalenceは$N_\xi$での像がvertical weak equivalenceである相対関手
-    \item fibrationは$N_\xi$での像がReedy fibrationである相対関手
-    \item cofibrationはDwyer射
-  \end{itemize}
-\end{definition}
+% \begin{definition}[Barwickモデル構造]
+%   $\RelCat$には次のモデル構造が存在する. 
+%   これを$\RelCat$上のBarwickモデル構造といい, $\RelCatBar$と表す. 
+%   \begin{itemize}
+%     \item weak equivalenceは$N_\xi$での像がvertical weak equivalenceである相対関手
+%     \item fibrationは$N_\xi$での像がReedy fibrationである相対関手
+%     \item cofibrationはDwyer射
+%   \end{itemize}
+% \end{definition}
 
-\begin{remark}
-  $\RelCatBar$において, 任意の相対半順序集合はコファイブラントである.
-  ファイブラントの明示的な表示は知られていない. 
-\end{remark}
+% \begin{remark}
+%   $\RelCatBar$において, 任意の相対半順序集合はコファイブラントである.
+%   ファイブラントの明示的な表示は知られていない. 
+% \end{remark}
 
-\begin{remark}
-  $\RelCatBar$は相対半順序集合のDwyer射をgenerating cofibrationとするコファイブラント生成なモデル圏である.
-  generating trivial cofibraitionの集合の明示的な表示は知られていない. 
-\end{remark}
+% \begin{remark}
+%   $\RelCatBar$は相対半順序集合のDwyer射をgenerating cofibrationとするコファイブラント生成なモデル圏である.
+%   generating trivial cofibraitionの集合の明示的な表示は知られていない. 
+% \end{remark}
 
-\newpage
+% \newpage
 
 
 \section{$\sSpace$上のモデル構造と$\sSetJoyal$のQuillen随伴, Quillen同値}
@@ -2795,404 +2795,404 @@ $\sSpace$上のRezkモデル構造と$\sSet$上のJoyalモデル構造はQuillen
 % \newpage
 
 
-\section{$\sSpaceCSS$と$\RelCatBar$のQuillen同値} \label{sec:quillen_equiv_sSpaceCSS_and_RelCatBar}
+% \section{$\sSpaceCSS$と$\RelCatBar$のQuillen同値} \label{sec:quillen_equiv_sSpaceCSS_and_RelCatBar}
 
-\cref{sec:quillen_equiv_sSpaceCSS_and_RelCatBar}の目標は, 次の\cref{prop:quillen_equiv_sSpaceCSS_and_RelCatBar}を示すことである. 
-これは\cite{BK11}で証明された. 
+% \cref{sec:quillen_equiv_sSpaceCSS_and_RelCatBar}の目標は, 次の\cref{prop:quillen_equiv_sSpaceCSS_and_RelCatBar}を示すことである. 
+% これは\cite{BK11}で証明された. 
 
-\begin{proposition} \label{prop:quillen_equiv_sSpaceCSS_and_RelCatBar}
-  細分化相対化関手$K_\xi : \sSpaceCSS \to \RelCat$と細分化分類図式$N_\xi : \RelCat \to \sSpaceCSS$は, $\sSpaceCSS$と$\RelCatBar$のQuillen同値を定める.  
-  % \begin{align*}
-  %   K_\xi : \sSpaceCSS \rightleftarrows \RelCatBar : N_\xi
-  % \end{align*}
-  % https://q.uiver.app/#q=WzAsMixbMCwwLCJcXHNTcGFjZUNTUyJdLFsyLDAsIlxcc1NldEpveWFsIl0sWzAsMSwiS19cXHhpIiwwLHsib2Zmc2V0IjotMSwiY3VydmUiOi0xfV0sWzEsMCwiTl9cXHhpIiwwLHsib2Zmc2V0IjotMSwiY3VydmUiOi0xfV0sWzIsMywiIiwyLHsibGV2ZWwiOjEsInN0eWxlIjp7Im5hbWUiOiJhZGp1bmN0aW9uIn19XV0=
-  \[\begin{tikzcd}
-    \sSpaceCSS && \sSetJoyal
-    \arrow[""{name=0, anchor=center, inner sep=0}, "{K_\xi}", shift left, curve={height=-6pt}, from=1-1, to=1-3]
-    \arrow[""{name=1, anchor=center, inner sep=0}, "{N_\xi}", shift left, curve={height=-6pt}, from=1-3, to=1-1]
-    \arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=0, to=1]
-  \end{tikzcd}\]
-\end{proposition}
+% \begin{proposition} \label{prop:quillen_equiv_sSpaceCSS_and_RelCatBar}
+%   細分化相対化関手$K_\xi : \sSpaceCSS \to \RelCat$と細分化分類図式$N_\xi : \RelCat \to \sSpaceCSS$は, $\sSpaceCSS$と$\RelCatBar$のQuillen同値を定める.  
+%   % \begin{align*}
+%   %   K_\xi : \sSpaceCSS \rightleftarrows \RelCatBar : N_\xi
+%   % \end{align*}
+%   % https://q.uiver.app/#q=WzAsMixbMCwwLCJcXHNTcGFjZUNTUyJdLFsyLDAsIlxcc1NldEpveWFsIl0sWzAsMSwiS19cXHhpIiwwLHsib2Zmc2V0IjotMSwiY3VydmUiOi0xfV0sWzEsMCwiTl9cXHhpIiwwLHsib2Zmc2V0IjotMSwiY3VydmUiOi0xfV0sWzIsMywiIiwyLHsibGV2ZWwiOjEsInN0eWxlIjp7Im5hbWUiOiJhZGp1bmN0aW9uIn19XV0=
+%   \[\begin{tikzcd}
+%     \sSpaceCSS && \sSetJoyal
+%     \arrow[""{name=0, anchor=center, inner sep=0}, "{K_\xi}", shift left, curve={height=-6pt}, from=1-1, to=1-3]
+%     \arrow[""{name=1, anchor=center, inner sep=0}, "{N_\xi}", shift left, curve={height=-6pt}, from=1-3, to=1-1]
+%     \arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=0, to=1]
+%   \end{tikzcd}\]
+% \end{proposition}
 
-この命題は次の命題の系として得られる. 
+% この命題は次の命題の系として得られる. 
 
-\begin{proposition} \label{prop:quillen_equiv_sSpaceReedy_and_RelCatBar}
-  細分化相対化関手$K_\xi : \sSpace_n \to \RelCat$と細分化分類図式$N_\xi : \RelCat \to \sSpace_n$は, $\sSpaceReedy$と$\RelCatBar$のQuillen同値を定める.  
-  % \begin{align*}
-  %   K_\xi : \sSpaceReedy \rightleftarrows \RelCatBar : N_\xi
-  % \end{align*}
-  % https://q.uiver.app/#q=WzAsMixbMCwwLCJcXHNTcGFjZVJlZWR5Il0sWzIsMCwiXFxzU2V0Sm95YWwiXSxbMCwxLCJLX1xceGkiLDAseyJvZmZzZXQiOi0xLCJjdXJ2ZSI6LTF9XSxbMSwwLCJOX1xceGkiLDAseyJvZmZzZXQiOi0xLCJjdXJ2ZSI6LTF9XSxbMiwzLCIiLDIseyJsZXZlbCI6MSwic3R5bGUiOnsibmFtZSI6ImFkanVuY3Rpb24ifX1dXQ==
-  \[\begin{tikzcd}
-    \sSpace_n && \sSetJoyal
-    \arrow[""{name=0, anchor=center, inner sep=0}, "{K_\xi}", shift left, curve={height=-6pt}, from=1-1, to=1-3]
-    \arrow[""{name=1, anchor=center, inner sep=0}, "{N_\xi}", shift left, curve={height=-6pt}, from=1-3, to=1-1]
-    \arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=0, to=1]
-  \end{tikzcd}\]
-\end{proposition}
+% \begin{proposition} \label{prop:quillen_equiv_sSpaceReedy_and_RelCatBar}
+%   細分化相対化関手$K_\xi : \sSpace_n \to \RelCat$と細分化分類図式$N_\xi : \RelCat \to \sSpace_n$は, $\sSpaceReedy$と$\RelCatBar$のQuillen同値を定める.  
+%   % \begin{align*}
+%   %   K_\xi : \sSpaceReedy \rightleftarrows \RelCatBar : N_\xi
+%   % \end{align*}
+%   % https://q.uiver.app/#q=WzAsMixbMCwwLCJcXHNTcGFjZVJlZWR5Il0sWzIsMCwiXFxzU2V0Sm95YWwiXSxbMCwxLCJLX1xceGkiLDAseyJvZmZzZXQiOi0xLCJjdXJ2ZSI6LTF9XSxbMSwwLCJOX1xceGkiLDAseyJvZmZzZXQiOi0xLCJjdXJ2ZSI6LTF9XSxbMiwzLCIiLDIseyJsZXZlbCI6MSwic3R5bGUiOnsibmFtZSI6ImFkanVuY3Rpb24ifX1dXQ==
+%   \[\begin{tikzcd}
+%     \sSpace_n && \sSetJoyal
+%     \arrow[""{name=0, anchor=center, inner sep=0}, "{K_\xi}", shift left, curve={height=-6pt}, from=1-1, to=1-3]
+%     \arrow[""{name=1, anchor=center, inner sep=0}, "{N_\xi}", shift left, curve={height=-6pt}, from=1-3, to=1-1]
+%     \arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=0, to=1]
+%   \end{tikzcd}\]
+% \end{proposition}
 
-\subsection{(細分化)分類図式と(細分化)相対化関手}
+% \subsection{(細分化)分類図式と(細分化)相対化関手}
 
-相対半順序集合を用いて分類図式を次のように定義する. 
+% 相対半順序集合を用いて分類図式を次のように定義する. 
 
-\begin{definition}[分類図式] \label{def:classification_diagram_with_relative_poset}
-  $\C$を相対圏とする. 
-  単体的空間$N\C$を, 任意の$m,n \geq 0$に対して集合$(N\C)_{n,m}$を次のように定義することで定め, $N\C$を$\C$の分類図式(classification diagram)という.
-  \footnote{
-    分類図式は次のように表すことができる. (この定義で書かれることが多い.) 
-    しかし, 後で見る細分化関手との合成を考えるときには, 上の定義の見方が重要である. 
+% \begin{definition}[分類図式] \label{def:classification_diagram_with_relative_poset}
+%   $\C$を相対圏とする. 
+%   単体的空間$N\C$を, 任意の$m,n \geq 0$に対して集合$(N\C)_{n,m}$を次のように定義することで定め, $N\C$を$\C$の分類図式(classification diagram)という.
+%   \footnote{
+%     分類図式は次のように表すことができる. (この定義で書かれることが多い.) 
+%     しかし, 後で見る細分化関手との合成を考えるときには, 上の定義の見方が重要である. 
 
-    \begin{notation}
-      $\C$を相対圏, $\D$を圏とする. 
-      関手圏$\C^\D$において, 自然変換の各成分が$\C$のweak equivalenceである$\C^\D$の部分圏を$\we(\C^\D)$と表す. 
-    \end{notation}
+%     \begin{notation}
+%       $\C$を相対圏, $\D$を圏とする. 
+%       関手圏$\C^\D$において, 自然変換の各成分が$\C$のweak equivalenceである$\C^\D$の部分圏を$\we(\C^\D)$と表す. 
+%     \end{notation}
 
-    \begin{definition}[分類図式]
-      $\C$を相対圏とする. 
-      単体的空間$N\C$を, 任意の$n \geq 0$に対して単体的集合を次のように定義することで定め, $N\C$を$\C$の分類図式(classification diagram)という.
-      ここで右辺の$N$は通常の圏の脈体である. 
-      \begin{align*}
-        (N\C)_n := N(\we(\C^{[n]}))
-      \end{align*}
-    \end{definition}
-  }
-  \begin{align*}
-    (N\C)_{n,m} := \Hom_\RelCat([n]_\min \times [m]_\max, \C)
-  \end{align*}
-\end{definition}
+%     \begin{definition}[分類図式]
+%       $\C$を相対圏とする. 
+%       単体的空間$N\C$を, 任意の$n \geq 0$に対して単体的集合を次のように定義することで定め, $N\C$を$\C$の分類図式(classification diagram)という.
+%       ここで右辺の$N$は通常の圏の脈体である. 
+%       \begin{align*}
+%         (N\C)_n := N(\we(\C^{[n]}))
+%       \end{align*}
+%     \end{definition}
+%   }
+%   \begin{align*}
+%     (N\C)_{n,m} := \Hom_\RelCat([n]_\min \times [m]_\max, \C)
+%   \end{align*}
+% \end{definition}
 
-\begin{remark}
-  構成$\C \mapsto N\C$は関手$N : \RelCat \to \sSpace$を定める. 
-  この関手$N$も分類図式(classification diagram)という. 
-\end{remark}
+% \begin{remark}
+%   構成$\C \mapsto N\C$は関手$N : \RelCat \to \sSpace$を定める. 
+%   この関手$N$も分類図式(classification diagram)という. 
+% \end{remark}
 
-\begin{definition}[相対化関手]
-  普遍随伴の一般論より, 分類図式$N$は左随伴$K : \sSpace \to \RelCat$を持つ. 
-  この関手$K$を相対化関手(relativization functor)
-  \footnote{
-    この用語は一般的には(英語を含めて)用いられておらず, 本稿独自の言葉である.
-    のちに定義される細分化分類図式や細分化相対関手も同様である. 
-  }
-  という. 
-\end{definition}
+% \begin{definition}[相対化関手]
+%   普遍随伴の一般論より, 分類図式$N$は左随伴$K : \sSpace \to \RelCat$を持つ. 
+%   この関手$K$を相対化関手(relativization functor)
+%   \footnote{
+%     この用語は一般的には(英語を含めて)用いられておらず, 本稿独自の言葉である.
+%     のちに定義される細分化分類図式や細分化相対関手も同様である. 
+%   }
+%   という. 
+% \end{definition}
 
-相対化関手を具体的に書き下すと次のようになる. 
+% 相対化関手を具体的に書き下すと次のようになる. 
 
-\begin{remark}
-  任意の$m,n \geq 0$において, $\Delta[n]^t \times \Delta[m]$に対して次が成立する. 
-  \begin{align*}
-    K(\Delta[n]^t \times \Delta[m]) = [n]_\min \times [m]_\max
-  \end{align*}
-\end{remark}
+% \begin{remark}
+%   任意の$m,n \geq 0$において, $\Delta[n]^t \times \Delta[m]$に対して次が成立する. 
+%   \begin{align*}
+%     K(\Delta[n]^t \times \Delta[m]) = [n]_\min \times [m]_\max
+%   \end{align*}
+% \end{remark}
 
-細分化関手との合成をとることで, 細分化分類図式と細分化相対化関手が定まる. 
+% 細分化関手との合成をとることで, 細分化分類図式と細分化相対化関手が定まる. 
 
-\begin{definition}[細分化分類図式]
-  $\C$を相対圏とする. 
-  単体的空間$N_\xi\C$を, 任意の$m,n \geq 0$に対して集合$N_\xi\C_{n,m}$を次のように定義することで定め, $N_\xi\C$を$\C$の細分化分類図式(subdivision classification diagram)という.
-  \begin{align*}
-    (N_\xi\C)_{n,m} :=  \Hom_\RelCat(\xi([n]_\min \times [m]_\max), \C)
-  \end{align*}
-\end{definition}
+% \begin{definition}[細分化分類図式]
+%   $\C$を相対圏とする. 
+%   単体的空間$N_\xi\C$を, 任意の$m,n \geq 0$に対して集合$N_\xi\C_{n,m}$を次のように定義することで定め, $N_\xi\C$を$\C$の細分化分類図式(subdivision classification diagram)という.
+%   \begin{align*}
+%     (N_\xi\C)_{n,m} :=  \Hom_\RelCat(\xi([n]_\min \times [m]_\max), \C)
+%   \end{align*}
+% \end{definition}
 
-\begin{definition}[細分化相対化関手]
-  普遍随伴の一般論より, 細分化分類図式$N_\xi$は左随伴$K_\xi : \sSpace \to \RelCat$を持つ.
-  この関手$K_\xi$を細分化相対化関手(subdivision relativization functor)という. 
-\end{definition}
+% \begin{definition}[細分化相対化関手]
+%   普遍随伴の一般論より, 細分化分類図式$N_\xi$は左随伴$K_\xi : \sSpace \to \RelCat$を持つ.
+%   この関手$K_\xi$を細分化相対化関手(subdivision relativization functor)という. 
+% \end{definition}
 
-細分化相対化関手を具体的に書き下すと次のようになる. 
+% 細分化相対化関手を具体的に書き下すと次のようになる. 
 
-\begin{remark} \label{rem:subdivision_relativization_functor}
-  任意の$m,n \geq 0$において, $\Delta[n]^t \times \Delta[m] \in \sSpace$に対して, 
-  \begin{align*}
-    K_\xi(\Delta[n]^t \times \Delta[m]) := \xi([n]_\min \times [m]_\max)
-  \end{align*}
-\end{remark}
+% \begin{remark} \label{rem:subdivision_relativization_functor}
+%   任意の$m,n \geq 0$において, $\Delta[n]^t \times \Delta[m] \in \sSpace$に対して, 
+%   \begin{align*}
+%     K_\xi(\Delta[n]^t \times \Delta[m]) := \xi([n]_\min \times [m]_\max)
+%   \end{align*}
+% \end{remark}
 
-\subsection{分類図式と細分化分類図式}
+% \subsection{分類図式と細分化分類図式}
 
-分類図式と細分化分類図式の関係を見る.
+% 分類図式と細分化分類図式の関係を見る.
  
-\begin{remark}
-  $\xi, \Id :\RelCat \to \RelCat$は自然変換$\pi : \xi \to \Id$を定める. 
-  % ここで, $\pi$の各成分は射影関手で与えられる. 
-\end{remark}
+% \begin{remark}
+%   $\xi, \Id :\RelCat \to \RelCat$は自然変換$\pi : \xi \to \Id$を定める. 
+%   % ここで, $\pi$の各成分は射影関手で与えられる. 
+% \end{remark}
 
-\begin{lemma} \label{prop:N_to_Nxi_is_Reedy_weak_equivalence}
-  自然変換$\pi : \xi \to \Id$から定まる自然変換$\pi^\ast : N \to N_\xi$はvertical weak equivalenceである. 
-\end{lemma}
+% \begin{lemma} \label{prop:N_to_Nxi_is_Reedy_weak_equivalence}
+%   自然変換$\pi : \xi \to \Id$から定まる自然変換$\pi^\ast : N \to N_\xi$はvertical weak equivalenceである. 
+% \end{lemma}
 
-\begin{proof}
-  任意の相対圏$\C$と$n \geq 0$に対して, 単体的集合の射 
-  \begin{align*}
-    \pi^\ast_n : (N\C)_n \to (N_\xi\C)_n
-  \end{align*}
-  がKan weak equivalenceであることを示せばよい. 
-  定義より, 
-  \begin{align*}
-    (N\C)_{n,m} &:= \Hom_\RelCat([n]_\min \times [m]_\max, \C) \\
-    (N_\xi\C)_{n,m} &:= \Hom_\RelCat(\xi([n]_\min \times [m]_\max), \C)
-  \end{align*}
-  である. 
-  ここで, 単体的空間$F_n\C$と$\overline{F}_n\C$をそれぞれ次のように定義する.
-  \begin{align*}
-    (F_n\C)_{m,p} &:= \Hom_\RelCat([n]_\min \times [m]_\max, \C^{[p]_\max}) \\
-    (\overline{F}_n\C)_{m,p} &:= \Hom_\RelCat([n]_\min \times [m]_\max, \C^{[0]_\max}) 
-  \end{align*}
-  包含$[0]_\max \hookrightarrow [p]_\max$は単体的空間の射
-  \begin{align*}
-    \overline{F}_n\C \to F_n\C
-  \end{align*}
-  を定める. 
-  同様に, 単体的空間$G_n\C$と$\overline{G}_n\C$をそれぞれ次のように定義する. 
-  \begin{align*}
-    (G_n\C)_{m,p} &:= \Hom_\RelCat(\xi([n]_\min \times [m]_\max), \C^{[p]_\max}) \\
-    (\overline{G}_n\C)_{m,p} &:= \Hom_\RelCat(\xi([n]_\min \times [m]_\max), \C^{[0]_\max}) 
-  \end{align*}
-  同様に, 包含$[0]_\max \hookrightarrow [p]_\max$は単体的空間の射
-  \begin{align*}
-    \overline{F}_n\C \to F_n\C
-  \end{align*}
-  を定める. 
-  積とべきの随伴性と自然変換の成分$\xi([n]_\min \times [m]_\max) \to [n]_\min \times [m]_\max$から, 次の射が定まる. 
-  \begin{align*}
-    (F_n\C)_{m,p} 
-    &= \Hom_\RelCat([n]_\min \times [m]_\max, \C^{[p]_\max}) 
-    \cong \Hom_\RelCat([p]_\max, \C^{[n]_\min \times [m]_\max}) \\
-    &\to \Hom_\RelCat([p]_\max, \C^{\xi([n]_\min \times [m]_\max)}) 
-    \cong \Hom_\RelCat(\xi([n]_\min \times [m]_\max), \C^{[p]_\max}) \\
-    &= (G_n\C)_{m,p}
-  \end{align*}
-  \cref{prop:all_maps_is_homotopy_equivalence_in_RelCat}より, $\xi([n]_\min \times [m]_\max) \to [n]_\min \times [m]_\max$は強ホモトピックである. 
-  \cref{prop:homotopic_compatible_power_in_RelCat}より, $\C^{[n]_\min \times [m]_\max} \to \C^{\xi([n]_\min \times [m]_\max)}$は強ホモトピックである. 
-  よって, $m$を固定して$p$を動かすと, $(F_n\C)_{m} \to (G_n\C)_{m}$はKan weak equivalenceである. 
-  また, 単体的集合の同型
-  \begin{align*}
-    (N\C)_n \cong \diag (\overline{F}_n\C), ~  (N_\xi\C)_n \cong \diag (\overline{G}_n\C)
-  \end{align*}
-  が成立する. 
-  よって, $(N\C)_n \to (N_\xi\C)_n$は単体的集合のweak equivalenceである. 
-\end{proof}
+% \begin{proof}
+%   任意の相対圏$\C$と$n \geq 0$に対して, 単体的集合の射 
+%   \begin{align*}
+%     \pi^\ast_n : (N\C)_n \to (N_\xi\C)_n
+%   \end{align*}
+%   がKan weak equivalenceであることを示せばよい. 
+%   定義より, 
+%   \begin{align*}
+%     (N\C)_{n,m} &:= \Hom_\RelCat([n]_\min \times [m]_\max, \C) \\
+%     (N_\xi\C)_{n,m} &:= \Hom_\RelCat(\xi([n]_\min \times [m]_\max), \C)
+%   \end{align*}
+%   である. 
+%   ここで, 単体的空間$F_n\C$と$\overline{F}_n\C$をそれぞれ次のように定義する.
+%   \begin{align*}
+%     (F_n\C)_{m,p} &:= \Hom_\RelCat([n]_\min \times [m]_\max, \C^{[p]_\max}) \\
+%     (\overline{F}_n\C)_{m,p} &:= \Hom_\RelCat([n]_\min \times [m]_\max, \C^{[0]_\max}) 
+%   \end{align*}
+%   包含$[0]_\max \hookrightarrow [p]_\max$は単体的空間の射
+%   \begin{align*}
+%     \overline{F}_n\C \to F_n\C
+%   \end{align*}
+%   を定める. 
+%   同様に, 単体的空間$G_n\C$と$\overline{G}_n\C$をそれぞれ次のように定義する. 
+%   \begin{align*}
+%     (G_n\C)_{m,p} &:= \Hom_\RelCat(\xi([n]_\min \times [m]_\max), \C^{[p]_\max}) \\
+%     (\overline{G}_n\C)_{m,p} &:= \Hom_\RelCat(\xi([n]_\min \times [m]_\max), \C^{[0]_\max}) 
+%   \end{align*}
+%   同様に, 包含$[0]_\max \hookrightarrow [p]_\max$は単体的空間の射
+%   \begin{align*}
+%     \overline{F}_n\C \to F_n\C
+%   \end{align*}
+%   を定める. 
+%   積とべきの随伴性と自然変換の成分$\xi([n]_\min \times [m]_\max) \to [n]_\min \times [m]_\max$から, 次の射が定まる. 
+%   \begin{align*}
+%     (F_n\C)_{m,p} 
+%     &= \Hom_\RelCat([n]_\min \times [m]_\max, \C^{[p]_\max}) 
+%     \cong \Hom_\RelCat([p]_\max, \C^{[n]_\min \times [m]_\max}) \\
+%     &\to \Hom_\RelCat([p]_\max, \C^{\xi([n]_\min \times [m]_\max)}) 
+%     \cong \Hom_\RelCat(\xi([n]_\min \times [m]_\max), \C^{[p]_\max}) \\
+%     &= (G_n\C)_{m,p}
+%   \end{align*}
+%   \cref{prop:all_maps_is_homotopy_equivalence_in_RelCat}より, $\xi([n]_\min \times [m]_\max) \to [n]_\min \times [m]_\max$は強ホモトピックである. 
+%   \cref{prop:homotopic_compatible_power_in_RelCat}より, $\C^{[n]_\min \times [m]_\max} \to \C^{\xi([n]_\min \times [m]_\max)}$は強ホモトピックである. 
+%   よって, $m$を固定して$p$を動かすと, $(F_n\C)_{m} \to (G_n\C)_{m}$はKan weak equivalenceである. 
+%   また, 単体的集合の同型
+%   \begin{align*}
+%     (N\C)_n \cong \diag (\overline{F}_n\C), ~  (N_\xi\C)_n \cong \diag (\overline{G}_n\C)
+%   \end{align*}
+%   が成立する. 
+%   よって, $(N\C)_n \to (N_\xi\C)_n$は単体的集合のweak equivalenceである. 
+% \end{proof}
 
-右随伴$N_\xi$がcofibrationを保つことを示す.
+% 右随伴$N_\xi$がcofibrationを保つことを示す.
 
-\begin{lemma}
-  細分化分類図式$N_\xi : \RelCat \to \sSpace$はDwyer射を単体的空間のmono射にうつす. 
-\end{lemma}
+% \begin{lemma}
+%   細分化分類図式$N_\xi : \RelCat \to \sSpace$はDwyer射を単体的空間のmono射にうつす. 
+% \end{lemma}
 
-\begin{proof}
-  $F : \C \to \D$をDwyer射とする. 
-  まず, $F$が相対半順序集合の相対包含である場合を考える. 
-  このとき, 任意の$m,n \geq 0$に対して, 集合の射
-  \begin{align*}
-    F^\ast: (N_\xi\C)_{n,m} \to (N_\xi\D)_{n,m}
-  \end{align*}
-  がmono射であることを示せばよい. 
-  つまり, 次の射が集合のmono射であることを示せばよい.
-  \begin{align*}
-    F^\ast : \Hom_\RelCat(\xi([n]_\min \times [m]_\max), \C) \to  \Hom_\RelCat(\xi([n]_\min \times [m]_\max), \D)
-  \end{align*}
-  ここで, $F$は相対包含なので, $F^\ast$は集合のmono射である. 
-\end{proof}
+% \begin{proof}
+%   $F : \C \to \D$をDwyer射とする. 
+%   まず, $F$が相対半順序集合の相対包含である場合を考える. 
+%   このとき, 任意の$m,n \geq 0$に対して, 集合の射
+%   \begin{align*}
+%     F^\ast: (N_\xi\C)_{n,m} \to (N_\xi\D)_{n,m}
+%   \end{align*}
+%   がmono射であることを示せばよい. 
+%   つまり, 次の射が集合のmono射であることを示せばよい.
+%   \begin{align*}
+%     F^\ast : \Hom_\RelCat(\xi([n]_\min \times [m]_\max), \C) \to  \Hom_\RelCat(\xi([n]_\min \times [m]_\max), \D)
+%   \end{align*}
+%   ここで, $F$は相対包含なので, $F^\ast$は集合のmono射である. 
+% \end{proof}
 
-\begin{proposition}
-  細分化分類図式$N_\xi : \RelCat \to \sSpace$は$\RelCat$の強ホモトピックな相対関手を$\sSpace$のホモトピックな単体的空間の射にうつす. 
-\end{proposition}
+% \begin{proposition}
+%   細分化分類図式$N_\xi : \RelCat \to \sSpace$は$\RelCat$の強ホモトピックな相対関手を$\sSpace$のホモトピックな単体的空間の射にうつす. 
+% \end{proposition}
 
-\begin{proof}
-  $F,G : \C \to \D$を相対関手, $H :  \C \times [1]_\max \to \D$を$F$から$G$への強ホモトピーとする. 
-  $H$に$N_\xi$を作用させると, 単体的空間の射
-  \begin{align*}
-    N_\xi(\C \times [1]_\max) \to N_\xi(\D)
-  \end{align*}
-  を得る. 
-  $N_\xi$は右随伴なので直積を保つ. 
-  \begin{align*}
-    N_\xi(\C) \times N_\xi[1]_\max \cong N_\xi(\C \times [1]_\max)
-  \end{align*}
-  また, 自然な単体的空間の射$\Delta[1]^t \to N_\xi[1]_\max$は単体的空間の射
-  \begin{align*}
-    N_\xi(\C) \times \Delta[1]^t \to N_\xi(\C) \times N_\xi[1]_\max
-  \end{align*}
-  を定める. 
-  これらの合成
-  \begin{align*}
-    N_\xi(\C) \times \Delta[1]^t \to N_\xi(\D)
-  \end{align*}
-  は$N_\xi(\C)$から$N_\xi(\D)$へのホモトピーである.
-\end{proof}  
+% \begin{proof}
+%   $F,G : \C \to \D$を相対関手, $H :  \C \times [1]_\max \to \D$を$F$から$G$への強ホモトピーとする. 
+%   $H$に$N_\xi$を作用させると, 単体的空間の射
+%   \begin{align*}
+%     N_\xi(\C \times [1]_\max) \to N_\xi(\D)
+%   \end{align*}
+%   を得る. 
+%   $N_\xi$は右随伴なので直積を保つ. 
+%   \begin{align*}
+%     N_\xi(\C) \times N_\xi[1]_\max \cong N_\xi(\C \times [1]_\max)
+%   \end{align*}
+%   また, 自然な単体的空間の射$\Delta[1]^t \to N_\xi[1]_\max$は単体的空間の射
+%   \begin{align*}
+%     N_\xi(\C) \times \Delta[1]^t \to N_\xi(\C) \times N_\xi[1]_\max
+%   \end{align*}
+%   を定める. 
+%   これらの合成
+%   \begin{align*}
+%     N_\xi(\C) \times \Delta[1]^t \to N_\xi(\D)
+%   \end{align*}
+%   は$N_\xi(\C)$から$N_\xi(\D)$へのホモトピーである.
+% \end{proof}  
 
-単体的空間のホモトピー同値がvertical weak equivalenceであることと合わせると, 次の系を得る. 
+% 単体的空間のホモトピー同値がvertical weak equivalenceであることと合わせると, 次の系を得る. 
 
-\begin{corollary}
-  細分化分類図式$N_\xi : \RelCat \to \sSpace$は$\RelCat$のホモトピー同値を$\sSpace$のvertical weak equivalenceにうつす. 
-\end{corollary}
+% \begin{corollary}
+%   細分化分類図式$N_\xi : \RelCat \to \sSpace$は$\RelCat$のホモトピー同値を$\sSpace$のvertical weak equivalenceにうつす. 
+% \end{corollary}
 
-\subsection{細分化相対化関手について}
+% \subsection{細分化相対化関手について}
 
-\begin{notation}
-  単体的空間$\Delta^\myop \times \Delta^\myop \to \Set$に対して, 次の記号を用いる. 
-  \begin{align*}
-    \Delta[n,m] &:= \Delta[n]^t \times \Delta[m] \\
-    \partial \Delta[n,m] &:= \partial \Delta[n] \times \Delta[m]^t \cup \Delta[n] \times \partial \Delta[m]^t 
-  \end{align*}
-\end{notation}
+% \begin{notation}
+%   単体的空間$\Delta^\myop \times \Delta^\myop \to \Set$に対して, 次の記号を用いる. 
+%   \begin{align*}
+%     \Delta[n,m] &:= \Delta[n]^t \times \Delta[m] \\
+%     \partial \Delta[n,m] &:= \partial \Delta[n] \times \Delta[m]^t \cup \Delta[n] \times \partial \Delta[m]^t 
+%   \end{align*}
+% \end{notation}
 
-\begin{proposition}
-  $K_\xi : \sSpace \to \RelCat$は包含$\partial \Delta[n,m] \hookrightarrow \Delta[n,m]$をDwyer射にうつす. 
-\end{proposition}
+% \begin{proposition}
+%   $K_\xi : \sSpace \to \RelCat$は包含$\partial \Delta[n,m] \hookrightarrow \Delta[n,m]$をDwyer射にうつす. 
+% \end{proposition}
 
-\begin{proof}
-  $K_\xi(\partial \Delta[n,m]) \to K_\xi(\Delta[n,m])$がDwyer射であることを示せばよい. 
-  \cref{rem:subdivision_relativization_functor}より, $K_\xi(\Delta[n,m]) = \xi([n]_\min \times [m]_\max)$である. 
-  始細分化関手$\xi_i$に対しても関手$K_{\xi_i} : \sSpace \to \RelCat$を同様に定義する. 
-  \begin{align*}
-    K_{\xi_i}(\Delta[n,m]) := \xi_i([n]_\min \times [m]_\max)
-  \end{align*}
-  この関手も同様に右随伴を持つので, $K_{\xi_i}$は余極限を保つ. 
-  また, 定義より次が成立する. 
-  \begin{align*}
-    \xi_t K_{\xi_i}(\Delta[n,m]) 
-    = \xi_t \xi_i([n]_\min \times [m]_\max) 
-    = \xi([n]_\min \times [m]_\max)
-    = K_\xi(\Delta[n,m])
-  \end{align*}
+% \begin{proof}
+%   $K_\xi(\partial \Delta[n,m]) \to K_\xi(\Delta[n,m])$がDwyer射であることを示せばよい. 
+%   \cref{rem:subdivision_relativization_functor}より, $K_\xi(\Delta[n,m]) = \xi([n]_\min \times [m]_\max)$である. 
+%   始細分化関手$\xi_i$に対しても関手$K_{\xi_i} : \sSpace \to \RelCat$を同様に定義する. 
+%   \begin{align*}
+%     K_{\xi_i}(\Delta[n,m]) := \xi_i([n]_\min \times [m]_\max)
+%   \end{align*}
+%   この関手も同様に右随伴を持つので, $K_{\xi_i}$は余極限を保つ. 
+%   また, 定義より次が成立する. 
+%   \begin{align*}
+%     \xi_t K_{\xi_i}(\Delta[n,m]) 
+%     = \xi_t \xi_i([n]_\min \times [m]_\max) 
+%     = \xi([n]_\min \times [m]_\max)
+%     = K_\xi(\Delta[n,m])
+%   \end{align*}
 
-  次に, 相対関手$K_{\xi_i}(\partial \Delta[n,m]) \to K_{\xi_i}(\Delta[n,m])$が\cref{prop:sieve_induce_dwyer_map}の仮定を満たすことを示す. 
-  この仮定を満たすとき, 
-  \begin{align*}
-    \xi_t K_{\xi_i}(\partial \Delta[n,m]) \to \xi_t K_{\xi_i}(\Delta[n,m]) = K_\xi(\Delta[n,m])
-  \end{align*}
-  はDwyer射である. 
-  まず, 相対半順序集合$[n]_\min \times [m]_\max$の部分相対半順序集合$\P$を次のように定義する. 
-  \begin{itemize}
-    \item $\P$の対象は$[a]_\min \subset [n]_\min$と$[b]_\max \subset [m]_\max$を満たす$[a]_\min$と$[b]_\max$の直積$[a]_\min \times [b]_\max$
-    \item $\P$の任意の対象$[a_1]_\min \times [b_1]_\max, [a_2]_\min \times [b_2]_\max$に対して, 射はそれぞれの包含が定める射$[a_1]_\min \times [b_1]_\max \to [a_2]_\min \times [b_2]_\max$
-  \end{itemize}
-  $\P$の対象$[a_1]_\min \times [b_1]_\max, [a_2]_\min \times [b_2]_\max$が$[a_1]_\min \cap [a_2]_\min \neq \emptyset$かつ$[b_1]_\max \cap [b_2]_\max \neq \emptyset$を満たすとき, 
-  \begin{align*}
-    ([a_1]_\min \times [b_1]_\max) \cap ([a_2]_\min \times [b_2]_\max)
-    = ([a_1]_\min \cap [a_2]_\min) \cap ([b_1]_\max \cap [b_2]_\max)
-  \end{align*}
-  である. 
-  つまり, $\P$は共通部分をとる操作で閉じる. 
-  $\xi_i$や$\xi$を作用させても同じように共通部分をとる操作で閉じる. 
-  \begin{align*}
-    \xi_i([a_1]_\min \times [b_1]_\max) \cap \xi_i([a_2]_\min \times [b_2]_\max)
-    &= \xi_i([a_1]_\min \cap [a_2]_\min) \cap \xi_i([b_1]_\max \cap [b_2]_\max) \\
-    \xi([a_1]_\min \times [b_1]_\max) \cap \xi([a_2]_\min \times [b_2]_\max)
-    &= \xi([a_1]_\min \cap [a_2]_\min) \cap \xi([b_1]_\max \cap [b_2]_\max)
-  \end{align*}
-  よって, $K_{\xi_i}(\partial \Delta[n,m])$は次のように表せる.
-  \begin{align*}
-    K_{\xi_i}(\partial \Delta[n,m]) = \bigcup_{a \neq n, b \neq m} \xi_i([a]_\min \times [b]_\max)
-  \end{align*}
-  $\P$の射$f : [a_1]_\min \times [b_1]_\max \to [a_2]_\min \times [b_2]_\max$に対して, $\xi_if$は相対包含かつ, $\xi_i([a_1]_\min \times [b_1]_\max)$は$\xi_i([a_2]_\min \times [b_2]_\max)$における余ふるいである. 
-  よって, $K_{\xi_i}(\partial \Delta[n,m])$は$K_{\xi_i}(\Delta[n,m])$の余ふるいなので, \cref{prop:sieve_induce_dwyer_map}の仮定を満たす.
+%   次に, 相対関手$K_{\xi_i}(\partial \Delta[n,m]) \to K_{\xi_i}(\Delta[n,m])$が\cref{prop:sieve_induce_dwyer_map}の仮定を満たすことを示す. 
+%   この仮定を満たすとき, 
+%   \begin{align*}
+%     \xi_t K_{\xi_i}(\partial \Delta[n,m]) \to \xi_t K_{\xi_i}(\Delta[n,m]) = K_\xi(\Delta[n,m])
+%   \end{align*}
+%   はDwyer射である. 
+%   まず, 相対半順序集合$[n]_\min \times [m]_\max$の部分相対半順序集合$\P$を次のように定義する. 
+%   \begin{itemize}
+%     \item $\P$の対象は$[a]_\min \subset [n]_\min$と$[b]_\max \subset [m]_\max$を満たす$[a]_\min$と$[b]_\max$の直積$[a]_\min \times [b]_\max$
+%     \item $\P$の任意の対象$[a_1]_\min \times [b_1]_\max, [a_2]_\min \times [b_2]_\max$に対して, 射はそれぞれの包含が定める射$[a_1]_\min \times [b_1]_\max \to [a_2]_\min \times [b_2]_\max$
+%   \end{itemize}
+%   $\P$の対象$[a_1]_\min \times [b_1]_\max, [a_2]_\min \times [b_2]_\max$が$[a_1]_\min \cap [a_2]_\min \neq \emptyset$かつ$[b_1]_\max \cap [b_2]_\max \neq \emptyset$を満たすとき, 
+%   \begin{align*}
+%     ([a_1]_\min \times [b_1]_\max) \cap ([a_2]_\min \times [b_2]_\max)
+%     = ([a_1]_\min \cap [a_2]_\min) \cap ([b_1]_\max \cap [b_2]_\max)
+%   \end{align*}
+%   である. 
+%   つまり, $\P$は共通部分をとる操作で閉じる. 
+%   $\xi_i$や$\xi$を作用させても同じように共通部分をとる操作で閉じる. 
+%   \begin{align*}
+%     \xi_i([a_1]_\min \times [b_1]_\max) \cap \xi_i([a_2]_\min \times [b_2]_\max)
+%     &= \xi_i([a_1]_\min \cap [a_2]_\min) \cap \xi_i([b_1]_\max \cap [b_2]_\max) \\
+%     \xi([a_1]_\min \times [b_1]_\max) \cap \xi([a_2]_\min \times [b_2]_\max)
+%     &= \xi([a_1]_\min \cap [a_2]_\min) \cap \xi([b_1]_\max \cap [b_2]_\max)
+%   \end{align*}
+%   よって, $K_{\xi_i}(\partial \Delta[n,m])$は次のように表せる.
+%   \begin{align*}
+%     K_{\xi_i}(\partial \Delta[n,m]) = \bigcup_{a \neq n, b \neq m} \xi_i([a]_\min \times [b]_\max)
+%   \end{align*}
+%   $\P$の射$f : [a_1]_\min \times [b_1]_\max \to [a_2]_\min \times [b_2]_\max$に対して, $\xi_if$は相対包含かつ, $\xi_i([a_1]_\min \times [b_1]_\max)$は$\xi_i([a_2]_\min \times [b_2]_\max)$における余ふるいである. 
+%   よって, $K_{\xi_i}(\partial \Delta[n,m])$は$K_{\xi_i}(\Delta[n,m])$の余ふるいなので, \cref{prop:sieve_induce_dwyer_map}の仮定を満たす.
 
-  以上より, $\xi_t K_{\xi_i}(\partial \Delta[n,m]) \to  K_\xi(\Delta[n,m])$はDwyer射である. 
-  最後に, $K_\xi(\partial \Delta[n,m]) = \xi_t K_{\xi_i}(\partial \Delta[n,m])$であることを示す.
-  (途中)
-\end{proof}
+%   以上より, $\xi_t K_{\xi_i}(\partial \Delta[n,m]) \to  K_\xi(\Delta[n,m])$はDwyer射である. 
+%   最後に, $K_\xi(\partial \Delta[n,m]) = \xi_t K_{\xi_i}(\partial \Delta[n,m])$であることを示す.
+%   (途中)
+% \end{proof}
 
-左随伴がcofibrationを保つことを示す. 
+% 左随伴がcofibrationを保つことを示す. 
 
-\begin{proposition} \label{prop:K_xi_preserve_cofibration}
-  $K_\xi : \sSpace \to \RelCat$は単体的空間のmono射を相対半順序集合のDwyer射にうつす.
-\end{proposition}
+% \begin{proposition} \label{prop:K_xi_preserve_cofibration}
+%   $K_\xi : \sSpace \to \RelCat$は単体的空間のmono射を相対半順序集合のDwyer射にうつす.
+% \end{proposition}
 
-\begin{proof}
-  $X \hookrightarrow Y$を単体的空間のmono射とする. 
-  単体的空間$Y$に対して, $i+j \leq n$を満たす非退化な$(i,j)$両単体のなす単体的空間を$Y_n (\subset Y)$と表す. 
-  このとき, $X \hookrightarrow Y$はmono射なので
-  \begin{align*}
-    Y &= \bigcup_{n \geq 1} (Y^n \cup X) \\
-    K_\xi Y &= \bigcup_{n \geq 1} K_\xi(Y^n \cup X)
-  \end{align*}
-  である. (途中)
-\end{proof}
+% \begin{proof}
+%   $X \hookrightarrow Y$を単体的空間のmono射とする. 
+%   単体的空間$Y$に対して, $i+j \leq n$を満たす非退化な$(i,j)$両単体のなす単体的空間を$Y_n (\subset Y)$と表す. 
+%   このとき, $X \hookrightarrow Y$はmono射なので
+%   \begin{align*}
+%     Y &= \bigcup_{n \geq 1} (Y^n \cup X) \\
+%     K_\xi Y &= \bigcup_{n \geq 1} K_\xi(Y^n \cup X)
+%   \end{align*}
+%   である. (途中)
+% \end{proof}
 
-\begin{proposition} \label{prop:X_to_NKX_is_Reedy_weak_equivalence}
-  随伴$(K_\xi \dashv N_\xi)$の単位射$\eta_\xi : \Id \to N_\xi K_\xi$はvertical weak equivalenceである.
-\end{proposition}
+% \begin{proposition} \label{prop:X_to_NKX_is_Reedy_weak_equivalence}
+%   随伴$(K_\xi \dashv N_\xi)$の単位射$\eta_\xi : \Id \to N_\xi K_\xi$はvertical weak equivalenceである.
+% \end{proposition}
 
-\begin{proof}
-  任意の単体的空間$X$に対して, $\eta_\xi : X \to  N_\xi K_\xi(X)$がvertical weak equivalenceであることを示せばよい. 
-  まず, $X = \Delta[n,m]$のときを示す. 
-  次の図式を考える. 
-  % https://q.uiver.app/#q=WzAsNixbMCwwLCJcXERlbHRhW24sbV0iXSxbMSwwLCJOX1xceGkgS19cXHhpKFxcRGVsdGFbbixtXSkiXSxbMSwxLCJOX1xceGkgSyhcXERlbHRhW24sbV0pIl0sWzAsMSwiTksoXFxEZWx0YVtuLG1dKSJdLFsyLDAsIk5fXFx4aSBcXHhpKFtuXV9cXG1pbiB0aW1lcyBbbV1fXFxtYXgpIl0sWzIsMSwiTl9cXHhpKFtuXV9cXG1pbiB0aW1lcyBbbV1fXFxtYXgpIl0sWzAsMSwiXFxldGFfXFx4aSJdLFsxLDJdLFszLDIsIlxccGleXFxhc3QiLDJdLFswLDMsIlxcZXRhIiwyXSxbMSw0LCIiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsyLDUsIiIsMCx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzQsNSwiXFxwaV9cXGFzdCJdXQ==
-  \[\begin{tikzcd}
-    {\Delta[n,m]} & {N_\xi K_\xi(\Delta[n,m])} & {N_\xi \xi([n]_\min \times [m]_\max)} \\
-    {NK(\Delta[n,m])} & {N_\xi K(\Delta[n,m])} & {N_\xi([n]_\min \times [m]_\max)}
-    \arrow["{\eta_\xi}", from=1-1, to=1-2]
-    \arrow[from=1-2, to=2-2]
-    \arrow["{\pi^\ast}"', from=2-1, to=2-2]
-    \arrow["\eta"', from=1-1, to=2-1]
-    \arrow[Rightarrow, no head, from=1-2, to=1-3]
-    \arrow[Rightarrow, no head, from=2-2, to=2-3]
-    \arrow["{\pi_\ast}", from=1-3, to=2-3]
-  \end{tikzcd}\]
-  ここで, $\eta$は随伴$(K \dashv N)$の単位射である. 
-  $N$は右随伴で極限を保つので, 
-  \begin{align*}
-    NK(\Delta[n,m]) = N([n]_\min \times [m]_\max) \cong N([n]_\min) \times N([m]_\max)
-  \end{align*}
-  であり, $\Delta[n,m]$と$NK(\Delta[n,m])$はvertical weak equivalenceである(らしい). 
-  \cref{prop:N_to_Nxi_is_Reedy_weak_equivalence}より, $\pi^\ast : NK(\Delta[n,m]) \to N_\xi K(\Delta[n,m])$はvertical weak equivalenceである.
-  \cref{prop:all_maps_is_homotopy_equivalence_in_RelCat}より, $\xi([n]_\min \times [m]_\max) \to [n]_\min \times [m]_\max$はweak equivalenceである. 
-  $\RelCatBar$におけるweak equivalenceの定義より, $\pi_\ast : N_\xi \xi([n]_\min \times [m]_\max) \to N_\xi([n]_\min \times [m]_\max)$はvertical weak equivalenceである. 
-  2-out-of-3より, $\eta_\xi : \Delta[n,m] \to N_\xi K_\xi (\Delta[n,m])$はvertical weak equivalenceである.
+% \begin{proof}
+%   任意の単体的空間$X$に対して, $\eta_\xi : X \to  N_\xi K_\xi(X)$がvertical weak equivalenceであることを示せばよい. 
+%   まず, $X = \Delta[n,m]$のときを示す. 
+%   次の図式を考える. 
+%   % https://q.uiver.app/#q=WzAsNixbMCwwLCJcXERlbHRhW24sbV0iXSxbMSwwLCJOX1xceGkgS19cXHhpKFxcRGVsdGFbbixtXSkiXSxbMSwxLCJOX1xceGkgSyhcXERlbHRhW24sbV0pIl0sWzAsMSwiTksoXFxEZWx0YVtuLG1dKSJdLFsyLDAsIk5fXFx4aSBcXHhpKFtuXV9cXG1pbiB0aW1lcyBbbV1fXFxtYXgpIl0sWzIsMSwiTl9cXHhpKFtuXV9cXG1pbiB0aW1lcyBbbV1fXFxtYXgpIl0sWzAsMSwiXFxldGFfXFx4aSJdLFsxLDJdLFszLDIsIlxccGleXFxhc3QiLDJdLFswLDMsIlxcZXRhIiwyXSxbMSw0LCIiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsyLDUsIiIsMCx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzQsNSwiXFxwaV9cXGFzdCJdXQ==
+%   \[\begin{tikzcd}
+%     {\Delta[n,m]} & {N_\xi K_\xi(\Delta[n,m])} & {N_\xi \xi([n]_\min \times [m]_\max)} \\
+%     {NK(\Delta[n,m])} & {N_\xi K(\Delta[n,m])} & {N_\xi([n]_\min \times [m]_\max)}
+%     \arrow["{\eta_\xi}", from=1-1, to=1-2]
+%     \arrow[from=1-2, to=2-2]
+%     \arrow["{\pi^\ast}"', from=2-1, to=2-2]
+%     \arrow["\eta"', from=1-1, to=2-1]
+%     \arrow[Rightarrow, no head, from=1-2, to=1-3]
+%     \arrow[Rightarrow, no head, from=2-2, to=2-3]
+%     \arrow["{\pi_\ast}", from=1-3, to=2-3]
+%   \end{tikzcd}\]
+%   ここで, $\eta$は随伴$(K \dashv N)$の単位射である. 
+%   $N$は右随伴で極限を保つので, 
+%   \begin{align*}
+%     NK(\Delta[n,m]) = N([n]_\min \times [m]_\max) \cong N([n]_\min) \times N([m]_\max)
+%   \end{align*}
+%   であり, $\Delta[n,m]$と$NK(\Delta[n,m])$はvertical weak equivalenceである(らしい). 
+%   \cref{prop:N_to_Nxi_is_Reedy_weak_equivalence}より, $\pi^\ast : NK(\Delta[n,m]) \to N_\xi K(\Delta[n,m])$はvertical weak equivalenceである.
+%   \cref{prop:all_maps_is_homotopy_equivalence_in_RelCat}より, $\xi([n]_\min \times [m]_\max) \to [n]_\min \times [m]_\max$はweak equivalenceである. 
+%   $\RelCatBar$におけるweak equivalenceの定義より, $\pi_\ast : N_\xi \xi([n]_\min \times [m]_\max) \to N_\xi([n]_\min \times [m]_\max)$はvertical weak equivalenceである. 
+%   2-out-of-3より, $\eta_\xi : \Delta[n,m] \to N_\xi K_\xi (\Delta[n,m])$はvertical weak equivalenceである.
 
-  次に, 一般の単体的空間$X$に対して示す. 
-  \cref{prop:K_xi_preserve_cofibration}の証明で用いた記号を用いる. 
-  $X=\cup_n X^n$として, 任意の$n \geq 0$に対して 
-  \begin{align*}
-    \eta_\xi : X^n \to N_\xi K_\xi X^n 
-  \end{align*}
-  がweak equivalenceであることを示せばよい. 
+%   次に, 一般の単体的空間$X$に対して示す. 
+%   \cref{prop:K_xi_preserve_cofibration}の証明で用いた記号を用いる. 
+%   $X=\cup_n X^n$として, 任意の$n \geq 0$に対して 
+%   \begin{align*}
+%     \eta_\xi : X^n \to N_\xi K_\xi X^n 
+%   \end{align*}
+%   がweak equivalenceであることを示せばよい. 
 
-\end{proof}
+% \end{proof}
 
-\begin{corollary}
-  単体的空間の射$f$がvertical weak equivalenceであることと, $N_\xi K_\xi f$がvertical weak equivalenceであることは同値である. 
-\end{corollary}
+% \begin{corollary}
+%   単体的空間の射$f$がvertical weak equivalenceであることと, $N_\xi K_\xi f$がvertical weak equivalenceであることは同値である. 
+% \end{corollary}
 
-\subsection{\cref{prop:quillen_equiv_sSpaceReedy_and_RelCatBar}の証明}
+% \subsection{\cref{prop:quillen_equiv_sSpaceReedy_and_RelCatBar}の証明}
 
-\cref{prop:quillen_equiv_sSpaceReedy_and_RelCatBar}を示す. 
+% \cref{prop:quillen_equiv_sSpaceReedy_and_RelCatBar}を示す. 
 
-\begin{proof}{\cref{prop:quillen_equiv_sSpaceReedy_and_RelCatBar}}
-  まず, $K_\xi : \sSpace \rightleftarrows \RelCat : N_\xi$が随伴であることは定義(と普遍随伴の一般論)から従う. 
+% \begin{proof}{\cref{prop:quillen_equiv_sSpaceReedy_and_RelCatBar}}
+%   まず, $K_\xi : \sSpace \rightleftarrows \RelCat : N_\xi$が随伴であることは定義(と普遍随伴の一般論)から従う. 
 
-  次に, $(K_\xi \dashv N_\xi)$がQuillen随伴であることを示す.
-  \cref{prop:K_xi_preserve_cofibration}より, 左随伴$K_\xi$はcofibrationを保つ. 
-  右随伴がfibrationを保つことは, $\RelCatBar$におけるfibrationの定義から従う. 
+%   次に, $(K_\xi \dashv N_\xi)$がQuillen随伴であることを示す.
+%   \cref{prop:K_xi_preserve_cofibration}より, 左随伴$K_\xi$はcofibrationを保つ. 
+%   右随伴がfibrationを保つことは, $\RelCatBar$におけるfibrationの定義から従う. 
 
-  最後に, $(K_\xi,N_\xi)$がQuillen同値であることを示す.
-  任意の単体的空間$X$と相対圏$Y$に対して, $K_\xi(X) \to Y$が$\RelCatBar$におけるweak equivalenceであることと, $X \to N_\xi(Y)$は$\sSpaceReedy$におけるweak equivalenceであることが同値であることを示せばよい. 
-  $\RelCatBar$におけるweak equivalenceの定義より, $N_\xi K_\xi(X) \to N_\xi(Y)$がvertical weak equivalenceであることと, $X \to N_\xi(Y)$がvertical weak equivalenceであることが同値であることを示せばよい. 
-  \cref{prop:X_to_NKX_is_Reedy_weak_equivalence}より, 次の図式を考えるとこの同値性は明らかである. 
-  % https://q.uiver.app/#q=WzAsMyxbMCwxLCJOX1xceGkgS19cXHhpKFgpIl0sWzIsMSwiWCJdLFsxLDAsIk5fXFx4aShZKSJdLFsxLDAsIlxcZXRhX1xceGkiXSxbMCwyXSxbMSwyXV0=
-  \[\begin{tikzcd}
-    & {N_\xi(Y)} \\
-    {N_\xi K_\xi(X)} && X
-    \arrow["{\eta_\xi}", from=2-3, to=2-1]
-    \arrow[from=2-1, to=1-2]
-    \arrow[from=2-3, to=1-2]
-  \end{tikzcd}\]
-\end{proof}
+%   最後に, $(K_\xi,N_\xi)$がQuillen同値であることを示す.
+%   任意の単体的空間$X$と相対圏$Y$に対して, $K_\xi(X) \to Y$が$\RelCatBar$におけるweak equivalenceであることと, $X \to N_\xi(Y)$は$\sSpaceReedy$におけるweak equivalenceであることが同値であることを示せばよい. 
+%   $\RelCatBar$におけるweak equivalenceの定義より, $N_\xi K_\xi(X) \to N_\xi(Y)$がvertical weak equivalenceであることと, $X \to N_\xi(Y)$がvertical weak equivalenceであることが同値であることを示せばよい. 
+%   \cref{prop:X_to_NKX_is_Reedy_weak_equivalence}より, 次の図式を考えるとこの同値性は明らかである. 
+%   % https://q.uiver.app/#q=WzAsMyxbMCwxLCJOX1xceGkgS19cXHhpKFgpIl0sWzIsMSwiWCJdLFsxLDAsIk5fXFx4aShZKSJdLFsxLDAsIlxcZXRhX1xceGkiXSxbMCwyXSxbMSwyXV0=
+%   \[\begin{tikzcd}
+%     & {N_\xi(Y)} \\
+%     {N_\xi K_\xi(X)} && X
+%     \arrow["{\eta_\xi}", from=2-3, to=2-1]
+%     \arrow[from=2-1, to=1-2]
+%     \arrow[from=2-3, to=1-2]
+%   \end{tikzcd}\]
+% \end{proof}
 
-Quillen同値であることは次のように示すこともできる. 
+% Quillen同値であることは次のように示すこともできる. 
 
-\begin{remark}
-  $\sSpaceReedy$において, 任意の対象(単体的空間)はコファイブラントである. 
-  よって, 任意の単体的空間$X$に対して, 単体的空間の射$X \to N_\xi (K_\xi(X))^f$がvertical weak equivalenceであることを示す.
-  \cref{prop:X_to_NKX_is_Reedy_weak_equivalence}より, $X \to N_\xi K_\xi(X)$はvertical weak equivalenceである.
-  $\RelCatBar$におけるファイブラント置換$K_\xi(X) \to  (K_\xi(X))^f$はtrivial fibrationである. 
-  $\RelCatBar$におけるweak equivalenceの定義より, $N_\xi K_\xi(X) \to  N_\xi(K_\xi(X))^f$はvertical weak equivalenceである.
-  weak equivalenceは合成で閉じるので, $X \to N_\xi (K_\xi(X))^f$はvertical weak equivalenceである.
+% \begin{remark}
+%   $\sSpaceReedy$において, 任意の対象(単体的空間)はコファイブラントである. 
+%   よって, 任意の単体的空間$X$に対して, 単体的空間の射$X \to N_\xi (K_\xi(X))^f$がvertical weak equivalenceであることを示す.
+%   \cref{prop:X_to_NKX_is_Reedy_weak_equivalence}より, $X \to N_\xi K_\xi(X)$はvertical weak equivalenceである.
+%   $\RelCatBar$におけるファイブラント置換$K_\xi(X) \to  (K_\xi(X))^f$はtrivial fibrationである. 
+%   $\RelCatBar$におけるweak equivalenceの定義より, $N_\xi K_\xi(X) \to  N_\xi(K_\xi(X))^f$はvertical weak equivalenceである.
+%   weak equivalenceは合成で閉じるので, $X \to N_\xi (K_\xi(X))^f$はvertical weak equivalenceである.
 
-  もう一方も, \cref{prop:X_to_NKX_is_Reedy_weak_equivalence}を用いて示すことができる. 
-\end{remark}
+%   もう一方も, \cref{prop:X_to_NKX_is_Reedy_weak_equivalence}を用いて示すことができる. 
+% \end{remark}
 
 \newpage
 \appendix
@@ -5221,397 +5221,397 @@ $\sSpace$上の水平Reedyモデル構造におけるfibrationを定義する.
 % \newpage
 
 
-\section{相対圏について} \label{sec:relative_category}
+% \section{相対圏について} \label{sec:relative_category}
 
-ホモトピー論の視点から考えると, $(\infty,1)$圏は弱同値を構造として持つことが要請される. 
-弱同値を持つような圏を相対圏(relative category)といい, 相対圏のなす圏にモデル構造を入れることを考える. 
-相対圏はBarwickとKan \cite{BK11}により, ホモトピー論のホモトピー論のモデルとして導入された. 
+% ホモトピー論の視点から考えると, $(\infty,1)$圏は弱同値を構造として持つことが要請される. 
+% 弱同値を持つような圏を相対圏(relative category)といい, 相対圏のなす圏にモデル構造を入れることを考える. 
+% 相対圏はBarwickとKan \cite{BK11}により, ホモトピー論のホモトピー論のモデルとして導入された. 
 
-\subsection{相対圏の定義}
+% \subsection{相対圏の定義}
 
-相対圏は「weak equivalenceの集まりを持つ圏」であり, すでに様々なところで出てきたが, 改めて相対圏を定義する. 
+% 相対圏は「weak equivalenceの集まりを持つ圏」であり, すでに様々なところで出てきたが, 改めて相対圏を定義する. 
 
-\begin{definition}[相対圏]
-  $\C$を圏, $W$を$\C$の全ての対象を含む$\C$の部分圏とする. 
-  このとき, 2つ組$(\C,W)$を相対圏(relative category)という. 
-  また, $\C$をunderlying category, $\W$の射をweak equivalenceという. 
-  相対圏$(\C,W)$を単に$\C$だけで表すこともある. 
-\end{definition}
+% \begin{definition}[相対圏]
+%   $\C$を圏, $W$を$\C$の全ての対象を含む$\C$の部分圏とする. 
+%   このとき, 2つ組$(\C,W)$を相対圏(relative category)という. 
+%   また, $\C$をunderlying category, $\W$の射をweak equivalenceという. 
+%   相対圏$(\C,W)$を単に$\C$だけで表すこともある. 
+% \end{definition}
 
-圏$\C$が与えられたとき, 2つの極端な相対圏の構造が考えられる. 
-1つは$\C$の全ての射が$W$の射である場合, もう1つは恒等射のみが$W$の射である場合である. 
+% 圏$\C$が与えられたとき, 2つの極端な相対圏の構造が考えられる. 
+% 1つは$\C$の全ての射が$W$の射である場合, もう1つは恒等射のみが$W$の射である場合である. 
 
-\begin{definition}[極大と極小]
-  $(\C,W)$を相対圏とする. 
-  $W=\C$のとき, $(\C,W)$は極大(maximal)であるという. 
-  $W$が恒等射以外の射を含まないとき, $(\C,W)$は極小(minimal)であるという.
-  圏$\C$に対する極大相対圏を$\C_\max$, 極小相対圏を$\C_\min$と表す. 
-\end{definition}
+% \begin{definition}[極大と極小]
+%   $(\C,W)$を相対圏とする. 
+%   $W=\C$のとき, $(\C,W)$は極大(maximal)であるという. 
+%   $W$が恒等射以外の射を含まないとき, $(\C,W)$は極小(minimal)であるという.
+%   圏$\C$に対する極大相対圏を$\C_\max$, 極小相対圏を$\C_\min$と表す. 
+% \end{definition}
 
-相対圏の間の関手を定義する. 
+% 相対圏の間の関手を定義する. 
 
-\begin{definition}[相対関手]
-  $(\C,W), (\D,V)$を相対圏とする. 
-  関手$F : \C \to \D$が$F(W) \subset V$を満たすとき, $F : (\C,W) \to (\D,V)$を相対関手(relative functor)という. 
-\end{definition}
+% \begin{definition}[相対関手]
+%   $(\C,W), (\D,V)$を相対圏とする. 
+%   関手$F : \C \to \D$が$F(W) \subset V$を満たすとき, $F : (\C,W) \to (\D,V)$を相対関手(relative functor)という. 
+% \end{definition}
 
-\begin{definition}[相対包含]
-  $i : (\C,W) \to (\D,V)$を相対関手とする. 
-  関手$i : \C \to \D$が通常の包含かつ, $W= V \cap \C$を満たすとき, $i$を相対包含(relative inclusion)という. 
-\end{definition}
+% \begin{definition}[相対包含]
+%   $i : (\C,W) \to (\D,V)$を相対関手とする. 
+%   関手$i : \C \to \D$が通常の包含かつ, $W= V \cap \C$を満たすとき, $i$を相対包含(relative inclusion)という. 
+% \end{definition}
 
-\begin{notation}
-  相対圏と相対関手のなす圏を$\RelCat$と表す. 
-\end{notation}
+% \begin{notation}
+%   相対圏と相対関手のなす圏を$\RelCat$と表す. 
+% \end{notation}
 
-相対圏の直積を定義する. 
+% 相対圏の直積を定義する. 
 
-\begin{definition}[直積]
-  相対圏$\C,\D$に対して, 相対圏$\C \times \D$を次のように定義し, $\C$と$\D$の直積(product)という. 
-  \begin{itemize}
-    \item $\C \times \D$の対象は$\C$の対象と$\D$の対象の組
-    \item $\C \times \D$の射は$\C$の射と$\D$の射の組
-    \item $\C \times \D$のweak equivalenceは$\C$のweak equivalenceと$\D$のweak equivalenceの組
-  \end{itemize}
-\end{definition}
+% \begin{definition}[直積]
+%   相対圏$\C,\D$に対して, 相対圏$\C \times \D$を次のように定義し, $\C$と$\D$の直積(product)という. 
+%   \begin{itemize}
+%     \item $\C \times \D$の対象は$\C$の対象と$\D$の対象の組
+%     \item $\C \times \D$の射は$\C$の射と$\D$の射の組
+%     \item $\C \times \D$のweak equivalenceは$\C$のweak equivalenceと$\D$のweak equivalenceの組
+%   \end{itemize}
+% \end{definition}
 
-相対圏のべき対象を定義する. 
+% 相対圏のべき対象を定義する. 
 
-\begin{definition}[べき対象]
-  相対圏$\C,\D$に対して, 相対圏$\D^\C$を次のように定義し, $\D$のべき対象(exponential object)という. 
-  \begin{itemize}
-    \item $\D^\C$の対象は相対関手$\C \to \D$
-    \item $\D^\C$の射は相対関手$\C \times [1]_\min \to \D$
-    \item $\D^\C$のweak equivalenceは相対関手$\C \times [1]_\max \to \D$
-  \end{itemize}
-\end{definition}
+% \begin{definition}[べき対象]
+%   相対圏$\C,\D$に対して, 相対圏$\D^\C$を次のように定義し, $\D$のべき対象(exponential object)という. 
+%   \begin{itemize}
+%     \item $\D^\C$の対象は相対関手$\C \to \D$
+%     \item $\D^\C$の射は相対関手$\C \times [1]_\min \to \D$
+%     \item $\D^\C$のweak equivalenceは相対関手$\C \times [1]_\max \to \D$
+%   \end{itemize}
+% \end{definition}
 
-\begin{proposition}
-  $\RelCat$はCartesian閉である.
-\end{proposition}
+% \begin{proposition}
+%   $\RelCat$はCartesian閉である.
+% \end{proposition}
 
-\begin{proof}
-  定義より, $\RelCat$は有限直積を持つ. 
-  $\C$を相対圏とする. 
-  直積をとる関手$- \times \C : \RelCat \to \RelCat$が右随伴$(-)^\C : \RelCat \to \RelCat$を持つことを示せばよい. 
-  これは通常の圏の直積とべきの随伴性から従う. 
-\end{proof}
+% \begin{proof}
+%   定義より, $\RelCat$は有限直積を持つ. 
+%   $\C$を相対圏とする. 
+%   直積をとる関手$- \times \C : \RelCat \to \RelCat$が右随伴$(-)^\C : \RelCat \to \RelCat$を持つことを示せばよい. 
+%   これは通常の圏の直積とべきの随伴性から従う. 
+% \end{proof}
 
-相対関手の間の強ホモトピーを定義する. 
+% 相対関手の間の強ホモトピーを定義する. 
 
-\begin{definition}[強ホモトピー]
-  $F,G : \C \to \D$を相対関手とする. 
-  相対関手$H : \C \times [1]_\max \to \D$が$\C$の任意の対象$C$と射$f$に対して, 
-  \begin{align*}
-    & H(C,0)=F(C),~ H(C,1)=G(C) \\
-    & H(f,0)=F(f),~ H(f,1)=G(f) 
-  \end{align*}
-  を満たすとき, $H$を$F$から$G$への強ホモトピー(strong homotopy)という. 
-  このとき, $F$と$G$は強ホモトピック(strong homotopic)であるという. 
-\end{definition}
+% \begin{definition}[強ホモトピー]
+%   $F,G : \C \to \D$を相対関手とする. 
+%   相対関手$H : \C \times [1]_\max \to \D$が$\C$の任意の対象$C$と射$f$に対して, 
+%   \begin{align*}
+%     & H(C,0)=F(C),~ H(C,1)=G(C) \\
+%     & H(f,0)=F(f),~ H(f,1)=G(f) 
+%   \end{align*}
+%   を満たすとき, $H$を$F$から$G$への強ホモトピー(strong homotopy)という. 
+%   このとき, $F$と$G$は強ホモトピック(strong homotopic)であるという. 
+% \end{definition}
 
-\begin{definition}[ホモトピー同値]
-  $F: \C \to \D$を相対関手とする. 
-  ある相対関手$G : \D \to \C$が存在して, $GF$が$\Id_\C$と強ホモトピックかつ$FG$が$\Id_\D$と強ホモトピックであるとき, $F$をホモトピー同値(homotopy equivalence)という. 
-\end{definition}
+% \begin{definition}[ホモトピー同値]
+%   $F: \C \to \D$を相対関手とする. 
+%   ある相対関手$G : \D \to \C$が存在して, $GF$が$\Id_\C$と強ホモトピックかつ$FG$が$\Id_\D$と強ホモトピックであるとき, $F$をホモトピー同値(homotopy equivalence)という. 
+% \end{definition}
 
-強ホモトピーは$\RelCat$のCartesian構造と整合性がある. 
+% 強ホモトピーは$\RelCat$のCartesian構造と整合性がある. 
 
-\begin{proposition} \label{prop:homotopic_compatible_power_in_RelCat}
-  $F,G : \C \to \D$を強ホモトピックな相対関手とする. 
-  このとき, 任意の相対圏$\E$に対して, 相対関手$F^\ast,G^\ast : \E^\D \to \E^\C$は強ホモトピックである. 
-\end{proposition}
+% \begin{proposition} \label{prop:homotopic_compatible_power_in_RelCat}
+%   $F,G : \C \to \D$を強ホモトピックな相対関手とする. 
+%   このとき, 任意の相対圏$\E$に対して, 相対関手$F^\ast,G^\ast : \E^\D \to \E^\C$は強ホモトピックである. 
+% \end{proposition}
 
-\begin{proof}
-  $H : \C \times [1]_\max \to \D$を$F$から$G$への強ホモトピーとする. 
-  このとき, $H$は相対関手
-  \begin{align*}
-    H^\ast : \E^\D \to \E^{\C \times [1]_\max} \cong (\E^\C)^{[1]_\max}
-  \end{align*}
-  を定める. 
-  $H^\ast$から, 積とべきの随伴で与えられる相対関手
-  \begin{align*}
-    \E^\D \times [1]_\max \to \E^\C
-  \end{align*}
-  が得られる. 
-  この$H^\ast$は$\E^\D$から$\E^\C$への強ホモトピーである. 
-  よって, $F^\ast$と$G^\ast$は強ホモトピックである. 
-\end{proof}
+% \begin{proof}
+%   $H : \C \times [1]_\max \to \D$を$F$から$G$への強ホモトピーとする. 
+%   このとき, $H$は相対関手
+%   \begin{align*}
+%     H^\ast : \E^\D \to \E^{\C \times [1]_\max} \cong (\E^\C)^{[1]_\max}
+%   \end{align*}
+%   を定める. 
+%   $H^\ast$から, 積とべきの随伴で与えられる相対関手
+%   \begin{align*}
+%     \E^\D \times [1]_\max \to \E^\C
+%   \end{align*}
+%   が得られる. 
+%   この$H^\ast$は$\E^\D$から$\E^\C$への強ホモトピーである. 
+%   よって, $F^\ast$と$G^\ast$は強ホモトピックである. 
+% \end{proof}
 
-\begin{corollary} \label{prop:homotopy_equiv_compatible_power}
-  $F : \C \to \D$をホモトピー同値とする.
-  このとき, 任意の相対圏$\E$に対して, 相対関手$F^\ast : \E^\D \to \E^\C$はホモトピー同値である.
-\end{corollary}
+% \begin{corollary} \label{prop:homotopy_equiv_compatible_power}
+%   $F : \C \to \D$をホモトピー同値とする.
+%   このとき, 任意の相対圏$\E$に対して, 相対関手$F^\ast : \E^\D \to \E^\C$はホモトピー同値である.
+% \end{corollary}
 
-相対関手の強ホモトピーを用いて, 相対包含の強分解レトラクトを定義する. 
-強分解レトラクトは$\RelCat$上のモデル構造におけるcofibrationの定義に用いる. 
+% 相対関手の強ホモトピーを用いて, 相対包含の強分解レトラクトを定義する. 
+% 強分解レトラクトは$\RelCat$上のモデル構造におけるcofibrationの定義に用いる. 
 
-\begin{definition}[強分解レトラクト]
-  $i : \C \to \D$を相対包含とする. 
-  このとき, $ri = \Id_\C$を満たす相対関手$r : \D \to \C$と$ir$から$\Id_\D$への強ホモトピー$S$の組$(r,S)$を$\D$から$\C$への強分解レトラクト(strong deformation retraction)という. 
-  単に, $D$を$C$の強分解レトラクトということもある. 
-  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEMiXSxbMSwwLCJcXEQiXSxbMiwwLCJcXEMiXSxbMywwLCJcXEQiXSxbMCwxLCJpIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMSwyLCJyIl0sWzIsMywiaSIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMiwiXFxJZF9cXEMiLDAseyJjdXJ2ZSI6LTN9XSxbMSwzLCJcXElkX1xcRCIsMix7ImN1cnZlIjozfV0sWzIsOCwiUyIsMCx7InNob3J0ZW4iOnsidGFyZ2V0IjoyMH19XSxbNywxLCIiLDAseyJzaG9ydGVuIjp7InNvdXJjZSI6MjB9LCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d
-  \[\begin{tikzcd}
-    \C & \D & \C & \D
-    \arrow["i", hook, from=1-1, to=1-2]
-    \arrow["r", from=1-2, to=1-3]
-    \arrow["i", hook, from=1-3, to=1-4]
-    \arrow[""{name=0, anchor=center, inner sep=0}, "{\Id_\C}", curve={height=-18pt}, from=1-1, to=1-3]
-    \arrow[""{name=1, anchor=center, inner sep=0}, "{\Id_\D}"', curve={height=18pt}, from=1-2, to=1-4]
-    \arrow["S", shorten >=1pt, Rightarrow, from=1-3, to=1]
-    \arrow[shorten <=1pt, Rightarrow, no head, from=0, to=1-2]
-  \end{tikzcd}\]
-\end{definition}
+% \begin{definition}[強分解レトラクト]
+%   $i : \C \to \D$を相対包含とする. 
+%   このとき, $ri = \Id_\C$を満たす相対関手$r : \D \to \C$と$ir$から$\Id_\D$への強ホモトピー$S$の組$(r,S)$を$\D$から$\C$への強分解レトラクト(strong deformation retraction)という. 
+%   単に, $D$を$C$の強分解レトラクトということもある. 
+%   % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEMiXSxbMSwwLCJcXEQiXSxbMiwwLCJcXEMiXSxbMywwLCJcXEQiXSxbMCwxLCJpIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMSwyLCJyIl0sWzIsMywiaSIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMiwiXFxJZF9cXEMiLDAseyJjdXJ2ZSI6LTN9XSxbMSwzLCJcXElkX1xcRCIsMix7ImN1cnZlIjozfV0sWzIsOCwiUyIsMCx7InNob3J0ZW4iOnsidGFyZ2V0IjoyMH19XSxbNywxLCIiLDAseyJzaG9ydGVuIjp7InNvdXJjZSI6MjB9LCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d
+%   \[\begin{tikzcd}
+%     \C & \D & \C & \D
+%     \arrow["i", hook, from=1-1, to=1-2]
+%     \arrow["r", from=1-2, to=1-3]
+%     \arrow["i", hook, from=1-3, to=1-4]
+%     \arrow[""{name=0, anchor=center, inner sep=0}, "{\Id_\C}", curve={height=-18pt}, from=1-1, to=1-3]
+%     \arrow[""{name=1, anchor=center, inner sep=0}, "{\Id_\D}"', curve={height=18pt}, from=1-2, to=1-4]
+%     \arrow["S", shorten >=1pt, Rightarrow, from=1-3, to=1]
+%     \arrow[shorten <=1pt, Rightarrow, no head, from=0, to=1-2]
+%   \end{tikzcd}\]
+% \end{definition}
 
-\begin{definition}[(余)ふるい]
-  $\D$を圏, $\C$を$\D$の部分圏とする. 
-  \begin{itemize}
-    \item $\D$の任意の射$f : d \to c$に対して, $c$が$\C$の対象ならば対象$d$と射$f$も$\C$の対象であるとき, $\C$を$\D$におけるふるい(sieve)という. 
-    \item $\D$の任意の射$f : c \to d$に対して, $c$が$\C$の対象ならば対象$d$と射$f$も$\C$の対象であるとき, $\C$を$\D$における余ふるい(cosieve)という. 
-  \end{itemize}
-\end{definition}
+% \begin{definition}[(余)ふるい]
+%   $\D$を圏, $\C$を$\D$の部分圏とする. 
+%   \begin{itemize}
+%     \item $\D$の任意の射$f : d \to c$に対して, $c$が$\C$の対象ならば対象$d$と射$f$も$\C$の対象であるとき, $\C$を$\D$におけるふるい(sieve)という. 
+%     \item $\D$の任意の射$f : c \to d$に対して, $c$が$\C$の対象ならば対象$d$と射$f$も$\C$の対象であるとき, $\C$を$\D$における余ふるい(cosieve)という. 
+%   \end{itemize}
+% \end{definition}
 
-(余)ふるいは相対圏の言葉を用いて次のように表せる. 
+% (余)ふるいは相対圏の言葉を用いて次のように表せる. 
 
-\begin{remark}
-  $\C$が$\D$におけるふるいであることと, ある関手$\alpha : \D \to [1]_\max$が存在して$\alpha^{-1}(0)=\C$を満たすことは同値である. 
-  相対的に, $\C$が$\D$における余ふるいであることと, ある関手$\beta : \D \to [1]_\max$が存在して$\beta^{-1}(1)=\C$を満たすことは同値である. 
-\end{remark}
+% \begin{remark}
+%   $\C$が$\D$におけるふるいであることと, ある関手$\alpha : \D \to [1]_\max$が存在して$\alpha^{-1}(0)=\C$を満たすことは同値である. 
+%   相対的に, $\C$が$\D$における余ふるいであることと, ある関手$\beta : \D \to [1]_\max$が存在して$\beta^{-1}(1)=\C$を満たすことは同値である. 
+% \end{remark}
 
-$\RelCat$上のモデル構造におけるfibrationの定義に用いるDwyer包含を定義する.
+% $\RelCat$上のモデル構造におけるfibrationの定義に用いるDwyer包含を定義する.
 
-\begin{definition}[Dwyer包含]
-  $i : (\C,W) \hookrightarrow (\D,V)$を相対包含とする. 
-  $i$が次の条件を満たすとき, $i$をDwyer包含(Dwyer inclusion)という.
-  \begin{itemize}
-    \item $C$は$D$のふるい 
-    \item $C$は$D$における$C$を含む最小の余ふるい$ZC$の強分解レトラクト 
-  \end{itemize}
-\end{definition}
+% \begin{definition}[Dwyer包含]
+%   $i : (\C,W) \hookrightarrow (\D,V)$を相対包含とする. 
+%   $i$が次の条件を満たすとき, $i$をDwyer包含(Dwyer inclusion)という.
+%   \begin{itemize}
+%     \item $C$は$D$のふるい 
+%     \item $C$は$D$における$C$を含む最小の余ふるい$ZC$の強分解レトラクト 
+%   \end{itemize}
+% \end{definition}
 
-\begin{definition}[Dwyer射]
-  $F : (\C,W) \to (\D,V)$を相対関手とする. 
-  $F$が圏同型$F' : (\C,W) \to (\C',W')$とDwyer包含$i : (\C',W') \hookrightarrow (D,V)$を用いて, $F=i \circ F'$と(一意に)分解できるとき, $F$をDwyer射(Dwyer map)という. 
-  % https://q.uiver.app/#q=WzAsMyxbMCwwLCIoXFxDLFcpIl0sWzIsMCwiKFxcRCxWKSJdLFsxLDEsIihcXEMnLFcnKSJdLFswLDEsIkYiXSxbMCwyLCJGJyIsMix7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzIsMSwiaSIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV1d
-  \[\begin{tikzcd}
-    {(\C,W)} && {(\D,V)} \\
-    & {(\C',W')}
-    \arrow["F", from=1-1, to=1-3]
-    \arrow["{F'}"', Rightarrow, no head, from=1-1, to=2-2]
-    \arrow["i"', hook, from=2-2, to=1-3]
-  \end{tikzcd}\]
-\end{definition}
+% \begin{definition}[Dwyer射]
+%   $F : (\C,W) \to (\D,V)$を相対関手とする. 
+%   $F$が圏同型$F' : (\C,W) \to (\C',W')$とDwyer包含$i : (\C',W') \hookrightarrow (D,V)$を用いて, $F=i \circ F'$と(一意に)分解できるとき, $F$をDwyer射(Dwyer map)という. 
+%   % https://q.uiver.app/#q=WzAsMyxbMCwwLCIoXFxDLFcpIl0sWzIsMCwiKFxcRCxWKSJdLFsxLDEsIihcXEMnLFcnKSJdLFswLDEsIkYiXSxbMCwyLCJGJyIsMix7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzIsMSwiaSIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV1d
+%   \[\begin{tikzcd}
+%     {(\C,W)} && {(\D,V)} \\
+%     & {(\C',W')}
+%     \arrow["F", from=1-1, to=1-3]
+%     \arrow["{F'}"', Rightarrow, no head, from=1-1, to=2-2]
+%     \arrow["i"', hook, from=2-2, to=1-3]
+%   \end{tikzcd}\]
+% \end{definition}
 
-Dwyer射の性質をいくつか述べる. 
+% Dwyer射の性質をいくつか述べる. 
 
-\begin{lemma}
-  Dwyer射はレトラクトで閉じる.
-\end{lemma}
+% \begin{lemma}
+%   Dwyer射はレトラクトで閉じる.
+% \end{lemma}
 
-\begin{lemma}
-  Dwyer射は超限合成で閉じる.
-\end{lemma}
+% \begin{lemma}
+%   Dwyer射は超限合成で閉じる.
+% \end{lemma}
 
-\subsection{細分化関手}
+% \subsection{細分化関手}
 
-underlying categoryが半順序集合(poset)である相対圏を相対半順序集合(relative poset)という. 
-相対半順序集合に対する細分化関手(subdivision functor)の構成は$\RelCat$上のモデル構造を定義する上で非常に重要である. 
+% underlying categoryが半順序集合(poset)である相対圏を相対半順序集合(relative poset)という. 
+% 相対半順序集合に対する細分化関手(subdivision functor)の構成は$\RelCat$上のモデル構造を定義する上で非常に重要である. 
 
-\begin{definition}[相対半順序集合]
-  相対圏$(\P,W)$のunderlying categoryが半順序集合のとき, $(\P,W)$を相対半順序集合(relative poset)という. 
-\end{definition}
+% \begin{definition}[相対半順序集合]
+%   相対圏$(\P,W)$のunderlying categoryが半順序集合のとき, $(\P,W)$を相対半順序集合(relative poset)という. 
+% \end{definition}
 
-\begin{notation}
-  相対半順序集合のなす$\RelCat$の充満部分圏を$\RelPos$と表す. 
-\end{notation}
+% \begin{notation}
+%   相対半順序集合のなす$\RelCat$の充満部分圏を$\RelPos$と表す. 
+% \end{notation}
 
-\begin{definition}[終細分化]
-  $\P$を相対半順序集合とする. 
-  このとき, 相対半順序集合$\xi_t\P$を次のように定義し, $\P$の終細分化(terminal subdivision)という. 
-  \begin{itemize}
-    \item $\xi_t\P$の対象は$\RelPos$におけるmono射$x : [n]_\min \to \P$ ($n \geq 0$)
-    \item $\xi_t\P$の射は次の図式を可換にする射$[n_1]_\min \to [n_2]_\min$
-    % https://q.uiver.app/#q=WzAsMyxbMCwwLCJbbl8xXV9cXG1pbiJdLFsyLDAsIltuXzJdX1xcbWluIl0sWzEsMSwiXFxQIl0sWzAsMV0sWzAsMiwieF8xIiwyXSxbMiwxLCJ4XzIiLDJdXQ==
-    \[\begin{tikzcd}
-      {[n_1]_\min} && {[n_2]_\min} \\
-      & \P
-      \arrow[from=1-1, to=1-3]
-      \arrow["{x_1}"', from=1-1, to=2-2]
-      \arrow["{x_2}", from=1-3, to=2-2]
-    \end{tikzcd}\]
-    \item $\xi_t\P$のweak equivalenceは上の図式が誘導する射$x_1(n_1) \to x_2(n_2)$が$\P$におけるweak equivalenceである上の可換図式における射
-  \end{itemize}
-\end{definition}
+% \begin{definition}[終細分化]
+%   $\P$を相対半順序集合とする. 
+%   このとき, 相対半順序集合$\xi_t\P$を次のように定義し, $\P$の終細分化(terminal subdivision)という. 
+%   \begin{itemize}
+%     \item $\xi_t\P$の対象は$\RelPos$におけるmono射$x : [n]_\min \to \P$ ($n \geq 0$)
+%     \item $\xi_t\P$の射は次の図式を可換にする射$[n_1]_\min \to [n_2]_\min$
+%     % https://q.uiver.app/#q=WzAsMyxbMCwwLCJbbl8xXV9cXG1pbiJdLFsyLDAsIltuXzJdX1xcbWluIl0sWzEsMSwiXFxQIl0sWzAsMV0sWzAsMiwieF8xIiwyXSxbMiwxLCJ4XzIiLDJdXQ==
+%     \[\begin{tikzcd}
+%       {[n_1]_\min} && {[n_2]_\min} \\
+%       & \P
+%       \arrow[from=1-1, to=1-3]
+%       \arrow["{x_1}"', from=1-1, to=2-2]
+%       \arrow["{x_2}", from=1-3, to=2-2]
+%     \end{tikzcd}\]
+%     \item $\xi_t\P$のweak equivalenceは上の図式が誘導する射$x_1(n_1) \to x_2(n_2)$が$\P$におけるweak equivalenceである上の可換図式における射
+%   \end{itemize}
+% \end{definition}
 
-相対半順序集合の終細分化は自然な射影を持つ. 
+% 相対半順序集合の終細分化は自然な射影を持つ. 
 
-\begin{definition}[終射影関手]
-  $\P$を相対半順序集合, $\xi_t\P$を$\P$の終細分化とする. 
-  このとき, 相対関手$\pi_t : \xi_t\P \to \P$を次のように定義し, $\pi_t$を終射影関手(terminal projection functor)という.
-  \begin{itemize}
-    \item $\xi_t\P$の対象$x : [n]_\min \to \P$に対して, $\pi_t(x) := x(n)$
-    \item $\xi_t\P$の射$[n_1]_\min \to [n_2]_\min$に対して, $\pi_t([n_1]_\min \to [n_2]_\min) := x_1(n_1) \to x_2(n_2)$ 
-  \end{itemize}
-\end{definition}
+% \begin{definition}[終射影関手]
+%   $\P$を相対半順序集合, $\xi_t\P$を$\P$の終細分化とする. 
+%   このとき, 相対関手$\pi_t : \xi_t\P \to \P$を次のように定義し, $\pi_t$を終射影関手(terminal projection functor)という.
+%   \begin{itemize}
+%     \item $\xi_t\P$の対象$x : [n]_\min \to \P$に対して, $\pi_t(x) := x(n)$
+%     \item $\xi_t\P$の射$[n_1]_\min \to [n_2]_\min$に対して, $\pi_t([n_1]_\min \to [n_2]_\min) := x_1(n_1) \to x_2(n_2)$ 
+%   \end{itemize}
+% \end{definition}
 
-\begin{remark}
-  $\xi_t\P$における射がweak equivalenceであることと, $\pi_t$の像が$\P$におけるweak equivalenceであることは同値である. 
-\end{remark}
+% \begin{remark}
+%   $\xi_t\P$における射がweak equivalenceであることと, $\pi_t$の像が$\P$におけるweak equivalenceであることは同値である. 
+% \end{remark}
 
-終細分化をとる操作は$\RelPos$上の関手を定める.
+% 終細分化をとる操作は$\RelPos$上の関手を定める.
 
-\begin{definition}[終細分化関手]
-  関手$\xi_t : \RelPos \to \RelPos$を次のように定義し, $\xi_t$を終細分化関手(terminal subdivision functor)という. 
-  \begin{itemize}
-    \item $\RelPos$の対象$\P$に対して, $\xi_t(\P) := \xi_t\P$
-    \item $\RelPos$の射$F : \P \to \Q$に対して, $\xi_t(F) : \xi_t\P \to \xi_t\Q$を次のように定める. 
-    \begin{itemize}
-      \item $\xi_t\P$の対象$x : [n]_\min \to \P$に対して, $\xi_t(F)(x)$は$[n]_\min \to [n]_\min$がepi射であり, 次の図式を可換にするような一意なmono射$x' : [m]_\min \to \Q$
-      % https://q.uiver.app/#q=WzAsNCxbMCwwLCJbbl1fXFxtaW4iXSxbMSwwLCJbbV1fXFxtaW4iXSxbMSwxLCJcXFEiXSxbMCwxLCJcXFAiXSxbMCwxLCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMSwyLCJ4JyJdLFswLDMsIngiLDJdLFszLDIsIkYiLDJdXQ==
-      \[\begin{tikzcd}
-        {[n]_\min} & {[m]_\min} \\
-        \P & \Q
-        \arrow[two heads, from=1-1, to=1-2]
-        \arrow["{x'}", from=1-2, to=2-2]
-        \arrow["x"', from=1-1, to=2-1]
-        \arrow["F"', from=2-1, to=2-2]
-      \end{tikzcd}\]
-      \item $\xi_t\P$の射$[n_1]_\min \to [n_2]_\min$に対して, $\xi_t(F)([n_1]_\min \to [n_2]_\min)$は次の図式を可換にするような射$[m_1]_\min \to [m_2]_\min$
-      % https://q.uiver.app/#q=WzAsNixbMCwwLCJbbl8xXV9cXG1pbiJdLFsyLDAsIltuXzJdX1xcbWluIl0sWzEsMSwiXFxQIl0sWzAsMiwiW21fMV1fXFxtaW4iXSxbMSwzLCJcXFEiXSxbMiwyLCJbbV8yXV9cXG1pbiJdLFswLDFdLFswLDIsInhfMSIsMl0sWzEsMiwieF8yIl0sWzAsMywiIiwxLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzMsNCwieF8xJyIsMl0sWzEsNSwiIiwxLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzUsNCwieF8yJyJdLFszLDVdLFsyLDRdXQ==
-      \[\begin{tikzcd}
-        {[n_1]_\min} && {[n_2]_\min} \\
-        & \P \\
-        {[m_1]_\min} && {[m_2]_\min} \\
-        & \Q
-        \arrow[from=1-1, to=1-3]
-        \arrow["{x_1}"', from=1-1, to=2-2]
-        \arrow["{x_2}", from=1-3, to=2-2]
-        \arrow[two heads, from=1-1, to=3-1]
-        \arrow["{x_1'}"', from=3-1, to=4-2]
-        \arrow[two heads, from=1-3, to=3-3]
-        \arrow["{x_2'}", from=3-3, to=4-2]
-        \arrow[from=3-1, to=3-3]
-        \arrow[from=2-2, to=4-2]
-      \end{tikzcd}\]
-    \end{itemize}
-  \end{itemize}
-\end{definition}
+% \begin{definition}[終細分化関手]
+%   関手$\xi_t : \RelPos \to \RelPos$を次のように定義し, $\xi_t$を終細分化関手(terminal subdivision functor)という. 
+%   \begin{itemize}
+%     \item $\RelPos$の対象$\P$に対して, $\xi_t(\P) := \xi_t\P$
+%     \item $\RelPos$の射$F : \P \to \Q$に対して, $\xi_t(F) : \xi_t\P \to \xi_t\Q$を次のように定める. 
+%     \begin{itemize}
+%       \item $\xi_t\P$の対象$x : [n]_\min \to \P$に対して, $\xi_t(F)(x)$は$[n]_\min \to [n]_\min$がepi射であり, 次の図式を可換にするような一意なmono射$x' : [m]_\min \to \Q$
+%       % https://q.uiver.app/#q=WzAsNCxbMCwwLCJbbl1fXFxtaW4iXSxbMSwwLCJbbV1fXFxtaW4iXSxbMSwxLCJcXFEiXSxbMCwxLCJcXFAiXSxbMCwxLCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMSwyLCJ4JyJdLFswLDMsIngiLDJdLFszLDIsIkYiLDJdXQ==
+%       \[\begin{tikzcd}
+%         {[n]_\min} & {[m]_\min} \\
+%         \P & \Q
+%         \arrow[two heads, from=1-1, to=1-2]
+%         \arrow["{x'}", from=1-2, to=2-2]
+%         \arrow["x"', from=1-1, to=2-1]
+%         \arrow["F"', from=2-1, to=2-2]
+%       \end{tikzcd}\]
+%       \item $\xi_t\P$の射$[n_1]_\min \to [n_2]_\min$に対して, $\xi_t(F)([n_1]_\min \to [n_2]_\min)$は次の図式を可換にするような射$[m_1]_\min \to [m_2]_\min$
+%       % https://q.uiver.app/#q=WzAsNixbMCwwLCJbbl8xXV9cXG1pbiJdLFsyLDAsIltuXzJdX1xcbWluIl0sWzEsMSwiXFxQIl0sWzAsMiwiW21fMV1fXFxtaW4iXSxbMSwzLCJcXFEiXSxbMiwyLCJbbV8yXV9cXG1pbiJdLFswLDFdLFswLDIsInhfMSIsMl0sWzEsMiwieF8yIl0sWzAsMywiIiwxLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzMsNCwieF8xJyIsMl0sWzEsNSwiIiwxLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzUsNCwieF8yJyJdLFszLDVdLFsyLDRdXQ==
+%       \[\begin{tikzcd}
+%         {[n_1]_\min} && {[n_2]_\min} \\
+%         & \P \\
+%         {[m_1]_\min} && {[m_2]_\min} \\
+%         & \Q
+%         \arrow[from=1-1, to=1-3]
+%         \arrow["{x_1}"', from=1-1, to=2-2]
+%         \arrow["{x_2}", from=1-3, to=2-2]
+%         \arrow[two heads, from=1-1, to=3-1]
+%         \arrow["{x_1'}"', from=3-1, to=4-2]
+%         \arrow[two heads, from=1-3, to=3-3]
+%         \arrow["{x_2'}", from=3-3, to=4-2]
+%         \arrow[from=3-1, to=3-3]
+%         \arrow[from=2-2, to=4-2]
+%       \end{tikzcd}\]
+%     \end{itemize}
+%   \end{itemize}
+% \end{definition}
 
-双対的に, 相対半順序集合の始細分化が定義される. 
+% 双対的に, 相対半順序集合の始細分化が定義される. 
 
-\begin{definition}[始細分化]
-  $\P$を相対半順序集合とする. 
-  このとき, 相対半順序集合$\xi_i\P$を次のように定義し, $\P$の始細分化(initial subdivision)という. 
-  \begin{itemize}
-    \item $\xi_i\P$の対象は$\RelPos$におけるmono射$x : [n]_\min \to \P$ ($n \geq 0$)
-    \item $\xi_i\P$の射は次の図式を可換にする射$[n_2]_\min \to [n_1]_\min$
-    % https://q.uiver.app/#q=WzAsMyxbMCwwLCJbbl8yXV9cXG1pbiJdLFsyLDAsIltuXzFdX1xcbWluIl0sWzEsMSwiXFxQIl0sWzAsMV0sWzAsMiwieF8yIiwyXSxbMSwyLCJ4XzEiXV0=
-    \[\begin{tikzcd}
-      {[n_2]_\min} && {[n_1]_\min} \\
-      & \P
-      \arrow[from=1-1, to=1-3]
-      \arrow["{x_2}"', from=1-1, to=2-2]
-      \arrow["{x_1}", from=1-3, to=2-2]
-    \end{tikzcd}\]
-    \item $\xi_i\P$のweak equivalenceは上の図式が誘導する射$x_2(0) \to x_1(0)$が$\P$におけるweak equivalenceである上の可換図式における射
-  \end{itemize}
-\end{definition}
+% \begin{definition}[始細分化]
+%   $\P$を相対半順序集合とする. 
+%   このとき, 相対半順序集合$\xi_i\P$を次のように定義し, $\P$の始細分化(initial subdivision)という. 
+%   \begin{itemize}
+%     \item $\xi_i\P$の対象は$\RelPos$におけるmono射$x : [n]_\min \to \P$ ($n \geq 0$)
+%     \item $\xi_i\P$の射は次の図式を可換にする射$[n_2]_\min \to [n_1]_\min$
+%     % https://q.uiver.app/#q=WzAsMyxbMCwwLCJbbl8yXV9cXG1pbiJdLFsyLDAsIltuXzFdX1xcbWluIl0sWzEsMSwiXFxQIl0sWzAsMV0sWzAsMiwieF8yIiwyXSxbMSwyLCJ4XzEiXV0=
+%     \[\begin{tikzcd}
+%       {[n_2]_\min} && {[n_1]_\min} \\
+%       & \P
+%       \arrow[from=1-1, to=1-3]
+%       \arrow["{x_2}"', from=1-1, to=2-2]
+%       \arrow["{x_1}", from=1-3, to=2-2]
+%     \end{tikzcd}\]
+%     \item $\xi_i\P$のweak equivalenceは上の図式が誘導する射$x_2(0) \to x_1(0)$が$\P$におけるweak equivalenceである上の可換図式における射
+%   \end{itemize}
+% \end{definition}
 
-相対半順序集合の始細分化は自然な射影を持つ. 
+% 相対半順序集合の始細分化は自然な射影を持つ. 
 
-\begin{definition}[始射影関手]
-  $\P$を相対半順序集合, $\xi_i\P$を$\P$の始細分化とする. 
-  このとき, 相対関手$\pi_i : \xi_i\P \to \P$を次のように定義し, $\pi_i$を始射影関手(initial projection functor)という.
-  \begin{itemize}
-    \item $\xi_i\P$の対象$x : [n]_\min \to \P$に対して, $\pi_t(x) := x(0)$
-    \item $\xi_i\P$の射$[n_2]_\min \to [n_1]_\min$に対して, $\pi_t([n_2]_\min \to [n_1]_\min) := x_2(0) \to x_1(0)$ 
-  \end{itemize}
-\end{definition}
+% \begin{definition}[始射影関手]
+%   $\P$を相対半順序集合, $\xi_i\P$を$\P$の始細分化とする. 
+%   このとき, 相対関手$\pi_i : \xi_i\P \to \P$を次のように定義し, $\pi_i$を始射影関手(initial projection functor)という.
+%   \begin{itemize}
+%     \item $\xi_i\P$の対象$x : [n]_\min \to \P$に対して, $\pi_t(x) := x(0)$
+%     \item $\xi_i\P$の射$[n_2]_\min \to [n_1]_\min$に対して, $\pi_t([n_2]_\min \to [n_1]_\min) := x_2(0) \to x_1(0)$ 
+%   \end{itemize}
+% \end{definition}
 
-\begin{remark}
-  $\xi_i\P$における射がweak equivalenceであることと, $\pi_i$の像が$\P$におけるweak equivalenceであることは同値である. 
-\end{remark}
+% \begin{remark}
+%   $\xi_i\P$における射がweak equivalenceであることと, $\pi_i$の像が$\P$におけるweak equivalenceであることは同値である. 
+% \end{remark}
 
-始細分化をとる操作は$\RelPos$上の関手を定める. (省略)
+% 始細分化をとる操作は$\RelPos$上の関手を定める. (省略)
 
-\begin{example}
-  相対半順序集合$\P = [2]$に対して, $\P$の終細分化(左)と始細分化(右)はそれぞれ次のようになる. 
-  ここで, $\xrightarrow{\sim}$はweak equivalenceを表す. 
-  % https://q.uiver.app/#q=WzAsMTQsWzEsMCwiMSJdLFsxLDEsIjAsMSwyIl0sWzAsMiwiMCJdLFsyLDIsIjIiXSxbMSwyLCIwLDIiXSxbMiwxLCIxLDIiXSxbMCwxLCIwLDEiXSxbNCwyLCIwIl0sWzQsMSwiMCwxIl0sWzUsMSwiMCwxLDIiXSxbNiwxLCIxLDIiXSxbNiwyLCIyIl0sWzUsMiwiMCwyIl0sWzUsMCwiMSJdLFswLDFdLFsyLDFdLFszLDEsIlxcc2ltIiwyXSxbMiw0XSxbMyw0LCJcXHNpbSJdLFswLDVdLFszLDUsIlxcc2ltIiwyXSxbMCw2LCJcXHNpbSIsMl0sWzIsNl0sWzQsMSwiXFxzaW0iLDJdLFs2LDFdLFs1LDEsIlxcc2ltIiwyXSxbNyw4LCJcXHNpbSJdLFs4LDksIlxcc2ltIl0sWzEwLDldLFsxMSwxMF0sWzExLDldLFs3LDksIlxcc2ltIl0sWzcsMTIsIlxcc2ltIiwyXSxbMTEsMTJdLFsxMiw5LCJcXHNpbSJdLFsxMyw5XSxbMTMsOF0sWzEzLDEwLCJcXHNpbSJdXQ==
-  \[\begin{tikzcd}
-    & 1 &&&& 1 \\
-    {0,1} & {0,1,2} & {1,2} && {0,1} & {0,1,2} & {1,2} \\
-    0 & {0,2} & 2 && 0 & {0,2} & 2
-    \arrow[from=1-2, to=2-2]
-    \arrow[from=3-1, to=2-2]
-    \arrow["\sim"', from=3-3, to=2-2]
-    \arrow[from=3-1, to=3-2]
-    \arrow["\sim", from=3-3, to=3-2]
-    \arrow[from=1-2, to=2-3]
-    \arrow["\sim"', from=3-3, to=2-3]
-    \arrow["\sim"', from=1-2, to=2-1]
-    \arrow[from=3-1, to=2-1]
-    \arrow["\sim"', from=3-2, to=2-2]
-    \arrow[from=2-1, to=2-2]
-    \arrow["\sim"', from=2-3, to=2-2]
-    \arrow["\sim", from=3-5, to=2-5]
-    \arrow["\sim", from=2-5, to=2-6]
-    \arrow[from=2-7, to=2-6]
-    \arrow[from=3-7, to=2-7]
-    \arrow[from=3-7, to=2-6]
-    \arrow["\sim", from=3-5, to=2-6]
-    \arrow["\sim"', from=3-5, to=3-6]
-    \arrow[from=3-7, to=3-6]
-    \arrow["\sim", from=3-6, to=2-6]
-    \arrow[from=1-6, to=2-6]
-    \arrow[from=1-6, to=2-5]
-    \arrow["\sim", from=1-6, to=2-7]
-  \end{tikzcd}\]
-\end{example}
+% \begin{example}
+%   相対半順序集合$\P = [2]$に対して, $\P$の終細分化(左)と始細分化(右)はそれぞれ次のようになる. 
+%   ここで, $\xrightarrow{\sim}$はweak equivalenceを表す. 
+%   % https://q.uiver.app/#q=WzAsMTQsWzEsMCwiMSJdLFsxLDEsIjAsMSwyIl0sWzAsMiwiMCJdLFsyLDIsIjIiXSxbMSwyLCIwLDIiXSxbMiwxLCIxLDIiXSxbMCwxLCIwLDEiXSxbNCwyLCIwIl0sWzQsMSwiMCwxIl0sWzUsMSwiMCwxLDIiXSxbNiwxLCIxLDIiXSxbNiwyLCIyIl0sWzUsMiwiMCwyIl0sWzUsMCwiMSJdLFswLDFdLFsyLDFdLFszLDEsIlxcc2ltIiwyXSxbMiw0XSxbMyw0LCJcXHNpbSJdLFswLDVdLFszLDUsIlxcc2ltIiwyXSxbMCw2LCJcXHNpbSIsMl0sWzIsNl0sWzQsMSwiXFxzaW0iLDJdLFs2LDFdLFs1LDEsIlxcc2ltIiwyXSxbNyw4LCJcXHNpbSJdLFs4LDksIlxcc2ltIl0sWzEwLDldLFsxMSwxMF0sWzExLDldLFs3LDksIlxcc2ltIl0sWzcsMTIsIlxcc2ltIiwyXSxbMTEsMTJdLFsxMiw5LCJcXHNpbSJdLFsxMyw5XSxbMTMsOF0sWzEzLDEwLCJcXHNpbSJdXQ==
+%   \[\begin{tikzcd}
+%     & 1 &&&& 1 \\
+%     {0,1} & {0,1,2} & {1,2} && {0,1} & {0,1,2} & {1,2} \\
+%     0 & {0,2} & 2 && 0 & {0,2} & 2
+%     \arrow[from=1-2, to=2-2]
+%     \arrow[from=3-1, to=2-2]
+%     \arrow["\sim"', from=3-3, to=2-2]
+%     \arrow[from=3-1, to=3-2]
+%     \arrow["\sim", from=3-3, to=3-2]
+%     \arrow[from=1-2, to=2-3]
+%     \arrow["\sim"', from=3-3, to=2-3]
+%     \arrow["\sim"', from=1-2, to=2-1]
+%     \arrow[from=3-1, to=2-1]
+%     \arrow["\sim"', from=3-2, to=2-2]
+%     \arrow[from=2-1, to=2-2]
+%     \arrow["\sim"', from=2-3, to=2-2]
+%     \arrow["\sim", from=3-5, to=2-5]
+%     \arrow["\sim", from=2-5, to=2-6]
+%     \arrow[from=2-7, to=2-6]
+%     \arrow[from=3-7, to=2-7]
+%     \arrow[from=3-7, to=2-6]
+%     \arrow["\sim", from=3-5, to=2-6]
+%     \arrow["\sim"', from=3-5, to=3-6]
+%     \arrow[from=3-7, to=3-6]
+%     \arrow["\sim", from=3-6, to=2-6]
+%     \arrow[from=1-6, to=2-6]
+%     \arrow[from=1-6, to=2-5]
+%     \arrow["\sim", from=1-6, to=2-7]
+%   \end{tikzcd}\]
+% \end{example}
 
-相対半順序集合の始細分化と終細分化を両方とった相対半順序集合を定義する. 
+% 相対半順序集合の始細分化と終細分化を両方とった相対半順序集合を定義する. 
 
-\begin{definition}[2重細分化]
-  $\P$を相対半順序集合とする. 
-  $\xi\P := \xi_t\xi_i\P$を$\P$の2重細分化(two-fold subdivision)という. 
-\end{definition}
+% \begin{definition}[2重細分化]
+%   $\P$を相対半順序集合とする. 
+%   $\xi\P := \xi_t\xi_i\P$を$\P$の2重細分化(two-fold subdivision)という. 
+% \end{definition}
 
-相対半順序集合の2重細分化は自然な射影を持つ. 
+% 相対半順序集合の2重細分化は自然な射影を持つ. 
 
-\begin{definition}[射影関手]
-  $\P$を相対半順序集合, $\xi\P$を$\P$の2重細分化とする. 
-  このとき, 相対関手$\pi : \xi\P \to \P$を
-  \begin{align*}
-    \pi := \pi_i \circ \pi_t : \xi_t\xi_i\P \to \xi_i\P \to \P
-  \end{align*}
-  で定義し, $\pi$を射影関手(projection functor)という. 
-\end{definition}
+% \begin{definition}[射影関手]
+%   $\P$を相対半順序集合, $\xi\P$を$\P$の2重細分化とする. 
+%   このとき, 相対関手$\pi : \xi\P \to \P$を
+%   \begin{align*}
+%     \pi := \pi_i \circ \pi_t : \xi_t\xi_i\P \to \xi_i\P \to \P
+%   \end{align*}
+%   で定義し, $\pi$を射影関手(projection functor)という. 
+% \end{definition}
 
-\begin{lemma}
-  終(始)細分化関手はdomainが有限相対半順序集合である射の間の強ホモトピーを保つ. 
-\end{lemma}
+% \begin{lemma}
+%   終(始)細分化関手はdomainが有限相対半順序集合である射の間の強ホモトピーを保つ. 
+% \end{lemma}
 
-\begin{proposition} \label{prop:all_maps_is_homotopy_equivalence_in_RelCat}
-  任意の$m,n \geq 0$に対して, 次の可換図式における全ての射はホモトピー同値である. 
-  % https://q.uiver.app/#q=WzAsNixbMCwwLCJcXHhpKFtuXV9cXG1pbiBcXHRpbWVzIFttXV9cXG1heCkiXSxbMSwwLCJcXHhpX2koW25dX1xcbWluIFxcdGltZXMgW21dX1xcbWF4KSJdLFsyLDAsIltuXV9cXG1pbiBcXHRpbWVzIFttXV9cXG1heCJdLFsyLDEsIltuXV9cXG1pbiJdLFsxLDEsIlxceGlfaVtuXV9cXG1pbiJdLFswLDEsIlxceGlbbl1fXFxtaW4iXSxbMCwxLCJcXHBpX3RcXHhpX2kiXSxbMSwyLCJcXHBpX2kiXSxbMiwzXSxbMSw0XSxbMCw1XSxbNSw0LCJcXHBpX3RcXHhpX2kiLDJdLFs0LDMsIlxccGlfaSIsMl1d
-  \[\begin{tikzcd}
-    {\xi([n]_\min \times [m]_\max)} & {\xi_i([n]_\min \times [m]_\max)} & {[n]_\min \times [m]_\max} \\
-    {\xi[n]_\min} & {\xi_i[n]_\min} & {[n]_\min}
-    \arrow["{\pi_t\xi_i}", from=1-1, to=1-2]
-    \arrow["{\pi_i}", from=1-2, to=1-3]
-    \arrow[from=1-3, to=2-3]
-    \arrow[from=1-2, to=2-2]
-    \arrow[from=1-1, to=2-1]
-    \arrow["{\pi_t\xi_i}"', from=2-1, to=2-2]
-    \arrow["{\pi_i}"', from=2-2, to=2-3]
-  \end{tikzcd}\]
-  ここで, 垂直な射は射影$[n]_\min \times [m]_\max \to [n]_\min$から定まる射である. 
-\end{proposition}
+% \begin{proposition} \label{prop:all_maps_is_homotopy_equivalence_in_RelCat}
+%   任意の$m,n \geq 0$に対して, 次の可換図式における全ての射はホモトピー同値である. 
+%   % https://q.uiver.app/#q=WzAsNixbMCwwLCJcXHhpKFtuXV9cXG1pbiBcXHRpbWVzIFttXV9cXG1heCkiXSxbMSwwLCJcXHhpX2koW25dX1xcbWluIFxcdGltZXMgW21dX1xcbWF4KSJdLFsyLDAsIltuXV9cXG1pbiBcXHRpbWVzIFttXV9cXG1heCJdLFsyLDEsIltuXV9cXG1pbiJdLFsxLDEsIlxceGlfaVtuXV9cXG1pbiJdLFswLDEsIlxceGlbbl1fXFxtaW4iXSxbMCwxLCJcXHBpX3RcXHhpX2kiXSxbMSwyLCJcXHBpX2kiXSxbMiwzXSxbMSw0XSxbMCw1XSxbNSw0LCJcXHBpX3RcXHhpX2kiLDJdLFs0LDMsIlxccGlfaSIsMl1d
+%   \[\begin{tikzcd}
+%     {\xi([n]_\min \times [m]_\max)} & {\xi_i([n]_\min \times [m]_\max)} & {[n]_\min \times [m]_\max} \\
+%     {\xi[n]_\min} & {\xi_i[n]_\min} & {[n]_\min}
+%     \arrow["{\pi_t\xi_i}", from=1-1, to=1-2]
+%     \arrow["{\pi_i}", from=1-2, to=1-3]
+%     \arrow[from=1-3, to=2-3]
+%     \arrow[from=1-2, to=2-2]
+%     \arrow[from=1-1, to=2-1]
+%     \arrow["{\pi_t\xi_i}"', from=2-1, to=2-2]
+%     \arrow["{\pi_i}"', from=2-2, to=2-3]
+%   \end{tikzcd}\]
+%   ここで, 垂直な射は射影$[n]_\min \times [m]_\max \to [n]_\min$から定まる射である. 
+% \end{proposition}
 
-\begin{proposition} \label{prop:sieve_induce_dwyer_map}
-  $\Q$を相対半順序集合, $\P$を$\Q$におけるふるい(または余ふるい), $F : \P \hookrightarrow \Q$を相対半順序集合の相対包含とする. 
-  このとき, 誘導される$\xi_t : \xi_t\P \hookrightarrow \xi_t\Q$はDwyer射である. 
-\end{proposition}
+% \begin{proposition} \label{prop:sieve_induce_dwyer_map}
+%   $\Q$を相対半順序集合, $\P$を$\Q$におけるふるい(または余ふるい), $F : \P \hookrightarrow \Q$を相対半順序集合の相対包含とする. 
+%   このとき, 誘導される$\xi_t : \xi_t\P \hookrightarrow \xi_t\Q$はDwyer射である. 
+% \end{proposition}
 
 
 % \section{位相空間の圏に入るモデル構造} \label{sec:model_stru_in_Top}

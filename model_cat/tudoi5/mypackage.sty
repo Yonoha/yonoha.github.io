@@ -1,0 +1,196 @@
+\usepackage[deluxe, expert, uplatex]{otf}
+\usepackage{xparse}
+\usepackage{bxdpx-beamer}
+\usepackage{pxjahyper} % しおりの文字化け解消 for uplatex
+\usepackage{minijs}
+\usepackage{mathrsfs, mathtools}
+\usepackage{amsmath, amsfonts, amsthm, amssymb}
+\usepackage{color}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{intersections, calc, arrows.meta, shadows}
+\usepackage{../quiver}
+\usepackage{bm, bbm}
+\usepackage{picture}
+\usepackage{fancybox}
+\usepackage{physics}
+\usepackage{here}
+\usepackage{anyfontsize}
+\usepackage{nameref}
+\usepackage{ulem}
+\usepackage{url}
+\usepackage{subfiles}
+\usepackage{relsize}
+\usepackage[bbgreekl]{mathbbol}
+\usepackage{eucal}
+\usefonttheme[onlymath]{serif}
+
+% beamerのテーマ選択(省略可)．テーマ一覧は http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+\usetheme{Berlin}
+% カラーテーマの選択(省略可)
+\usecolortheme{default}
+% フォントテーマの選択(省略可) (数式の文字を通常のLaTeXと同じにする)
+\usefonttheme{professionalfonts}
+% フレーム内のテーマの選択(省略可)
+\useinnertheme{circles}
+% フレーム外側のテーマの選択(省略可)
+\useoutertheme{infolines}
+
+% 既定をゴシック体に
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+% タイトル色
+\setbeamercolor{title}{fg=structure, bg=}
+% フレームタイトル色
+\setbeamercolor{frametitle}{fg=structure, bg=}
+
+% ナビゲーションバー非表示
+\setbeamertemplate{navigation symbols}{}
+% % スライド番号のみ表示
+% \setbeamertemplate{footline}[frame number]
+
+% セクションの後に自動で目次スライドを入れる
+\AtBeginSection[]{
+  \begin{frame}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+% 定理などに番号をふるために必要
+\setbeamertemplate{theorems}[numbered] 
+% 定理内でイタリックにしない
+\addtobeamertemplate{theorem begin}{\normalfont}{}
+
+\makeatletter
+\def\th@mystylegray{
+    \normalfont % body font
+    \setbeamercolor{block title example}{bg=gray,fg=white}
+    \setbeamercolor{block body example}{bg=gray!20,fg=black}
+    \def\inserttheoremblockenv{exampleblock}
+  }
+\def\th@mystyleorange{
+    \normalfont % body font
+    \setbeamercolor{block title example}{bg=orange,fg=white}
+    \setbeamercolor{block body example}{bg=orange!20,fg=black}
+    \def\inserttheoremblockenv{exampleblock}
+  }
+\makeatother
+% 定理環境 (色分け)
+\setbeamertemplate{theorems}[numbered]  % 定理に番号をつける
+\newtheorem{thm}{Theorem}[section] % blue
+% \newtheorem{definition}[thm]{定義}
+\newtheorem{theorem}[thm]{定理}
+\newtheorem{lemma}[thm]{補題}
+\newtheorem{corollary}[thm]{系}
+\theoremstyle{example} % green
+\newtheorem{example}[thm]{例}
+\theoremstyle{mystylegray} % gray
+\newtheorem{definition}[thm]{定義}
+\theoremstyle{mystyleorange} % orange
+\newtheorem{remark}[thm]{注意} 
+
+% \theoremstyle{jplain}
+% \newtheorem{theorem}{定理}
+% \newtheorem{prop}[theorem]{命題}
+% \newtheorem{lemma}[theorem]{補題}
+% \newtheorem{example}[theorem]{例}
+% \newtheorem{definition}[theorem]{定義}
+% \newtheorem{corollary}[theorem]{系}
+% \newtheorem{remark}[theorem]{注意}
+% \newtheorem{conjecture}[theorem]{予想}
+% \newtheorem{notation}[theorem]{記法}
+% \newtheorem{question}[theorem]{疑問}
+
+% % show theorem depth
+% \numberwithin{theorem}{section}
+% \numberwithin{equation}{section}
+
+% \uselanguage{japanese}
+% \languagepath{japanese}
+% \deftranslation[to=japanese]{Theorem}{定理}
+% \deftranslation[to=japanese]{Corollary}{系}
+% \deftranslation[to=japanese]{Lemma}{補題}
+% \deftranslation[to=japanese]{Example}{例}
+% \deftranslation[to=japanese]{Definition}{定義}
+% \deftranslation[to=japanese]{Problem}{問題}
+% \deftranslation[to=japanese]{Fact}{事実}
+% \deftranslation[to=japanese]{Proof}{証明}
+% \def\proofname{証明}
+
+% 証明の最後に四角を入れる
+\makeatletter
+\newenvironment{Proof}[1][\Proofname]{\par
+  \normalfont
+  \topsep6\p@\@plus6\p@ \trivlist
+  \item[\hskip\labelsep{\bfseries #1}\@addpunct{\bfseries.}]\ignorespaces
+}{
+  \endtrivlist
+}
+\newcommand{\Proofname}{証明}
+\makeatother
+
+% itemizeの調整
+\setbeamertemplate{itemize item}{\small\raise0.5pt\hbox{$\bullet$}}
+\setbeamertemplate{itemize subitem}{\tiny\raise1.5pt\hbox{$\blacktriangleright$}}
+\setbeamertemplate{itemize subsubitem}{\tiny\raise1.5pt\hbox{$\bigstar$}}
+
+% % bibtexのファイル
+% \addbibresource{A_infty_cf.bib}
+% % 参考文献のインデックスを文字列で表示
+% \setbeamertemplate{bibliography item}[text]
+
+% newcommands
+% mathbb
+
+% mathrm 
+\newcommand{\N}{\mathrm{N}}
+\newcommand{\Ob}{\mathrm{Ob}}
+\newcommand{\Mor}{\mathrm{Mor}}
+\newcommand{\Tw}{\mathrm{Tw}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\h}{\mathrm{h}}
+\newcommand{\myop}{\mathrm{op}}
+\newcommand{\Ho}{\mathrm{Ho}}
+\newcommand{\map}{\mathrm{map}}
+\newcommand{\comp}{\mathrm{comp}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Sing}{\mathrm{Sing}}
+\newcommand{\Map}{\mathrm{Map}}
+\newcommand{\hoequiv}{\mathrm{hoequiv}}
+\renewcommand{\min}{\mathrm{min}}
+\renewcommand{\max}{\mathrm{max}}
+
+\newcommand{\Joyal}{\mathrm{Joyal}}
+\newcommand{\KQ}{\mathrm{KQ}}
+\newcommand{\Quillen}{\mathrm{Quillen}}
+\newcommand{\Reedy}{\mathrm{Reedy}}
+\newcommand{\Rezk}{\mathrm{Rezk}}
+\newcommand{\BK}{\mathrm{BK}}
+\newcommand{\Berg}{\mathrm{Berg}}
+
+% mathbf 
+\newcommand{\bfA}{\mathbf{A}}
+
+% mathcal
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\M}{\mathcal{M}}
+\renewcommand{\P}{\mathcal{P}}
+
+% mathcal for category
+\newcommand{\Cat}{\mathcal{C}\mathrm{at}}
+\newcommand{\CGWH}{\mathcal{CG}}
+\newcommand{\Fun}{\mathrm{Fun}}
+\newcommand{\RelCat}{\mathcal{R}\mathrm{el}\mathcal{C}\mathrm{at}}
+\newcommand{\RelPos}{\mathcal{R}\mathrm{el}\mathcal{P}\mathrm{os}}
+\newcommand{\Set}{\mathcal{S}\mathrm{et}}
+% \newcommand{\sSet}{\mathrm{s}\mathcal{S}\mathrm{et}}
+\newcommand{\sSet}{\mathcal{S}\mathrm{et}_{\Delta}}
+\newcommand{\sSpace}{\mathrm{s}\mathcal{S}\mathrm{pace}}
+\newcommand{\Top}{\mathcal{T}\mathrm{op}}
+
+% mathfrak

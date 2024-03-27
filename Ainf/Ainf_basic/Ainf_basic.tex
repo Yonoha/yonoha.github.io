@@ -26,10 +26,9 @@
   % これにより, $\Ainf$圏(の$\Ainf$脈体)は擬圏の構造をもつことが分かる. 
   % 更に, 前三角$\Ainf$圏の$\Ainf$脈体が安定擬圏になることがMuro \cite{Orn}により示されている. 
 
-  本稿では, まず恒等射を持たない$\Ainf$圏と,その間の恒等射を考えない$\Ainf$関手を定義する. 
-  ホモロジー的摂動論によって, $\Ainf$圏から新たな$\Ainf$圏を構成することができる. 
-  これにより, 任意の$\Ainf$圏がある極小$\Ainf$圏と$\Ainf$擬同型であることが分かる. 
-
+  % 本稿では, まず恒等射を持たない$\Ainf$圏と,その間の恒等射を考えない$\Ainf$関手を定義する. 
+  % ホモロジー的摂動論によって, $\Ainf$圏から新たな$\Ainf$圏を構成することができる. 
+  % これにより, 任意の$\Ainf$圏がある極小$\Ainf$圏と$\Ainf$擬同型であることが分かる. 
 \end{abstract}
 
 \tableofcontents
@@ -49,9 +48,9 @@
       \mu^d_\A : \hom_\A(X_{d-1},X_d) \otimes \cdots \otimes \hom_\A(X_0,X_1) \to \hom_\A(X_0,X_d)[2-d]
     \end{align*}
   \end{itemize}
-  \footnote{
-    任意の$i \in \mathbb{Z}$に対して, $[i]$はベクトル空間のシフトを表している.
-  }
+  % \footnote{
+  %   任意の$i \in \mathbb{Z}$に対して, $[i]$はベクトル空間のシフトを表している.
+  % }
   が定まっていて, 次の$\Ainf$結合式($\Ainf$-associativity equation)を満たすものをいう. 
   \begin{align*}
     \sum_{m,n} (-1)^{\maltese n} \mu^{d-m+1}_\A(a_d,\cdots,a_{n+m+1}, \mu^m_\A(a_{n+m},\cdots,a_{n+1}), a_n,\cdots,a_1)
@@ -63,8 +62,7 @@
     \maltese n &:= |a_1| + \cdots |a_n| - n
   \end{align*}
   である. 
-
-  $\mu_\A$を恒等射を持たない$\Ainf$圏の$\Ainf$構造($\Ainf$-structure of non-unital $\Ainf$-category)という. 
+  このとき, $\mu_\A$を恒等射を持たない$\Ainf$圏の$\Ainf$構造($\Ainf$-structure of non-unital $\Ainf$-category)という. 
 \end{definition}
 
 \begin{remark} \label{rem_low_Ainf_associativity}
@@ -154,7 +152,7 @@
   \end{itemize}
 \end{definition}
 
-$(\Aop,\mu_{\Aop})$が恒等射を持たない$\Ainf$圏の構造を持つことを示す. 
+% $(\Aop,\mu_{\Aop})$が恒等射を持たない$\Ainf$圏の構造を持つことを示す. 
 
 \begin{proof}  
   $\mu_{\Aop}$が$\Ainf$結合式
@@ -276,7 +274,7 @@ $(\Aop,\mu_{\Aop})$が恒等射を持たない$\Ainf$圏の構造を持つこと
   \end{itemize}
 \end{definition}
 
-コホモロジー圏と$0$次コホモロジー圏には次のような関係がある. 
+% コホモロジー圏と$0$次コホモロジー圏には次のような関係がある. 
 
 \begin{remark}
   $\A$を恒等射を持たない$\Ainf$圏$\A$とする. 
@@ -355,7 +353,7 @@ $(\Aop,\mu_{\Aop})$が恒等射を持たない$\Ainf$圏の構造を持つこと
     &\sum_r \sum_{s_1,\cdots,s_r} \mu^d_\B (\F^{s_r} (a_d,\cdots,a_{d-s_r+1}), \cdots, \F^{s_1}(a_{s_1},\cdots,a_1)) \\ 
     &= \sum_{m,n} (-1)^{\maltese n} \F^{d-m+1} (a_d,\cdots,a_{m+n+1}, \mu^m_\A(a_{n+m},\cdots,a_{n+1}), a_n,\cdots,a_1)
   \end{align*}
-  を満たす. 
+  を満たすものをいう. 
   ここで
   \begin{align*}
     \sum_r \sum_{s_1,\cdots,s_r} 
@@ -417,15 +415,14 @@ $(\Aop,\mu_{\Aop})$が恒等射を持たない$\Ainf$圏の構造を持つこと
   \end{description}
 \end{definition}
 
-$\Id_\A$が恒等射を考えない$\Ainf$関手であることを示す. 
-
 \begin{proof}
+  $\Id_\A$が恒等射を考えない$\Ainf$関手であることを示す. 
   $\Id_\A$が多項等式
   \begin{align*}
     &\sum_r \sum_{s_1,\cdots,s_r} \mu^d_\A (\Id_\A^{s_r} (a_d,\cdots,a_{d-s_r+1}), \cdots, \Id_\A^{s_1}(a_{s_1},\cdots,a_1)) \\ 
     &= \sum_{m,n} (-1)^{\maltese n} \Id_\A^{d-m+1} (a_d,\cdots,a_{m+n+1}, \mu^m_\A(a_{n+m},\cdots,a_{n+1}), a_n,\cdots,a_1)
   \end{align*}
-  を満たすことをみる.
+  を満たすことを示せばよい.
   左辺は$d = s_1+\cdots+s_d = 1+\cdots+1$, 右辺は$(m,n)=(d,0)$のみを考えればよい. 
   よって, 左辺と右辺はそれぞれ次のようになる. 
   \begin{align*}
@@ -500,11 +497,7 @@ $\Id_\A$が恒等射を考えない$\Ainf$関手であることを示す.
 コホモロジー圏上の関手が通常の圏同型であるとき, $\Ainf$擬同型という. 
 
 \begin{definition}[$\Ainf$擬同型]
-  恒等射を考えない$\Ainf$関手$\F : \A \to \B$に対して, $H(\F)$がコホモロジー圏の圏同型
-  \begin{align*}
-    H(\A) \cong H(\B)
-  \end{align*}
-  を定めるとき, $\F$を$\Ainf$擬同型($\Ainf$-quasi-isomorphism)という. 
+  恒等射を考えない$\Ainf$関手$\F : \A \to \B$に対して, $H(\F)$がコホモロジー圏の圏同型$H(\A) = H(\B)$を定めるとき, $\F$を$\Ainf$擬同型($\Ainf$-quasi-isomorphism)という. 
 \end{definition}
 
 \cref{prop_F_induces_HF}より, $\Ainf$擬同型は複体の写像を用いて表すことができる. 
@@ -592,8 +585,8 @@ $\Id_\A$が恒等射を考えない$\Ainf$関手であることを示す.
 \end{corollary}
 
 \begin{proof}
-  まず, $\Phi$が恒等射を考えない$\Ainf$関手であることは, 形式的微分同相の定義と\cref{prop_modified_Ainf_structure}から従う. 
-  次に, $\Phi$が$\Ainf$同型であることは, $\Phi^1$が線形自己同型であることから従う.
+  $\Phi$が恒等射を考えない$\Ainf$関手であることは, 形式的微分同相の定義と\cref{prop_modified_Ainf_structure}から従う. 
+  $\Phi$が$\Ainf$同型であることは, $\Phi^1$が線形自己同型であることから従う.
 \end{proof}
 
 % \begin{definition}[修正$\Ainf$構造]
@@ -601,7 +594,7 @@ $\Id_\A$が恒等射を考えない$\Ainf$関手であることを示す.
 % \end{definition}
 
 \begin{notation}
-  \cref{prop_modified_Ainf_structure}で得られた$\tilA$を$\Phi_\ast \A$と表す.
+  \cref{prop_modified_Ainf_structure}で得られた恒等射を持たない$\Ainf$圏$\tilA$を$\Phi_\ast \A$と表す.
 \end{notation}
 
 % \begin{remark}
@@ -611,7 +604,7 @@ $\Id_\A$が恒等射を考えない$\Ainf$関手であることを示す.
 恒等射を考えない$\Ainf$関手の合成を帰納的に解くことで, 形式的微分同相の逆関手を構成できる. 
 
 \begin{lemma} \label{prop_diffeomorphism_has_inverse}
-  形式的微分同相$\Phi: \A \to \Phi_\ast \A$に対して, 恒等射を考えない$\Ainf$関手$\Phi^{-1} : \Phi_\ast \A \to \A$を次のように定義する.
+  形式的微分同相$\Phi: \A \to \Phi_\ast \A$に対して, 恒等射を考えない$\Ainf$関手$\Phi^{-1} : \Phi_\ast \A \to \A$を次のように定義すると, $\Phi^{-1}$は$\Phi$の逆関手である.
   \begin{description}
     \item[($d=0$)] 対象の対応$\Phi^{-1} : \Ob\Phi_\ast \A \to \Ob\A$は恒等写像
     \item[($d \geq 1$)] 任意の$a_1 \in \hom_{\Phi_\ast \A}(X_0,X_1), \cdots, a_d \in \hom_{\Phi_\ast \A}(X_{d-1},X_d)$に対して
@@ -621,7 +614,6 @@ $\Id_\A$が恒等射を考えない$\Ainf$関手であることを示す.
     \end{align*}
     により帰納的に$(\Phi^{-1})^d$を定める.
   \end{description}
-  このとき, $\Phi^{-1}$は$\Phi$の逆関手である. 
   % つまり
   % \begin{align*}
   %   \Phi^{-1} \circ \Phi &= \Id_\A \\
@@ -631,7 +623,7 @@ $\Id_\A$が恒等射を考えない$\Ainf$関手であることを示す.
 \end{lemma}
 
 \begin{example} \label{eg_Ainf_qis_with_zero_differential_is_formal_diffeo}
-  恒等射を持たない$\Ainf$圏$(\A,\mu_\A), (\B,\mu_\B)$が$\mu^1_\A=\mu^1_\B=0$を満たすとする.
+  $(\A,\mu_\A), (\B,\mu_\B)$を恒等射を持たない極小$\Ainf$圏とする. 
   恒等射を考えない$\Ainf$関手$\Phi : \A \to \B$が$\Ainf$擬同型のとき, $\Phi$は形式的微分同相である. 
 \end{example}
 
